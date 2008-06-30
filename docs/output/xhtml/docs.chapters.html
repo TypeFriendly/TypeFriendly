@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="robots" content="all" />
+
+	<title>Rozdziały - TypeFriendly</title>
+	
+
+	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>TypeFriendly 0.1.0</h1>
+		<h2>Rozdziały</h2>
+		<p class="generated"></p>
+		<p class="location"><strong>Dokumentacja</strong></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="docs.html">Tworzenie własnej dokumentacji</a><br/>Rozdziały<hr/></dt><dd class="prev">Struktura katalogowa<br/><a href="docs.directories.html">&laquo; Poprzedni</a></dd><dd class="next">Składnia pliku<br/><a href="docs.syntax.html">Następny &raquo;</a></dd></dl>	<h1>Rozdziały</h1><p>W TypeFriendly poszczególne rozdziały dokumentacji tworzysz jako pliki tekstowe w katalogu <code>/input/jezyk/</code>. Każdy taki plik składa się z dwóch części:</p>
+
+<h1>Nagłówek</h1>
+
+<h1>Treść</h1>
+
+<p>W nagłówku znajdue się kilka opcji, które pozwalają ustawić np. właściwy tytuł danego rozdziału lub powiązania z innymi częściami dokumentacji. Pod nagłówkiem umieszczana jest treść w formacie Markdown. Dokładny opis składni tych plików znajduje się dalej, gdyż tutaj pragniemy omówić inną rzecz związaną z rozdziałami, mianowicie ustalanie ich kolejności.</p>
+
+<p>TypeFriendly do ustalania zależności między rozdziałami używa samej nazwy pliku. Każda nazwa musi składać się z rozszerzenia <strong>.txt</strong> oraz grupy identyfikatorów rozdzielonych kropkami. Każdy identyfikator określa kolejne podrozdziały, do których przypisany jest dany plik. Oto przykładowa lista plików:</p>
+
+<ol>
+<li><code>wstep.txt</code></li>
+<li><code>instalacja.txt</code></li>
+<li><code>instalacja.prosta.txt</code></li>
+<li><code>instalacja.zlozona.txt</code></li>
+<li><code>api.txt</code></li>
+<li><code>api.klasa.txt</code></li>
+<li><code>api.klasa.funkcja1.txt</code></li>
+<li><code>api.klasa.funkcja2.txt</code></li>
+<li><code>api.interfejs.txt</code></li>
+<li><code>api.interfejs.funkcja1.txt</code></li>
+<li><code>api.interfejs.funkcja2.txt</code></li>
+</ol>
+
+<p>Przyjrzyjmy się np. rozdziałowi poświęconemu instalacji. Jest stworzony plik tekstowy dla niego, w którym możemy zamieścić jakieś wprowadzenie. Jednocześnie umieszczamy w nim dwa podrozdziały: <code>instalacja.prosta</code> i <code>instalacja.zlozona</code>. TypeFriendly na podstawie nazw pliku powiąże jedno z drugim i wygeneruje odpowiednią nawigację. Opis API jest już bardziej złożony, ponieważ mamy tutaj aż trzy poziomy. Po słowie wstępu w pliku <code>api.txt</code> tworzymy wprowadzenie do opisu pierwszej z klas (<code>api.klasa.txt</code>). Klasa ma jakieś funkcje, tak więc opisujemy każdą z nich jako osobny podrozdział. Pamiętaj, że nie możesz pominąć żadnego pliku dla rozdziału nadrzędnego. Przykładowo, skoro tworzysz rozdziały z opisami funkcji interfejsu, plik <code>api.interfejs.txt</code> także musi istnieć.</p>
+
+<p>Domyślnie TypeFriendly sortuje poziomy zagnieżdżeń alfabetycznie. Możemy wpływać na tę kolejność, tworząc w głównym katalogu projektu plik <code>sort_hints.txt</code> z dodatkowymi wskazówkami dla tych rozdziałów, które chcesz sortować inaczej. Bez nich powyższy przykład zostanie automatycznie ułożony w następującej kolejności:</p>
+
+<ol>
+<li><code>api.txt</code></li>
+<li><code>api.interfejs.txt</code></li>
+<li><code>api.interfejs.funkcja1.txt</code></li>
+<li><code>api.interfejs.funkcja2.txt</code></li>
+<li><code>api.klasa.txt</code></li>
+<li><code>api.klasa.funkcja1.txt</code></li>
+<li><code>api.klasa.funkcja2.txt</code></li>
+<li><code>instalacja.txt</code></li>
+<li><code>instalacja.prosta.txt</code></li>
+<li><code>instalacja.zlozona.txt</code></li>
+<li><code>wstep.txt</code></li>
+</ol>
+
+<p>Jest to trochę bez sensu, ponieważ o ile super, że funkcje są sortowane automatycznie, o tyle wstęp na końcu dokumentacji może już wzbudzić u czytelników zdumienie. Umieśćmy więc w <code>sort_hints.txt</code> parę wskazówek:</p>
+
+<pre name="code">
+wstep
+instalacja
+instalacja.prosta
+instalacja.zlozona
+api
+api.klasa
+api.interfejs
+</pre>
+
+<p>Widać, że w pliku tym podajemy po prostu w nowych liniach żądaną kolejność. Jeśli dla jakiegoś rozdziału pasuje nam sortowanie alfabetyczne, po prostu nie wymieniamy jego zawartości (np. nie wypisaliśmy tutaj żadnych funkcji z <code>api.klasa</code> i <code>api.interfejs</code>). Jeżeli spróbujemy zrobić mix, wymieniając tylko część zawartości danego rozdziału, TypeFriendly zgłosi błąd podczas próby wygenerowania dokumentacji.</p>
+
+<p>Wskazówki:</p>
+
+<ol>
+<li>Plik ze wskazówkami jest jeden dla wszystkich języków, dlatego bardzo ważne jest, aby w każdej wersji językowej odpowiadające sobie rozdziały miały tę samą nazwę pliku.</li>
+<li>Nazwa pliku jest też wykorzystywana do identyfikowania rozdziałów przy tworzeniu ręcznym odnośników w tekście. Dlatego wybieraj nazwy krótkie i intuicyjne, trzymając się jakichś reguł. Ułatwi to późniejsze odnalezienie się w tym wszystkim.</li>
+<li>TypeFriendly pomija pliki z innym rozszerzeniem lub kończące się np. tyldą, tak więc nie trzeba wyłączać opcji tworzenia kopii zapasowej w edytorze, aby tworzyć dokumentację.</li>
+</ol><dl class="location location-bottom"><dt><a href="docs.html">Tworzenie własnej dokumentacji</a><br/>Rozdziały<hr/></dt><dd class="prev">Struktura katalogowa<br/><a href="docs.directories.html">&laquo; Poprzedni</a></dd><dd class="next">Składnia pliku<br/><a href="docs.syntax.html">Następny &raquo;</a></dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.invenzzia.org/">Invenzzia Group 2008</a></p>
+		<p>Generated by <a href="#">TypeFriendly</a> by <a href="#">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

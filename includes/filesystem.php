@@ -1,0 +1,279 @@
+<?php
+
+	define('TF_READ', 4);
+	define('TF_WRITE', 2);
+	define('TF_EXEC', 1);
+
+	class tfFilesystem
+	{
+		private $master;
+		
+		public function setMasterDirectory($dir, $flags)
+		{
+			if(!$this -> checkFlags($dir, $flags))
+			{
+				return false;
+			}
+			$this -> master = $dir;
+			return true;
+		} // end setMasterDirectory();
+		
+		public function get($name)
+		{
+			return $this -> master.$name;			
+		} // end get();
+		
+		public function read($name)
+		{
+			if(!file_exists($this->master.$name))
+			{
+				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			}
+			
+			return file_get_contents($this->master.$name);
+		} // end read();
+		
+		public function readAsArray($name)
+		{
+			if(!file_exists($this->master.$name))
+			{
+				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			}
+			
+			$data = file($this->master.$name);
+			foreach($data as &$item)
+			{
+				$item = trim($item);
+			}
+			return $data;
+		} // end readAsArray();
+		
+		public function loadObject($name, $object)
+		{
+			if(!file_exists($this->master.$name))
+			{
+				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			}
+			require($this->master.$name);
+			if(!class_exists($object))
+			{
+				throw new SystemException('The file '.$this->master.$name.' does not contain the required class: '.$object.'.');
+			}
+			return new $object;
+		} // end loadObject();
+		
+		public function write($name, $content)
+		{	
+			return file_put_contents($this->master.$name, $content);
+		} // end write();
+
+		public function checkDirectories($list)
+		{
+			$err = false;
+			$errors = array();
+			foreach($list as $name => $param)
+			{
+			    if(!is_dir($this -> master.$name))
+			    {
+					$errors[$name] = 'Not a directory.';	
+					$err = true;
+					continue;
+			    }
+				if($param & TF_READ)
+				{
+				    if(!is_readable($this -> master.$name))
+				    {
+						$errors[$name] = 'Not readable';
+						$err = true;
+				    }
+				}
+				if($param & TF_WRITE)
+				{
+				    if(!is_writeable($this -> master.$name))
+				    {
+				    	$errors[$name] = 'Not writeable';
+						$err = true;
+				    }
+			    }
+				if($param & TF_EXEC)
+				{
+				    if(!is_executable($this -> master.$name))
+				    {
+						$errors[$name] = 'Not executable';
+						$err = true;
+				    }
+				}
+			}
+			if($err)
+			{
+				return $errors;
+			}
+			return true;
+		} // end checkDirectories();
+		
+		public function listDirectory($directory, $files = true, $directories = false)
+		{
+			$dir = @opendir($this -> master.$directory);
+			if(!is_resource($dir))
+			{
+				throw new SystemException('Cannot open directory: '.$directory);
+			}
+			$list = array();
+			while($f = readdir($dir))
+			{
+				if($f != '.' && $f != '..')
+				{
+					if($files && is_file($this -> master.$directory.$f))
+					{
+						$list[] = $f;
+					}
+					elseif($directories && is_dir($this -> master.$directory.$f))
+					{
+						$list[] = $f;
+					}
+				}
+			}
+			closedir($dir);
+			return $list;
+		} // end listDirectory();
+		
+		public function safeMkdir($directory, $access)
+		{
+			if(!is_dir($this->master.$directory))
+			{
+				mkdir($this->master.$directory);
+			}
+			$what = '';
+			if($access & TF_READ)
+			{
+				if(!is_readable($this->master.$directory))
+				{
+					$what .= 'r';
+				}
+			}
+			if($access & TF_WRITE)
+			{
+				if(!is_writeable($this->master.$directory))
+				{
+					$what .= 'w';
+				}
+			}
+			if($access & TF_EXEC)
+			{
+				if(!is_executable($this->master.$directory))
+				{
+					$what .= 'x';
+				}
+			}
+			if(USED_OS != 'Windows' && strlen($what) > 0)
+			{
+				system('chmod u+'.$what.' "'.$this->master.$directory.'"');
+			}
+		} // end safeMkdir();
+		
+		public function copyItem($from, $to)
+		{
+			if(is_file($this->master.$from))
+			{
+				copy($this->master.$from, $this->master.$to);
+			}
+			else
+			{
+				$this -> safeMkdir($this->master.$to, TF_WRITE);
+				$this -> recursiveCopy($this->master.$from, $this->master.$to);
+			}
+		} // end copyItem();
+		
+		public function copyFromVFS(tfFilesystem $sys, $from, $to)
+		{
+			if(is_file($sys->master.$from))
+			{
+				copy($sys->master.$from, $this->master.$to);
+			}
+			else
+			{
+				$this -> safeMkdir($to, TF_WRITE);
+				
+				if(!is_dir($sys->master.$from))
+				{
+					throw new SystemException('The directory '.$sys->master.$from.' does not exist.');
+				}
+				
+				$this -> recursiveCopy($sys->master.$from, $this->master.$to);
+			}
+		} // end copyFromVFS();
+		
+		public function getModificationTime($directory)
+		{
+			$dir = @opendir($this -> master.$directory);
+			if(!is_resource($dir))
+			{
+				throw new SystemException('Cannot open directory: '.$directory);
+			}
+			
+			$list = array();
+			while($f = readdir($dir))
+			{
+				if($f != '.' && $f != '..')
+				{
+					if(is_file($this -> master.$directory.$f))
+					{
+						$list[$f] = filemtime($this -> master.$directory.$f);
+					}
+				}
+			}
+			closedir($dir);
+			return $list;
+		} // end getModificationTime();
+		
+		private function recursiveCopy($source, $dest)
+		{		
+			$dir = opendir($source);
+			while($f = readdir($dir))
+			{
+				if($f != '.' && $f != '..')
+				{
+					if(is_file($source.$f))
+					{
+						copy($source.$f, $dest.$f);
+					}
+					else
+					{
+						
+						if(!is_dir($dest.$f))
+						{
+							mkdir($dest.$f);
+						}
+						$this -> recursiveCopy($source.$f.'/', $dest.$f.'/');
+					}				
+				}
+			}
+			closedir($dir);
+		} // end recursiveCopy();
+		
+		private function checkFlags($directory, $access)
+		{
+			if($access & TF_READ)
+			{
+				if(!is_readable($directory))
+				{
+					return false;
+				}
+			}
+			if($access & TF_WRITE)
+			{
+				if(!is_writeable($directory))
+				{
+					return false;
+				}
+			}
+			if($access & TF_EXEC)
+			{
+				if(!is_executable($directory))
+				{
+					return false;
+				}
+			}
+			return true;
+		} // end checkFlags();
+	} // end tfFilesystem;

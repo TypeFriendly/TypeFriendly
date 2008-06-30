@@ -1,0 +1,44 @@
+Title: Plik settings.ini
+
+----
+Jest to główny plik konfiguracyjny z listą opcji o składni:
+
+<pre name="code">
+opcja1 = "wartosc1"
+opcja2 = "wartosc2"
+opcja3 = "wartosc3"
+</pre>
+
+Znak średnika rozpoczyna komentarz, który ciągnie się aż do końca linii. 
+
+Podstawowe opcje, jakie należy ustawić, to:
+
++ **title** - nazwa projektu, do którego tworzysz dokumentację.
++ **version** - wersja projektu
++ **copyright** - prawa autorskie do dokumentacji
++ **copyrightLink** - odnośnik do strony posiadacza praw autorskich
++ **license** - licencja, na jakiej udostępniana jest dokumentacja
++ **licenseLink** - odnośnik do strony z treścią licencji
+
+Opcje techniczne związane z projektem:
+
++ **outputs** - lista formatów, w jakich chcesz generować dokumentację, odseparowanych przecinkami.
++ **baseLanguage** - dla każdego projektu musi być wybrany podstawowy język dokumentacji, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja dokumentacji w tym języku.
+
+Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:
+
+<pre name="code">
+; Opcje podstawowe
+
+title = "TypeFriendly"
+version = "0.1.0"
+copyright = "Invenzzia Group 2008"
+copyrightLink = "http://www.invenzzia.org/"
+license = "GNU Free Documentation License 2.1"
+licenseLink = "#"
+
+; Ustawienia wyswietlania
+
+outputs = "xhtml, web"
+baseLanguage = "pl"
+</pre>

@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="robots" content="all" />
+
+	<title>Składnia pliku - TypeFriendly</title>
+	
+
+	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>TypeFriendly 0.1.0</h1>
+		<h2>Składnia pliku</h2>
+		<p class="generated"></p>
+		<p class="location"><strong>Dokumentacja</strong></p>
+	</div>
+	
+	<div id="content"><dl class="location"><dt><a href="docs.html">Tworzenie własnej dokumentacji</a><br/>Składnia pliku<hr/></dt><dd class="prev">Rozdziały<br/><a href="docs.chapters.html">&laquo; Poprzedni</a></dd></dl>	<h1>Składnia pliku</h1><p>Przykładowy plik rozdziału wygląda następująco:</p>
+
+<pre name="code">
+Title: Tytuł
+Opcja1: Wartość
+Opcja2: Wartość
+ListaUstawień:
+ - Wartość 1
+ - Wartość 2
+
+----
+Treść pliku
+</pre>
+
+<p>W ustawieniach umieszczamy kolejne znaczniki w sposób pokazany powyżej. Obowiązkowy jest <em>Title</em>, ale jest też kilka innych. Właściwie ich lista zależy bardziej od tego, w jakim formacie wyjściowym będziemy generować dokumentację. Można bardzo łatwo opracować własny i zacząć używać tam nowe znaczniki - zostanie to omówione dalej.</p>
+
+<p>Do formatowania treści używana jest składnia http://michelf.com/projects/php-markdown/  "PHP Markdown Extra" z paroma rozszerzeniami i modyfikacjami. Spotkać się z nią można na wielu stronach internetowych, ponieważ parsery są publicznie dostępne, stąd istnieje szansa, że już ją znasz. Gdyby jednak nie, odwiedź stronę jednego z parserów (np. tę podaną powyżej), by dowiedzieć się więcej. W tym miejscu opiszemy reguły formatowania na swój swój sposób i z uwzględnieniem dokonanych zmian.</p>
+
+<p>Markdown został stworzony, by być zarówno łatwy w użyciu, jak i przyjazny w czytaniu plików źródłowych. Pliki źródłowe dokumentacji TypeFriendly mogą dzięki temu służyć za pomoc nawet bez przepuszczenia ich przez generator. Przyjęte jest założenie, że znaki formatujące powinny jak najmniej rzucać się w oczy czytelnikowi i mieć zbliżone zastosowanie do tego, jakiego już się używa np. w poczcie elektronicznej czy plikach README. Jednak oprócz tego, do użytku dopuszczony jest także HTML i modyfikacje TypeFriendly czasem z tego faktu korzystają.</p>
+
+<h3>Paragrafy i nowe linie</h3>
+
+<p>W Markdownie obowiązuje zasada, że elementy blokowe oddzielone są od siebie jedną lub większą ilością pustych linii. To samo dotyczy paragrafów. Piszemy tekst, a gdy chcemy rozpocząć nowy, robimy jedną pustą linię przerwy:</p>
+
+<pre name="code">
+To jest paragraf 1.
+
+To jest paragraf 2.
+</pre>
+
+<p>Aby zrobić zwykłe przełamanie linii, kończymy ją dwoma lub większą ilością spacji i piszemy z powrotem od nowej:</p>
+
+<pre name="code">
+To jest tekst z przełamaniem  
+linii. Na końcu linjki wyżej są dwie spacje.
+</pre>
+
+<h3>Nagłówki</h3>
+
+<p>Markdown obsługuje kilka rodzajów nagłówków. Najprostszym wyjściem jest "podkreślenie" tytułu nagłówka liniami poziomymi lub znakami równości:</p>
+
+<pre name="code">
+tekst
+
+<h3>Nagłówek 1</h3>
+
+tekst
+
+<h4>Nagłówek 1.1</h4>
+
+tekst
+</pre>
+
+<p>Ilość znaków równości czy pauzy nie ma znaczenia.</p>
+
+<p>Alternatywny styl to poprzedzenie tytułu jednym do sześciu znaków <strong>#</strong>:</p>
+
+<pre name="code">
+tekst
+
+<h1>nagłówek 1</h1>
+
+tekst
+
+<h2>nagłówek 2</h2>
+
+tekst
+
+<h4># nagłówek 6</h4>
+
+</pre>
+
+<p>Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Ilość znaków po tytule nie musi się zgadzać z ilością przed:</p>
+
+<pre name="code">
+tekst
+
+<h1>nagłówek 1</h1>
+
+tekst
+
+<h2>nagłówek 2</h2>
+
+tekst
+</pre>
+
+<h3>Listy i cytaty</h3>
+
+<p>Markdown pozwala bardzo łatwo tworzyć listy. Dodanie listy numerowanej jest niezwykle proste:</p>
+
+<pre name="code">
+Tekst.
+
+1. Element 1
+2. Element 2
+3. Element 3
+
+Tekst
+</pre>
+
+<p>Numery nie grają znaczenia - mogą być w innej kolejności, mogą się powtarzać. Alternatywny sposób to użycie znaku <strong>#</strong> zamiast numerów:</p>
+
+<pre name="code">
+Tekst.
+
+<h1>Element 1</h1>
+
+<h1>Element 2</h1>
+
+<h1>Element 3</h1>
+
+Tekst
+</pre>
+
+<p>Do tworzenia listy wypunktowanej, linijka musi zaczynać się od znaku <strong>*</strong>, <strong>+</strong> lub <strong>-</strong>:</p>
+
+<pre name="code">
+Tekst.
+
++ Element 1
++ Element 2
++ Element 3
+
+Tekst
+</pre>
+
+<p>Markdown dopuszcza umieszczanie cytatów w formie znanej z poczty elektronicznej:</p>
+
+<pre name="code">
+Tekst.
+
+> To jest cytat...
+> To jest cytat...
+> To jest cytat...
+
+Tekst
+</pre>
+
+<h3>Kod źródłowy</h3>
+
+<h3>Obrazki i multimedia</h3>
+
+<h3>Formatowanie tekstu</h3>
+
+<h3>Tabelki</h3><dl class="location location-bottom"><dt><a href="docs.html">Tworzenie własnej dokumentacji</a><br/>Składnia pliku<hr/></dt><dd class="prev">Rozdziały<br/><a href="docs.chapters.html">&laquo; Poprzedni</a></dd></dl>		</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="http://www.invenzzia.org/">Invenzzia Group 2008</a></p>
+		<p>Generated by <a href="#">TypeFriendly</a> by <a href="#">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>

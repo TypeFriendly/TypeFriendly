@@ -1,0 +1,137 @@
+/* CSS RESET */
+body { color: black; background: white; }
+a {color: black; text-decoration: none;}
+body, div, dl, dt, dd, li, pre,
+form, fieldset, input, textarea, p, blockquote, th, td { margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6, td { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+address, caption, cite, code, dfn, var { font-style: normal; font-weight: normal; }
+ol, ul { list-style: none; margin: 0; padding: 0; }
+table { border-collapse: collapse; border-spacing: 0; } 
+caption, th { text-align: left; font-weight: normal; font-style: normal; }
+acronym, abbr, fieldset, img { border: 0;}
+:focus { outline: 0; }
+
+
+h1.dev-seph {background: #000000 !important; color: #ffffff; font-size: 11px; padding: 3px 5px; border-top: 1px solid #ffffff; border-bottom: 1px solid #ffffff}
+
+
+body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px;background: #d4dec0 url(body-bg.gif) repeat-x; color: #555555}
+
+#wrap {margin: 0 auto; border: 5px solid #c4d69f;min-width: 760px;background: #ffffff; max-width: 1000px; }
+
+#header {position: relative; padding-top: 60px; background: #d5f19c url(header-h1-bg.gif) repeat-x; margin:3px;}
+#header h1{position: absolute; line-height: 60px; top: 0; right: 10px; color:#5e6f2c; text-shadow: #ffffff 0 0 12px; font-size: 20pt; font-weight: bold;}
+#header h2{position: absolute; line-height: 60px; top: 0; left: 0; padding-left: 10px;  text-shadow: #ffffff 1px 1px 2px;  font-size: 16pt; font-weight: normal; letter-spacing: -1px;}
+#header p {line-height: 25px; padding-left: 10px; color:#acb886; background:#f4ffd1; border-top: 3px solid #ffffff; font-size: 12px;}
+#header p a {color: #5b6a2d;}
+#header p a:hover {text-decoration: underline;}
+#header p.generated {font-size: 11px; text-align: right; background: none; position: absolute; right: 0; bottom: 0; border-top-width:1px; padding-right: 10px;}
+#footer {position: relative;  background: #eef4da; margin:3px; color:#91977f; font-size: 10pt;text-align: center;padding: 5px 0;}
+#footer a {font-weight: bold; color: #8e9a75;}
+#footer a:hover {text-decoration:underline;}
+
+#content {margin: 10px; line-height: 20px;}
+
+#content h1 {font-size: 22px;line-height: 24px; font-weight: bold; letter-spacing:-1; font-family: Arial, Helvetica, sans-serif; margin: 10px 0; border-bottom: 1px solid #c4f58a; color:#2e5727; padding-bottom: 4px;}
+#content h2 {font-size: 18px;line-height: 20px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 10px 0; border-bottom: 1px solid #dddddd; color:#333333; padding-bottom: 2px;}
+#content h3 {font-size: 16px;line-height: 18px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 10px 0;  color:#333333; padding-bottom: 2px;}
+#content h4 {font-size: 12px;line-height: 14px; font-weight: bold;}
+#content h1 a {border:none;}
+#content h2 a {border:none; color: #333333;}
+#content h3 a {text-decoration: underline; border:none;color: #333333;}
+
+#content p {margin: 10px 0; text-align: justify;}
+#content a {color: #669900;/*padding-right: 18px; background: url(jump.gif) no-repeat 100% 50%;*/}
+#content a:hover {/*color: #8d1414;*/ border-bottom: 1px solid #6faf00}
+#content hr {color: #000000;background-color: #000000;height: 1px; border: none;}
+#content dl {}
+#content dl dt {font-weight: bold; margin: 10px 0 ; position: relative; }
+#content dl dt a {border: none; position: absolute;display: block; top:-2px; right: 5px; font-weight: bold;}
+#content dl dd {margin-left: 20px; padding-left: 5px;}
+#content ul {list-style: disc; margin: 10px 0 10px 30px;}
+#content ol {list-style: decimal; margin: 10px 0 10px 40px; }
+#content code {padding: 1px 2px; background: #feffee}
+#content code a, #content pre a {color: #3a9900;  padding-right: 18px; background: url(jump.gif) no-repeat 100% 50%;}
+#content code a:hover, #content pre a:hover {border:none; color:#8d1414}
+#content div.pre {}
+#content pre {overflow: auto; letter-spacing: 0;margin:10px 0; background: #f4f4f4; padding: 3px 7px; }
+#content pre code {background: none; padding: 0;}
+
+#content table {margin: 10px 0;width: 100%;}
+#content table thead{}
+#content table tbody {}
+#content table td, #content table th {padding: 4px 7px; text-align: center; border: 1px solid #999999;}
+#content table td {background: #ffffff;}
+#content table th {background: #e4f7bd;  font-weight: bold; color: #657926;}
+
+#content div.method-synopsis {padding-left: 100px; text-indent: -100px; font-family: 'Courier New', Courier; font-size: 13px;}
+#content div.method-synopsis kbd {color: #ff0000;font-size: 16px; font-weight: bold;}
+#content div.method-synopsis kbd.b {color: #0000ff;font-size: 14px; }
+#content div.method-synopsis strong {font-size: 15px;}
+#content div.method-synopsis em {font-style: normal; color: #777777;font-size: 12px}
+#content div.method-synopsis code {background: none; color: #000000;font-size: 13px;}
+
+#content div.block-border {margin: 10px 0 10px 20px; border-left: 5px solid #555555; padding-left: 10px;}
+#content div.border-yellow { border-color: #edef5b;}
+#content div.border-red { border-color: #ff0000;}
+#content div.border-blue { border-color: #aaaaff;}
+
+#content dl.location {position: relative;border-color:#d1f1c1; border-style: solid; border-width: 0 0 3px 0; height:50px;line-height:20px;font-weight: bold;}
+#content dl.location a {font-weight: normal;}
+#content dl.location dt {text-align: center;margin:0; padding: 5px 0;}
+#content dl.location dt a{position: static; display: inline;}
+#content dl.location dd {position: absolute; top: 0;margin:0; padding: 5px 0;}
+#content dl.location-bottom {border-top-width: 3px; border-bottom-width: 0;}
+#content dl.location dd a{}
+#content dl.location dd.prev {left:0;text-align: left;}
+#content dl.location dd.next {right:0;text-align: right;}
+#content dl.location hr {display: none;background-color: #d1f1c1; height:3px; border-color:#d1f1c1; color:#d1f1c1;}
+
+/*
+	CODE COLORING
+*/
+
+.kw1 {
+	color: #ff00ff;
+}
+.kw2 {
+	color: #000000;
+	font-weight: bold;
+}
+
+.kw3 {
+	color: #006F08;
+}
+.kw4 {
+	color: #f63333;
+}
+.co1, .co2, .coMULTI {
+	color: #808080;
+}
+.es0 {
+	color: #000033;
+}
+
+.br0 {
+	color: #ff0000;
+}
+
+.st0 {
+	color: #0000ff;
+}
+
+.nu0 {
+	color: #ffff00;
+}
+
+.me0 {
+	color: #006600;
+}
+
+.sc3{
+color: #339933;	
+	}
+
+.rel{
+	color: #ff0000;
+}

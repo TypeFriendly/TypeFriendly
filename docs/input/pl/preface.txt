@@ -1,0 +1,16 @@
+Title: Przedmowa
+
+----
+TypeFriendly to napisany w PHP5 skrypt przeznaczony do generowania dokumentacji. Został napisany tak, aby być prostym w obsłudze oraz aby rezultaty można było osiągnąć już w kilka minut po rozpoczęciu pracy. TypeFriendly domyślnie zawiera wszystko, co niezbędne, do stworzenia dokumentacji, dzięki czemu nie trzeba wyważać otwartych drzwi.
+
+Najważniejsze cechy TypeFriendly:
+
+* Modularna budowa dokumentacji - dokumentacja generowana jest ze zwykłych plików tekstowych, a jej układ i zależności między podstronami automatycznie ustalane na podstawie nazw tych plików.
+* Prosta składnia - dokumentację można pisać w niezwykle prostym i czytelnym formacie Markdown.
+* Wsparcie dla dokumentacji wielojęzycznych - TypeFriendly umożliwia równoległe tworzenie dokumentacji w kilku językach, a także udostępnia narzędzia ułatwiające prace, takie jak porównywanie wersji językowych.
+* Konfigurowalne formaty wyjściowe - aktualnie TypeFriendly potrafi generować dokumentację w trzech formatach: *XHTML - wiele stron*, *XHTML - jedna strona* oraz *Metadane*. Ostatni z nich umożliwia szybkie zaimportowanie dokumentacji do bazy danych i zrobienie jej wersji on-line.
+* Różne dodatki przydatne przy dokumentowaniu kodu: kolorowanie składni, referencje, zależności między klasami...
+* Łatwe tworzenie nawigacji.
+* Pracuje pod Linuksem, FreeBSD i Windowsem.
+
+TypeFriendly dostępny jest na licencji GNU General Public License 3, co oznacza, że możesz go nie tylko używać za darmo, ale także modyfikować i dostosowywać do własnych celów.

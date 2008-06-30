@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="robots" content="all" />
+
+	<title></title>
+	
+
+	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1>Open Power Template 2.0</h1>
+		<h2>syntax.instructions.extend</h2>
+		
+		<p class="generated">syntax.instructions.extend.txt - generated @ 25.03.2008</p>
+		
+		<p class="location"><strong>Dokumentacja</strong> - <a href="#">Składnia</a> &raquo; <a href="#">Instrukcje</a> &raquo; <a href="#">Rozszerzanie</a></p>
+	</div>
+	
+	<div id="content">
+
+<dl class="location">
+	<dt><a href="#">Rozdział 2. Składnia szablonów</a><br/>2.5. Wyrażenia<hr/></dt>
+	<dd class="prev">2.4. CDATA<br/><a href="#">&laquo; Poprzedni</a></dd>
+	<dd class="next">2.5.1. Bloki<br/><a href="#">Następny &raquo;</a></dd>
+</dl>	
+
+<h1>2.5.1. Bloki</h1>
+
+<p>Blokami nazywamy wszystkie elementy, które reprezentują jakąś zmienną wartość, np. wynik działania skryptu. Każdy blok ma swoją określoną nazwę, na podstawie której OPT decyduje, jakie wartości może podstawić w jego miejsce. Wartością bloku może być dowolna informacja skalarna: liczby, ciągi tekstowe, wartości logiczne, a także typy złożone, jak tablice i obiekty. Nazwa bloku może rozpoczynać się od litery lub podkreślenia, natomiast na dalszych pozycjach dozwolone są cyfry. Wielkość liter ma znaczenie.</p>
+
+<h2>Użycie zaawansowane</h2>
+
+<ul>
+	<li><p>Lorem ipsum</p></li>
+	<li><p>Lorem ipsum</p></li>
+	<li><p>Lorem ipsum</p></li>
+</ul>
+
+<p>Blok prosty służy do osadzania w szablonie danych dostarczonych przez skrypt wykonujący szablon. Jego nazwa poprzedzona jest znakiem dolara. Skrypt może przypisać blokowi dowolną wartość, posługując się jego nazwą, zatem element ten pełni główną rolę w komunikacji między skryptem, a szablonem. Poniżej pokazany jest przykład użycia:</p>
+
+<h4>Przykład 2.5.1.1: Wstawianie bloku</h4>
+
+<pre>
+&lt;p&gt;Witaj, przyjacielu! Czy potrzebujesz {$przedmiot}?&lt;/p&gt;
+</pre>
+
+<pre><code>&lt;p&gt;Witaj, przyjacielu! Czy potrzebujesz {$przedmiot}?&lt;/p&gt;
+</code></pre>
+
+<p>Jeżeli skrypt przypisze blokowi przedmiot wartość "okularów", wynik działania parsera będzie następujący:</p>
+
+<p><code>&lt;p&gt;Witaj, przyjacielu! Czy potrzebujesz {$przedmiot}?&lt;/p&gt;</code></p>
+
+<ol>
+	<li>Lorem ipsum</li>
+	<li>Lorem ipsum</li>
+	<li>Lorem ipsum</li>
+</ol>
+
+<div class="important">
+	<p>Jak wspominaliśmy, bloki mogą przechowywać nie tylko wartości skalarne, ale i złożone struktury znane z PHP: tablice oraz obiekty. Tablica jest zbiorem zmiennych zgrupowanych pod tą samą nazwą. Przykładowo, zamiast pisać $osoba_imie, $osoba_nazwisko, robimy $osoba.imie, $osoba.nazwisko. Niektórzy powiedzą, że to praktycznie to samo, lecz główna różnica leży w kodzie PHP i możliwościach. Od strony kodu dane są prościej przypisywane do szablonów, a ponadto tablica sama w sobie jest jednym wielkim blokiem i jeśli trzeba, można napisać po prostu $osoba, aby przekazać gdzieś wszystkie informacje o facecie za jednym zamachem. Skonsultuj się z Twoim programistą PHP, gdzie będziecie używać tablic.</p>
+	
+	<h3>Użycie zaawansowane</h3>
+	
+	<p>OPT domyślnie zezwala na używanie w szablonach niezdefiniowanych bloków, lecz można to zmienić, ustawiając żądany poziom raportowania błędów w dyrektywie errorReporting na E_ALL | E_NOTICE.</p>
+</div>
+
+<p>Przejdźmy teraz do skryptu. Na początku musimy ustawić stałą <code>OPT_DIR</code> tak, aby wskazywała na katalog z plikami biblioteki. Zalecamy, aby pojawiła się tam ścieżka bezwzględna lub względem aktualnego katalogu (rozpoczyna się od <code>./</code>) - dzięki temu PHP nie będzie przeszukiwać listy ścieżek zdefiniowanych w "include_path", co spowalnia wykonywanie. Następnie dołączamy plik <code>opt.class.php</code>. Cały kod, w którym korzystasz z OPT, powinien być objęty blokiem <code>try...catch</code>, w którym przechwytujemy wyjątek <code><a href="#">optException</a></code>. Można kierować go do domyślnej funkcji obsługi lub napisać własną.</p>
+
+<hr/>
+
+<p>Właściwe korzystanie z OPT polega na utworzeniu obiektu klasy <code><a href="#">optClass</a></code>, skonfigurowaniu go, załadowaniu danych do parsera i wykonanie szablonów. Niezbędne do ustawienia dyrektywy to <code><a href="#">sourceDir</a></code> oraz <code><a href="#">compileDir</a></code>, w których podajemy ścieżki dostępu do obu katalogów z szablonami (w pierwszym wersje źródłowe, w drugim - skompilowane). Zakończenie konfigurowania potwierdzamy wywołaniem metody <code><a href="#">optClass::setup()</a></code>. Zostało to opisane w rozdziale <a href="">3.4.5 Lorem ipsum</a>.</p>
+
+<dl class="location location-bottom">
+	<dt><hr/><a href="#">Początek rozdziału</a><br/><a href="#">Spis treści</a></dt>
+	<dd class="prev"><a href="#">&laquo; Poprzedni</a><br/>2.4. CDATA</dd>
+	<dd class="next"><a href="#">Następny &raquo;</a><br/>2.5.1. Bloki</dd>
+</dl>	
+
+	</div>
+	
+	<div id="comments">
+	
+	</div>
+	
+	<div id="footer">
+		<p>Copyright &copy; <a href="#">Lorem ispum</a></p>
+		<p>Generated by <a href="#">TypeFriendly</a> by <a href="#">Invenzzia</a></p>
+	</div>
+</div>
+
+</body>
+</html>
