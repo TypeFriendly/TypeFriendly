@@ -1,4 +1,26 @@
 <?php
+/*
+  --------------------------------------------------------------------
+                           TypeFriendly
+                 Copyright (c) 2008 Invenzzia Team
+                    http://www.invenzzia.org/
+                See README for more author details
+  --------------------------------------------------------------------
+  This file is part of TypeFriendly.
+                                                                   
+  TypeFriendly is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  TypeFriendly is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 	class tfMain extends tfApplication
 	{
@@ -60,7 +82,7 @@
 			$out -> writeln('   -o output   - render only the specified output. The output');
 			$out -> writeln('                 must be declared within the project.');
 		} // end main();
-		
+
 		public function work(tfProgram $prg)
 		{
 			$prg -> loadLibrary('parsers');
@@ -69,7 +91,7 @@
 			
 			$project = new tfProject($this -> args['#path']);
 			tfProject::set($project);
-			
+
 			// Choose the language
 			if(isset($this -> args['-l']))
 			{
@@ -103,14 +125,14 @@
 				}
 			}
 		} // end work();
-		
+
 		public function compare(tfProgram $prg)
 		{
 			$prg -> loadLibrary('project');
 
 			$project = new tfProject($this -> args['#path']);
 			tfProject::set($project);
-			
+
 			$project -> versionCompare($this -> args['-c']);
 		} // end compare();
 	} // end tfMain;

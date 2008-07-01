@@ -5,6 +5,12 @@ TypeFriendly is a documentation generator written in PHP5 and developed to be ea
 You may use it to create a HTML documentations for your projects using simple text files
 and the Markdown syntax.
 
+Run TF from the command line to self-generate a complete user manual:
+
+./typefriendly.php -o xhtml ./docs
+
+The output files will be in ./docs/output/xhtml
+
 Authors and licensing
 ---------------------
 
@@ -16,5 +22,4 @@ Authors and contributors:
 - The PHP-Markdown Extra parser: Copyright (c) 2004-2007 Michel Fortin <http://www.michelf.com/>
 - The original Markdown: Copyright (c) 2003-2006 John Gruber <http://daringfireball.net/> 
  
-The last two ones are originally available under the terms of new BSD license, however according to the
-GNU GPL 3 statements, in this project, they have been re-licensed to GNU GPL.
+The last two ones are originally available under the terms of new BSD license.

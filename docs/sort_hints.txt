@@ -5,3 +5,5 @@ docs.settings
 docs.directories
 docs.chapters
 docs.syntax
+docs.tags
+tf

@@ -1,0 +1,4 @@
+Title: Interfejs wiersza poleceń
+
+----
+TypeFriendly jest obsługiwany wyłącznie z wiersza poleceń systemu operacyjnego. Współpracuje zarówno z rozmaitymi odmianami Uniksa, jak i z systemem Windows.

@@ -1,4 +1,26 @@
 <?php
+/*
+  --------------------------------------------------------------------
+                           TypeFriendly
+                 Copyright (c) 2008 Invenzzia Team
+                    http://www.invenzzia.org/
+                See README for more author details
+  --------------------------------------------------------------------
+  This file is part of TypeFriendly.
+                                                                   
+  TypeFriendly is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  TypeFriendly is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 	function walkTrim(&$val)
 	{
@@ -53,6 +75,7 @@
 		private $prog;
 		private $media = array();
 		private $pages = array();
+		private $parsed = false;
 		
 		static private $object;
 		
@@ -73,6 +96,10 @@
 			{
 				$this -> config['outputs'] = explode(',', $this->config['outputs']);
 				array_walk($this -> config['outputs'], 'walkTrim');
+			}
+			if(!isset($this -> config['navigation']))
+			{
+				$this -> config['navigation'] = 'tree';
 			}
 			
 			
@@ -163,6 +190,10 @@
 				{
 					$list[$parentId][] = array('id' => $item, 'order' => sizeof($list[$parentId]));
 				}
+				if(!isset($list[$item]))
+				{
+					$list[$item] = array();
+				}
 			}
 
 			try
@@ -216,15 +247,16 @@
 			/*
 			 * Part 2 - create the meta-data for each page.
 			 */
+
 			
 			$this -> pages = array();
 			$parser = tfParsers::get();
 			foreach($list as $id => &$sublist)
-			{
+			{		
 				foreach($sublist as $subId => &$item)
 				{
 					$metaData = $parser -> tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
-				//	unset($metaData['Content']);
+					// unset($metaData['Content']);
 					// Validate the user-defined meta.
 					if(!isset($metaData['ShortTitle']))
 					{
@@ -233,6 +265,8 @@
 					
 					// Create the additional meta.
 					$metaData['Id'] = $item['id'];
+					
+					// Create the navigation according to the chapter layout					
 					$metaData['_Parent'] = $id;
 					$metaData['_Previous'] = null;
 					$metaData['_Next'] = null;
@@ -244,18 +278,46 @@
 					{
 						$metaData['_Next'] = $sublist[$subId+1]['id'];
 					}
+					
+					if($this -> config['navigation'] == 'flat')
+					{
+						// Create a flat navigation, where "Next" can point to the first child, if accessible
+						$metaData['_XNext'] = $metaData['_Next'];
+						if(sizeof($list[$item['id']]) > 0)
+						{
+							$metaData['_Next'] = $list[$item['id']][0]['id'];
+						}
+						elseif(is_null($metaData['_Next']) && $id != '')
+						{
+							$metaData['_Next'] = $this -> pages[$id]['_XNext'];
+						}
+
+						if(!is_null($metaData['_Previous']))
+						{
+							$xid = $metaData['_Previous'];
+							while(($size = sizeof($list[$xid])) > 0)
+							{
+								$xid = $list[$xid][$size-1]['id'];
+							}
+							$metaData['_Previous'] = $xid;
+						}
+						elseif(is_null($metaData['_Previous']) && $id != '')
+						{
+							$metaData['_Previous'] = $id;
+						}
+						
+					}
 					$item = $metaData;
 					$this -> pages[$item['Id']] = &$item;
 				}
 			}
 			$this -> tree = $list;
-		//	var_dump($this->tree);
 		} // end loadItems();
 
 		public function copyMedia()
 		{
 			try
-			{		
+			{
 				$this -> fs -> copyFromVFS($this->prog->fs, 'media/'.$this->output.'/', 'output/'.$this->output.'/');
 			}
 			catch(SystemException $e)
@@ -274,9 +336,13 @@
 			
 			foreach($this -> pages as &$page)
 			{
-				$page['Content'] = $parsers -> parse($page['Content']);
+				if(!$this -> parsed)
+				{	
+					$page['Content'] = $parsers -> parse($page['Content']);
+				}
 				$out -> generate($page);
 			}
+			$this -> parsed = true;
 			$out -> close();
 		} // end generate();
 
