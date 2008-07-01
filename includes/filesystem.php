@@ -298,7 +298,7 @@
 					return false;
 				}
 			}
-			if($access & TF_EXEC)
+			if($access & TF_EXEC && USED_OS != 'Windows')
 			{
 				if(!is_executable($directory))
 				{

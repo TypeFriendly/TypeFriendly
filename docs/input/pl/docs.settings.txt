@@ -1,13 +1,14 @@
 Title: Plik settings.ini
 
 ----
+
 Jest to główny plik konfiguracyjny z listą opcji o składni:
 
-<pre name="code">
+~~~
 opcja1 = "wartosc1"
 opcja2 = "wartosc2"
 opcja3 = "wartosc3"
-</pre>
+~~~
 
 Znak średnika rozpoczyna komentarz, który ciągnie się aż do końca linii. 
 
@@ -27,7 +28,7 @@ Opcje techniczne związane z projektem:
 
 Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:
 
-<pre name="code">
+~~~
 ; Opcje podstawowe
 
 title = "TypeFriendly"
@@ -41,4 +42,4 @@ licenseLink = "#"
 
 outputs = "xhtml, web"
 baseLanguage = "pl"
-</pre>
+~~~

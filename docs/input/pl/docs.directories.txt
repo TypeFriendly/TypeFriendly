@@ -3,11 +3,11 @@ Title: Struktura katalogowa
 ----
 Dokumentacja TypeFriendly musi mieć odpowiednią strukturę katalogową. Utwórz gdzieś w swoim projekcie katalog na jej przechowywanie (np. `/docs`) i utwórz w nim następujące foldery:
 
-* `/input`
-  * `/pl`
-* `/output`
-* `/sort_hints.txt` (plik tekstowy)
-* `/links.txt` (plik tekstowy)
-* `/settings.ini` (plik tekstowy)
+    /input
+        /pl
+    /output
+    /sort_hints.txt
+    /links.txt
+    /settings.ini
 
 Zasady są bardzo proste: w katalogu `/input` znajdują się podkatalogi reprezentujące poszczególne wersje językowe, a w nich umieszczamy charakterystyczne dla każdej z nich pliki tekstowe. Dodatkowo możemy umieścić tu folder `/media` przechowujący obrazki i inną grafikę wykorzystywaną w dokumentacji. W `/output` TypeFriendly będzie zapisywać wygenerowane dokumentacje, dlatego upewnij się, że nadałeś mu uprawnienia do zapisu. Bezpośrednio w głównym katalogu zapisywane są pliki z ustawieniami, w których możesz wpływać na różne aspekty dokumentacji. Najważniejszym z nich jest `settings.ini` zawierający ustawienia główne. `sort_hints.txt` zawiera wskazówki dotyczące sortowania stron dokumentacji, zaś `links.txt` umożliwia zdefiniowanie słów kluczowych, które będą automatycznie zamieniane na linki do odpowiednich podstron. Dokładna budowa każdego z plików wyjaśniona jest dalej.

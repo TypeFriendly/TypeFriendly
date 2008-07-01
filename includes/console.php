@@ -206,8 +206,10 @@
 		
 		public function detectOS()
 		{
-			$this -> os = php_uname('s');
-			define('USED_OS', $this -> os);
+			$this->os = php_uname('s');
+			$explode = explode(' ', $this->os);
+			$this->os = $explode[0];
+			define('USED_OS', $this->os);
 		} // end detectOS();		
 	} // end tfConsole;
 	

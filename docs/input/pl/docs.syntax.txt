@@ -3,7 +3,7 @@ Title: Składnia pliku
 ----
 Przykładowy plik rozdziału wygląda następująco:
 
-<pre name="code">
+~~~
 Title: Tytuł
 Opcja1: Wartość
 Opcja2: Wartość
@@ -12,8 +12,9 @@ ListaUstawień:
  - Wartość 2
 
 ----
+
 Treść pliku
-</pre>
+~~~
 
 W ustawieniach umieszczamy kolejne znaczniki w sposób pokazany powyżej. Obowiązkowy jest *Title*, ale jest też kilka innych. Właściwie ich lista zależy bardziej od tego, w jakim formacie wyjściowym będziemy generować dokumentację. Można bardzo łatwo opracować własny i zacząć używać tam nowe znaczniki - zostanie to omówione dalej.
 
@@ -26,25 +27,25 @@ Paragrafy i nowe linie
 
 W Markdownie obowiązuje zasada, że elementy blokowe oddzielone są od siebie jedną lub większą ilością pustych linii. To samo dotyczy paragrafów. Piszemy tekst, a gdy chcemy rozpocząć nowy, robimy jedną pustą linię przerwy:
 
-<pre name="code">
+~~~
 To jest paragraf 1.
 
 To jest paragraf 2.
-</pre>
+~~~
 
 Aby zrobić zwykłe przełamanie linii, kończymy ją dwoma lub większą ilością spacji i piszemy z powrotem od nowej:
 
-<pre name="code">
+~~~
 To jest tekst z przełamaniem  
 linii. Na końcu linjki wyżej są dwie spacje.
-</pre>
+~~~
 
 Nagłówki
 ========
 
 Markdown obsługuje kilka rodzajów nagłówków. Najprostszym wyjściem jest "podkreślenie" tytułu nagłówka liniami poziomymi lub znakami równości:
 
-<pre name="code">
+~~~
 tekst
 
 Nagłówek 1
@@ -56,13 +57,13 @@ Nagłówek 1.1
 ------------
 
 tekst
-</pre>
+~~~
 
 Ilość znaków równości czy pauzy nie ma znaczenia.
 
 Alternatywny styl to poprzedzenie tytułu jednym do sześciu znaków **#**:
 
-<pre name="code">
+~~~
 tekst
 
 # nagłówek 1
@@ -74,11 +75,11 @@ tekst
 tekst
 
 ##### nagłówek 6
-</pre>
+~~~
 
 Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Ilość znaków po tytule nie musi się zgadzać z ilością przed:
 
-<pre name="code">
+~~~
 tekst
 
 # nagłówek 1 #
@@ -88,14 +89,14 @@ tekst
 ## nagłówek 2 ######
 
 tekst
-</pre>
+~~~
 
 Listy i cytaty
 ==============
 
 Markdown pozwala bardzo łatwo tworzyć listy. Dodanie listy numerowanej jest niezwykle proste:
 
-<pre name="code">
+~~~
 Tekst.
 
 1. Element 1
@@ -103,23 +104,13 @@ Tekst.
 3. Element 3
 
 Tekst
-</pre>
+~~~
 
-Numery nie grają znaczenia - mogą być w innej kolejności, mogą się powtarzać. Alternatywny sposób to użycie znaku **#** zamiast numerów:
-
-<pre name="code">
-Tekst.
-
-# Element 1
-# Element 2
-# Element 3
-
-Tekst
-</pre>
+Numery nie grają znaczenia - mogą być w innej kolejności, mogą się powtarzać. 
 
 Do tworzenia listy wypunktowanej, linijka musi zaczynać się od znaku **\***, **+** lub **-**:
 
-<pre name="code">
+~~~
 Tekst.
 
 + Element 1
@@ -127,11 +118,11 @@ Tekst.
 + Element 3
 
 Tekst
-</pre>
+~~~
 
 Markdown dopuszcza umieszczanie cytatów w formie znanej z poczty elektronicznej:
 
-<pre name="code">
+~~~
 Tekst.
 
 > To jest cytat...
@@ -139,7 +130,7 @@ Tekst.
 > To jest cytat...
 
 Tekst
-</pre>
+~~~
 
 Kod źródłowy
 ============

@@ -40,15 +40,13 @@ Domyślnie TypeFriendly sortuje poziomy zagnieżdżeń alfabetycznie. Możemy wp
 
 Jest to trochę bez sensu, ponieważ o ile super, że funkcje są sortowane automatycznie, o tyle wstęp na końcu dokumentacji może już wzbudzić u czytelników zdumienie. Umieśćmy więc w `sort_hints.txt` parę wskazówek:
 
-<pre name="code">
-wstep
-instalacja
-instalacja.prosta
-instalacja.zlozona
-api
-api.klasa
-api.interfejs
-</pre>
+    wstep
+    instalacja
+    instalacja.prosta
+    instalacja.zlozona
+    api
+    api.klasa
+    api.interfejs
 
 Widać, że w pliku tym podajemy po prostu w nowych liniach żądaną kolejność. Jeśli dla jakiegoś rozdziału pasuje nam sortowanie alfabetyczne, po prostu nie wymieniamy jego zawartości (np. nie wypisaliśmy tutaj żadnych funkcji z `api.klasa` i `api.interfejs`). Jeżeli spróbujemy zrobić mix, wymieniając tylko część zawartości danego rozdziału, TypeFriendly zgłosi błąd podczas próby wygenerowania dokumentacji.
 

@@ -3,12 +3,12 @@ Title: Tagi plików
 ----
 W rozdziale tym opisane są wszystkie dostępne tagi, jakich można używać w plikach rozdziałów. Większość z nich przyjmuje wartość tekstową, lecz niektóre mogą także obsługiwać zespół wartości (tablicę), którą podajemy w następujący sposób:
 
-<pre name="code">
+~~~
 NazwaTagu:
  - Wartość 1
  - Wartość 2
  - Wartość 3
-</pre>
+~~~
 
 Pola podstawowe
 ---------------
@@ -21,13 +21,13 @@ Pola podstawowe
 
 Przykład:
 
-<pre name="code">
+~~~
 Title: Funkcja foo()
 ShortTitle: foo()
 Reference: void foo(int $a, int $b)
 SeeAlso:
  - reference.functions.bar
-</pre>
+~~~
 
 Programowanie obiektowe
 -----------------------
@@ -39,7 +39,7 @@ Pola te służą do łatwiejszego tworzenia dokumentacji do obiektowego kodu. Um
 
 Przykładowe użycie:
 
-<pre name="code">
+~~~
 Title: Klasa "foo"
 Extends: reference.bar
 Implements:
@@ -47,17 +47,17 @@ Implements:
  - reference.bar-interface
 ExtendedBy:
  - reference.joe
- </pre>
+~~~
  
 Dodatkowo istnieją wersje tych dyrektyw, które umożliwiają podanie nazwy klasy bezpośrednio. Wszystkie one mają nazwy rozpoczynające się od dużej litery "E", np. **EExtends**, **EImplements**. Przykładowe użycie:
 
-<pre name="code">
+~~~
 Title: Klasa "foo"
 EExtends: PDO
 EImplements:
  - Countable
  - IteratorAggregate
-</pre>
+~~~
 
 Pola planowane
 --------------
