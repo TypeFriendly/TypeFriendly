@@ -1,0 +1,8 @@
+status = "Status"
+obj_extends = "Klasa bazowa"
+obj_implements = "Implementuje"
+obj_extended = "Klasy pochodne"
+version_since = "Od wersji"
+version_to = "Do wersji"
+author = "Autor"
+reference = "Wywołanie"

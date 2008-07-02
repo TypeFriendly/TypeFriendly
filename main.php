@@ -88,6 +88,7 @@
 			$prg->loadLibrary('parsers');
 			$prg->loadLibrary('output');
 			$prg->loadLibrary('project');
+			$prg->loadLibrary('i18n');
 			
 			$project = new tfProject($this->args['#path']);
 			tfProject::set($project);

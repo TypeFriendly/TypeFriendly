@@ -1,0 +1,4 @@
+Title: Dodatki
+
+----
+Dodatkowe informacje dotyczące TypeFriendly.

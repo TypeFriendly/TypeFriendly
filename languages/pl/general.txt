@@ -1,0 +1,3 @@
+table_of_contents = "Spis treści"
+documentation = "Dokumentacja"
+generated_in = "Wygenerowano %s"

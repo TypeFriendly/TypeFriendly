@@ -1,0 +1,8 @@
+status = "Status"
+obj_extends = "Extends"
+obj_implements = "Implements"
+obj_extended = "Extended by"
+version_since = "Since version"
+version_to = "To version"
+author = "Author"
+reference = "Reference"

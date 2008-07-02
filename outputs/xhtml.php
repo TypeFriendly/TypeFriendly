@@ -6,18 +6,19 @@
 		
 		public function init($project, $path)
 		{		
+			$translate = tfTranslate::get();
 			$this->date = date('d.m.Y');
 			
 			$this->project = $project;
 			$this->path = $path;
 			// Generating TOC.
-			$code = $this->createHeader('Spis treści', array());
+			$code = $this->createHeader($translate->_('general','table_of_contents'), array());
 			
 			$code .= '<h1>'.$this->project->config['title'].' '.$this->project->config['version'].'</h1>';
 			
 			$code .= '<p><strong>Copyright &copy; '.$this->project->config['copyright'].'</strong></p>';
 			
-			$code .= '<p>Wygenerowano '.$this->date.'</p>';
+			$code .= '<p>'.$translate->_('general','generated_in',$this->date).'</p>';
 			
 			$code .= $this->menuGen('', true, true);
 			$code .= $this->createFooter();
@@ -54,9 +55,9 @@
 			
 			$code .= $page['Content'];
 			
-			if(isset($page['SeeAlso']))
+			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
 			{
-				$code .= $this->createSeeAlso($page['SeeAlso']);
+				$code .= $this->createSeeAlso($page);
 			}
 			
 			$code .= $this->createBottomNavigator($page);
@@ -71,8 +72,11 @@
 		
 		private function createHeader($title, Array $nav)
 		{
+			$translate = tfTranslate::get();
 			$docTitle = $this->project->config['title'];
 			$docVersion = $this->project->config['version'];
+			
+			$textDocumentation = $translate->_('general','documentation');
 $code = <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -94,7 +98,7 @@ $code = <<<EOF
 		<h1>{$docTitle} {$docVersion}</h1>
 		<h2>{$title}</h2>
 		<p class="generated">@ {$this->date}</p>
-		<p class="location"><a href="index.html"><strong>Dokumentacja</strong></a>
+		<p class="location"><a href="index.html"><strong>{$textDocumentation}</strong></a>
 EOF;
 		foreach($nav as $id => $title)
 		{
@@ -130,6 +134,7 @@ EOF;
 		
 		public function createTopNavigator(&$page)
 		{
+			$translate = tfTranslate::get();
 			$parent = $this->project->getMetaInfo($page['_Parent'], false);
 			$prev = $this->project->getMetaInfo($page['_Previous'], false);
 			$next = $this->project->getMetaInfo($page['_Next'], false);
@@ -140,15 +145,15 @@ EOF;
 			}
 			else
 			{
-				$code .= '<dt><a href="index.html">Spis treści</a><br/>'.$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="index.html">'.$translate->_('general','table_of_contents').'</a><br/>'.$page['Title'].'<hr/></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev">'.$prev['Title'].'<br/><a href="'.$prev['Id'].'.html">&laquo; Poprzedni</a></dd>';
+				$code .= '<dd class="prev">'.$prev['Title'].'<br/><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a></dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next">'.$next['Title'].'<br/><a href="'.$next['Id'].'.html">Następny &raquo;</a></dd>';
+				$code .= '<dd class="next">'.$next['Title'].'<br/><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a></dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
@@ -156,6 +161,7 @@ EOF;
 
 		public function createBottomNavigator(&$page)
 		{
+			$translate = tfTranslate::get();
 			$parent = $this->project->getMetaInfo($page['_Parent'], false);
 			$prev = $this->project->getMetaInfo($page['_Previous'], false);
 			$next = $this->project->getMetaInfo($page['_Next'], false);
@@ -166,35 +172,46 @@ EOF;
 			}
 			else
 			{
-				$code .= '<dt><hr/>'.$page['Title'].'<br/><a href="index.html">Spis treści</a></dt>';
+				$code .= '<dt><hr/>'.$page['Title'].'<br/><a href="index.html">'.$translate->_('general','table_of_contents').'</a></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev"><a href="'.$prev['Id'].'.html">&laquo; Poprzedni</a><br/>'.$prev['Title'].'</dd>';
+				$code .= '<dd class="prev"><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a><br/>'.$prev['Title'].'</dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next"><a href="'.$next['Id'].'.html">Następny &raquo;</a><br/>'.$next['Title'].'</dd>';
+				$code .= '<dd class="next"><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a><br/>'.$next['Title'].'</dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
 		} // end createBottomNavigator();
 		
-		public function createSeeAlso($seealso)
+		public function createSeeAlso(&$page)
 		{
+			$translate = tfTranslate::get();
 			$prog = tfProgram::get();
-			$code = '<h3>Zobacz także:</h3><ul>';
-			foreach($seealso as $value)
+			$code = '<h3>'.$translate->get('navigation','see_also').':</h3><ul>';
+			if(isset($page['SeeAlso']))
 			{
-				$page = $this->project->getMetaInfo($value, false);
-				if(is_null($page))
+				foreach($page['SeeAlso'] as $value)
 				{
-					$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
+					$page = $this->project->getMetaInfo($value, false);
+					if(is_null($page))
+					{
+						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
+					}
+					else
+					{
+						$code .= '<li><a href="'.$page['Id'].'.html">'.$page['Title'].'</a></li>';
+					}			
 				}
-				else
+			}
+			if(isset($page['SeeAlsoExternal']))
+			{
+				foreach($page['SeeAlsoExternal'] as $value)
 				{
-					$code .= '<li><a href="'.$page['Id'].'.html">'.$page['Title'].'</a></li>';
-				}			
+					// TODO: Finish!!!
+				}
 			}
 			$code .= '</ul>';
 			return $code;
@@ -202,26 +219,27 @@ EOF;
 		
 		public function createReference(&$page)
 		{
+			$translate = tfTranslate::get();
 			$code = '';
 			if(isset($page['Status']))
 			{
-				$code .= '<p><strong>Status: </strong>'.$page['Status'].'</p>';
+				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';
 			}
 			if(isset($page['Extends']))
 			{
 				$pp = $this->project->getMetaInfo($page['Extends'], false);
 				if(!is_null($pp))
 				{
-					$code .= '<p><strong>Klasa bazowa: </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
+					$code .= '<p><strong>'.$translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
 				}
 			}
 			elseif(isset($page['EExtends']))
 			{
-				$code .= '<p><strong>Klasa bazowa:</strong> <code>'.$page['EExtends'].'</code></p>';
+				$code .= '<p><strong>'.$translate->_('tags','obj_extends').':</strong> <code>'.$page['EExtends'].'</code></p>';
 			}
 			if(isset($page['Implements']) || isset($page['EImplements']))
 			{
-				$code .= '<p><strong>Implementuje:</strong></p><ul>';
+				$code .= '<p><strong>'.$translate->_('tags','obj_implements').':</strong></p><ul>';
 				if(isset($page['Implements']))
 				{
 					foreach($page['Implements'] as $item)
@@ -244,7 +262,7 @@ EOF;
 			}
 			if(isset($page['ExtendedBy']) || isset($page['EExtendedBy']))
 			{
-				$code .= '<p><strong>Klasy pochodne:</strong></p><ul>';
+				$code .= '<p><strong>'.$translate->_('tags','obj_extended').':</strong></p><ul>';
 				if(isset($page['ExtendedBy']))
 				{
 					foreach($page['ExtendedBy'] as $item)
@@ -265,6 +283,18 @@ EOF;
 				}
 				$code .= '</ul>';
 			}
+			if(isset($page['VersionSince']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','version_since').': </strong>'.$page['VersionSince'].'</p>';
+			}
+			if(isset($page['VersionTo']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','version_to').': </strong>'.$page['VersionTo'].'</p>';
+			}
+			if(isset($page['Author']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','author').': </strong>'.$page['Author'].'</p>';
+			}
 			if($code != '')
 			{
 				$code .= '<hr/>';
@@ -274,10 +304,11 @@ EOF;
 		
 		public function menuGen($what, $recursive = true, $start = false)
 		{
+			$translate = tfTranslate::get();
 			$code = '';
 			if($start)
 			{
-				$code .= '<h3>Spis treści</h3>';
+				$code .= '<h3>'.$translate->_('general','table_of_contents').'</h3>';
 			}
 			if(isset($this->project->tree[$what]) && count($this->project->tree[$what]) > 0)
 			{

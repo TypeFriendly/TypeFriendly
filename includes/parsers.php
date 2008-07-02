@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	class tfParsers
 	{
@@ -46,7 +47,7 @@
 			{
 				throw new SystemException('tfdoc: '.$filename.' - file not found');
 			}
-			
+
 			$f = fopen($filename, 'r');
 			
 			$data = array();
@@ -79,7 +80,7 @@
 				}
 				$ok = true;
 			}
-			while(!$this->separator($line));
+			while(!$this -> separator($line));
 			$data['Content'] = '';
 			while(!feof($f))
 			{
@@ -109,4 +110,6 @@
 		{
 			return preg_match('/^[\-\=\*]{3,}$/', trim($text));
 		} // end separator();
+
 	} // end tfParsers;
+

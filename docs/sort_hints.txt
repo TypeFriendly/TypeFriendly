@@ -7,3 +7,7 @@ docs.chapters
 docs.syntax
 docs.tags
 tf
+tf.cli
+tf.outputs
+tf.languages
+appendix

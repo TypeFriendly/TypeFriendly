@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	define('OPT_REQUIRED', 0);
 	define('OPT_OPTIONAL', 1);

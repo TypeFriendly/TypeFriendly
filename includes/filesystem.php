@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	define('TF_READ', 4);
 	define('TF_WRITE', 2);
@@ -43,11 +44,18 @@
 		
 		public function get($name)
 		{
-			return $this->master.$name;			
+			$name = str_replace('../', '', $name);
+			if(!file_exists($this->master.$name))
+			{
+				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			}
+
+			return $this->master.$name;		
 		} // end get();
 		
 		public function read($name)
 		{
+			$name = str_replace('../', '', $name);
 			if(!file_exists($this->master.$name))
 			{
 				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
@@ -58,6 +66,7 @@
 		
 		public function readAsArray($name)
 		{
+			$name = str_replace('../', '', $name);
 			if(!file_exists($this->master.$name))
 			{
 				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
@@ -73,6 +82,7 @@
 		
 		public function loadObject($name, $object)
 		{
+			$name = str_replace('../', '', $name);
 			if(!file_exists($this->master.$name))
 			{
 				throw new SystemException('The file '.$this->master.$name.' is not accessible.');
@@ -87,7 +97,7 @@
 		
 		public function write($name, $content)
 		{	
-			return file_put_contents($this->master.$name, $content);
+			return file_put_contents($this->master.str_replace('../', '', $name), $content);
 		} // end write();
 
 		public function checkDirectories($list)

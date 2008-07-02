@@ -1,0 +1,4 @@
+next = "Next"
+prev = "Previous"
+to_up = "Up"
+see_also = "See also"

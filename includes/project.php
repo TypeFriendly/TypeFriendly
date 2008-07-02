@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	function walkTrim(&$val)
 	{
@@ -102,6 +103,9 @@
 				$this->config['navigation'] = 'tree';
 			}
 			
+			// Base language settings for the documentation interface translator
+			$translate = tfTranslate::get();
+			$translate->setBaseLanguage($this->config['baseLanguage']);
 			
 			// Now we have to check the directory accessibility
 			if(!$this->fs->checkDirectories(array(
@@ -132,14 +136,17 @@
 		{
 			return $this->outputObj;
 		} // end getOutput();
-		
+
 		public function setLanguage($language)
 		{
 			if(!in_array($language, $this->langs))
 			{
 				throw new SystemException('The used language '.$language.' is not supported in this project.');
 			}
-		
+
+			$translate = tfTranslate::get();
+			$translate->setLanguage($language);
+
 			$this->language = $language;
 		} // end setLanguage();
 		
@@ -155,8 +162,37 @@
 		
 		public function loadItems()
 		{
+			/* HOW DOES IT WORK?
+			
+			All the mystery of the chapter tree sorting algorithm lies in the data organization.
+			The main data structure is a 2-dimensional array, which shows, what the children of the
+			specified node are. So, in the first level, the index is the name of a chapter, and the
+			value is an array of subchapters that are identified by:
+			 - Name
+			 - Order
+
+			In the first stage, we simply load the list of TXT files from the directory. We sort them in
+			order to provide the standard alphanumerical sorting. The structure mentioned above is constructed
+			in the stage 2. We iterate through the filelist and explode each item with a dot. By cutting down the
+			last path element, we are able to specify the parent of the chapter. Now we do two things:
+			 - We create an empty list for the currently processed chapter.
+			 - We add the chapter to its parent children list.
+
+			The stage 3 applies the sorting hints from sort_hints.txt file. We load the file and use basically the
+			same algorithm, as in stage 2, to process its content. So, now we have two lists:
+			 - The first one, sorted alphanumerically
+			 - The second one, that uses the sorting hints.
+
+			In the stage 4, we simply connect them, by scanning the first list. We check, whether it figures in the
+			second one (that means we have to use hints instead of standard sorting). If yes, we copy the order. Once
+			it is completed, we run PHP sort again to apply the order physically.
+
+			Stage 5 creates some meta data for each page, as well as resolves the navigation issue.
+
+			*/
 			$items = $this->fs->listDirectory('input/'.$this->language.'/', true, true);
 			
+			// Stage 1
 			// See, what are the documentation pages, and what - other files.
 			$doc = array();
 			foreach($items as $item)
@@ -175,6 +211,7 @@
 			}
 			sort($doc);
 			
+			// Stage 2
 			// Build the standard connections
 			$list = array();
 			foreach($doc as &$item)
@@ -195,20 +232,21 @@
 					$list[$item] = array();
 				}
 			}
-			
+
 			try
 			{
-			//	echo 'krajator';
+				// Stage 3
+				// If the hints are not defined, the exception will be thrown and
+				// the stages 3 and 4 won't be executed.
 				$this->sortHint = $this->fs->readAsArray('sort_hints.txt');
-			//	var_dump($this->sortHint);
-			//	echo 'ddd';
+
 				$hintedList = array();
 				foreach($this->sortHint as &$item)
 				{
 					$extract = explode('.', $item);
 					array_pop($extract);
 					$parentId = implode('.', $extract);
-					
+	
 					if(!isset($hintedList[$parentId]))
 					{
 						$hintedList[$parentId] = array($item => array('id' => $item, 'order' => 0));
@@ -219,7 +257,7 @@
 					}
 				}
 				
-				// Now connect those two lists:
+				// Stage 4
 				foreach($list as $id => &$item)
 				{
 					if(isset($hintedList[$id]))
@@ -245,9 +283,9 @@
 				// TODO: However, if the debug is active, there must be some kind of message.
 			}
 			/*
-			 * Part 2 - create the meta-data for each page.
+			 * Part 2 - create the meta-data for each page. (stage 5)
 			 */
-			
+
 			
 			$this->pages = array();
 			$parser = tfParsers::get();
@@ -291,7 +329,7 @@
 						{
 							$metaData['_Next'] = $this->pages[$id]['_XNext'];
 						}
-						
+
 						if(!is_null($metaData['_Previous']))
 						{
 							$xid = $metaData['_Previous'];
@@ -313,7 +351,7 @@
 			}
 			$this->tree = $list;
 		} // end loadItems();
-		
+
 		public function copyMedia()
 		{
 			try
@@ -325,7 +363,7 @@
 				// Nothing to do - here this is not a crtitical error.
 			}
 		} // end copyMedia();
-		
+
 		public function generate()
 		{
 			$this->fs->safeMkDir('output/'.$this->output, TF_READ | TF_WRITE | TF_EXEC);
@@ -345,7 +383,7 @@
 			$this->parsed = true;
 			$out->close();
 		} // end generate();
-		
+
 		public function versionCompare($secondLanguage)
 		{
 			if(!in_array($this->config['baseLanguage'], $this->langs) || !in_array($this->langs))
