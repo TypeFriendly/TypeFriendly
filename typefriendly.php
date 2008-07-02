@@ -35,5 +35,5 @@
 	require_once(TF_MARKDOWN.'markdown.php');
 
 	$app = tfProgram::get();
-	$app -> loadModule('main');
-	$app -> run();
+	$app->loadModule('main');
+	$app->run();

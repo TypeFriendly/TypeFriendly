@@ -43,18 +43,18 @@
 		
 		public function __construct($name)
 		{
-			$this -> name = $name;
-			$this -> level = substr_count($name, '.');
+			$this->name = $name;
+			$this->level = substr_count($name, '.');
 		} // end __construct();
 		
 		public function getName()
 		{
-			return $this -> name;
+			return $this->name;
 		} // end getName();
 		
 		public function getLevel()
 		{
-			return $this -> level;
+			return $this->level;
 		} // end getLevel();
 	} // end tfItem;
 
@@ -82,29 +82,29 @@
 		public function __construct($directory)
 		{
 			$p = tfParsers::get();
-			$this -> prog = tfProgram::get();
+			$this->prog = tfProgram::get();
 			
-			$this -> fs = new tfFilesystem;
-			if(!$this -> fs -> setMasterDirectory($directory, TF_READ | TF_EXEC))
+			$this->fs = new tfFilesystem;
+			if(!$this->fs->setMasterDirectory($directory, TF_READ | TF_EXEC))
 			{
 				throw new SystemException('The project directory: '.$directory.' is not accessible');
 			}
 			
-			$this -> config = $p -> config($this->fs->get('settings.ini'));
+			$this->config = $p->config($this->fs->get('settings.ini'));
 			// Some workaround
-			if(isset($this -> config['outputs']))
+			if(isset($this->config['outputs']))
 			{
-				$this -> config['outputs'] = explode(',', $this->config['outputs']);
-				array_walk($this -> config['outputs'], 'walkTrim');
+				$this->config['outputs'] = explode(',', $this->config['outputs']);
+				array_walk($this->config['outputs'], 'walkTrim');
 			}
-			if(!isset($this -> config['navigation']))
+			if(!isset($this->config['navigation']))
 			{
-				$this -> config['navigation'] = 'tree';
+				$this->config['navigation'] = 'tree';
 			}
 			
 			
 			// Now we have to check the directory accessibility
-			if(!$this -> fs -> checkDirectories(array(
+			if(!$this->fs->checkDirectories(array(
 				'input/' => TF_READ | TF_EXEC,
 				'output/' => TF_READ | TF_WRITE,
 				'media/' => TF_READ | TF_EXEC
@@ -114,7 +114,7 @@
 			}
 			
 			// Retrieve the language versions
-			$this -> langs = $this -> fs -> listDirectory('input/', false, true);
+			$this->langs = $this->fs->listDirectory('input/', false, true);
 			// Produce the outputs		
 		} // end __construct();
 		
@@ -130,32 +130,32 @@
 		
 		public function getOutput()
 		{
-			return $this -> outputObj;
+			return $this->outputObj;
 		} // end getOutput();
-
+		
 		public function setLanguage($language)
 		{
-			if(!in_array($language, $this -> langs))
+			if(!in_array($language, $this->langs))
 			{
 				throw new SystemException('The used language '.$language.' is not supported in this project.');
 			}
-
-			$this -> language = $language;
+		
+			$this->language = $language;
 		} // end setLanguage();
 		
 		public function setOutput($output)
 		{
 			$res = tfResources::get();
-			if(!in_array($output, $res -> outputs))
+			if(!in_array($output, $res->outputs))
 			{
 				throw new SystemException('The used output '.$output.' is not supported by TypeFriendly.');
 			}
-			$this -> output = $output;
+			$this->output = $output;
 		} // end setOutput();
 		
 		public function loadItems()
 		{
-			$items = $this -> fs -> listDirectory('input/'.$this->language.'/', true, true);
+			$items = $this->fs->listDirectory('input/'.$this->language.'/', true, true);
 			
 			// See, what are the documentation pages, and what - other files.
 			$doc = array();
@@ -170,7 +170,7 @@
 				}
 				else
 				{
-					$this -> media[] = $item;
+					$this->media[] = $item;
 				}
 			}
 			sort($doc);
@@ -195,20 +195,20 @@
 					$list[$item] = array();
 				}
 			}
-
+			
 			try
 			{
 			//	echo 'krajator';
-				$this -> sortHint = $this -> fs -> readAsArray('sort_hints.txt');
+				$this->sortHint = $this->fs->readAsArray('sort_hints.txt');
 			//	var_dump($this->sortHint);
 			//	echo 'ddd';
 				$hintedList = array();
-				foreach($this -> sortHint as &$item)
+				foreach($this->sortHint as &$item)
 				{
 					$extract = explode('.', $item);
 					array_pop($extract);
 					$parentId = implode('.', $extract);
-	
+					
 					if(!isset($hintedList[$parentId]))
 					{
 						$hintedList[$parentId] = array($item => array('id' => $item, 'order' => 0));
@@ -247,15 +247,15 @@
 			/*
 			 * Part 2 - create the meta-data for each page.
 			 */
-
 			
-			$this -> pages = array();
+			
+			$this->pages = array();
 			$parser = tfParsers::get();
 			foreach($list as $id => &$sublist)
 			{		
 				foreach($sublist as $subId => &$item)
 				{
-					$metaData = $parser -> tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
+					$metaData = $parser->tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
 					// unset($metaData['Content']);
 					// Validate the user-defined meta.
 					if(!isset($metaData['ShortTitle']))
@@ -279,7 +279,7 @@
 						$metaData['_Next'] = $sublist[$subId+1]['id'];
 					}
 					
-					if($this -> config['navigation'] == 'flat')
+					if($this->config['navigation'] == 'flat')
 					{
 						// Create a flat navigation, where "Next" can point to the first child, if accessible
 						$metaData['_XNext'] = $metaData['_Next'];
@@ -289,9 +289,9 @@
 						}
 						elseif(is_null($metaData['_Next']) && $id != '')
 						{
-							$metaData['_Next'] = $this -> pages[$id]['_XNext'];
+							$metaData['_Next'] = $this->pages[$id]['_XNext'];
 						}
-
+						
 						if(!is_null($metaData['_Previous']))
 						{
 							$xid = $metaData['_Previous'];
@@ -308,65 +308,65 @@
 						
 					}
 					$item = $metaData;
-					$this -> pages[$item['Id']] = &$item;
+					$this->pages[$item['Id']] = &$item;
 				}
 			}
-			$this -> tree = $list;
+			$this->tree = $list;
 		} // end loadItems();
-
+		
 		public function copyMedia()
 		{
 			try
 			{
-				$this -> fs -> copyFromVFS($this->prog->fs, 'media/'.$this->output.'/', 'output/'.$this->output.'/');
+				$this->fs->copyFromVFS($this->prog->fs, 'media/'.$this->output.'/', 'output/'.$this->output.'/');
 			}
 			catch(SystemException $e)
 			{
 				// Nothing to do - here this is not a crtitical error.
 			}
 		} // end copyMedia();
-
+		
 		public function generate()
 		{
-			$this -> fs -> safeMkDir('output/'.$this->output, TF_READ | TF_WRITE | TF_EXEC);
+			$this->fs->safeMkDir('output/'.$this->output, TF_READ | TF_WRITE | TF_EXEC);
 			
-			$this -> outputObj = $out = $this -> prog -> fs -> loadObject('outputs/'.$this->output.'.php', $this->output);
-			$out -> init($this, 'output/'.$this->output.'/');
+			$this->outputObj = $out = $this->prog->fs->loadObject('outputs/'.$this->output.'.php', $this->output);
+			$out->init($this, 'output/'.$this->output.'/');
 			$parsers = tfParsers::get();
 			
-			foreach($this -> pages as &$page)
+			foreach($this->pages as &$page)
 			{
-				if(!$this -> parsed)
+				if(!$this->parsed)
 				{	
-					$page['Content'] = $parsers -> parse($page['Content']);
+					$page['Content'] = $parsers->parse($page['Content']);
 				}
-				$out -> generate($page);
+				$out->generate($page);
 			}
-			$this -> parsed = true;
-			$out -> close();
+			$this->parsed = true;
+			$out->close();
 		} // end generate();
-
+		
 		public function versionCompare($secondLanguage)
 		{
-			if(!in_array($this -> config['baseLanguage'], $this -> langs) || !in_array($this -> langs))
+			if(!in_array($this->config['baseLanguage'], $this->langs) || !in_array($this->langs))
 			{
-				throw new SystemException('The used language '.$this -> config['baseLanguage'].' is not supported in this project.');
+				throw new SystemException('The used language '.$this->config['baseLanguage'].' is not supported in this project.');
 			}
-			if(!in_array($secondLanguage, $this -> langs))
+			if(!in_array($secondLanguage, $this->langs))
 			{
 				throw new SystemException('The used language '.$secondLanguage.' is not supported in this project.');
 			}
 			
-			$statBase = $this -> fs -> getModificationTime('input/'.$this->config['baseLanguage'].'/');
-			$statSec = $this -> fs -> getModificationTime('input/'.$secondLangage.'/');
+			$statBase = $this->fs->getModificationTime('input/'.$this->config['baseLanguage'].'/');
+			$statSec = $this->fs->getModificationTime('input/'.$secondLangage.'/');
 			$thirdList = array();
 			
-			$out = $this -> prog -> console -> stdout;
+			$out = $this->prog->console->stdout;
 			
-			$out -> writeln('Comparing "'.$secondLanguage.'" to the base language: "'.$this->config['baseLanguage'].'".');
-			$out -> space();
-			$out -> writeln('Files that are not up-to-date in "'.$secondLanguage.'":');
-			$out -> space();
+			$out->writeln('Comparing "'.$secondLanguage.'" to the base language: "'.$this->config['baseLanguage'].'".');
+			$out->space();
+			$out->writeln('Files that are not up-to-date in "'.$secondLanguage.'":');
+			$out->space();
 			
 			foreach($statBase as $name => $time)
 			{
@@ -374,7 +374,7 @@
 				{
 					if($time > $statSec[$name])
 					{
-						$out -> writeln('  '.$name);
+						$out->writeln('  '.$name);
 					}
 					unset($statSec[$name]);
 				}
@@ -384,22 +384,22 @@
 				}
 			}
 			
-			$out -> space();
-			$out -> writeln('Files that do not exist in "'.$secondLanguage.'":');
-			$out -> space();
+			$out->space();
+			$out->writeln('Files that do not exist in "'.$secondLanguage.'":');
+			$out->space();
 			
 			foreach($thirdList as $name)
 			{
-				$out -> writeln('  '.$name);
+				$out->writeln('  '.$name);
 			}
 
-			$out -> space();
-			$out -> writeln('Files that do not exist in "'.$this->config['baseLanguage'].'" (but should, if they are used in "'.$secondLanguage.'"):');
-			$out -> space();
+			$out->space();
+			$out->writeln('Files that do not exist in "'.$this->config['baseLanguage'].'" (but should, if they are used in "'.$secondLanguage.'"):');
+			$out->space();
 			
 			foreach($statSec as $name => $time)
 			{
-				$out -> writeln('  '.$name);
+				$out->writeln('  '.$name);
 			}
 		} // end versionCompare();
 

@@ -4,35 +4,35 @@
 	{
 		public function init($project, $path)
 		{
-			$this -> project = $project;
-			$this -> path = $path;
+			$this->project = $project;
+			$this->path = $path;
 			// Generating TOC.
-			$code = $this -> createHeader('Spis treści', array());
+			$code = $this->createHeader('Spis treści', array());
 			$code .= '<h1>Spis treści</h3>';
-			$code .= $this -> menuGen('', true);
-			$code .= $this -> createFooter();
+			$code .= $this->menuGen('', true);
+			$code .= $this->createFooter();
 			
-			$this -> project -> fs -> write($this->path.'index.html', $code);			
+			$this->project->fs->write($this->path.'index.html', $code);			
 		} // end init();
 
 		public function generate($page)
 		{		
-			$code = $this -> createHeader($page['Title'], array());
-			$code .= $this -> createTopNavigator($page);
+			$code = $this->createHeader($page['Title'], array());
+			$code .= $this->createTopNavigator($page);
 			$code .= '<h1>'.$page['Title'].'</h1>';
-			$code .= $this -> menuGen($page['Id'], false);
-			$code .= $this -> createReference($page);
+			$code .= $this->menuGen($page['Id'], false);
+			$code .= $this->createReference($page);
 			
 			$code .= $page['Content'];
 			
 			if(isset($page['SeeAlso']))
 			{
-				$code .= $this -> createSeeAlso($page['SeeAlso']);
+				$code .= $this->createSeeAlso($page['SeeAlso']);
 			}
 			
-			$code .= $this -> createBottomNavigator($page);
-			$code .= $this -> createFooter();
-			$this -> project -> fs -> write($this->path.$page['Id'].'.html', $code);
+			$code .= $this->createBottomNavigator($page);
+			$code .= $this->createFooter();
+			$this->project->fs->write($this->path.$page['Id'].'.html', $code);
 		} // end generate();
 
 		public function close()
@@ -42,8 +42,8 @@
 		
 		private function createHeader($title, Array $nav)
 		{
-			$docTitle = $this -> project -> config['title'];
-			$docVersion = $this -> project -> config['version'];
+			$docTitle = $this->project->config['title'];
+			$docVersion = $this->project->config['version'];
 $code = <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -87,7 +87,7 @@ EOF;
 		public function createFooter()
 		{
 			$copyrightLink = $this->project->config['copyrightLink'];
-			$copyright = $this -> project -> config['copyright'];
+			$copyright = $this->project->config['copyright'];
 $code = <<<EOF
 	</div>
 	
@@ -105,9 +105,9 @@ EOF;
 		
 		public function createTopNavigator(&$page)
 		{
-			$parent = $this -> project -> getMetaInfo($page['_Parent'], false);
-			$prev = $this -> project -> getMetaInfo($page['_Previous'], false);
-			$next = $this -> project -> getMetaInfo($page['_Next'], false);
+			$parent = $this->project->getMetaInfo($page['_Parent'], false);
+			$prev = $this->project->getMetaInfo($page['_Previous'], false);
+			$next = $this->project->getMetaInfo($page['_Next'], false);
 			$code = '<dl class="location">';
 			if(!is_null($parent))
 			{
@@ -131,9 +131,9 @@ EOF;
 
 		public function createBottomNavigator(&$page)
 		{
-			$parent = $this -> project -> getMetaInfo($page['_Parent'], false);
-			$prev = $this -> project -> getMetaInfo($page['_Previous'], false);
-			$next = $this -> project -> getMetaInfo($page['_Next'], false);
+			$parent = $this->project->getMetaInfo($page['_Parent'], false);
+			$prev = $this->project->getMetaInfo($page['_Previous'], false);
+			$next = $this->project->getMetaInfo($page['_Next'], false);
 			$code = '<dl class="location location-bottom">';
 			if(!is_null($parent))
 			{
@@ -161,7 +161,7 @@ EOF;
 			$code = '<h3>Zobacz także:</h3><ul>';
 			foreach($seealso as $value)
 			{
-				$page = $this -> project -> getMetaInfo($value, false);
+				$page = $this->project->getMetaInfo($value, false);
 				if(is_null($page))
 				{
 					$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
@@ -184,7 +184,7 @@ EOF;
 			}
 			if(isset($page['Extends']))
 			{
-				$pp = $this -> project -> getMetaInfo($page['Extends'], false);
+				$pp = $this->project->getMetaInfo($page['Extends'], false);
 				if(!is_null($pp))
 				{
 					$code .= '<p><strong>Klasa bazowa: </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
@@ -201,7 +201,7 @@ EOF;
 				{
 					foreach($page['Implements'] as $item)
 					{
-						$pp = $this -> project -> getMetaInfo($item, false);
+						$pp = $this->project->getMetaInfo($item, false);
 						if(!is_null($pp))
 						{
 							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
@@ -224,7 +224,7 @@ EOF;
 				{
 					foreach($page['ExtendedBy'] as $item)
 					{
-						$pp = $this -> project -> getMetaInfo($item, false);
+						$pp = $this->project->getMetaInfo($item, false);
 						if(!is_null($pp))
 						{
 							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
@@ -252,7 +252,7 @@ EOF;
 			if(isset($this->project->tree[$what]))
 			{
 				$code = '<ul>';
-				foreach($this -> project -> tree[$what] as $item)
+				foreach($this->project->tree[$what] as $item)
 				{
 					if($recursive)
 					{
@@ -274,5 +274,3 @@ EOF;
 			return $page.'.html';
 		} // end toAddress();
 	} // end xhtml;
-
-?>

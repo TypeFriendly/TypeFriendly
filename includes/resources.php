@@ -44,7 +44,7 @@
 			$app = tfProgram::get();
 			
 			// Load outputs
-			$list = $app -> fs -> listDirectory('outputs/', true, false);
+			$list = $app->fs->listDirectory('outputs/', true, false);
 			foreach($list as &$item)
 			{
 				if(strpos($item, '.php') !== false)
@@ -52,7 +52,7 @@
 					$item = substr($item, 0, strlen($item) - 4);
 				}
 			}
-			$this -> outputs = $list;
+			$this->outputs = $list;
 		} // end __construct();
 	
 	

@@ -46,7 +46,7 @@
 			{
 				throw new SystemException('tfdoc: '.$filename.' - file not found');
 			}
-
+			
 			$f = fopen($filename, 'r');
 			
 			$data = array();
@@ -79,7 +79,7 @@
 				}
 				$ok = true;
 			}
-			while(!$this -> separator($line));
+			while(!$this->separator($line));
 			$data['Content'] = '';
 			while(!feof($f))
 			{
@@ -109,7 +109,4 @@
 		{
 			return preg_match('/^[\-\=\*]{3,}$/', trim($text));
 		} // end separator();
-
 	} // end tfParsers;
-
-?>

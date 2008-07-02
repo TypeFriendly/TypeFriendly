@@ -29,8 +29,8 @@
 	
 		public function init($project, $path)
 		{
-			$this -> project = $project;
-			$this -> path = $path;
+			$this->project = $project;
+			$this->path = $path;
 		} // end init();
 	
 		abstract public function generate($page);

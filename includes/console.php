@@ -36,26 +36,8 @@
 		
 		public function __construct($stream)
 		{
-			switch(USED_OS)
-			{
-				case 'Windows':
-					$this -> nl = "\r\n";
-					break;
-				case 'Linux':
-				case 'FreeBSD':
-				case 'NetBSD':
-				case 'OpenBSD':
-					$this -> nl = "\n";
-					break;
-				case 'MacOS':
-					$this -> nl = "\r";
-					break;
-				default:
-					$this -> nl = "\r\n";
-			}
-
-			$this -> stream = $stream;
-			if(!is_resource($this -> stream))
+			$this->stream = $stream;
+			if(!is_resource($this->stream))
 			{
 				throw new Exception('Stream exception: an attempt to initialize an empty stream.');
 			}
@@ -63,7 +45,7 @@
 		
 		public function __destruct()
 		{
-			fclose($this -> stream);
+			fclose($this->stream);
 		} // end __destruct();
 		
 		public function write($text)
@@ -73,7 +55,7 @@
 		
 		public function writeln($text)
 		{			
-			fwrite($this -> stream, $text.$this -> nl);
+			fwrite($this->stream, $text.PHP_EOL);
 		} // end writeln();
 		
 		public function center($text, $length)
@@ -81,29 +63,29 @@
 			$tl = strlen($text);
 			if($tl > $length)
 			{
-				fwrite($this -> stream, $text.$this -> nl);
+				fwrite($this->stream, $text.PHP_EOL);
 			}
 			else
 			{
-				fwrite($this -> stream, str_repeat(' ', floor($length/2) - floor($tl/2)).$text.$this->nl);
+				fwrite($this->stream, str_repeat(' ', floor($length/2) - floor($tl/2)).$text.PHP_EOL);
 			}
 		} // end center();
 		
 		public function space()
 		{
-			fwrite($this -> stream, $this -> nl);
+			fwrite($this->stream, PHP_EOL);
 		} // end space();
 		
 		public function writeHr($type = '-', $repeat=30)
 		{
-			fwrite($this -> stream, str_repeat($type, $repeat).$this->nl);
+			fwrite($this->stream, str_repeat($type, $repeat).PHP_EOL);
 		} // end writeHr();
 		
 		public function read($length = 80)
 		{
-			return fread($this -> stream, $length);
+			return fread($this->stream, $length);
 		} // end read();		
-	} // end tfStream();
+	} // end tfStream;
 
 	class tfConsole
 	{
@@ -115,18 +97,18 @@
 
 		public function __construct()
 		{
-			$this -> detectOS();
+			$this->detectOS();
 			
-			$this -> stdin = new tfStream(STDIN);
-			$this -> stdout = new tfStream(STDOUT);
-			$this -> stderr = new tfStream(STDERR);
+			$this->stdin = new tfStream(STDIN);
+			$this->stdout = new tfStream(STDOUT);
+			$this->stderr = new tfStream(STDERR);
 			
-			$this -> args = $_SERVER['argv'];
+			$this->args = $_SERVER['argv'];
 		} // end __construct();
 		
 		public function testArgNum($from, $to = null)
 		{
-			$size = sizeof($this -> args) - 1;
+			$size = sizeof($this->args) - 1;
 			if(is_null($to))
 			{
 				return $size == $from;				
@@ -144,9 +126,9 @@
 			{
 				if($name[0] == '#')
 				{
-					if(isset($this -> args[$i]) && $this -> testValue($this->args[$i], $item[1]))
+					if(isset($this->args[$i]) && $this->testValue($this->args[$i], $item[1]))
 					{
-						$item = $this -> args[$i];
+						$item = $this->args[$i];
 						$i++;
 					}
 					else
@@ -160,12 +142,12 @@
 				}
 				else
 				{
-					if(isset($this -> args[$i]) && $this -> args[$i] == $name)
+					if(isset($this->args[$i]) && $this->args[$i] == $name)
 					{
 						$i++;
-						if($this -> testValue($this->args[$i], $item[1]))
+						if($this->testValue($this->args[$i], $item[1]))
 						{
-							$item = $this -> args[$i];
+							$item = $this->args[$i];
 							$i++;
 						}
 						else
@@ -224,11 +206,11 @@
 		
 		private function __construct()
 		{
-			$this -> console = new tfConsole;
+			$this->console = new tfConsole;
 			
 			// This is the master filesystem
-			$this -> fs = new tfFilesystem;
-			$this -> fs -> setMasterDirectory(TF_DIR, TF_READ | TF_EXEC);
+			$this->fs = new tfFilesystem;
+			$this->fs->setMasterDirectory(TF_DIR, TF_READ | TF_EXEC);
 		} // end __construct();
 		
 		static public function get()
@@ -244,7 +226,7 @@
 		{
 			if(!file_exists(TF_DIR.$module.'.php'))
 			{
-				$this -> console -> stderr -> writeln('Specified module has not been found: '.$module);
+				$this->console->stderr->writeln('Specified module has not been found: '.$module);
 				die();
 			}
 			require_once(TF_DIR.$module.'.php');
@@ -252,10 +234,10 @@
 			
 			if(!class_exists($className))
 			{
-				$this -> console -> stderr -> writeln('Error while loading a module: '.$module);
+				$this->console->stderr->writeln('Error while loading a module: '.$module);
 				die();
 			}
-			$this -> app = new $className;
+			$this->app = new $className;
 		} // end load();
 		
 		final public function loadLibrary($name)
@@ -267,21 +249,21 @@
 		{
 			try
 			{
-				$this -> app -> parseArgs($this);
-				$a = $this -> app -> action;
+				$this->app->parseArgs($this);
+				$a = $this->app->action;
 			
 				if(!method_exists($this->app, $a))
 				{
-					$this -> app -> main($this);
+					$this->app->main($this);
 				}
 				else
 				{
-					$this -> app -> $a($this);
+					$this->app->$a($this);
 				}
 			}
 			catch(Exception $e)
 			{
-				fwrite(STDERR, "\nAn exception occured during the execution: \n".$e -> getMessage()."\n");
+				fwrite(STDERR, "\nAn exception occured during the execution: \n".$e->getMessage()."\n");
 				die();			
 			}
 		} // end run();
@@ -293,4 +275,4 @@
 		
 		abstract public function parseArgs(tfProgram $prg);
 		abstract public function main(tfProgram $prg);
-	} // end tfApplication();
+	} // end tfApplication;

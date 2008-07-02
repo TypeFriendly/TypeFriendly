@@ -33,17 +33,17 @@
 		
 		public function setMasterDirectory($dir, $flags)
 		{
-			if(!$this -> checkFlags($dir, $flags))
+			if(!$this->checkFlags($dir, $flags))
 			{
 				return false;
 			}
-			$this -> master = $dir;
+			$this->master = $dir;
 			return true;
 		} // end setMasterDirectory();
 		
 		public function get($name)
 		{
-			return $this -> master.$name;			
+			return $this->master.$name;			
 		} // end get();
 		
 		public function read($name)
@@ -96,7 +96,7 @@
 			$errors = array();
 			foreach($list as $name => $param)
 			{
-			    if(!is_dir($this -> master.$name))
+			    if(!is_dir($this->master.$name))
 			    {
 					$errors[$name] = 'Not a directory.';	
 					$err = true;
@@ -104,7 +104,7 @@
 			    }
 				if($param & TF_READ)
 				{
-				    if(!is_readable($this -> master.$name))
+				    if(!is_readable($this->master.$name))
 				    {
 						$errors[$name] = 'Not readable';
 						$err = true;
@@ -112,7 +112,7 @@
 				}
 				if($param & TF_WRITE)
 				{
-				    if(!is_writeable($this -> master.$name))
+				    if(!is_writeable($this->master.$name))
 				    {
 				    	$errors[$name] = 'Not writeable';
 						$err = true;
@@ -120,7 +120,7 @@
 			    }
 				if($param & TF_EXEC)
 				{
-				    if(!is_executable($this -> master.$name))
+				    if(!is_executable($this->master.$name))
 				    {
 						$errors[$name] = 'Not executable';
 						$err = true;
@@ -136,7 +136,7 @@
 		
 		public function listDirectory($directory, $files = true, $directories = false)
 		{
-			$dir = @opendir($this -> master.$directory);
+			$dir = @opendir($this->master.$directory);
 			if(!is_resource($dir))
 			{
 				throw new SystemException('Cannot open directory: '.$directory);
@@ -146,15 +146,15 @@
 			{
 				if($f != '.' && $f != '..')
 				{
-					if($this -> ignoreHidden && $f[0] == '.')
+					if($this->ignoreHidden && $f[0] == '.')
 					{
 						continue;
 					}
-					if($files && is_file($this -> master.$directory.$f))
+					if($files && is_file($this->master.$directory.$f))
 					{
 						$list[] = $f;
 					}
-					elseif($directories && is_dir($this -> master.$directory.$f))
+					elseif($directories && is_dir($this->master.$directory.$f))
 					{
 						$list[] = $f;
 					}
@@ -206,8 +206,8 @@
 			}
 			else
 			{
-				$this -> safeMkdir($this->master.$to, TF_WRITE);
-				$this -> recursiveCopy($this->master.$from, $this->master.$to);
+				$this->safeMkdir($this->master.$to, TF_WRITE);
+				$this->recursiveCopy($this->master.$from, $this->master.$to);
 			}
 		} // end copyItem();
 		
@@ -219,20 +219,20 @@
 			}
 			else
 			{
-				$this -> safeMkdir($to, TF_WRITE);
+				$this->safeMkdir($to, TF_WRITE);
 				
 				if(!is_dir($sys->master.$from))
 				{
 					throw new SystemException('The directory '.$sys->master.$from.' does not exist.');
 				}
 				
-				$this -> recursiveCopy($sys->master.$from, $this->master.$to);
+				$this->recursiveCopy($sys->master.$from, $this->master.$to);
 			}
 		} // end copyFromVFS();
 		
 		public function getModificationTime($directory)
 		{
-			$dir = @opendir($this -> master.$directory);
+			$dir = @opendir($this->master.$directory);
 			if(!is_resource($dir))
 			{
 				throw new SystemException('Cannot open directory: '.$directory);
@@ -243,9 +243,9 @@
 			{
 				if($f != '.' && $f != '..')
 				{
-					if(is_file($this -> master.$directory.$f))
+					if(is_file($this->master.$directory.$f))
 					{
-						$list[$f] = filemtime($this -> master.$directory.$f);
+						$list[$f] = filemtime($this->master.$directory.$f);
 					}
 				}
 			}
@@ -260,7 +260,7 @@
 			{
 				if($f != '.' && $f != '..')
 				{
-					if($this -> ignoreHidden && $f[0] == '.')
+					if($this->ignoreHidden && $f[0] == '.')
 					{
 						continue;
 					}
@@ -275,7 +275,7 @@
 						{
 							mkdir($dest.$f);
 						}
-						$this -> recursiveCopy($source.$f.'/', $dest.$f.'/');
+						$this->recursiveCopy($source.$f.'/', $dest.$f.'/');
 					}				
 				}
 			}

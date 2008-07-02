@@ -70,7 +70,6 @@ $code = <<<EOF
 
 	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
 	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
-	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
 </head>
 <body>
 
@@ -250,6 +249,4 @@ EOF;
 		{
 			return '#'.$page;
 		} // end toAddress();
-	} // end xhtml;
-
-?>
+	} // end xhtml_single;
