@@ -17,14 +17,21 @@ Podstawowe opcje, jakie należy ustawić, to:
 + **title** - nazwa projektu, do którego tworzysz dokumentację.
 + **version** - wersja projektu
 + **copyright** - prawa autorskie do dokumentacji
-+ **copyrightLink** - odnośnik do strony posiadacza praw autorskich
 + **license** - licencja, na jakiej udostępniana jest dokumentacja
+
+Dodatkowe opcje:
+
++ **copyrightLink** - odnośnik do strony posiadacza praw autorskich
 + **licenseLink** - odnośnik do strony z treścią licencji
 
 Opcje techniczne związane z projektem:
 
 + **outputs** - lista formatów, w jakich chcesz generować dokumentację, odseparowanych przecinkami.
 + **baseLanguage** - dla każdego projektu musi być wybrany podstawowy język dokumentacji, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja dokumentacji w tym języku.
++ **navigation** - określa sposób łączenia stron w pasku nawigacyjnym "Poprzedni/Następny". Dozwolone wartości to:
+  - *tree* - linki "Poprzedni" i "Następny" zawsze wskazują na sąsiada danego rozdziału. Jeżeli sąsiad nie istnieje, link nie jest wyświetlany. Jest to domyślna wartość.
+  - *book* - rozdziały są tak łączone, aby klikając "Poprzedni" lub "Następny" można było przejść całą dokumentację (jak w książce).
++ **showNumbers** - czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
 
 Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:
 
@@ -36,7 +43,7 @@ version = "0.1.0"
 copyright = "Invenzzia Group 2008"
 copyrightLink = "http://www.invenzzia.org/"
 license = "GNU Free Documentation License 2.1"
-licenseLink = "#"
+licenseLink = "http://www.gnu.org/licenses/fdl.html"
 
 ; Ustawienia wyswietlania
 

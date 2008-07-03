@@ -1,0 +1,12 @@
+Title: Directory structure
+
+----
+The TypeFriendly documentation must have a proper directory structure. Create a new directory somewhere in your project (for example, `/docs`) and make there the following folders and files:
+
+    /input
+        /en
+    /output
+    /sort_hints.txt
+    /settings.ini
+
+The rules are imple. In `/input`, there are directories representing various language versions. Inside them, we place text files with the content. Optionally, we may want to create here a directory named `/media` with images and other graphics used in the manual. TypeFriendly generates the output files to the `/output` directory, so it must have some write access there. Directly in the main directory, we put the configuration files. The most important is `settings.ini` with the configuration. `sort_hints.txt` contains our own sorting rules. In the next chapters, we will describe, what they must contain.

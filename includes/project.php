@@ -98,9 +98,28 @@
 				$this->config['outputs'] = explode(',', $this->config['outputs']);
 				array_walk($this->config['outputs'], 'walkTrim');
 			}
-			if(!isset($this->config['navigation']))
+			$baseConfig = array(
+				'title' => NULL,
+				'version' => NULL,
+				'copyright' => NULL,
+				'license' => NULL,
+			
+				'copyrightLink' => '',
+				'licenseLink' => '',
+				'navigation' => 'tree',
+				'showNumbers' => true
+			);
+			
+			foreach($baseConfig as $name => $value)
 			{
-				$this->config['navigation'] = 'tree';
+				if(!isset($this->config[$name]))
+				{
+					if(is_null($value))
+					{
+						throw new Exception('The configuration option "'.$name.'" is not defined in this project.');
+					}
+					$this->config[$name] = $value;
+				}
 			}
 			
 			// Base language settings for the documentation interface translator
@@ -303,6 +322,7 @@
 					
 					// Create the additional meta.
 					$metaData['Id'] = $item['id'];
+					$metaData['Number'] = $item['order'] + 1;
 					
 					// Create the navigation according to the chapter layout					
 					$metaData['_Parent'] = $id;
@@ -317,7 +337,7 @@
 						$metaData['_Next'] = $sublist[$subId+1]['id'];
 					}
 					
-					if($this->config['navigation'] == 'flat')
+					if($this->config['navigation'] == 'book')
 					{
 						// Create a flat navigation, where "Next" can point to the first child, if accessible
 						$metaData['_XNext'] = $metaData['_Next'];
@@ -343,12 +363,35 @@
 						{
 							$metaData['_Previous'] = $id;
 						}
-						
 					}
 					$item = $metaData;
 					$this->pages[$item['Id']] = &$item;
 				}
 			}
+			
+			// Additional stage that adds the numbers
+			$queue = new SplQueue;
+			foreach($list[''] as &$item)
+			{
+				$queue->enqueue($item['Id']);
+			}
+			while($queue->count() > 0)
+			{
+				$id = $queue->dequeue();
+				if($this->pages[$id]['_Parent'] == '')
+				{
+					$this->pages[$id]['FullNumber'] = $this->pages[$id]['Number'];
+				}
+				else
+				{
+					$this->pages[$id]['FullNumber'] = $this->pages[$this->pages[$id]['_Parent']]['FullNumber'].'.'.$this->pages[$id]['Number'];
+				}
+				foreach($list[$id] as &$item)
+				{
+					$queue->enqueue($item['Id']);
+				}
+			}
+
 			$this->tree = $list;
 		} // end loadItems();
 
@@ -386,7 +429,7 @@
 
 		public function versionCompare($secondLanguage)
 		{
-			if(!in_array($this->config['baseLanguage'], $this->langs) || !in_array($this->langs))
+			if(!in_array($this->config['baseLanguage'], $this->langs))
 			{
 				throw new SystemException('The used language '.$this->config['baseLanguage'].' is not supported in this project.');
 			}
@@ -396,7 +439,7 @@
 			}
 			
 			$statBase = $this->fs->getModificationTime('input/'.$this->config['baseLanguage'].'/');
-			$statSec = $this->fs->getModificationTime('input/'.$secondLangage.'/');
+			$statSec = $this->fs->getModificationTime('input/'.$secondLanguage.'/');
 			$thirdList = array();
 			
 			$out = $this->prog->console->stdout;

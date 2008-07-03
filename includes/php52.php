@@ -1,4 +1,3 @@
-#!/usr/bin/php -q
 <?php
 /*
   --------------------------------------------------------------------
@@ -24,22 +23,22 @@
 */
 // $Id$
 
-	define('TF_DIR', './');
-	define('TF_INCLUDES', TF_DIR.'includes/');
-	define('TF_MARKDOWN', TF_DIR.'markdown/');
-	define('TF_GESHI', TF_DIR.'geshi/');
-	define('TF_OUTPUTS', TF_DIR.'outputs/');
-	define('TF_TPL', TF_DIR.'templates/');
-	require_once(TF_INCLUDES.'console.php');
-	require_once(TF_INCLUDES.'resources.php');
-	require_once(TF_INCLUDES.'filesystem.php');
-	require_once(TF_MARKDOWN.'markdown.php');
-	
-	if(version_compare(phpversion(), '5.3.0-dev', '<'))
+	class SplQueue implements Countable
 	{
-		require_once(TF_INCLUDES.'php52.php');
-	}
+		private $_data = array();
 
-	$app = tfProgram::get();
-	$app->loadModule('main');
-	$app->run();
+		public function enqueue($data)
+		{
+			array_push($this->_data, $data);
+		} // end enqueue();
+
+		public function dequeue()
+		{
+			return array_shift($this->_data);
+		} // end dequeue();
+
+		public function count()
+		{
+			return sizeof($this->_data);
+		} // end count();
+	} // end SplQueue();

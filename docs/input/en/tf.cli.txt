@@ -1,0 +1,34 @@
+Title: Interfejs wiersza poleceń
+
+----
+TypeFriendly jest obsługiwany wyłącznie z wiersza poleceń systemu operacyjnego. Współpracuje zarówno z rozmaitymi odmianami Uniksa, jak i z systemem Windows. Wywołanie jest następujące:
+
+~~~~
+php ./typefriendly.php
+~~~~
+
+W przypadku systemów uniksowych możliwe jest także:
+
+~~~~
+./typefriendly.php
+~~~~
+
+Niezbędnym parametrem jest zawsze ścieżka do katalogu, w którym znajduje się dokumentacja (tj. zawierającego plik `settings.ini` i inne), np.
+
+~~~~
+./typefriendly.php ./docs/
+~~~~
+
+Dostępne są następujące opcje, które podajemy w kolejności alfabetycznej przed ścieżką:
+
++ **-c JĘZYK** - narzędzie dla dokumentacji wielojęzycznych. Porównuje czas modyfikacji plików źródłowych podanego języka z plikami języka bazowego. Wyświetla wszystkie pliki, które mają wersję bazową nowszą, niż tę w danym języku, a także różnice w rodzaju brakujących plików.
++ **-l JĘZYK** - generuje dokumentację w podanym języku (domyślnie wybierany jest język bazowy).
++ **-o WYJSCIE** - generuje dokumentację, korzystając jedynie z podanego wyjścia. Musi ono być zdefiniowane na liście dostępnych wyjść dokumentacji.
+
+Przykład:
+
+~~~~
+./typefriendly -l en -o xhtml ./docs/
+~~~~
+
+Aby wyświetlić informacje o TypeFriendly, należy wywołać skrypt bez żadnych parametrów.

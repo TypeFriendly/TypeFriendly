@@ -1,0 +1,53 @@
+Title: settings.ini file
+
+----
+
+This is the main configuration file with an option list. The syntax looks like below:
+
+~~~
+option1 = "value 1"
+option2 = "value 2"
+option3 = "value 3"
+~~~
+
+The semicolon begins a new comment, which ends at the end of the line.
+
+The basic options are:
+
++ **title** - project name
++ **version** - project version
++ **copyright** - copyright of the documentation
++ **license** - documentation license name
+
+Additional options:
+
++ **copyrightLink** - an URL to the copyright holder website
++ **licenseLink** - an URL to the page with a license text
+
+Technical options:
+
++ **outputs** - the list of outputs we want to use in our project to process the documentation.
++ **baseLanguage** - each documentation must choose its base language, which the original content is written in. It is important that the identifier of the language must be the same, as the language directory name.
++ **navigation** - defines the way, how to generate "Previous" and "Next" links:
+  - *tree* - "Previous" and "Next" always point to the neighbours of the current chapter. If such a neighbour does not exist, the link is not displayed. This is the default value.
+  - *book* - the "Previous" and "Next" links allow to travell across the whole documentation (like a book).
++ **showNumbers** - whether to display chapter numbers (values are *true* or *false*).
+
+An example file looks like this:
+
+~~~
+; Base options
+
+title = "TypeFriendly"
+version = "0.1.0"
+copyright = "Invenzzia Group 2008"
+copyrightLink = "http://www.invenzzia.org/"
+license = "GNU Free Documentation License 2.1"
+licenseLink = "http://www.gnu.org/licenses/fdl.html"
+
+; Display settings
+
+outputs = "xhtml, web"
+baseLanguage = "en"
+showNumbers = true
+~~~

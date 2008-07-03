@@ -1,0 +1,4 @@
+Title: Creating a documentation
+
+----
+In this chapter we will describe, how to create your own documentation.

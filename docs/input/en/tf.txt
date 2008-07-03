@@ -1,0 +1,4 @@
+Title: TypeFriendly
+
+----
+W tym rozdziale opisane zostały różne aspekty samego TypeFriendly.

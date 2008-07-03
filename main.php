@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	class tfMain extends tfApplication
 	{
@@ -29,7 +30,7 @@
 		public function parseArgs(tfProgram $prg)
 		{		
 			$this->args = array(
-				'-l' => array(0 => OPT_OPTIONAL, TYPE_STRING),
+				'-c' => array(0 => OPT_OPTIONAL, TYPE_STRING),
 				'-l' => array(0 => OPT_OPTIONAL, TYPE_STRING),
 				'-o' => array(0 => OPT_OPTIONAL, TYPE_STRING),
 				'#path' => array(0 => OPT_REQUIRED, TYPE_PATH),					
@@ -130,6 +131,8 @@
 		public function compare(tfProgram $prg)
 		{
 			$prg->loadLibrary('project');
+			$prg->loadLibrary('parsers');
+			$prg->loadLibrary('i18n');
 
 			$project = new tfProject($this->args['#path']);
 			tfProject::set($project);
