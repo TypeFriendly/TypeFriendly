@@ -153,7 +153,7 @@ Możesz w elementach listy zarzeć kolejne akapity. Muszą być one otoczone pus
 > *   Panno Święta, co jasnej bronisz Częstochowy
 >     I w Ostrej świecisz Bramie! Ty, co gród zamkowy...
 
-<!-- -- -->
+<!-- # -->
 
 > [warning]
 > System wstawiania akapitów niesie ze sobą pewne konsekwencje. Niemożliwe jest umieszczenie bezpośrednio pod sobą osobnych list, gdyż zamienione zostają one w jedną:
@@ -174,7 +174,7 @@ Możesz w elementach listy zarzeć kolejne akapity. Muszą być one otoczone pus
 > > 2. Element 2
 > > 3. Element 3
 > 
-> Sprawa ta nadal dyskutowana jest podczas opracowywania specyfikacji języka Markdown. Jedynym zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- -- -->` i wstawienie go między listami, co spowoduje ich rodzielenie.
+> Sprawa ta nadal dyskutowana jest podczas opracowywania specyfikacji języka Markdown. Jedynym zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- # -->` i wstawienie go między listami, co spowoduje ich rodzielenie.
 
 Zagnieżdżone listy
 ------------------

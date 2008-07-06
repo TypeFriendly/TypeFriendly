@@ -28,7 +28,7 @@ Ciąg tekstu otoczony odwróconymi apostrofami: `` `coś` ``
 > 
 > Ciąg tekstu otoczony odwróconymi apostrofami: `` `coś` ``
 
-<!-- -- -->
+<!-- # -->
 
 > [information]
 > Umieszczone we wstawce znaki `<`, `>` oraz `&` automatycznie zamieniane są na encje, a znaczniki HTML w nich nie są przetwarzane. 

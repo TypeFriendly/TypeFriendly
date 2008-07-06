@@ -106,7 +106,7 @@ Termin 2
 >     1.  element pierwszy
 >     2.  element drugi
 
-<!-- -- -->
+<!-- # -->
 
 > [warning]
 > Należy uważać na ilość spacji przed każdym elementem. 

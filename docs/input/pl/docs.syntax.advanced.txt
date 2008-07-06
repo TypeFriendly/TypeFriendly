@@ -11,14 +11,14 @@ Dobrą wprawką jest również kod źródłowy tej dokumentacji.
 Rozdzielanie list, bloków cytatu i kodu
 =======================================
 
-Może zdarzyć się sytuacja, gdy chcemy mieć np. dwie osobne listy porządkowe albo dwa przykłady kodu źródłowego bezpośrednio pod sobą. Praser Markdown połączy jednak je jednak, co wynika ze specyfikacji. Nie zostało jeszcze opracowane "ładne" rozwiązanie tego problemu i zaleca się stosowanie HTML-owego komentarza, np. w postaci `<!-- -- -->` (taką stosujemy w naszej dokumentacji). Oczywiście może to być dowolny inny, prawidłowy komentarz.
+Może zdarzyć się sytuacja, gdy chcemy mieć np. dwie osobne listy porządkowe albo dwa przykłady kodu źródłowego bezpośrednio pod sobą. Praser Markdown połączy jednak je jednak, co wynika ze specyfikacji. Nie zostało jeszcze opracowane "ładne" rozwiązanie tego problemu i zaleca się stosowanie HTML-owego komentarza, np. w postaci `<!-- # -->` (taką stosujemy w naszej dokumentacji). Oczywiście może to być dowolny inny, prawidłowy komentarz.
 
 ~~~
 1.  Element 1
 2.  Element 2
 3.  Element 3
 
-<!-- -- -->
+<!-- # -->
 
 1.  Element 1
 2.  Element 2
@@ -26,7 +26,7 @@ Może zdarzyć się sytuacja, gdy chcemy mieć np. dwie osobne listy porządkowe
 
 > cytat
 
-<!-- -- -->
+<!-- # -->
 
 > cytat
 ~~~
@@ -35,7 +35,7 @@ Może zdarzyć się sytuacja, gdy chcemy mieć np. dwie osobne listy porządkowe
 > 2.  Element 2
 > 3.  Element 3
 
-> <!-- -- -->
+> <!-- # -->
 
 > 1.  Element 1
 > 2.  Element 2
@@ -43,7 +43,7 @@ Może zdarzyć się sytuacja, gdy chcemy mieć np. dwie osobne listy porządkowe
 
 > > cytat
 
-> <!-- -- -->
+> <!-- # -->
 
 > > cytat
 

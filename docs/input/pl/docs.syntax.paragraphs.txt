@@ -50,7 +50,7 @@ Ty jesteś jak zdrowie.
 > Ojczyzno moja!  
 > Ty jesteś jak zdrowie.
 
-<!-- -- -->
+<!-- # -->
 
 > [important]
 > ### Znaki specjalne: `>`, `<` i `&`

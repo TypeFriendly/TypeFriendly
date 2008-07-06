@@ -31,7 +31,7 @@ Oczywiście, nie musisz ręcznie łamać każdej linjki:
 ~~~
 
 > [warning]
-> Ten "leniwy" sposób wstawiania cytatów uniemożliwia proste oddzielenie dwóch osobnych cytatów od siebie, gdyż niezależnie od ilości pustych linijek pomiędzy blokami, zostaną one połączone w jeden. Sprawa cały czas jest dyskutowana podczas opracowywania specyfikacji języka i - póki co - zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- -- -->` pomiędzy blokami.
+> Ten "leniwy" sposób wstawiania cytatów uniemożliwia proste oddzielenie dwóch osobnych cytatów od siebie, gdyż niezależnie od ilości pustych linijek pomiędzy blokami, zostaną one połączone w jeden. Sprawa cały czas jest dyskutowana podczas opracowywania specyfikacji języka i - póki co - zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- # -->` pomiędzy blokami.
 
 Bloki można zagnieżdżać w sobie, dodając kolejne nawiasy `>`:
 
@@ -89,32 +89,32 @@ Ramki te korzystają ze składni bloków cytatu. Różnią się tylko tym, że w
 > [error]
 > `[error]`
 
-<!-- -- -->
+<!-- # -->
 
 > [help]
 > `[help]`
 
-<!-- -- -->
+<!-- # -->
 
 > [important]
 > `[important]`
 
-<!-- -- -->
+<!-- # -->
 
 > [information]
 > `[information]`
 
-<!-- -- -->
+<!-- # -->
 
 > [steps]
 > `[steps]`
 
-<!-- -- -->
+<!-- # -->
 
 > [stop]
 > `[stop]`
 
-<!-- -- -->
+<!-- # -->
 
 > [warning]
 > `[warning]`

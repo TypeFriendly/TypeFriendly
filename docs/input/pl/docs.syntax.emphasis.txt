@@ -32,7 +32,7 @@ Wyróżnienia możesz użyć również wewnątrz słowa:
     
 > Litwo*Ojczyzno*Moja
 
-<!-- -- -->
+<!-- # -->
 
 > [help]
 > Powyższa reguła stosuje się jedynie do gwiazdek. Znaki podkreślenia wyróżnią tekst tylko jeśli odnoszą się do całego słowa, możesz więc bez obaw pisać:
