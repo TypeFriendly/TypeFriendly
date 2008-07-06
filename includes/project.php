@@ -176,6 +176,7 @@
 			{
 				throw new SystemException('The used output '.$output.' is not supported by TypeFriendly.');
 			}
+			
 			$this->output = $output;
 		} // end setOutput();
 		
@@ -409,18 +410,45 @@
 
 		public function generate()
 		{
+			static $lastOutput = NULL;
+			
+			$reparse = false;
+			
+			if($lastOutput != $this->output)
+			{
+				$lastOutput = $this->output;
+				$reparse = true;
+			}
+			
 			$this->fs->safeMkDir('output/'.$this->output, TF_READ | TF_WRITE | TF_EXEC);
 			
 			$this->outputObj = $out = $this->prog->fs->loadObject('outputs/'.$this->output.'.php', $this->output);
 			$out->init($this, 'output/'.$this->output.'/');
-			$parsers = tfParsers::get();
+			
+			if($reparse)
+			{
+				$parsers = tfParsers::get();
+				
+				$refs = array();
+				$refTitles = array();
+				foreach($this->pages as &$page)
+				{
+					$refs[$page['Id']] = $this->outputObj->toAddress($page['Id']);
+					$refTitles[$page['Id']] = $page['Title'];
+				}
+				
+				$parsers->getParser()->predef_urls = $refs;
+				$parsers->getParser()->predef_titles = $refTitles;
+			}
 			
 			foreach($this->pages as &$page)
 			{
 				if(!$this->parsed)
 				{	
-					$page['Content'] = $parsers->parse($page['Content']);
+					$page['Markdown'] = $page['Content'];
 				}
+				$parsers->getParser()->fn_id_prefix = str_replace('.', '_', $page['Id']).':'; 
+				$page['Content'] = $parsers->parse($page['Markdown']);
 				$out->generate($page);
 			}
 			$this->parsed = true;

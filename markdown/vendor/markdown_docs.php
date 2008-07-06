@@ -21,6 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	@define('MARKDOWN_PARSER_CLASS', 'MarkdownDocs_Parser');
 	
@@ -38,7 +39,7 @@
 		function _doCodeBlocks_callback($matches)
 		{
 			$codeblock = $matches[1];
-	
+			
 			$codeblock = $this->outdent($codeblock);
 	
 			# trim leading newlines and trailing newlines
@@ -74,7 +75,7 @@
 		
 		function _codeBlockHighlighter($codeblock, &$clear)
 		{
-			if($codeblock{0} == '>')
+			/*if($codeblock{0} == '>')
 			{
 				$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
 				$codeblock = preg_replace_callback('/^\n+/', array($this, '_doFencedCodeBlocks_newlines'), $codeblock);
@@ -88,7 +89,7 @@
 				$codeblock = substr($codeblock, 1);
 				return $codeblock;
 			}
-			elseif(preg_match('/^((\\\)?\[([a-zA-Z0-9\-_]+)\]\s*\n)/', $codeblock, $matches))
+			else*/if(preg_match('/^((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*\n)/', $codeblock, $matches))
 			{
 				
 				if($matches[2] == '\\')
@@ -96,7 +97,6 @@
 					$codeblock = substr($codeblock, 1);
 					return $codeblock;
 				}
-				
 				
 				$strlen = strlen($matches[1]);
 				$parser = strtolower($matches[3]);
@@ -112,6 +112,7 @@
 					}
 					else
 					{
+						$codeblock = preg_replace('/\n+$/', '', $codeblock);
 						$geshi = new GeSHi($codeblock, $parser);
 					
 						$codeblock = $geshi->parse_code();
@@ -128,6 +129,27 @@
 			$bq = $matches[1];
 			# trim one level of quoting - trim whitespace-only lines
 			$bq = preg_replace('/^[ ]*>[ ]?|^[ ]+$/m', '', $bq);
+			                                                          
+			$addClass = '';
+			if(preg_match('/^((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*\n)/', $bq, $matches))
+			{
+				if($matches[2] == '\\')
+				{
+					$bq = substr($bq, 1);
+				}
+				else
+				{	
+					$strlen = strlen($matches[1]);
+					$parser = strtolower($matches[3]);
+					
+					if($strlen > 0)
+					{
+						$bq = substr($bq, $strlen);
+						$addClass = ' class="'.$parser.'"';
+					}
+				}
+			}
+			
 			$bq = $this->runBlockGamut($bq);		# recurse
 			
 			$bq = preg_replace('/^/m', "  ", $bq);
@@ -135,7 +157,7 @@
 			# so we need to fix that:
 			$bq = preg_replace_callback('{(\s*<pre>.+?</pre>)}sx', array($this, '_DoBlockQuotes_callback2'), $bq);
 			
-			return "\n".$this->hashBlock("<blockquote>\n$bq\n</blockquote>")."\n\n";
+			return "\n".$this->hashBlock("<blockquote$addClass>\n$bq\n</blockquote>")."\n\n";
 		} // end _doBlockQuotes_callback();
 		
 		function _doBlockQuotes_callback2($matches)

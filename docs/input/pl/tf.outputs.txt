@@ -24,6 +24,7 @@ Jest to klasa abstrakcyjna, którą musi rozszerzać i implementować klasa wyj�
 + `close()` - wywoływana na zakończenie przetwarzania danego wyjścia.
 
 Dodatkowe tagi w meta-danych rozdziału
+
 * `Id` - identyfikator rozdziału
 * `Content` - przetworzona treść rozdziału
 * `Next` - identyfikator następnej strony dokumentacji lub NULL

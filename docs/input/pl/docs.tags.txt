@@ -13,15 +13,32 @@ NazwaTagu:
 Pola podstawowe
 ---------------
 
-* **Title** - pełny tytuł danego rozdziału
-* **ShortTitle** - skrócony tytuł rozdziału (np. na potrzeby odnośników). Jeżeli nie jest ustawiony, brana jest wartość z **Title**.
-* **SeeAlso** - tablica identyfikatorów rozdziałów na potrzeby rubryki "Zobacz także".
-* **SeeAlsoExternal** - jak wyżej, lecz umożliwia podanie zewnętrznych odnośników. Po spacji można wpisać tekst odnośnika
-* **Status** - wyświetla pod tytułem pole o tytule "Status", które można zaadaptować do dowolnych celów.
-* **Reference** - umożliwia podanie sposobu wywołania funkcji (liczba, typ parametrów, zwracana wartość itd.).
-* **Author** - autor dokumentu
-* **VersionSince** - od jakiej wersji dany element jest dostępny
-* **VersionTo** - do jakiej wersji dany element był dostępny
+Title
+:   pełny tytuł danego rozdziału
+
+ShortTitle
+:   skrócony tytuł rozdziału (np. na potrzeby odnośników). Jeżeli nie jest ustawiony, brana jest wartość z **Title**.
+
+SeeAlso
+:   tablica identyfikatorów rozdziałów na potrzeby rubryki "Zobacz także".
+
+SeeAlsoExternal
+:   jak wyżej, lecz umożliwia podanie zewnętrznych odnośników. Po spacji można wpisać tekst odnośnika
+
+Status
+:   wyświetla pod tytułem pole o tytule "Status", które można zaadaptować do dowolnych celów.
+
+Reference
+:   umożliwia podanie sposobu wywołania funkcji (liczba, typ parametrów, zwracana wartość itd.).
+
+Author
+:   autor dokumentu
+
+VersionSince
+:   od jakiej wersji dany element jest dostępny
+
+VersionTo
+:   do jakiej wersji dany element był dostępny
 
 Przykład:
 
@@ -41,9 +58,14 @@ Programowanie obiektowe
 -----------------------
 Pola te służą do łatwiejszego tworzenia dokumentacji do obiektowego kodu. Umożliwiają określenie np. klas pochodnych, bazowych itd. Wszędzie TypeFriendly zakłada, że otrzyma identyfikator rozdziału, który opisuje daną rzecz:
 
-* **Extends** - klasa bazowa.
-* **Implements** - implementowane interfejsy.
-* **ExtendedBy** - lista klas rozszerzających aktualną.
+Extends
+:   klasa bazowa.
+
+Implements
+:   implementowane interfejsy.
+
+ExtendedBy
+:   lista klas rozszerzających aktualną.
 
 Przykładowe użycie:
 
@@ -71,9 +93,20 @@ Pola planowane
 --------------
 Poniższe pola są propozycjami, które prawdopodobnie zostaną wdrożone w nadchodzących wersjach.
 
-* **MultiExtends** - do obsługi wielokrotnego dziedziczenia
-* **SeeAlsoExternal** - sekcja "Zobacz także", lecz z odnośnikami zewnętrznymi
-* **Quote** - umożliwi wklejenie cytatu na początek rozdziału
-* **QuoteAuthor** - autorstwo cytatu
-* **AllowUserComments** - do generatora wersji on-line: informacja, czy zezwolić na komentowanie danego rozdziału.
-* **Appendix** - doklei do nazwy podstrony słowa "Dodatek X.", gdzie X to litera podana za wartość.
+MultiExtends
+:   do obsługi wielokrotnego dziedziczenia
+
+SeeAlsoExternal
+:   sekcja "Zobacz także", lecz z odnośnikami zewnętrznymi
+
+Quote
+:   umożliwi wklejenie cytatu na początek rozdziału
+
+QuoteAuthor
+:   autorstwo cytatu
+
+AllowUserComments
+:   do generatora wersji on-line: informacja, czy zezwolić na komentowanie danego rozdziału.
+
+Appendix
+:   doklei do nazwy podstrony słowa "Dodatek X.", gdzie X to litera podana za wartość.

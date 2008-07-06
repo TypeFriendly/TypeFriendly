@@ -21,5 +21,6 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
+// $Id$
 
 	require_once TF_MARKDOWN.'vendor/markdown_docs.php';

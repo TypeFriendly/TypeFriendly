@@ -26,10 +26,12 @@
 	class tfParsers
 	{
 		static private $instance;
+        
+		protected $_parser = NULL;
 		
 		private function __construct()
 		{
-			
+			$this->_parser = new MarkdownDocs_Parser;
 		} // end __construct();
 		
 		static public function get()
@@ -40,6 +42,11 @@
 			}
 			return tfParsers::$instance;
 		} // end get();
+        
+		public function getParser()
+		{
+			return $this->_parser;
+		} // end getParser();
 		
 		public function tfdoc($filename)
 		{
@@ -80,7 +87,7 @@
 				}
 				$ok = true;
 			}
-			while(!$this -> separator($line));
+			while(!$this->separator($line));
 			$data['Content'] = '';
 			while(!feof($f))
 			{
@@ -92,7 +99,7 @@
 
 		public function parse($text)
 		{
-			return Markdown($text);
+			return $this->_parser->transform($text);
 		} // end parse();
 		
 		public function config($filename)

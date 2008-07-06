@@ -1,11 +1,19 @@
 Title: Instalacja
 
 ----
+
 Aby móc używać TypeFriendly, musisz posiadać zainstalowane PHP w wersji co najmniej 5.1 oraz umożliwiające uruchamianie skryptów PHP z linii komend Twojego systemu operacyjnego. Rozpakuj zawartość archiwum do dowolnego katalogu na dysku twardym i to wszystko. Aby przetestować działanie, uruchom linię komend, przejdź do katalogu z TypeFriendly i wydaj następujące polecenie:
 
     [console]
     php typefriendly.php -o xhtml "./docs/"
 
 Jeśli wszystko poszło prawidłowo, TypeFriendly powinien wygenerować wersję XHTML swojej własnej dokumentacji.
+
+> [information]
+> ### System Windows ###
+> 
+> O ile pod np. Linuksem polecenie `php` w konsoli jest od razu dostępne, to pod systemami Windows konieczne może być zmodyfikowanie zmiennych systemowych. W tym celu należy wejść do *Panelu Sterowania* i uruchomić aplet *System*. W zakładce *Zaawansowane* wybieramy przycisk *Zmienne środowiskowe*. W otwartym oknie, w sekcji *Zmienne systemowe* należy odnaleźć zmienną nazwaną `Path`, a następnie kliknąć na przycisk *Edytuj*. W *Wartości zmiennej* **po średniku `;`** należy dopisać ścieżkę do katalogu, w którym znajduje się interpreter `php.exe`, np.:
+> 
+>     ...;C:\serwer\php5\
 
 W następnym rozdziale opiszemy, jak rozpocząć tworzenie własnej dokumentacji.

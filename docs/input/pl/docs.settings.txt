@@ -2,36 +2,60 @@ Title: Plik settings.ini
 
 ----
 
-Jest to główny plik konfiguracyjny z listą opcji o składni:
+Jest to główny plik konfiguracyjny z listą opcji. Jak sama nazwa pliku wskazuje, jest to typowa składnia plików INI:
 
 ~~~
 opcja1 = "wartosc1"
 opcja2 = "wartosc2"
 opcja3 = "wartosc3"
+; komentarz
 ~~~
 
 Znak średnika rozpoczyna komentarz, który ciągnie się aż do końca linii. 
 
-Podstawowe opcje, jakie należy ustawić, to:
+#### Podstawowe opcje, jakie należy ustawić, to:
 
-+ **title** - nazwa projektu, do którego tworzysz dokumentację.
-+ **version** - wersja projektu
-+ **copyright** - prawa autorskie do dokumentacji
-+ **license** - licencja, na jakiej udostępniana jest dokumentacja
+title
+:   nazwa projektu, do którego tworzysz dokumentację.
 
-Dodatkowe opcje:
+version
+:   wersja projektu
 
-+ **copyrightLink** - odnośnik do strony posiadacza praw autorskich
-+ **licenseLink** - odnośnik do strony z treścią licencji
+copyright
+:   prawa autorskie do dokumentacji
 
-Opcje techniczne związane z projektem:
+license
+:   licencja, na jakiej udostępniana jest dokumentacja
 
-+ **outputs** - lista formatów, w jakich chcesz generować dokumentację, odseparowanych przecinkami.
-+ **baseLanguage** - dla każdego projektu musi być wybrany podstawowy język dokumentacji, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja dokumentacji w tym języku.
-+ **navigation** - określa sposób łączenia stron w pasku nawigacyjnym "Poprzedni/Następny". Dozwolone wartości to:
-  - *tree* - linki "Poprzedni" i "Następny" zawsze wskazują na sąsiada danego rozdziału. Jeżeli sąsiad nie istnieje, link nie jest wyświetlany. Jest to domyślna wartość.
-  - *book* - rozdziały są tak łączone, aby klikając "Poprzedni" lub "Następny" można było przejść całą dokumentację (jak w książce).
-+ **showNumbers** - czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
+#### Dodatkowe opcje:
+
+copyrightLink
+:   odnośnik do strony posiadacza praw autorskich
+
+licenseLink
+:   odnośnik do strony z treścią licencji
+
+#### Opcje techniczne związane z projektem:
+
+outputs
+:   lista formatów, w jakich chcesz generować dokumentację, odseparowanych przecinkami.
+
+baseLanguage
+:   dla każdego projektu musi być wybrany podstawowy język dokumentacji, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja dokumentacji w tym języku.
+
+navigation
+:   określa sposób łączenia stron w pasku nawigacyjnym "Poprzedni/Następny". **Dozwolone wartości to:**
+    
+    tree
+    :   linki "Poprzedni" i "Następny" zawsze wskazują na sąsiada danego rozdziału. Jeżeli sąsiad nie istnieje, link nie jest wyświetlany. Jest to domyślna wartość.
+
+    book
+    :   rozdziały są tak łączone, aby klikając "Poprzedni" lub "Następny" można było przejść całą dokumentację (jak w książce).
+    
+showNumbers
+:   czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
+
+***
 
 Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:
 
