@@ -214,10 +214,14 @@
 			{
 				copy($this->master.$from, $this->master.$to);
 			}
+			elseif(is_dir($this->master.$from))
+			{
+				$this->safeMkdir($to, TF_WRITE);
+				$this->recursiveCopy($this->master.$from, $this->master.$to);
+			}
 			else
 			{
-				$this->safeMkdir($this->master.$to, TF_WRITE);
-				$this->recursiveCopy($this->master.$from, $this->master.$to);
+				throw new SystemException('The directory '.$this->master.$from.' does not exist.');
 			}
 		} // end copyItem();
 		

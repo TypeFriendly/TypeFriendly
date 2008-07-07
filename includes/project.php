@@ -71,6 +71,7 @@
 		private $output;
 		private $outputObj;
 		private $language;
+		private $baseLanguage;
 	
 		private $langs;
 		private $prog;
@@ -125,6 +126,7 @@
 			// Base language settings for the documentation interface translator
 			$translate = tfTranslate::get();
 			$translate->setBaseLanguage($this->config['baseLanguage']);
+			$this->baseLanguage = $this->config['baseLanguage'];
 			
 			// Now we have to check the directory accessibility
 			if(!$this->fs->checkDirectories(array(
@@ -210,8 +212,10 @@
 			Stage 5 creates some meta data for each page, as well as resolves the navigation issue.
 
 			*/
-			$items = $this->fs->listDirectory('input/'.$this->language.'/', true, true);
-			
+		
+			// The tree structure is always built upon the base language directory content.
+			$items = $this->fs->listDirectory('input/'.$this->baseLanguage.'/', true, true);
+
 			// Stage 1
 			// See, what are the documentation pages, and what - other files.
 			$doc = array();
@@ -313,8 +317,17 @@
 			{		
 				foreach($sublist as $subId => &$item)
 				{
-					$metaData = $parser->tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
-					// unset($metaData['Content']);
+					// Try to load the content: first check the current language
+					// if does not exist, load the base language file.
+					try
+					{
+						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
+					}
+					catch(SystemException $e)
+					{
+						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->baseLanguage.'/'.$item['id'].'.txt'));
+					}
+
 					// Validate the user-defined meta.
 					if(!isset($metaData['ShortTitle']))
 					{
@@ -402,10 +415,17 @@
 			{
 				$this->fs->copyFromVFS($this->prog->fs, 'media/'.$this->output.'/', 'output/'.$this->output.'/');
 			}
-			catch(SystemException $e)
+			catch(SystemException $e){}
+			try
 			{
-				// Nothing to do - here this is not a crtitical error.
+				$this->fs->copyItem('input/'.$this->baseLanguage.'/media/', 'output/'.$this->output.'/media/');
 			}
+			catch(SystemException $e){}
+			try
+			{
+				$this->fs->copyItem('input/'.$this->language.'/media/', 'output/'.$this->output.'/media/');
+			}
+			catch(SystemException $e){}				
 		} // end copyMedia();
 
 		public function generate()

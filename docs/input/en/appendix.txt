@@ -1,4 +1,4 @@
-Title: Dodatki
+Title: Appendix
 
 ----
-Dodatkowe informacje dotyczące TypeFriendly.
+Additional information about TypeFriendly.

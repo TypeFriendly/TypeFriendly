@@ -1,151 +1,28 @@
-Title: Składnia pliku
+Title: File syntax
 SeeAlso:
  - docs.tags
-
-----
-Przykładowy plik rozdziału wygląda następująco:
-
-~~~
-Title: Tytuł
-Opcja1: Wartość
-Opcja2: Wartość
-ListaUstawień:
- - Wartość 1
- - Wartość 2
+SeeAlsoExternal:
+ - http://michelf.com/projects/php-markdown/ PHP Markdown Extra syntax
 
 ----
 
-Treść pliku
-~~~
-
-W ustawieniach umieszczamy kolejne znaczniki w sposób pokazany powyżej. Obowiązkowy jest *Title*, ale jest też kilka innych. Właściwie ich lista zależy bardziej od tego, w jakim formacie wyjściowym będziemy generować dokumentację. Można bardzo łatwo opracować własny i zacząć używać tam nowe znaczniki - zostanie to omówione dalej.
-
-Do formatowania treści używana jest składnia ["PHP Markdown Extra"](http://michelf.com/projects/php-markdown/) z paroma rozszerzeniami i modyfikacjami. Spotkać się z nią można na wielu stronach internetowych, ponieważ parsery są publicznie dostępne, stąd istnieje szansa, że już ją znasz. Gdyby jednak nie, odwiedź stronę jednego z parserów (np. tę podaną powyżej), by dowiedzieć się więcej. W tym miejscu opiszemy reguły formatowania na swój swój sposób i z uwzględnieniem dokonanych zmian.
-
-Markdown został stworzony, by być zarówno łatwy w użyciu, jak i przyjazny w czytaniu plików źródłowych. Pliki źródłowe dokumentacji TypeFriendly mogą dzięki temu służyć za pomoc nawet bez przepuszczenia ich przez generator. Przyjęte jest założenie, że znaki formatujące powinny jak najmniej rzucać się w oczy czytelnikowi i mieć zbliżone zastosowanie do tego, jakiego już się używa np. w poczcie elektronicznej czy plikach README. Jednak oprócz tego, do użytku dopuszczony jest także HTML i modyfikacje TypeFriendly czasem z tego faktu korzystają.
-
-Paragrafy i nowe linie
-======================
-
-W Markdownie obowiązuje zasada, że elementy blokowe oddzielone są od siebie jedną lub większą ilością pustych linii. To samo dotyczy paragrafów. Piszemy tekst, a gdy chcemy rozpocząć nowy, robimy jedną pustą linię przerwy:
+A sample chapter file looks like this:
 
 ~~~
-To jest paragraf 1.
+Title: Some title
+Option1: Some value
+Option2: Some value
+OptionList:
+ - value 1
+ - value 2
 
-To jest paragraf 2.
+---
+
+Chapter content
 ~~~
 
-Aby zrobić zwykłe przełamanie linii, kończymy ją dwoma lub większą ilością spacji i piszemy z powrotem od nowej:
+In the header section, we put the tags in the way showed above. The *Title* is compulsory, but TypeFriendly recognizes much more. In fact, their list depends on the used output, because unsually it's it which makes use of them. You can easily create a new output and start to use your own tags. It will be described later.
 
-~~~
-To jest tekst z przełamaniem  
-linii. Na końcu linjki wyżej są dwie spacje.
-~~~
+The header must be separated from the content by at least three pause characters `---` surrounded with two single empty lines.
 
-Nagłówki
-========
-
-Markdown obsługuje kilka rodzajów nagłówków. Najprostszym wyjściem jest "podkreślenie" tytułu nagłówka liniami poziomymi lub znakami równości:
-
-~~~
-tekst
-
-Nagłówek 1
-==========
-
-tekst
-
-Nagłówek 1.1
-------------
-
-tekst
-~~~
-
-Ilość znaków równości czy pauzy nie ma znaczenia.
-
-Alternatywny styl to poprzedzenie tytułu jednym do sześciu znaków **#**:
-
-~~~
-tekst
-
-# nagłówek 1
-
-tekst
-
-## nagłówek 2
-
-tekst
-
-##### nagłówek 6
-~~~
-
-Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Ilość znaków po tytule nie musi się zgadzać z ilością przed:
-
-~~~
-tekst
-
-# nagłówek 1 #
-
-tekst
-
-## nagłówek 2 ######
-
-tekst
-~~~
-
-Listy i cytaty
-==============
-
-Markdown pozwala bardzo łatwo tworzyć listy. Dodanie listy numerowanej jest niezwykle proste:
-
-~~~
-Tekst.
-
-1. Element 1
-2. Element 2
-3. Element 3
-
-Tekst
-~~~
-
-Numery nie grają znaczenia - mogą być w innej kolejności, mogą się powtarzać. 
-
-Do tworzenia listy wypunktowanej, linijka musi zaczynać się od znaku **\***, **+** lub **-**:
-
-~~~
-Tekst.
-
-+ Element 1
-+ Element 2
-+ Element 3
-
-Tekst
-~~~
-
-Markdown dopuszcza umieszczanie cytatów w formie znanej z poczty elektronicznej:
-
-~~~
-Tekst.
-
-> To jest cytat...
-> To jest cytat...
-> To jest cytat...
-
-Tekst
-~~~
-
-Kod źródłowy
-============
-
-Obrazki i multimedia
-====================
-
-Formatowanie tekstu
-===================
-
-Tabelki
-=======
-
-
-
-
+The content is formatted using the ["PHP Markdown Extra"](http://michelf.com/projects/php-markdown/) syntax with some extensions and modifications. You can find it in many websites, because the parsers are simple in use and very popular, so there is a chance you already know it. However, whether you know it or not, we encourage you to take a look at our syntax description, to see what improvements have been introduced by TypeFriendly. Similar documents can be also found at the parser website mentioned above.

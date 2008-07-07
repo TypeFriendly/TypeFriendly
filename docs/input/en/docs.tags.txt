@@ -1,32 +1,50 @@
-Title: Tagi plików
+Title: File tags
 
 ----
-W rozdziale tym opisane są wszystkie dostępne tagi, jakich można używać w plikach rozdziałów. Większość z nich przyjmuje wartość tekstową, lecz niektóre mogą także obsługiwać zespół wartości (tablicę), którą podajemy w następujący sposób:
+
+In this chapter we have described all the tags that are available in the chapter files. Most of them takes a string as a value, but some of them also support a group of values (an array). We specify them in the following way:
 
 ~~~
-NazwaTagu:
- - Wartość 1
- - Wartość 2
- - Wartość 3
+TagName:
+ - Value 1
+ - Value 2
+ - Value 3
 ~~~
 
-Pola podstawowe
----------------
+Basic tags
+----------
 
-* **Title** - pełny tytuł danego rozdziału
-* **ShortTitle** - skrócony tytuł rozdziału (np. na potrzeby odnośników). Jeżeli nie jest ustawiony, brana jest wartość z **Title**.
-* **SeeAlso** - tablica identyfikatorów rozdziałów na potrzeby rubryki "Zobacz także".
-* **SeeAlsoExternal** - jak wyżej, lecz umożliwia podanie zewnętrznych odnośników. Po spacji można wpisać tekst odnośnika
-* **Status** - wyświetla pod tytułem pole o tytule "Status", które można zaadaptować do dowolnych celów.
-* **Reference** - umożliwia podanie sposobu wywołania funkcji (liczba, typ parametrów, zwracana wartość itd.).
-* **Author** - autor dokumentu
-* **VersionSince** - od jakiej wersji dany element jest dostępny
-* **VersionTo** - do jakiej wersji dany element był dostępny
+Title
+:   a full title of the chapter (required tag)
 
-Przykład:
+ShortTitle
+:   a shortened title of the chapter (for example, for use in URLs). If not set, the value is taken from **Title**.
+
+SeeAlso
+:   an array of identifiers to generate the "See also" section.
+
+SeeAlsoExternal
+:   like above, but allows to put external URLs. The address can be separated with a space from the URL text.
+
+Status
+:   shows a field named "Status" under the chapter title that can be used for various purposes.
+
+Reference
+:   allows to create a function reference (number of arguments, their type, returned value etc.). The reference itself is created manually.
+
+Author
+:   document author
+
+VersionSince
+:   which version this element is available since.
+
+VersionTo
+:   which version this element is available to.
+
+Example:
 
 ~~~
-Title: Funkcja foo()
+Title: Function foo()
 ShortTitle: foo()
 Reference: void foo(int $a, int $b)
 VersionSince: 1.0.0
@@ -34,21 +52,27 @@ VersionTo: 1.2.0
 SeeAlso:
  - reference.functions.bar
  SeeAlsoExternal:
- - http://www.example.com/ Przykładowa strona
+ - http://www.example.com/ A sample website
 ~~~
 
-Programowanie obiektowe
------------------------
-Pola te służą do łatwiejszego tworzenia dokumentacji do obiektowego kodu. Umożliwiają określenie np. klas pochodnych, bazowych itd. Wszędzie TypeFriendly zakłada, że otrzyma identyfikator rozdziału, który opisuje daną rzecz:
+Object-oriented Programming
+---------------------------
 
-* **Extends** - klasa bazowa.
-* **Implements** - implementowane interfejsy.
-* **ExtendedBy** - lista klas rozszerzających aktualną.
+Those fields are used to mark the class dependencies in the objective code. You can set the base and derived classes, interfaces etc. TypeFriendly expects a chapter identifier that describes the required class/interface.
 
-Przykładowe użycie:
+Extends
+:   base class.
+
+Implements
+:   implemented interfaces.
+
+ExtendedBy
+:   derived classes.
+
+Sample use:
 
 ~~~
-Title: Klasa "foo"
+Title: Class "foo"
 Extends: reference.bar
 Implements:
  - reference.foo-interface
@@ -56,24 +80,33 @@ Implements:
 ExtendedBy:
  - reference.joe
 ~~~
- 
-Dodatkowo istnieją wersje tych dyrektyw, które umożliwiają podanie nazwy klasy bezpośrednio. Wszystkie one mają nazwy rozpoczynające się od dużej litery "E", np. **EExtends**, **EImplements**. Przykładowe użycie:
+
+In addition, there are alternative versions of those tags that allow to specify the class/interface names manually. The tag name begins with an uppercase letter **e**: **EExtents**, **EImplements**, etc. Sample use:
 
 ~~~
-Title: Klasa "foo"
+Title: Class "foo"
 EExtends: PDO
 EImplements:
  - Countable
  - IteratorAggregate
 ~~~
 
-Pola planowane
---------------
-Poniższe pola są propozycjami, które prawdopodobnie zostaną wdrożone w nadchodzących wersjach.
+Tag proposals
+-------------
 
-* **MultiExtends** - do obsługi wielokrotnego dziedziczenia
-* **SeeAlsoExternal** - sekcja "Zobacz także", lecz z odnośnikami zewnętrznymi
-* **Quote** - umożliwi wklejenie cytatu na początek rozdziału
-* **QuoteAuthor** - autorstwo cytatu
-* **AllowUserComments** - do generatora wersji on-line: informacja, czy zezwolić na komentowanie danego rozdziału.
-* **Appendix** - doklei do nazwy podstrony słowa "Dodatek X.", gdzie X to litera podana za wartość.
+The following fields are proposals that probably will be supported in the future releases of TypeFriendly.
+
+MultiExtends
+:   supports the multiple inheritance
+
+Quote
+:   adds a quote at the begin of the chapter
+
+QuoteAuthor
+:   quote author
+
+AllowUserComments
+:   for the on-line documentation generator. It is used to mark, whether this chapter allows user comments or not.
+
+Appendix
+:   appendix support.

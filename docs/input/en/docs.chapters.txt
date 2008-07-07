@@ -1,59 +1,60 @@
-Title: Rozdziały
+Title: Chapters
 SeeAlso:
  - docs.directories
 
 ----
-W TypeFriendly poszczególne rozdziały dokumentacji tworzysz jako pliki tekstowe w katalogu `/input/jezyk/`. Każdy taki plik składa się z dwóch części:
+The chapters are created as simple text files in the `/input/language/` directory. Each of them consists of two parts:
 
-1. Nagłówek
-2. Treść
+1. Header
+2. Content
 
-W nagłówku znajdue się kilka opcji, które pozwalają ustawić np. właściwy tytuł danego rozdziału lub powiązania z innymi częściami dokumentacji. Pod nagłówkiem umieszczana jest treść w formacie Markdown. Dokładny opis składni tych plików znajduje się dalej, gdyż tutaj pragniemy omówić inną rzecz związaną z rozdziałami, mianowicie ustalanie ich kolejności.
+In the header, there are several options (called "tags") that allow you to set the chapter title or connections to the other chapters. Under the header, there is a content written in the Markdown format. The exact syntax description can be found later. Here we would like to show, how to manage the chapter order.
 
-TypeFriendly do ustalania zależności między rozdziałami używa samej nazwy pliku. Każda nazwa musi składać się z rozszerzenia **.txt** oraz grupy identyfikatorów rozdzielonych kropkami. Każdy identyfikator określa kolejne podrozdziały, do których przypisany jest dany plik. Oto przykładowa lista plików:
+TypeFriendly uses the file name to set the basic order and the parent/child dependency. Each name must consist of the **.txt** extension and a group of identifiers separated with dots. The identifiers define all the upper-level chapters which our file belongs to. Here is a sample file list:
 
-1. `wstep.txt`
-2. `instalacja.txt`
-3. `instalacja.prosta.txt`
-4. `instalacja.zlozona.txt`
+1. `preface.txt`
+2. `installation.txt`
+3. `installation.simple.txt`
+4. `installation.advanced.txt`
 5. `api.txt`
-6. `api.klasa.txt`
-7. `api.klasa.funkcja1.txt`
-8. `api.klasa.funkcja2.txt`
-9. `api.interfejs.txt`
-10. `api.interfejs.funkcja1.txt`
-11. `api.interfejs.funkcja2.txt`
+6. `api.class.txt`
+7. `api.class.function1.txt`
+8. `api.class.function2.txt`
+9. `api.interface.txt`
+10. `api.interface.function1.txt`
+11. `api.interface.function2.txt`
 
-Przyjrzyjmy się np. rozdziałowi poświęconemu instalacji. Jest stworzony plik tekstowy dla niego, w którym możemy zamieścić jakieś wprowadzenie. Jednocześnie umieszczamy w nim dwa podrozdziały: `instalacja.prosta` i `instalacja.zlozona`. TypeFriendly na podstawie nazw pliku powiąże jedno z drugim i wygeneruje odpowiednią nawigację. Opis API jest już bardziej złożony, ponieważ mamy tutaj aż trzy poziomy. Po słowie wstępu w pliku `api.txt` tworzymy wprowadzenie do opisu pierwszej z klas (`api.klasa.txt`). Klasa ma jakieś funkcje, tak więc opisujemy każdą z nich jako osobny podrozdział. Pamiętaj, że nie możesz pominąć żadnego pliku dla rozdziału nadrzędnego. Przykładowo, skoro tworzysz rozdziały z opisami funkcji interfejsu, plik `api.interfejs.txt` także musi istnieć.
+Let's take a look at the installation chapter. We have a text file for it: `installation.txt`, where we can add some introductory text. But there are also two subchapters: `installation.simple` and `installation.advanced`. TypeFriendly sees that the first identifier is `installation`, so it links them to that chapter and generates a navigation for them. The API description is a bit more complex, because there are three levels. The `api.txt` contains an introduction, and inside it, we have a manual for the first class (`api.class.txt`). The class contains some functions, so we describe them in separate sub-chapters. Remember that if you have a path `foo.bar.joe.txt`, your documentation must have also the following files: `foo.txt` and `foo.bar.txt`, otherwise TypeFriendly will throw an error.
 
-Domyślnie TypeFriendly sortuje poziomy zagnieżdżeń alfabetycznie. Możemy wpływać na tę kolejność, tworząc w głównym katalogu projektu plik `sort_hints.txt` z dodatkowymi wskazówkami dla tych rozdziałów, które chcesz sortować inaczej. Bez nich powyższy przykład zostanie automatycznie ułożony w następującej kolejności:
+By default, TypeFriendly sorts everything alphabetically. However, most of the chapters must have some other order. You can change it by creating in the main documentation directory a file called `sort_hints.txt` with additional sorting hints. Without them, TF will apply the following default order to the file list you have seen above:
+
 
 1. `api.txt`
-2. `api.interfejs.txt`
-3. `api.interfejs.funkcja1.txt`
-4. `api.interfejs.funkcja2.txt`
-5. `api.klasa.txt`
-6. `api.klasa.funkcja1.txt`
-7. `api.klasa.funkcja2.txt`
-8. `instalacja.txt`
-9. `instalacja.prosta.txt`
-10. `instalacja.zlozona.txt`
-11. `wstep.txt`
+2. `api.interface.txt`
+3. `api.interface.function1.txt`
+4. `api.interface.function2.txt`
+5. `api.class.txt`
+6. `api.class.function1.txt`
+7. `api.class.function2.txt`
+8. `installation.txt`
+9. `installation.simple.txt`
+10. `installation.advanced.txt`
+11. `preface.txt`
 
-Jest to trochę bez sensu, ponieważ o ile super, że funkcje są sortowane automatycznie, o tyle wstęp na końcu dokumentacji może już wzbudzić u czytelników zdumienie. Umieśćmy więc w `sort_hints.txt` parę wskazówek:
+Of course, this order does not make any sense. Yes, it is nice that the functions are sorted by default, but the reader may feel a bit confused, if he sees the preface at the end. Let's give some sorting hints to TF in the `sort_hints.txt` file:
 
-    wstep
-    instalacja
-    instalacja.prosta
-    instalacja.zlozona
+    preface
+    installation
+    installation.simple
+    installation.advanced
     api
-    api.klasa
-    api.interfejs
+    api.class
+    api.interface
 
-Widać, że w pliku tym podajemy po prostu w nowych liniach żądaną kolejność. Jeśli dla jakiegoś rozdziału pasuje nam sortowanie alfabetyczne, po prostu nie wymieniamy jego zawartości (np. nie wypisaliśmy tutaj żadnych funkcji z `api.klasa` i `api.interfejs`). Jeżeli spróbujemy zrobić mix, wymieniając tylko część zawartości danego rozdziału, TypeFriendly zgłosi błąd podczas próby wygenerowania dokumentacji.
+As you see, in this file we declare a required order by placing every chapter name in the separate line. If we enjoy an alphabetical order in a chapter, we simply do not mention its subchapters in the hints (in the example, we have not added any functions from `api.class` and `api.interface`. However, TypeFriendly does not allow to write only a part of the subchapter names and do a mix. It will cause an error then.
 
-Wskazówki:
+Tips:
 
-1. Plik ze wskazówkami jest jeden dla wszystkich języków, dlatego bardzo ważne jest, aby w każdej wersji językowej odpowiadające sobie rozdziały miały tę samą nazwę pliku.
-2. Nazwa pliku jest też wykorzystywana do identyfikowania rozdziałów przy tworzeniu ręcznym odnośników w tekście. Dlatego wybieraj nazwy krótkie i intuicyjne, trzymając się jakichś reguł. Ułatwi to późniejsze odnalezienie się w tym wszystkim.
-3. TypeFriendly pomija pliki z innym rozszerzeniem lub kończące się np. tyldą, tak więc nie trzeba wyłączać opcji tworzenia kopii zapasowej w edytorze, aby tworzyć dokumentację.
+1. All the language versions use the same hint file. Remember that your chapter must have the same file name in all the language versions.
+2. The file name is also used to create the links manually in the text. Choose short and intuitive names that can be memorized easily.
+3. TypeFriendly ignores the files with the different extension or with a tilde (~) character at the end of the name. This means you do not have to disable the backup options in your favourite editor.

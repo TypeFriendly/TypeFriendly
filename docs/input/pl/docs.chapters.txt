@@ -8,7 +8,7 @@ W TypeFriendly poszczególne rozdziały dokumentacji tworzysz jako pliki tekstow
 1. Nagłówek
 2. Treść
 
-W nagłówku znajdue się kilka opcji, które pozwalają ustawić np. właściwy tytuł danego rozdziału lub powiązania z innymi częściami dokumentacji. Pod nagłówkiem umieszczana jest treść w formacie Markdown. Dokładny opis składni tych plików znajduje się dalej, gdyż tutaj pragniemy omówić inną rzecz związaną z rozdziałami, mianowicie ustalanie ich kolejności.
+W nagłówku znajduje się kilka opcji, które pozwalają ustawić np. właściwy tytuł danego rozdziału lub powiązania z innymi częściami dokumentacji. Pod nagłówkiem umieszczana jest treść w formacie Markdown. Dokładny opis składni tych plików znajduje się dalej, gdyż tutaj pragniemy omówić inną rzecz związaną z rozdziałami, mianowicie ustalanie ich kolejności.
 
 TypeFriendly do ustalania zależności między rozdziałami używa samej nazwy pliku. Każda nazwa musi składać się z rozszerzenia **.txt** oraz grupy identyfikatorów rozdzielonych kropkami. Każdy identyfikator określa kolejne podrozdziały, do których przypisany jest dany plik. Oto przykładowa lista plików:
 
@@ -24,7 +24,7 @@ TypeFriendly do ustalania zależności między rozdziałami używa samej nazwy p
 10. `api.interfejs.funkcja1.txt`
 11. `api.interfejs.funkcja2.txt`
 
-Przyjrzyjmy się np. rozdziałowi poświęconemu instalacji. Jest stworzony plik tekstowy dla niego, w którym możemy zamieścić jakieś wprowadzenie. Jednocześnie umieszczamy w nim dwa podrozdziały: `instalacja.prosta` i `instalacja.zlozona`. TypeFriendly na podstawie nazw pliku powiąże jedno z drugim i wygeneruje odpowiednią nawigację. Opis API jest już bardziej złożony, ponieważ mamy tutaj aż trzy poziomy. Po słowie wstępu w pliku `api.txt` tworzymy wprowadzenie do opisu pierwszej z klas (`api.klasa.txt`). Klasa ma jakieś funkcje, tak więc opisujemy każdą z nich jako osobny podrozdział. Pamiętaj, że nie możesz pominąć żadnego pliku dla rozdziału nadrzędnego. Przykładowo, skoro tworzysz rozdziały z opisami funkcji interfejsu, plik `api.interfejs.txt` także musi istnieć.
+Przyjrzyjmy się np. rozdziałowi poświęconemu instalacji. Jest stworzony plik tekstowy dla niego, w którym możemy zamieścić jakieś wprowadzenie. Jednocześnie umieszczamy w nim dwa podrozdziały: `instalacja.prosta` i `instalacja.zlozona`. TypeFriendly na podstawie nazw pliku powiąże jedno z drugim i wygeneruje odpowiednią nawigację. Opis API jest już bardziej złożony, ponieważ mamy tutaj aż trzy poziomy. Po słowie wstępu w pliku `api.txt` tworzymy wprowadzenie do opisu pierwszej z klas (`api.klasa.txt`). Klasa ma jakieś funkcje, tak więc opisujemy każdą z nich jako osobny podrozdział. Pamiętaj, że jeżeli chcesz stworzyć plik o nazwie `foo.bar.joe.txt`, w dokumentacji muszą również istnieć `foo.txt` i `foo.bar.txt` - inaczej TypeFriendly zwróci błąd.
 
 Domyślnie TypeFriendly sortuje poziomy zagnieżdżeń alfabetycznie. Możemy wpływać na tę kolejność, tworząc w głównym katalogu projektu plik `sort_hints.txt` z dodatkowymi wskazówkami dla tych rozdziałów, które chcesz sortować inaczej. Bez nich powyższy przykład zostanie automatycznie ułożony w następującej kolejności:
 

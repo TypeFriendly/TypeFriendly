@@ -1,4 +1,4 @@
-Title: Dokumentacja wielojęzyczna
+Title: Multilingual documentation
 
 ----
 W tym rozdziale opiszemy wszystkie aspekty tworzenia dokumentacji wielojęzycznych.

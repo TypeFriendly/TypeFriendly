@@ -9,9 +9,9 @@ Title: Przedmowa
 1.  Modularna budowa dokumentacji - dokumentacja generowana jest ze zwykłych plików tekstowych, a jej układ i zależności między podstronami automatycznie ustalane na podstawie nazw tych plików.
 2.  Prosta składnia - dokumentację można pisać w niezwykle prostym i czytelnym formacie **Markdown**.
 3.  Wsparcie dla dokumentacji wielojęzycznych - TypeFriendly umożliwia równoległe tworzenie dokumentacji w kilku językach, a także udostępnia narzędzia ułatwiające prace, takie jak porównywanie wersji językowych.
-4.  Konfigurowalne formaty wyjściowe - aktualnie TypeFriendly potrafi generować dokumentację w trzech formatach: *XHTML - wiele stron*, *XHTML - jedna strona* oraz *Metadane*. Ostatni z nich umożliwia szybkie zaimportowanie dokumentacji do bazy danych i zrobienie jej wersji on-line.
+4.  Konfigurowalne formaty wyjściowe - aktualnie TypeFriendly potrafi generować dane w dwóch formatach: *XHTML - wiele stron* i *XHTML - jedna strona*. W trakcie projektowania jest format, który umożliwi prosty eksport dokumentacji do bazy danych w celu jej publikacji on-line, np. z komentarzami użytkownika.
 5.  Różne dodatki przydatne przy dokumentowaniu kodu: kolorowanie składni, referencje, zależności między klasami...
 6.  Łatwe tworzenie nawigacji.
-7.  Pracuje pod Linuksem, FreeBSD i Windowsem.
+7.  Pracuje pod Linuksem i Windowsem.
 
 TypeFriendly dostępny jest na licencji GNU General Public License 3, co oznacza, że możesz go nie tylko używać za darmo, ale także modyfikować i dostosowywać do własnych celów.

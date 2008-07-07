@@ -1,18 +1,19 @@
-Title: Licencja i autorzy
+Title: License and authors
 Appendix: B
 
 ----
-Skrypt TypeFriendly został stworzony przez [grupę Invenzzia](http://www.invenzzia.org/). Odpowiedzialne za niego osoby to:
 
-+ Tomasz "Zyx" Jędrzejewski - projekt, kod silnika, dokumentacja.
-+ Jacek "eXtreme" Jędrzejewski - systemy wyjścia, dostosowanie Markdowna, szereg poprawek.
+The TypeFriendly script is developed by the [Invenzzia group](http://www.invenzzia.org/). The code was written by:
 
-W projekcie został użyty parser PHP Markdown Extra napisany przez Michela Fortina i bazujący na kodzie Johna Grubera. Dostępny jest on na zmodyfikowanej licencji BSD.
++ Tomasz "Zyx" Jędrzejewski - design, core programming, documentation.
++ Jacek "eXtreme" Jędrzejewski - outputs, Markdown issues, various fixes, default documentation layout.
 
-W projekcie został użyty parser GeSHi napisany przez Benny'ego Baumanna i dostępny na licencji GNU GPL.
+The project uses the PHP Markdown Extra parser written by Michel Fortin and based on the John Gruber code. It is available under the modified BSD license included in its source code.
 
-TypeFriendly dostępny jest na zasadach licencji ''GNU General Public License 3''. Treść tej licencji dołączona jest do pakietu w katalogu `info/COPYING`, a w razie jej braku możesz zapoznać się z nią pod adresem [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html).
+The project uses the GeSHi syntax highlighter written by Benny Baumann and available under GNU GPL license.
 
-Niniejsza dokumentacja dostępna jest na zasadach licencji ''GNU Free Documentation License 2.1''. Treść tej licencji dołączona jest do pakietu w katalogu `info/COPYING_DOCS`, a w razie jej braku możesz zapoznać się z nią pod adresem [http://www.gnu.org/licenses/fdl.html](http://www.gnu.org/licenses/fdl.html).
+TypeFriendly is available under the terms of ''GNU General Public License 3''. The text of the license is included into the package in the `info/COPYING` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html).
 
-Licencje te w żaden sposób nie stosują się do dokumentacji stworzonych przez Ciebie i przetwarzanych przez TypeFriendly tak samo, jak grafika stworzona w programie na licencji GNU GPL nie jest automatycznie obejmowana tą samą licencją.
+This documentation is available under the terms of ''GNU Free Documentation License 2.1'. The text of the license is included into the package in the `info/COPYING_DOCS` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/fdl.html](http://www.gnu.org/licenses/fdl.html).
+
+Those licenses do not apply in any way to documentations created by you and processed by TypeFriendly, as well as the graphics created in a GPL editor is not a subject of GPL license.

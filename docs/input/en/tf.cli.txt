@@ -1,34 +1,35 @@
-Title: Interfejs wiersza poleceń
+Title: Command line interface
 
 ----
-TypeFriendly jest obsługiwany wyłącznie z wiersza poleceń systemu operacyjnego. Współpracuje zarówno z rozmaitymi odmianami Uniksa, jak i z systemem Windows. Wywołanie jest następujące:
+
+TypeFriendly is used only from the operating system command line. It supports both Windsows systems and various Unix clones, including Linux. You can call the script in this way:
 
 ~~~~
 php ./typefriendly.php
 ~~~~
 
-W przypadku systemów uniksowych możliwe jest także:
+In case of Unix system the following should also work:
 
 ~~~~
 ./typefriendly.php
 ~~~~
 
-Niezbędnym parametrem jest zawsze ścieżka do katalogu, w którym znajduje się dokumentacja (tj. zawierającego plik `settings.ini` i inne), np.
+The required parameter is always a path to the documentation directory (it means, to the directory that contains the `settings.ini` and other files). For example:
 
 ~~~~
 ./typefriendly.php ./docs/
 ~~~~
 
-Dostępne są następujące opcje, które podajemy w kolejności alfabetycznej przed ścieżką:
+Allowed options that must be provided in the alphabetical order are:
 
-+ **-c JĘZYK** - narzędzie dla dokumentacji wielojęzycznych. Porównuje czas modyfikacji plików źródłowych podanego języka z plikami języka bazowego. Wyświetla wszystkie pliki, które mają wersję bazową nowszą, niż tę w danym języku, a także różnice w rodzaju brakujących plików.
-+ **-l JĘZYK** - generuje dokumentację w podanym języku (domyślnie wybierany jest język bazowy).
-+ **-o WYJSCIE** - generuje dokumentację, korzystając jedynie z podanego wyjścia. Musi ono być zdefiniowane na liście dostępnych wyjść dokumentacji.
++ **-c LANGUAGE** - a tool for multilingual documentations. It compares the last modification time of the files and shows those ones in the derived language that are not up-to-date. Moreover it looks also for the missing files.
++ **-l LANGUAGE** - generates the documentation in the specified language (by default, the base language is chosen).
++ **-o OUTPUT** - generates the documentation, using the specified output only. It must be listed in the available outputs in the configuration.
 
-Przykład:
+Example:
 
 ~~~~
 ./typefriendly -l en -o xhtml ./docs/
 ~~~~
 
-Aby wyświetlić informacje o TypeFriendly, należy wywołać skrypt bez żadnych parametrów.
+To display the information about TypeFriendly, call the script without any parameters.

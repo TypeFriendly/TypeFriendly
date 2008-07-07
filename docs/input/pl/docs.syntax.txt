@@ -21,6 +21,6 @@ Treść rodziału
 
 W ustawieniach umieszczamy kolejne znaczniki w sposób pokazany powyżej. Obowiązkowy jest *Title*, ale jest też kilka innych. Właściwie ich lista zależy bardziej od tego, w jakim formacie wyjściowym będziemy generować dokumentację. Można bardzo łatwo opracować własny i zacząć używać tam nowe znaczniki - zostanie to omówione dalej.
 
-Treść nagłówka od właściwej treści rodziału rodzielamy conajmniej trzema pauzami `---` otoczonymi pojedynczymi pustymi linijkami.
+Treść nagłówka od właściwej treści rodziału rodzielamy co najmniej trzema pauzami `---` otoczonymi pojedynczymi pustymi linijkami.
 
 Do formatowania treści rodziału używana jest składnia ["PHP Markdown Extra"](http://michelf.com/projects/php-markdown/) z paroma rozszerzeniami i modyfikacjami. Spotkać się z nią można na wielu stronach internetowych, ponieważ parsery są publicznie dostępne, stąd istnieje szansa, że już ją znasz. Gdyby jednak nie, odwiedź stronę jednego z parserów (np. tę podaną powyżej), by dowiedzieć się więcej. W następnych rodziałach szczegółowo została opisana składnia tego języka oraz wyszczególnione zostały drobne modyfikacje zastosowane w TypeFriendly.
