@@ -11,7 +11,7 @@ W projekcie został użyty parser PHP Markdown Extra napisany przez Michela Fort
 
 W projekcie został użyty parser GeSHi napisany przez Benny'ego Baumanna i dostępny na licencji GNU GPL.
 
-W szablonie dokumentacji użyto ikonek zestawu Tango Icon dostępnych na licencji Creative Commons Attribution-ShareAlike 2.5.
+W szablonie dokumentacji użyto ikonek zestawu [Tango Icon Library](http://tango.freedesktop.org), części projektu Tango Desktop Project dostępnej na licencji Creative Commons Attribution-ShareAlike 2.5.
 
 TypeFriendly dostępny jest na zasadach licencji ''GNU General Public License 3''. Treść tej licencji dołączona jest do pakietu w katalogu `info/COPYING`, a w razie jej braku możesz zapoznać się z nią pod adresem [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html).
 

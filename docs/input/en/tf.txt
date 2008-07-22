@@ -1,4 +1,4 @@
 Title: TypeFriendly
 
 ----
-W tym rozdziale opisane zostały różne aspekty samego TypeFriendly.
+This chapter describes various aspects of TypeFriendly itself.

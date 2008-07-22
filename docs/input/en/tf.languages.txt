@@ -1,22 +1,22 @@
 Title: Multilingual documentation
 
 ----
-W tym rozdziale opiszemy wszystkie aspekty tworzenia dokumentacji wielojęzycznych.
+This chapter describes, how to use multilingual tools available in TypeFriendly.
 
-Model wielojęzyczny TypeFriendly zakłada, że w dokumentacji wyróżnimy jeden z języków (tzw. język bazowy), w którym tworzymy oryginalną treść, z której robione są później tłumaczenia do języków pochodnych. Język bazowy wybieramy w konfiguracji projektu, ustawiając opcję *baseLanguage*. Każdy z języków identyfikowany jest za pomocą dwuliterowego kodu, np. *en*, *de*, *pl*.
+TypeFriendly assumes that one language works as a primary (base) language which is used to create the original text. The other languages are the translations (called derived languages). We set the primary language in the project configuration, using the **baseLanguage** option. Each language has a two-letter code, for example **en**, **de**, **pl**.  
 
-Aby utworzyć dokumentację w nowym języku, wystarczy że założymy nowy katalog w folderze `input/` o nazwie identycznej z kodem danego języka, a następnie zaczniemy pisać rozdziały. Gdy chcemy wygenerować pliki końcowe w jakimś języku pochodnym, TypeFriendly zawsze buduje strukturę na podstawie języka bazowego, lecz w miarę możliwości właściwą treść bierze z wybranego języka pochodnego. W ten sposób brakujące rozdziały tłumaczenia uzupełniane są oryginalnym tekstem w języku bazowym.
+In order to make a documentation in a new language, we create a folder in the `/input` directory whose name is the language code. Then, we translate the chapters. When we generate the output in the derived language, TypeFriendly checks the structure of the base language files. If some chapter does not exist in the derived language, the original content is used instead. This means that you can create new derived language files in you want to translate them, and the "missing" files will remain untranslated.
 
-TypeFriendly tłumaczy interfejs dokumentacji na podstawie komunikatów zdefiniowanych w folderze `languages/`, który zawiera podkatalogi z poszczególnymi wersjami językowymi. Każdy tekst jest przydzielony do określonej grupy i ma pewien identyfikator, po którym skrypt może go odnaleźć. Każda grupa zapisana jest w oddzielonym pliku, który wygląda następująco:
+TypeFriendly also translates some manual interface messages. The texts assigned to the messages are defined in the `/languages` directory. The subdirectories represent each language currently available. The message is a part of a group and has its own unique ID used to find it. The groups are located in separate files that look like this:
 
 ~~~~
-; komentarz
+; a comment
 
-identyfikator1 = "Tekst 1"
-identyfikator2 = "Tekst 2"
-identyfikator3 = "Tekst 3"
-; i tak dalej
+identifier1 = "Text 1"
+identifier2 = "Text 2"
+identifier3 = "Text 3"
+; etc.
 ~~~~
 
-Aby wykonać tłumaczenie, najlepiej wziąć pliki interfejsu jednego z istniejących języków, skopiować je do katalogu nowego języka i przetłumaczyć przyporządkowane do identyfikatorów teksty. Gdyby w naszym języku brakowało jakiegoś identyfikatora, który jest używany przez wyjście, TypeFriendly spróbuje go znaleźć w tekstach języka bazowego. Gdy i tam go nie ma, generowany jest błąd.
+To translate the manual interface, create a new directory in `/languages` using the language code as the name, take the files from one of existing languages and simply replace the message texts. Remember - if one of the messages is missing, TypeFriendly tries to load it from the base language. The exception is generated, if the message is missing there, too.
 

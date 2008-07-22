@@ -260,6 +260,10 @@ EOF;
 		{
 			$translate = tfTranslate::get();
 			$code = '';
+			if(isset($page['Reference']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','reference').': </strong><code>'.$page['Reference'].'</code></p>';
+			}
 			if(isset($page['Status']))
 			{
 				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';

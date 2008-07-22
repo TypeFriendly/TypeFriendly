@@ -1,4 +1,5 @@
 status = "Status"
+reference = "Wywołanie"
 obj_extends = "Klasa bazowa"
 obj_implements = "Implementuje"
 obj_extended = "Klasy pochodne"

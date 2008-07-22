@@ -1,0 +1,30 @@
+Title: Tables
+
+---
+
+It is possible to add tables to text in Markdown. A simple table looks like this:
+
+~~~
+First header | Second header
+-------------| -------------
+Cell content | Cell content
+Cell content | Cell content
+~~~
+
+> First header | Second header
+> -------------| -------------
+> Cell content | Cell content
+> Cell content | Cell content
+
+The first line contains table headers. The second one are lines that separate the headers from the table rows. The columns are separated with a vertical bar `|`.
+
+Optionally, you may also add the vertical bars before and after each table line:
+
+~~~
+| First header | Second header |
+|--------------| --------------|
+| Cell content | Cell content  |
+| Cell content | Cell content  |
+~~~
+
+The only content available in table cells are the inline elements, such as emphasis, links, images and code spans.

@@ -7,9 +7,13 @@ and the Markdown syntax.
 
 Run TF from the command line to self-generate a complete user manual:
 
-./typefriendly.php -o xhtml ./docs
+    ./typefriendly.php -l en -o xhtml ./docs
 
-The output files will be in ./docs/output/xhtml
+The output files will be in `./docs/output/xhtml`
+
+Polish-language users can use:
+
+    ./typefriendly.php -o xhtml ./docs
 
 Authors and licensing
 ---------------------
@@ -18,8 +22,17 @@ The project is distributed under the terms of GNU General Public License 3.
 
 Authors and contributors:
 
-- The TypeFriendly code and engine: Invenzzia Group <http://www.invenzzia.org/>
+- The TypeFriendly code and engine: Copyright (c) 2008 Invenzzia Group <http://www.invenzzia.org/>
+  GNU General Public License 3
 - The PHP-Markdown Extra parser: Copyright (c) 2004-2007 Michel Fortin <http://www.michelf.com/>
-- The original Markdown: Copyright (c) 2003-2006 John Gruber <http://daringfireball.net/> 
+  New BSD license
+- The original Markdown: Copyright (c) 2003-2006 John Gruber <http://daringfireball.net/>
+  New BSD license
+- Tango Icon Library: Copyright (c) Tango Desktop Project <http://tango.freedesktop.org/>
+  Creative Commons Attribution-ShareAlike 2.5 License Agreement
  
-The last two ones are originally available under the terms of new BSD license.
+You should obtain the copies of the licenses in the `/info` directory. They are also available
+on-line:
+- <http://www.invenzzia.org/license/gpl>, <http://www.gnu.org/licenses/>
+- <http://www.invenzzia.org/license/markdown> 
+- <http://www.invenzzia.org/license/cc-share-alike-2.5> 
