@@ -23,13 +23,13 @@
 			$code .= $this->createTopNavigator($page);
 			
 			$id = str_replace('.', '_', $page['Id']);
-			$code .= '<h1 id="'.$id.'">'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'</h1>';
+			$code .= '<h1>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'</h1>';
 			
 			$code .= $this->createReference($page);
 			
 			$code .= $page['Content'];
 			
-			if(isset($page['SeeAlso']))
+			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
 			{
 				$code .= $this->createSeeAlso($page['SeeAlso']);
 			}
@@ -51,7 +51,7 @@
 			
 			$code .= '<p>'.$translate->_('general','generated_in',$this->date).'</p>';
 			
-			$code .= '<h3 id="toc">'.$translate->_('general','table_of_contents').'</h3>';
+			$code .= '<h4 id="toc">'.$translate->_('general','table_of_contents').'</h4>';
 			$code .= $this->menuGen('', true);
 			foreach($this->pageOrder as $id)
 			{
@@ -139,12 +139,14 @@ EOF;
 		public function createTopNavigator(&$page)
 		{
 			$n =& $this->project->config['showNumbers'];
+            
+            $id = str_replace('.', '_', $page['Id']);
 			
 			$translate = tfTranslate::get();
 			$parent = $this->project->getMetaInfo($page['_Parent'], false);
 			$prev = $this->project->getMetaInfo($page['_Previous'], false);
 			$next = $this->project->getMetaInfo($page['_Next'], false);
-			$code = '<dl class="location location-middle">';
+			$code = '<dl id="'.$id.'" class="location location-middle">';
 			if(!is_null($parent))
 			{
 				$code .= '<dt><a href="'.$this->toAddress($parent['Id']).'">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
@@ -184,6 +186,20 @@ EOF;
 				{
 					$code .= '<li><a href="'.$this->toAddress($page['Id']).'">'.$page['Title'].'</a></li>';
 				}			
+			}
+			if(isset($page['SeeAlsoExternal']))
+			{
+				foreach($page['SeeAlsoExternal'] as $value)
+				{
+					if(($sep = strpos($value, ' ')) !== false)
+					{
+						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
+					}
+					else
+					{
+						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
+					}
+				}
 			}
 			$code .= '</ul>';
 			return $code;

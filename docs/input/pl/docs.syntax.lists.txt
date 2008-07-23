@@ -4,7 +4,7 @@ SeeAlso:
 
 ---
 
-Markdown wspiera listy wypunktowane oraz numeryczne. Listy są elementami blokowymi, należy je więc poprzedzać i kończyć conajmniej jedną pustą linijką.
+Markdown wspiera listy wypunktowane oraz numeryczne. Listy są elementami blokowymi, należy je więc poprzedzać i kończyć co najmniej jedną pustą linijką.
 
 Dodanie listy numerowanej jest niezwykle proste:
 

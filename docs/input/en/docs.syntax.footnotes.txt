@@ -20,7 +20,7 @@ The footnote definitions can be located in any place, but they will be always di
 > [important]
 > It is not possible to create two references to the same note. If you do this, the next notes will not be replaced.
 
-Each footnote must have an unique name.
+Each footnote must have an unique name. It doesn't have to be a number - it can be also a text label.
 
 > [important]
 > The footnote name is used in the addresses and **it does not influence** the footnotes in the text.

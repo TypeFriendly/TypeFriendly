@@ -8,14 +8,14 @@ Markdown supports a special list format called a definition lists. It consists o
 Apple
 :   Fruit of the apple tree.
 
-Banana
+Orange
 :   Citrus fruit, a type of berry.
 ~~~
 
 > Apple
 > :   Fruit of the apple tree.
 > 
-> Banana
+> Orange
 > :   Citrus fruit, a type of berry.
 
 Definition lists support a group of explainations to the same term or a couple of terms to one explaination:
@@ -45,7 +45,7 @@ Apple
 
 :   Fruit of the apple tree.
 
-Banana
+Orange
 
 :   Citrus fruit, a type of berry.
 ~~~

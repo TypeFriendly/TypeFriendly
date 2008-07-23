@@ -5,31 +5,40 @@ Title: Command line interface
 TypeFriendly is used only from the operating system command line. It supports both Windsows systems and various Unix clones, including Linux. You can call the script in this way:
 
 ~~~~
+[console]
 php ./typefriendly.php
 ~~~~
 
 In case of Unix system the following should also work:
 
 ~~~~
+[console]
 ./typefriendly.php
 ~~~~
 
 The required parameter is always a path to the documentation directory (it means, to the directory that contains the `settings.ini` and other files). For example:
 
 ~~~~
-./typefriendly.php ./docs/
+[console]
+./typefriendly.php "./docs/"
 ~~~~
 
 Allowed options that must be provided in the alphabetical order are:
 
-+ **-c LANGUAGE** - a tool for multilingual documentations. It compares the last modification time of the files and shows those ones in the derived language that are not up-to-date. Moreover it looks also for the missing files.
-+ **-l LANGUAGE** - generates the documentation in the specified language (by default, the base language is chosen).
-+ **-o OUTPUT** - generates the documentation, using the specified output only. It must be listed in the available outputs in the configuration.
+`-c LANGUAGE`
+:   a tool for multilingual documentations. It compares the last modification time of the files and shows those ones in the derived language that are not up-to-date. Moreover it looks also for the missing files.
+
+`-l LANGUAGE`
+:   generates the documentation in the specified language (by default, the base language is chosen).
+
+`-o OUTPUT`
+:   generates the documentation, using the specified output only. It must be listed in the available outputs in the configuration.
 
 Example:
 
 ~~~~
-./typefriendly -l en -o xhtml ./docs/
+[console]
+./typefriendly -l en -o xhtml "./docs/"
 ~~~~
 
 To display the information about TypeFriendly, call the script without any parameters.

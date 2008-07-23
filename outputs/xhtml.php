@@ -244,7 +244,7 @@ EOF;
 				{
 					if(($sep = strpos($value, ' ')) !== false)
 					{
-						$code .= '<li><a href="'.substr($value, 0, $sep).'.html">'.substr($value, $sep).'</a></li>';
+						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
 					}
 					else
 					{

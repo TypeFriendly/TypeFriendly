@@ -19,7 +19,7 @@ Niezbędnym parametrem jest zawsze ścieżka do katalogu, w którym znajduje si�
 
 ~~~~
 [console]
-./typefriendly.php ./docs/
+./typefriendly.php "./docs/"
 ~~~~
 
 Dostępne są następujące opcje, które podajemy w kolejności alfabetycznej przed ścieżką:
@@ -37,7 +37,7 @@ Przykład:
 
 ~~~~
 [console]
-./typefriendly.php -l en -o xhtml ./docs/
+./typefriendly.php -l en -o xhtml "./docs/"
 ~~~~
 
 Aby wyświetlić informacje o TypeFriendly, należy wywołać skrypt bez żadnych parametrów.

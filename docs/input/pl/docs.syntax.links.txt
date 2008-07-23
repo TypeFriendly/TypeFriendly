@@ -40,7 +40,7 @@ Są to kolejno:
    
 1. Nawiasy kwadratowe, w których umieszczona jest nazwa etykiety referencji
 2. Dwukropek
-3. Conajmniej jedna spacja lub tabulacja
+3. Co najmniej jedna spacja lub tabulacja
 4. Adres URL, do którego odnosi się referencja
 5. Opcjonalnie, po spacji, bądź w nowej linijce wcięty spacjami lub tabulacją, otoczony cudzysłowami, apostrofami lub nawiasami tytuł linku
 
@@ -119,11 +119,12 @@ Markdown umożliwia również wstawienie bezpośrednio linków do tekstu w bardz
     
 > Zajrzyj na naszą stronę: <http://www.invenzzia.org/>
 
-W podobny sposób można postąpić a adresami e-mail. W tym przypadku jednak parser Markdown zamieni je w wyjściowych HTML-u na "sieczkę" HTML-owych encji.
+W podobny sposób można postąpić a adresami e-mail. W tym przypadku jednak parser Markdown zamieni je w wyjściowym HTML-u na "sieczkę" HTML-owych encji.
 
-    Adres kontaktowy: <jadam_spam@example.org>
+    Adres kontaktowy: <kontakt@example.org>
     
-> Adres kontaktowy: <jadam_spam@example.org>
+> Adres kontaktowy: <kontakt@example.org>
+
 
 Odnośniki do pozostałych rozdziałów dokumentacji
 ================================================
