@@ -14,8 +14,8 @@ The project uses the GeSHi syntax highlighter written by Benny Baumann and avail
 
 The documentation template uses [Tango Icon Library](http://tango.freedesktop.org), a part of Tango Desktop Project which is available under Creative Commons Attribution-ShareAlike 2.5 license.
 
-TypeFriendly is available under the terms of ''GNU General Public License 3''. The text of the license is included into the package in the `info/COPYING` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html).
+TypeFriendly is available under the terms of GNU General Public License 3. The text of the license is included into the package in the `info/COPYING` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html).
 
-This documentation is available under the terms of ''GNU Free Documentation License 2.1'. The text of the license is included into the package in the `info/COPYING_DOCS` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/fdl.html](http://www.gnu.org/licenses/fdl.html).
+This documentation is available under the terms of GNU Free Documentation License 2.1. The text of the license is included into the package in the `info/COPYING_DOCS` file. If you do not have this file, the license is available online here: [http://www.gnu.org/licenses/fdl.html](http://www.gnu.org/licenses/fdl.html).
 
 Those licenses do not apply in any way to documentations created by you and processed by TypeFriendly, as well as the graphics created in a GPL editor is not a subject of GPL license.
