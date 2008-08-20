@@ -16,7 +16,7 @@ Zawartość komórki | Zawartość komórki
 > Zawartość komórki | Zawartość komórki
 > Zawartość komórki | Zawartość komórki
 
-Pierwsza linijka zawiera nagłówki tabelki. Druga, to linie oddzielające nagłówki od kolejnych wierszy tabeli. Kolumny tabeli oddzielane są pionową kreską `|`.
+Pierwsza linijka zawiera nagłówki tabelki. Druga, to linie (`----`) oddzielające nagłówki od kolejnych wierszy tabeli. Kolumny tabeli oddzielane są pionową kreską `|`.
 
 Opcjonalnie możesz dodać pionowe kreski przed i po każdej linijce tabelki:
 
@@ -28,3 +28,25 @@ Opcjonalnie możesz dodać pionowe kreski przed i po każdej linijce tabelki:
 ~~~
 
 Zawartość komórek tabeli może przyjmować jedynie elementy liniowe takie jak: wyróżnienia, linki, obrazki, wstawki kodu.
+
+Wyrównywanie do lewej lub prawej krawędzi
+-----------------------------------------
+
+W tabekach można określić do której strony ma być wyrównany tekst w komórkach danej kolumny. Realizuje się to poprzez dodanie znaku dwukropka `:` po lewej, prawej bądź obu stronach lini oddzielającej nagłówek od wierszy kolumny. W poniższym przkładzie również optycznie przesunięto spacjami zawartość komórek lecz nie jest to konieczne.
+
+~~~
+| Nagłówek  | Nagłówek | Nagłówek  | Nagłówek     |
+| --------- |:-------- | ---------:|:------------:|
+| Domyślne  | Do lewej | Do prawej |     Oraz     |
+| położenie | strony   |    strony | wycentrowane |
+~~~
+
+> | Nagłówek  | Nagłówek | Nagłówek  | Nagłówek     |
+> | --------- |:-------- | ---------:|:------------:|
+> | Domyślne  | Do lewej | Do prawej |     Oraz     |
+> | położenie | strony   |    strony | wycentrowane |
+
+<!-- # -->
+
+> [information]
+> Domyślny styl CSS wyjścia (**xhtml** i **xhtml_single**) automatycznie centruje dane wpisane do komórek.

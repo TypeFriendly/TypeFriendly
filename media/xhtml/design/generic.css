@@ -68,11 +68,12 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content div.footnotes li hr {color: #000000;background-color: #000000;}
 
 #content table {margin: 10px 0;width: 100%;}
-#content table thead{}
+#content table thead {}
 #content table tbody {}
-#content table td, #content table th {padding: 4px 7px; text-align: center; border: 1px solid #999999;}
+#content table tr {text-align: center;}    
+#content table td, #content table th {padding: 4px 7px;  border: 1px solid #999999;}
 #content table td {background: #ffffff;}
-#content table th {background: #e4f7bd;  font-weight: bold; color: #657926;}
+#content table th {background: #e4f7bd; text-align: center; font-weight: bold; color: #657926;}
 
 #content blockquote {border: none; padding: 0 0 0 10px; margin-left: 10px; margin-right: 5px; background: transparent; border-left: 3px solid #d1f1c1; }
 

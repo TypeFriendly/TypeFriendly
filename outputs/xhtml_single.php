@@ -173,6 +173,8 @@ EOF;
 			
 			$translate = tfTranslate::get();
 			
+			$i = 0;
+			
 			$prog = tfProgram::get();
 			$code = '<h3>'.$translate->_('navigation','see_also').':</h3><ul>';
 			foreach($seealso as $value)
@@ -184,7 +186,8 @@ EOF;
 				}
 				else
 				{
-					$code .= '<li><a href="'.$this->toAddress($page['Id']).'">'.$page['Title'].'</a></li>';
+					$code .= '<li><a href="'.$this->toAddress($page['Id']).'">'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'</a></li>';
+					$i++;
 				}			
 			}
 			if(isset($page['SeeAlsoExternal']))
@@ -194,14 +197,22 @@ EOF;
 					if(($sep = strpos($value, ' ')) !== false)
 					{
 						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
+						$i++;
 					}
 					else
 					{
 						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
+						$i++;
 					}
 				}
 			}
 			$code .= '</ul>';
+			
+			if($i == 0)
+			{
+				return '';
+			}
+			
 			return $code;
 		} // end createSeeAlso();  
 		
@@ -209,6 +220,10 @@ EOF;
 		{
 			$translate = tfTranslate::get();
 			$code = '';
+			if(isset($page['Reference']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','reference').': </strong><code>'.$page['Reference'].'</code></p>';
+			}
 			if(isset($page['Status']))
 			{
 				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';
