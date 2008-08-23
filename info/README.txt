@@ -7,13 +7,13 @@ and the Markdown syntax.
 
 Run TF from the command line to self-generate a complete user manual:
 
-    ./typefriendly.php -l en -o xhtml ./docs
+    ./typefriendly.php -l en -o xhtml "./docs/"
 
 The output files will be in `./docs/output/xhtml`
 
 Polish-language users can use:
 
-    ./typefriendly.php -o xhtml ./docs
+    ./typefriendly.php -o xhtml "./docs/"
 
 Authors and licensing
 ---------------------
