@@ -27,6 +27,37 @@
 	{
 		$val = trim($val);
 	} // end walkTrim();
+	
+	function array_duplicates($array) 
+	{ 
+		if(!is_array($array))
+		{ 
+			return false; 
+		} 
+		
+		$duplicates = array(); 
+		
+		foreach($array as $key => $val)
+		{ 
+			end($array); 
+			$k = key($array); 
+			$v = current($array); 
+			
+			while($k !== $key)
+			{ 
+				if($v === $val)
+				{ 
+					$duplicates[$key] = $v; 
+					break; 
+				} 
+				
+				$v = prev($array); 
+				$k = key($array); 
+			} 
+		} 
+		
+		return $duplicates; 
+	} // end array_duplicates();
 
 	class SystemException extends Exception{}
 
@@ -255,7 +286,7 @@
 				{
 					$list[$item] = array();
 				}
-			}
+			}     
 
 			try
 			{
@@ -264,12 +295,40 @@
 				// the stages 3 and 4 won't be executed.
 				$this->sortHint = $this->fs->readAsArray('sort_hints.txt');
 
+				$sortDuplicates = array_duplicates($this->sortHint);
+				
+				if(count($sortDuplicates) > 0)
+				{
+					foreach($sortDuplicates as $duplicate)
+					{
+						$this->prog->console->stdout->writeln('Duplicates of page "'.$duplicate.'" in sort hints.');
+					}
+                	$this->sortHint = array_values(array_unique($this->sortHint));
+				}
+				
 				$hintedList = array();
 				foreach($this->sortHint as &$item)
 				{
 					$extract = explode('.', $item);
 					array_pop($extract);
 					$parentId = implode('.', $extract);
+					
+					$exists = false;
+					foreach($list[$parentId] as &$subitem)
+					{
+						if($subitem['id'] == $item)
+						{
+							$exists = true;
+							break;
+						}
+					}
+					
+					if(!$exists)
+					{
+						$this->prog->console->stdout->writeln('Sort hint for "'.$item.'" does not have existing page.');
+						unset($item);
+						continue;
+					}
 	
 					if(!isset($hintedList[$parentId]))
 					{
@@ -312,7 +371,8 @@
 
 			
 			$this->pages = array();
-			$parser = tfParsers::get();
+			$parser = tfParsers::get(); 
+			
 			foreach($list as $id => &$sublist)
 			{		
 				foreach($sublist as $subId => &$item)
@@ -341,7 +401,8 @@
 					// Create the navigation according to the chapter layout					
 					$metaData['_Parent'] = $id;
 					$metaData['_Previous'] = null;
-					$metaData['_Next'] = null;
+					$metaData['_Next'] = null; 
+					
 					if(isset($sublist[$subId-1]))
 					{
 						$metaData['_Previous'] = $sublist[$subId-1]['Id'];
