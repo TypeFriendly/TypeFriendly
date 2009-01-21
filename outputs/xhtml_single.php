@@ -31,7 +31,7 @@
 			
 			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
 			{
-				$code .= $this->createSeeAlso($page['SeeAlso']);
+				$code .= $this->createSeeAlso($page);
 			}
 			
 			$this->pageContent[$page['Id']] = $code;
@@ -167,7 +167,7 @@ EOF;
 			return $code;
 		} // end createTopNavigator();
 		
-		public function createSeeAlso($seealso)
+		public function createSeeAlso(&$page)
 		{
 			$n =& $this->project->config['showNumbers'];
 			
@@ -177,18 +177,21 @@ EOF;
 			
 			$prog = tfProgram::get();
 			$code = '<h3>'.$translate->_('navigation','see_also').':</h3><ul>';
-			foreach($seealso as $value)
+			if(isset($page['SeeAlso']))
 			{
-				$page = $this->project->getMetaInfo($value, false);
-				if(is_null($page))
+				foreach($page['SeeAlso'] as $value)
 				{
-					$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
+					$meta = $this->project->getMetaInfo($value, false);
+					if(is_null($meta))
+					{
+						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
+					}
+					else
+					{
+						$code .= '<li><a href="'.$this->toAddress($meta['Id']).'">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
+						$i++;
+					}			
 				}
-				else
-				{
-					$code .= '<li><a href="'.$this->toAddress($page['Id']).'">'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'</a></li>';
-					$i++;
-				}			
 			}
 			if(isset($page['SeeAlsoExternal']))
 			{
