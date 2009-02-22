@@ -8,4 +8,11 @@ In order to use TypeFriendly, you must have PHP 5.1 or newer installed that supp
 
 If everything went good, TypeFriendly should generate an XHTML version of its own documentation.
 
+> [information]
+> ### For Windows users ###
+> 
+> In Linux, `php` command is unsually available by default, but Windows users should also modify some system variables. To do this, go to *Control Panel* and find *System* applet. In the tab *Advanced* select *Environment variables* and you will see a new window. Then, find the variable `PATH` in the *System variables* and click *Edit* to modify its value. **After the semicolon `;`** add the path to the directory, where the `php.exe` file is located, for example: 
+> 
+>     ...;C:\server\php5\
+
 In the next chapter, we are going to describe, how to create a documentation for your project.

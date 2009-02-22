@@ -77,7 +77,7 @@ Of course, backslashes are removed from the output text.
 #### Characters that can be escaped:
 
     \   backslash
-    `   backtrick quote
+    `   backtick quote
     *   asterisk
     _   underline
     {}  curly brackets

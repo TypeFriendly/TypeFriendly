@@ -19,7 +19,7 @@ Objaśnienia przypisów mogą znaleźć się w dowolnym miejscu w dokumencie, al
 > [important]
 > Nie da się stworzyć dwóch odnośników do jednego przypisu. Jeśli to zrobisz, kolejne odnośniki nie będą po prostu zamieniane.
 
-Każdy przypis musi mieć unikalną nazwę. 
+Każdy przypis musi mieć unikalną nazwę, którą nie musi być wcale liczba - może być to też etykieta tekstowa.
 
 > [important]
 > Nazwa odnośnika służy tylko do adresów i **nie ma wpływu na numerację** przypisów w tekście.

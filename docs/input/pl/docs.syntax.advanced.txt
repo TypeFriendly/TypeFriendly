@@ -90,7 +90,7 @@ Oczywiście, backslashe są wtedy usuwane z tekstu wyjściowego.
     +   plus
     -   minus (pauza)
     .   kropka
-    !   ewykrzyknik
+    !   wykrzyknik
     ~   tylda
     :   dwukropek
     |   kreska

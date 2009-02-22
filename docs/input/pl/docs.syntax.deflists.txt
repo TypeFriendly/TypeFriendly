@@ -27,18 +27,18 @@ Jabłko
 :   Owoc drzewa jabłoni, z rodziny różowatych.
 :   Złocista kula z krzyżem na wierzchu, jedno z insygniów władzy królewskiej i cesarskiej.
 
-Orange
-Pomarańcza
-:   Owoc cytrusowy, zwykle o pomarańczowej skórce i włóknistym miąższu.
+Oranż
+Pomarańczowy
+:   Kolor pomiędzy żółcią i czerwienią, pochodzi od koloru owocu pomarańczy.
 ~~~
 
 > Jabłko
 > :   Owoc drzewa jabłoni, z rodziny różowatych.
 > :   Złocista kula z krzyżem na wierzchu, jedno z insygniów władzy królewskiej i cesarskiej.
 > 
-> Orange
-> Pomarańcza
-> :   Owoc cytrusowy, zwykle o pomarańczowej skórce i włóknistym miąższu.
+> Oranż
+> Pomarańczowy
+> :   Kolor pomiędzy żółcią i czerwienią, pochodzi od koloru owocu pomarańczy.
 
 Oddzielenie definicji od terminów jedną pustą linijką zawrze je w akapity.
 

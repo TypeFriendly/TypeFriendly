@@ -42,7 +42,7 @@ The emphasis may be used inside a word:
 If you surround _ or * with single spaces, the text will not be formatted, and those characters will be simply displayed in the output.
 
 > [information]
-> You can escape the emphasis symbols with `\\`, if you do not want to parse them:
+> You can escape the emphasis symbols with `\`, if you do not want to parse them:
 > 
 >     \*this text is surrounded with asterisks\*
 >     

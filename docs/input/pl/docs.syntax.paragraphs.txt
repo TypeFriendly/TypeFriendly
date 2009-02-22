@@ -2,7 +2,7 @@ Title: Akapity i tekst
 
 ---
 
-Akapit to jedna bądź więcej następujących po sobie linijki tekstu. Osobne akapity oddzielone są jedną, bądź więcej pustą linijka. (Pusta linijka, jak sama nazwa wskazuje, nie może zawierać nic prócz spacji lub tabulacji.) Akapity nie powinny mieć wcięć spacjami na początku.
+Akapit to jedna - bądź więcej, następujących po sobie - linijki tekstu. Osobne akapity oddzielone są jedną, bądź więcej pustą linijka. (Pusta linijka, jak sama nazwa wskazuje, nie może zawierać nic prócz spacji lub tabulacji.) Akapity nie powinny mieć wcięć spacjami na początku.
 
 ~~~
 Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś piękność twą w Litwie chodził po całym domu lasami i Rzeczpospolita! Zawżdy z jakich rąk strzelby, którą powinna młodź dla żony przy Bernardynie, bernardyn zmówił krótki pacierz wieczorny, pomału usnął ostatni w ręku trzyma obyczajem pańskim i żywot Katona.
@@ -28,7 +28,7 @@ Bernardynie, bernardyn zmówił krótki pacierz wieczorny, pomału usnął
 ostatni w ręku trzyma obyczajem pańskim i żywot Katona.
 ~~~
 
-Mimo tego, zostanie on zamieniony na pojedynczy akapit, bez złamań linijek:
+Mimo tego, że powyższy tekst ma 5 linijek, zostanie on zamieniony na pojedynczy akapit, bez złamań wierszy:
 
 > Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. 
 > Dziś piękność twą w Litwie chodził po całym domu lasami i Rzeczpospolita! 

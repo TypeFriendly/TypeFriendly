@@ -16,7 +16,7 @@ Curae, Cras dictum eget, pede. Fusce blandit tempus arcu. Etiam tincidunt mattis
 > 
 > Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Phasellus sapien enim ac eros. Fusce iaculis pede sit amet erat. Praesent dictum accumsan id, condimentum convallis.
 > 
-> Curae, Cras dictum eget, pede. Fusce blandit tempus arcu. Etiam tincidunt mattis egestas, nunc venenatis interdum, lacus. Vivamus malesuada fames ac erat. Suspendisse dignissim enim enim non eros. Aliquam in. [^1]
+> Curae, Cras dictum eget, pede. Fusce blandit tempus arcu. Etiam tincidunt mattis egestas, nunc venenatis interdum, lacus. Vivamus malesuada fames ac erat. Suspendisse dignissim enim enim non eros. Aliquam in.
 
 In the source file, the paragraph can be written in more consecutive text lines. They will not be broken with `<br />` in the output text. This means we can format the text, for example like in e-mails.
 
@@ -63,7 +63,9 @@ Sapien pede dictum.
 > 
 >     Search <a href="http://images.google.com/images?num=30&amp;q=linus+torvalds">photos</a>
 >
-> The Markdown parser is quite intelligent and guesses from the content, whether a character must be written as an entity or not. So if you wish to put a copyright symbol &copy, you can use a normal HTML entity: `&copy;`. But let's get back to our R&B music. In this case, & will be changed into an entity automatically.
+> The Markdown parser is quite intelligent and guesses from the content, whether a character must be written as an entity or not. So if you wish to put a copyright symbol &copy, you can use a normal HTML entity: `&copy;`. 
+> 
+> But let's get back to our R&B music. In this case, & will be changed into an entity automatically.
 >
 >     R&B music
 > 
@@ -88,5 +90,3 @@ To insert a horizontal line (`<hr />`), you write at least three asterisks `*`, 
 
 ---------------------------------------
 ~~~
-
-[^1]: Text generated with [Lorem Ipsum Generator](http://lipsum.pl/index.php)

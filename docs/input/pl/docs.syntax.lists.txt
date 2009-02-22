@@ -4,7 +4,7 @@ SeeAlso:
 
 ---
 
-Markdown wspiera listy wypunktowane oraz numeryczne. Listy są elementami blokowymi, należy je więc poprzedzać i kończyć conajmniej jedną pustą linijką.
+Markdown wspiera listy wypunktowane oraz numeryczne. Listy są elementami blokowymi, należy je więc poprzedzać i kończyć co najmniej jedną pustą linijką.
 
 Dodanie listy numerowanej jest niezwykle proste:
 
@@ -66,7 +66,7 @@ To, którego znaku użyjemy, nie ma znaczenia - może to być którykolwiek z ni
 
 Znaczniki list mogą być oddzielone od tekstu jedną, bądź więcej spacją lub tabulacją. Znaczniki list powinny zaczynać się na początku linijek, można jednak odsunąć je od brzegu maksymalnie trzema spacjami. 
 
-Linijki w elementach listy można przełamywać, które możesz odsunąć dla estetyki na tę samą odległość co pierwsza linijka:
+Linijki w elementach listy można przełamywać, możesz je również odsunąć dla estetyki na tą samą odległość co pierwsza linijka:
 
 ~~~
  *  Litwo! Ojczyzno moja! ty jesteś jak zdrowie.
@@ -131,7 +131,7 @@ Da efekt w postaci:
 > 
 > *  Element 3
 
-Możesz w elementach listy zarzeć kolejne akapity. Muszą być one otoczone pustymi linijkami oraz zaczynać się czterema spacjami bądź tabulacją.
+Możesz w elementach listy zawrzeć kolejne akapity. Muszą być one otoczone pustymi linijkami oraz zaczynać się czterema spacjami bądź tabulacją.
 
 ~~~
 *   Litwo! Ojczyzno moja! ty jesteś jak zdrowie.
@@ -174,7 +174,7 @@ Możesz w elementach listy zarzeć kolejne akapity. Muszą być one otoczone pus
 > > 2. Element 2
 > > 3. Element 3
 > 
-> Sprawa ta nadal dyskutowana jest podczas opracowywania specyfikacji języka Markdown. Jedynym zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- # -->` i wstawienie go między listami, co spowoduje ich rodzielenie.
+> Sprawa ta nadal dyskutowana jest podczas opracowywania specyfikacji języka Markdown. Jedynym zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- # -->` i wstawienie go między listami, co spowoduje ich rozdzielenie.
 
 Zagnieżdżone listy
 ------------------

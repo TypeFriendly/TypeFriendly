@@ -34,6 +34,11 @@
 		
 		public function setMasterDirectory($dir, $flags)
 		{
+			if($dir{strlen($dir)-1} != '/')
+			{
+				$dir .= '/';
+			}
+			
 			if(!$this->checkFlags($dir, $flags))
 			{
 				return false;

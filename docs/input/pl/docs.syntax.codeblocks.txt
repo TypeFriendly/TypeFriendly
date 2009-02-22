@@ -18,7 +18,7 @@ To jest jakiś paragraf.
 To jest jakiś następny paragraf.
 ~~~
 
-Drugim sposobem jest wstawienie conajmniej trzech tyld `~` przed i za wstawioną partią kodu.  
+Drugim sposobem jest wstawienie co najmniej trzech tyld `~` przed i za wstawioną partią kodu.  
 **Ważne jest, aby ilość znaków na początku i na końcu była taka sama**. 
 
 ~~~~~~
@@ -41,7 +41,7 @@ Kolorowanie składni
 
 TypeFriendly dodaje nam możliwość włączenia kolorowania składni wstawionego kodu. Obsługiwane jest ono przez [GeSHi](http://qbnz.com/highlighter/). Lista obsługiwanych języków dostępna jest na stronie tego parsera. 
 
-Włączenie kolorowania składni realizowane jest poprzez wstawienie w pierwszej linijce bloku kodu znacznika: `[język]`. W nawiasach klamrowych zawarta jest nazwa języka, której odpowiada plik kolorowania GeSHi znajdujący się w katalogu `/geshi/geshi`.
+Włączenie kolorowania składni realizowane jest poprzez wstawienie w pierwszej linijce bloku kodu znacznika: `[język]`. W nawiasach kwadratowych zawarta jest nazwa języka, której odpowiada plik kolorowania GeSHi znajdujący się w katalogu `/geshi/geshi`.
 
 #### Przykładowe użycie
 

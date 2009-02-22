@@ -1,4 +1,4 @@
-Title: Ordered lists
+Title: Lists
 SeeAlso:
  - docs.syntax.advanced
 
@@ -89,7 +89,7 @@ sociis natoque penatibus et ultrices bibendum, sem in lacus tellus
 > *  Lorem ipsum dolor sit amet sapien pede dictum sapien massa sit amet
 > sapien varius egestas, dapibus aliquam id, neque. Donec facilisis diam
 > elit, gravida turpis. Nullam at ligula. Aenean urna a purus fermentum
->  *  libero quis ipsum. Fusce ullamcorper ut, semper turpis egestas. Cum
+> *  libero quis ipsum. Fusce ullamcorper ut, semper turpis egestas. Cum
 > sociis natoque penatibus et ultrices bibendum, sem in lacus tellus
 
 * * *

@@ -2,7 +2,7 @@ Title: Nagłówki
 
 ---
 
-Markdown obsługuje dwa systemy wstawiania nagłówków: **Setext** oraz **atx**. Tak jak akapity, są one elementami blokowymi, co znaczy, że do oddzielenia od innych elementów blokowych (listy, akapity, bloki kodu) stosuje się conajmniej jedną pustą linijkę.
+Markdown obsługuje dwa systemy wstawiania nagłówków: **Setext** oraz **atx**. Tak jak akapity, są one elementami blokowymi, co znaczy, że do oddzielenia od innych elementów blokowych (listy, akapity, bloki kodu) stosuje się co najmniej jedną pustą linijkę.
 
 Notacja Setext
 --------------

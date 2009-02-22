@@ -27,7 +27,7 @@ Więcej informacji na temat referencji znaleźć można w [rodziale o linkach][d
 Grafika i obrazki w TypeFriendly
 ================================
 
-Odnoszenie się do obrazków znajdujących się w internecie w przypadku dokumentacji nie ma najmniejszego sensu. Dlatego TypeFriendly umożliwia umieszczenie obrazków w folderze `media/` znajdującym się w katalogu z rodziałami dokumentacji w danym języku. Podczas procesu budowania dokumentacji, katalog ten zostanie przeniesiony do folderu `output/`.
+Odnoszenie się do obrazków znajdujących się w internecie w przypadku dokumentacji nie ma najmniejszego sensu. Dlatego TypeFriendly umożliwia umieszczenie obrazków w folderze `media/` znajdującym się w katalogu z rodziałami dokumentacji w danym języku (`/input/JĘZYK/media`). Podczas procesu budowania dokumentacji, katalog ten zostanie przeniesiony do folderu `output/`.
 
 ~~~
 ![Wykres](media/graph.png)  

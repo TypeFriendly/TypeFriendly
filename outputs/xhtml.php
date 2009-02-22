@@ -222,19 +222,21 @@ EOF;
 			
 			$translate = tfTranslate::get();
 			$prog = tfProgram::get();
+			$i = 0;
 			$code = '<h4>'.$translate->_('navigation','see_also').':</h4><ul>';
 			if(isset($page['SeeAlso']))
 			{
 				foreach($page['SeeAlso'] as $value)
 				{
 					$meta = $this->project->getMetaInfo($value, false);
-					if(is_null($page))
+					if(is_null($meta))
 					{
 						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
 					}
 					else
 					{
 						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
+						$i++;
 					}			
 				}
 			}
@@ -244,15 +246,23 @@ EOF;
 				{
 					if(($sep = strpos($value, ' ')) !== false)
 					{
-						$code .= '<li><a href="'.substr($value, 0, $sep).'.html">'.substr($value, $sep).'</a></li>';
+						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
+						$i++;
 					}
 					else
 					{
 						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
+						$i++;
 					}
 				}
 			}
 			$code .= '</ul>';
+			
+			if($i == 0)
+			{
+				return '';
+			}
+			
 			return $code;
 		} // end createSeeAlso();
 		

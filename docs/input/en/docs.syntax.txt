@@ -1,8 +1,6 @@
 Title: File syntax
 SeeAlso:
  - docs.tags
-SeeAlsoExternal:
- - http://michelf.com/projects/php-markdown/ PHP Markdown Extra syntax
 
 ----
 
