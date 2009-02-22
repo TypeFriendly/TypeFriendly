@@ -13,7 +13,7 @@
 
 
 define( 'MARKDOWN_VERSION',  "1.0.1m" ); # Sat 21 Jun 2008
-define( 'MARKDOWNEXTRA_VERSION',  "1.2.2" ); # Sat 21 Jun 2008
+define( 'MARKDOWNEXTRA_VERSION',  "1.2.3" ); # Wed 31 Dec 2008
 
 
 #
@@ -88,9 +88,9 @@ if (isset($wp_version)) {
 		remove_filter('the_content',     'wpautop');
         remove_filter('the_content_rss', 'wpautop');
 		remove_filter('the_excerpt',     'wpautop');
-		add_filter('the_content',     'Markdown', 6);
-        add_filter('the_content_rss', 'Markdown', 6);
-		add_filter('get_the_excerpt', 'Markdown', 6);
+		add_filter('the_content',     'mdwp_MarkdownPost', 6);
+        add_filter('the_content_rss', 'mdwp_MarkdownPost', 6);
+		add_filter('get_the_excerpt', 'mdwp_MarkdownPost', 6);
 		add_filter('get_the_excerpt', 'trim', 7);
 		add_filter('the_excerpt',     'mdwp_add_p');
 		add_filter('the_excerpt_rss', 'mdwp_strip_p');
@@ -99,6 +99,21 @@ if (isset($wp_version)) {
 		remove_filter('excerpt_save_pre',  'balanceTags', 50);
 		add_filter('the_content',  	  'balanceTags', 50);
 		add_filter('get_the_excerpt', 'balanceTags', 9);
+	}
+	
+	# Add a footnote id prefix to posts when inside a loop.
+	function mdwp_MarkdownPost($text) {
+		static $parser;
+		if (!$parser) {
+			$parser_class = MARKDOWN_PARSER_CLASS;
+			$parser = new $parser_class;
+		}
+		if (is_single() || is_page() || is_feed()) {
+			$parser->fn_id_prefix = "";
+		} else {
+			$parser->fn_id_prefix = get_the_ID() . ".";
+		}
+		return $parser->transform($text);
 	}
 	
 	# Comments
@@ -1820,7 +1835,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 							(?!\s)'.$enclosing_tag_re.'
 						)
 						(?:
-							(?=[\s"\'/])		# Allowed characters after tag name.
+							(?=[\s"\'/a-zA-Z0-9])	# Allowed characters after tag name.
 							(?'.'>
 								".*?"		|	# Double quotes (can contain `>`)
 								\'.*?\'   	|	# Single quotes (can contain `>`)
@@ -1921,7 +1936,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 				else {
 					# Fenced code block marker: find matching end marker.
 					$tag_re = preg_quote(trim($tag));
-					if (preg_match('{^(?'.'>.*\n)+?'.$tag_re.' *\n}', $text, 
+					if (preg_match('{^(?'.'>.*\n)+?'.$tag_re.' *\n}', $text,
 						$matches)) 
 					{
 						# End marker found: pass text unchanged until marker.
@@ -2032,7 +2047,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 					</?					# Any opening or closing tag.
 						[\w:$]+			# Tag name.
 						(?:
-							(?=[\s"\'/])		# Allowed characters after tag name.
+							(?=[\s"\'/a-zA-Z0-9])	# Allowed characters after tag name.
 							(?'.'>
 								".*?"		|	# Double quotes (can contain `>`)
 								\'.*?\'   	|	# Single quotes (can contain `>`)
@@ -2443,7 +2458,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 				[ ]{0,'.$less_than_tab.'}	# leading whitespace
 				(?![:][ ]|[ ])				# negative lookahead for a definition 
 											#   mark (colon) or more whitespace.
-				(?'.'> \S.* \n)+?				# actual term (not whitespace).	
+				(?'.'> \S.* \n)+?				# actual term (not whitespace).
 			)			
 			(?=\n?[ ]{0,3}:[ ])				# lookahead for following line feed 
 											#   with a definition mark.
@@ -2891,4 +2906,3 @@ negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
 
 */
-?>
