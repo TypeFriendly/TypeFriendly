@@ -515,7 +515,7 @@
 				foreach($this->pages as &$page)
 				{
 					$refs[$page['Id']] = $this->outputObj->toAddress($page['Id']);
-					$refTitles[$page['Id']] = $page['Title'];
+					$refTitles[$page['Id']] = $page['FullNumber'].'. '.$page['Title'];
 				}
 				
 				$parsers->getParser()->predef_urls = $refs;

@@ -36,6 +36,62 @@
 	
 	class MarkdownDocs_Parser extends MarkdownExtra_Parser
 	{
+		function MarkdownDocs_Parser()
+		{
+			parent::MarkdownExtra_Parser();
+			$this->span_gamut += array(
+				"doChapterAnchors"		=> 25,
+			);
+		}
+		function doChapterAnchors($text)
+		{
+			$text = preg_replace_callback('{
+			(					# wrap whole match in $1
+			  \[\[
+				([^\[\]]+)		# link text = $2; can\'t contain [ or ]
+			  \]\]
+			)
+			}xs',
+			array(&$this, '_doChapterAnchors_reference_callback'), $text);
+			return $text;
+		}
+
+		function _doChapterAnchors_reference_callback($matches)
+		{
+			$whole_match =  $matches[1];
+			$link_id   =&  $matches[2];
+			//var_dump($whole_match);
+
+			# lower-case and turn embedded newlines into spaces
+			$link_id = strtolower($link_id);
+			$link_id = preg_replace('{[ ]?\n}', ' ', $link_id);
+
+			if (isset($this->urls[$link_id])) {
+				$url = $this->urls[$link_id];
+				$url = $this->encodeAttribute($url);
+
+				$result = "<a class=\"chapter_link\" href=\"$url\"";
+				if ( isset( $this->titles[$link_id] ) ) {
+					$title = $this->titles[$link_id];
+					$title = $this->encodeAttribute($title);
+					$result .=  " title=\"$title\"";
+					$link_text = $title;
+				}
+				else
+				{
+					 $link_text = $link_id;
+				}
+
+				$link_text = $this->runSpanGamut($link_text);
+				$result .= ">$link_text</a>";
+				$result = $this->hashPart($result);
+			}
+			else {
+				$result = $whole_match;
+			}
+			return $result;
+		}
+
 		function _doCodeBlocks_callback($matches)
 		{
 			$codeblock = $matches[1];
@@ -129,7 +185,7 @@
 			$bq = $matches[1];
 			# trim one level of quoting - trim whitespace-only lines
 			$bq = preg_replace('/^[ ]*>[ ]?|^[ ]+$/m', '', $bq);
-			                                                          
+
 			$addClass = '';
 			if(preg_match('/^((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*\n)/', $bq, $matches))
 			{
@@ -159,13 +215,6 @@
 			
 			return "\n".$this->hashBlock("<blockquote$addClass>\n$bq\n</blockquote>")."\n\n";
 		} // end _doBlockQuotes_callback();
-		
-		function _doBlockQuotes_callback2($matches)
-		{
-			$pre = $matches[1];
-			$pre = preg_replace('/^  /m', '', $pre);
-			return $pre;
-		} // end _doBlockQuotes_callback2();
 		
 		function _doHeaders_attr($attr)
 		{
