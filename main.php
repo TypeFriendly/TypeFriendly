@@ -112,6 +112,7 @@
 				$project->setOutput($this->args['-o']);
 				$project->copyMedia();
 				$project->generate();	
+				$prg->console->stdout->writeln('Generation completed.');
 			}
 			else
 			{
