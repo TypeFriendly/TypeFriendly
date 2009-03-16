@@ -111,7 +111,8 @@
 				$prg->console->stdout->writeln('Starting '.$this->args['-o'].'.');
 				$project->setOutput($this->args['-o']);
 				$project->copyMedia();
-				$project->generate();	
+				$project->generate();
+				$prg->console->stdout->writeln('Generation completed.');
 			}
 			else
 			{

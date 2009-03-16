@@ -374,7 +374,7 @@
 			$parser = tfParsers::get(); 
 			
 			foreach($list as $id => &$sublist)
-			{		
+			{
 				foreach($sublist as $subId => &$item)
 				{
 					// Try to load the content: first check the current language
@@ -416,15 +416,11 @@
 					{
 						// Create a flat navigation, where "Next" can point to the first child, if accessible
 						$metaData['_XNext'] = $metaData['_Next'];
-						if(sizeof($list[$item['id']]) > 0)
-						{
-							$metaData['_Next'] = $list[$item['id']][0]['id'];
-						}
-						elseif(is_null($metaData['_Next']) && $id != '')
-						{
-							$metaData['_Next'] = $this->pages[$id]['_XNext'];
-						}
 
+						if(isset($this->pages[$metaData['Id']]['_Next']))
+						{
+							$metaData['_Next'] = $this->pages[$metaData['Id']]['_Next'];
+						}
 						if(!is_null($metaData['_Previous']))
 						{
 							$xid = $metaData['_Previous'];
@@ -437,6 +433,11 @@
 						elseif(is_null($metaData['_Previous']) && $id != '')
 						{
 							$metaData['_Previous'] = $id;
+						}
+
+						if(!is_null($metaData['_Previous']))
+						{
+							$this->pages[$metaData['_Previous']]['_Next'] = $metaData['Id'];
 						}
 					}
 					$item = $metaData;
