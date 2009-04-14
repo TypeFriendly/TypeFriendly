@@ -1,13 +1,13 @@
 <?php
 /*
   --------------------------------------------------------------------
-                           TypeFriendly
-                 Copyright (c) 2008 Invenzzia Team
-                    http://www.invenzzia.org/
-                See README for more author details
+						   TypeFriendly
+				 Copyright (c) 2008 Invenzzia Team
+					http://www.invenzzia.org/
+				See README for more author details
   --------------------------------------------------------------------
   This file is part of TypeFriendly.
-                                                                   
+																   
   TypeFriendly is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -26,7 +26,7 @@
 	class tfParsers
 	{
 		static private $instance;
-        
+		
 		protected $_parser = NULL;
 		
 		private function __construct()
@@ -42,7 +42,7 @@
 			}
 			return tfParsers::$instance;
 		} // end get();
-        
+		
 		public function getParser()
 		{
 			return $this->_parser;
@@ -80,10 +80,17 @@
 					$ok = false;
 					continue;
 				}
-				if(preg_match('/^([a-zA-Z\-]+)\:( )?(.+)$/', $line, $found))
+				elseif(preg_match('/^([a-zA-Z\-]+)\:( )?(.+)$/', $line, $found))
 				{
 					$data[$found[1]] = trim($found[3]);
 					$ok = true;
+				}
+				else
+				{
+					if(strlen($line) > 0 && !$this->separator($line))
+					{
+						throw new SystemException('Error in parsing "'.basename($filename).'": unexpected line:'.PHP_EOL.$line); 
+					}
 				}
 				$ok = true;
 			}

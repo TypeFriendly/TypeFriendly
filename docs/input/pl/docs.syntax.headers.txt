@@ -32,7 +32,7 @@ Druga metoda pozwala wstawić nagłówki wszystkich rzędów, przy użyciu od je
 ##### nagłówek 5
 ~~~
 
-Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Służy to jedynie celom estatycznym, a ilość znaków po nagłówku nie musi się zgadzać z ilością przed nagłówkiem.
+Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Służy to jedynie celom estetycznym, a ilość znaków po nagłówku nie musi się zgadzać z ilością przed nagłówkiem.
 
 ~~~
 # nagłówek 1 #
