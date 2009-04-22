@@ -18,8 +18,10 @@ To jest jakiś paragraf.
 To jest jakiś następny paragraf.
 ~~~
 
-Drugim sposobem jest wstawienie co najmniej trzech tyld `~` przed i za wstawioną partią kodu.  
-**Ważne jest, aby ilość znaków na początku i na końcu była taka sama**. 
+Drugim sposobem jest wstawienie co najmniej trzech tyld `~` przed i za wstawioną partią kodu.
+
+> [important]
+> Ważne jest, aby ilość znaków na początku i na końcu była taka sama. 
 
 ~~~~~~
 To jest jakiś paragraf.

@@ -63,7 +63,7 @@ Sapien pede dictum.
 > 
 >     Search <a href="http://images.google.com/images?num=30&amp;q=linus+torvalds">photos</a>
 >
-> The Markdown parser is quite intelligent and guesses from the content, whether a character must be written as an entity or not. So if you wish to put a copyright symbol &copy, you can use a normal HTML entity: `&copy;`. 
+> The Markdown parser is quite intelligent and guesses from the content, whether a character must be written as an entity or not. So if you wish to put a copyright symbol &copy;, you can use a normal HTML entity: `&copy;`. 
 > 
 > But let's get back to our R&B music. In this case, & will be changed into an entity automatically.
 >

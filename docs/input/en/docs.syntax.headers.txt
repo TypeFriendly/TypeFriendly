@@ -44,7 +44,7 @@ The text may be optionally ended with the same characters to make the header loo
 
 > [important]
 >
-> TypeFriendly makes a small change to the original parser. The header level is always decreased by 1, because the first level is reserved for the chapter title. So, the header written as the first level will be the second level and so on. As a result, TypeFriendly supports up to 5 levels, not 6.
+> TypeFriendly makes a small change to the original parser. The header level in the XHTML output is always decreased by 1, because the first level (`<h1>`) is reserved for the chapter title. So, the header written as the first level will be the second level and so on. As a result, TypeFriendly supports up to 5 levels, not 6.
 
 * * *
 

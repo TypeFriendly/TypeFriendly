@@ -20,8 +20,10 @@ Some paragraph here...
 Some other paragraph....
 ~~~
 
-Alternatively, we can insert at least three consecutive tildes `~` before and after the code block.  
-**It is very important to write the same number of tildes in those two places.**
+Alternatively, we can insert at least three consecutive tildes `~` before and after the code block.
+
+> [important]
+> It is very important to write the same number of tildes in those two places.
 
 ~~~~~~
 Some paragraph here...
