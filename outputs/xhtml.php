@@ -231,7 +231,7 @@ EOF;
 					$meta = $this->project->getMetaInfo($value, false);
 					if(is_null($meta))
 					{
-						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also does not exist.');
+						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$page['Id'].'" does not exist.');
 					}
 					else
 					{

@@ -7,7 +7,7 @@
                 See README for more author details
   --------------------------------------------------------------------
   This file is part of TypeFriendly.
-                                                                   
+
   TypeFriendly is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -110,7 +110,6 @@
 				$project->loadItems();
 				$prg->console->stdout->writeln('Starting '.$this->args['-o'].'.');
 				$project->setOutput($this->args['-o']);
-				$project->copyMedia();
 				$project->generate();	
 				$prg->console->stdout->writeln('Generation completed.');
 			}
@@ -123,7 +122,6 @@
 				{
 					$prg->console->stdout->writeln('Starting '.$out.'.');
 					$project->setOutput($out);
-					$project->copyMedia();
 					$project->generate();	
 				}
 			}

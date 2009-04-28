@@ -286,7 +286,7 @@
 				{
 					$list[$item] = array();
 				}
-			}     
+			}
 
 			try
 			{
@@ -303,7 +303,7 @@
 					{
 						$this->prog->console->stdout->writeln('Duplicates of page "'.$duplicate.'" in sort hints.');
 					}
-                	$this->sortHint = array_values(array_unique($this->sortHint));
+					$this->sortHint = array_values(array_unique($this->sortHint));
 				}
 				
 				$hintedList = array();
@@ -502,7 +502,12 @@
 				$reparse = true;
 			}
 			
+			
 			$this->fs->safeMkDir('output/'.$this->output, TF_READ | TF_WRITE | TF_EXEC);
+			
+			$this->fs->cleanUpDirectory('output/'.$this->output);
+			
+			$this->copyMedia();
 			
 			$this->outputObj = $out = $this->prog->fs->loadObject('outputs/'.$this->output.'.php', $this->output);
 			$out->init($this, 'output/'.$this->output.'/');

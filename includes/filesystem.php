@@ -111,35 +111,35 @@
 			$errors = array();
 			foreach($list as $name => $param)
 			{
-			    if(!is_dir($this->master.$name))
-			    {
+				if(!is_dir($this->master.$name))
+				{
 					$errors[$name] = 'Not a directory.';	
 					$err = true;
 					continue;
-			    }
+				}
 				if($param & TF_READ)
 				{
-				    if(!is_readable($this->master.$name))
-				    {
+					if(!is_readable($this->master.$name))
+					{
 						$errors[$name] = 'Not readable';
 						$err = true;
-				    }
+					}
 				}
 				if($param & TF_WRITE)
 				{
-				    if(!is_writeable($this->master.$name))
-				    {
-				    	$errors[$name] = 'Not writeable';
+					if(!is_writeable($this->master.$name))
+					{
+						$errors[$name] = 'Not writeable';
 						$err = true;
-				    }
-			    }
+					}
+				}
 				if($param & TF_EXEC)
 				{
-				    if(!is_executable($this->master.$name))
-				    {
+					if(!is_executable($this->master.$name))
+					{
 						$errors[$name] = 'Not executable';
 						$err = true;
-				    }
+					}
 				}
 			}
 			if($err)
@@ -159,20 +159,22 @@
 			$list = array();
 			while($f = readdir($dir))
 			{
-				if($f != '.' && $f != '..')
+				if($f == '.' || $f == '..')
 				{
-					if($this->ignoreHidden && $f[0] == '.')
-					{
-						continue;
-					}
-					if($files && is_file($this->master.$directory.$f))
-					{
-						$list[] = $f;
-					}
-					elseif($directories && is_dir($this->master.$directory.$f))
-					{
-						$list[] = $f;
-					}
+					continue;
+				}
+				
+				if($this->ignoreHidden && $f[0] == '.')
+				{
+					continue;
+				}
+				if($files && is_file($this->master.$directory.$f))
+				{
+					$list[] = $f;
+				}
+				elseif($directories && is_dir($this->master.$directory.$f))
+				{
+					$list[] = $f;
 				}
 			}
 			closedir($dir);
@@ -212,6 +214,54 @@
 				system('chmod u+'.$what.' "'.$this->master.$directory.'"');
 			}
 		} // end safeMkdir();
+		
+		public function cleanUpDirectory($directory)
+		{
+			if(!is_dir($this->master.$directory))
+			{
+				return false;
+			}
+			
+			$this->_cleanUpDirectory($this->master.$directory, false);
+
+		} // end cleanUpDirectory();
+		
+		protected function _cleanUpDirectory($directory, $deleteSelf = true)
+		{
+			
+			$dir = @opendir($directory);
+			if(!is_resource($dir))
+			{ 
+				return false; 
+			}
+			
+			if(!is_writeable($directory) && USED_OS != 'Windows')
+			{
+				system('chmod u+w "'.$directory.'"');
+			}
+			
+			while($f = readdir($dir))
+			{
+				if($f == '.' || $f == '..')
+				{
+					continue;
+				}
+				
+				if(is_file($directory.'/'.$f))
+				{
+					unlink($directory.'/'.$f);
+				}
+				if(is_dir($directory.'/'.$f))
+				{
+					$this->_cleanUpDirectory($directory.'/'.$f);
+				}
+			}
+			closedir($dir);
+			if($deleteSelf)
+			{
+				rmdir($directory);
+			}
+		} // end _cleanUpDirectory();
 		
 		public function copyItem($from, $to)
 		{
