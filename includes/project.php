@@ -352,10 +352,10 @@
 								$val['order'] = $hintedList[$id][$val['id']]['order'];
 							}
 							elseif(strlen($id) == 0)
-                            {
-                            	throw new Exception('Not all base chapters are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
-                            }
-                            else
+							{
+								throw new Exception('Not all base chapters are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
+							}
+							else
 							{
 								throw new Exception('Not all children of "'.$id.'" are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
 							}
