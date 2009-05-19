@@ -70,7 +70,7 @@ skryptu('który piszemy');
 Dodatkowym dostępnym "kolorowaniem" jest `console`, który upodabnia ramkę z kodem do widoku z konsoli systemowej (ciemne tło, biała czcionka).
 
     [console]
-    php typefriendly.php -o xhtml "./docs/"
+    php typefriendly.php build "./docs/"
 
 > [important]
 > ### Wyłączanie kolorowania ###

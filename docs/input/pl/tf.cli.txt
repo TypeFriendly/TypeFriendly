@@ -5,7 +5,7 @@ TypeFriendly jest obsługiwany wyłącznie z wiersza poleceń systemu operacyjne
 
 ~~~~
 [console]
-php ./typefriendly.php
+php typefriendly.php
 ~~~~
 
 W przypadku systemów uniksowych możliwe jest także:
@@ -19,7 +19,7 @@ Niezbędnym parametrem jest zawsze ścieżka do katalogu, w którym znajduje si�
 
 ~~~~
 [console]
-./typefriendly.php "./docs/"
+php typefriendly.php build "./docs/"
 ~~~~
 
 Dostępne są następujące opcje, które podajemy w kolejności alfabetycznej przed ścieżką:
@@ -37,7 +37,7 @@ Przykład:
 
 ~~~~
 [console]
-./typefriendly.php -l en -o xhtml "./docs/"
+php typefriendly.php build "./docs/" -l en -o xhtml
 ~~~~
 
 Aby wyświetlić informacje o TypeFriendly, należy wywołać skrypt bez żadnych parametrów.

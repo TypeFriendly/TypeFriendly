@@ -6,7 +6,7 @@ TypeFriendly is used only from the operating system command line. It supports bo
 
 ~~~~
 [console]
-php ./typefriendly.php
+php typefriendly.php
 ~~~~
 
 In case of Unix system the following should also work:
@@ -20,7 +20,7 @@ The required parameter is always a path to the documentation directory (it means
 
 ~~~~
 [console]
-./typefriendly.php "./docs/"
+php typefriendly.php build "./docs/"
 ~~~~
 
 Allowed options that must be provided in the alphabetical order are:
@@ -38,7 +38,7 @@ Example:
 
 ~~~~
 [console]
-./typefriendly -l en -o xhtml "./docs/"
+php typefriendly.php build "./docs/" -l en -o xhtml
 ~~~~
 
 To display the information about TypeFriendly, call the script without any parameters.

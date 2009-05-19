@@ -4,7 +4,7 @@ Title: Installation
 In order to use TypeFriendly, you must have PHP 5.1 or newer installed that supports CLI (command line interface). Extract the archive with the script somewhere in your filesystem. To test, whether it works, run the command line of your operating system, go to the TypeFriendly directory and run the following command:
 
     [console]
-    php typefriendly.php -l en -o xhtml "./docs/"
+    php typefriendly.php build "./docs/"
 
 If everything went good, TypeFriendly should generate an XHTML version of its own documentation.
 

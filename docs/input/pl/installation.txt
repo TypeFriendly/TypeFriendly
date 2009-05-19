@@ -5,7 +5,7 @@ Title: Instalacja
 Aby móc używać TypeFriendly, musisz posiadać zainstalowane PHP w wersji co najmniej 5.1 oraz umożliwiające uruchamianie skryptów PHP z linii komend Twojego systemu operacyjnego. Rozpakuj zawartość archiwum do dowolnego katalogu na dysku twardym i to wszystko. Aby przetestować działanie, uruchom linię komend, przejdź do katalogu z TypeFriendly i wydaj następujące polecenie:
 
     [console]
-    php typefriendly.php -o xhtml "./docs/"
+    php typefriendly.php build "./docs/" -l pl
 
 Jeśli wszystko poszło prawidłowo, TypeFriendly powinien wygenerować wersję XHTML swojej własnej dokumentacji.
 

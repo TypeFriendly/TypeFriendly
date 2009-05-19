@@ -72,7 +72,7 @@ of_script('that we write');
 The additional "language" is `console`, which changes the layout of the frame with the code to look like a operating system command line (dark background, white text):
 
     [console]
-    php typefriendly.php -o xhtml "./docs/"
+    php typefriendly.php build "./docs/"
 
 > [important]
 > ### How to turn off the highlighting? ###

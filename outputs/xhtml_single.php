@@ -62,6 +62,11 @@
 			
 			$code .= $this->createReference($page);
 			
+			if($this->project->config['versionControlInfo'])
+			{
+				$code .= $this->createVersionControlInfo($page);
+			}
+			
 			$code .= $page['Content'];
 			
 			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
