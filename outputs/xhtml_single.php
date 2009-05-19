@@ -1,4 +1,28 @@
 <?php
+/*
+  --------------------------------------------------------------------
+                           TypeFriendly
+                 Copyright (c) 2008 Invenzzia Team
+                    http://www.invenzzia.org/
+                See README for more author details
+  --------------------------------------------------------------------
+  This file is part of TypeFriendly.
+
+  TypeFriendly is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  TypeFriendly is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
+*/
+// $Id$
+
 
 	class xhtml_single extends standardOutput
 	{
@@ -6,6 +30,12 @@
 		private $pageOrder = array();
 		private $pageContent = array();
 
+		/**
+		 * Initializes the generation, creating the index.html file with the
+		 * table of contents.
+		 * @param tfProject $project The project
+		 * @param String $path Output path
+		 */
 		public function init($project, $path)
 		{
 			$this->date = date('d.m.Y');
@@ -14,6 +44,11 @@
 			$this->path = $path;	
 		} // end init();
 
+		/**
+		 * Generates a single page and saves it on the disk.
+		 *
+		 * @param Array $page The page meta-info.
+		 */
 		public function generate($page)
 		{	
 			$code = '';	
@@ -37,6 +72,9 @@
 			$this->pageContent[$page['Id']] = $code;
 		} // end generate();
 
+		/**
+		 * Finalizes the generation and saves the results to the hard disk.
+		 */
 		public function close()
 		{
 			$translate = tfTranslate::get();
@@ -62,7 +100,15 @@
 		
 			$this->project->fs->write($this->path.'index.html', $code);
 		} // end close();
-		
+
+		/**
+		 * Internal method that generates a common header for all the pages
+		 * and returns the source code.
+		 *
+		 * @param String $title The page title.
+		 * @param Array $nav The navigation list.
+		 * @return String
+		 */
 		private function createHeader()
 		{
 			$translate = tfTranslate::get();
@@ -98,7 +144,12 @@ $code = <<<EOF
 EOF;
 			return $code;
 		} // end createHeader();
-		
+
+		/**
+		 * Creates a common footer for each page.
+		 *
+		 * @return String
+		 */
 		public function createFooter()
 		{
 			$translate = tfTranslate::get();		
@@ -135,7 +186,13 @@ $code = <<<EOF
 EOF;
 			return $code;
 		} // end createFooter();
-		
+
+		/**
+		 * Creates the navigation above the page contents.
+		 *
+		 * @param Array &$page The page meta-info.
+		 * @return String
+		 */
 		public function createTopNavigator(&$page)
 		{
 			$n =& $this->project->config['showNumbers'];
@@ -166,7 +223,13 @@ EOF;
 			$code .= '</dl>	';
 			return $code;
 		} // end createTopNavigator();
-		
+
+		/**
+		 * Creates "See also" links below the page content.
+		 *
+		 * @param Array &$page The page meta-info.
+		 * @return String
+		 */
 		public function createSeeAlso(&$page)
 		{
 			$n =& $this->project->config['showNumbers'];
@@ -218,18 +281,34 @@ EOF;
 			
 			return $code;
 		} // end createSeeAlso();  
-		
+
+
+		/**
+		 * Creates the programming references about the described structure.
+		 * This includes the support for various programming-related tags
+		 * in the page header.
+		 *
+		 * @param Array &$page The page meta-info.
+		 * @return String
+		 */
 		public function createReference(&$page)
 		{
 			$translate = tfTranslate::get();
 			$code = '';
+			// Reference 
 			if(isset($page['Reference']))
 			{
 				$code .= '<p><strong>'.$translate->_('tags','reference').': </strong><code>'.$page['Reference'].'</code></p>';
 			}
+			// The status tag
 			if(isset($page['Status']))
 			{
 				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';
+			}
+			// Visibility tag
+			if(isset($page['Visibility']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','visibility').': </strong>'.$page['Visibility'].'</p>';
 			}
 			if(isset($page['Extends']))
 			{
@@ -289,6 +368,29 @@ EOF;
 				}
 				$code .= '</ul>';
 			}
+			if(isset($page['Throws']) || isset($page['EThrows']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','obj_throws').':</strong></p><ul>';
+				if(isset($page['Throws']))
+				{
+					foreach($page['Throws'] as $item)
+					{
+						$pp = $this->project->getMetaInfo($item, false);
+						if(!is_null($pp))
+						{
+							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
+						}
+					}
+				}
+				if(isset($page['EThrows']))
+				{
+					foreach($page['EThrows'] as $item)
+					{
+						$code .= '<li><code>'.$item.'</code></li>';
+					}
+				}
+				$code .= '</ul>';
+			}
 			if(isset($page['VersionSince']))
 			{
 				$code .= '<p><strong>'.$translate->_('tags','version_since').': </strong>'.$page['VersionSince'].'</p>';
@@ -307,7 +409,33 @@ EOF;
 			}
 			return $code;
 		} // end createReference();
-		
+
+		/**
+		 * Creates version control information for the page.
+		 *
+		 * @param Array &$page The page meta-info.
+		 * @return String
+		 */
+		public function createVersionControlInfo($page)
+		{
+			$translate = tfTranslate::get();
+			$code = '';
+			if(isset($page['VCSKeywords']))
+			{
+				$code .= '<p><strong>'.$translate->_('tags','versionControlInfo').': </strong><code>'.$page['VCSKeywords'].'</code></p>';
+			}
+
+			return $code;
+		} // end createVersionControlInfo();
+
+		/**
+		 * Generates a menu.
+		 *
+		 * @param String $what The root page.
+		 * @param Boolean $recursive Do we need a recursive tree?
+		 * @param Boolean $start Do we include the "Table of contents" text?
+		 * @return String
+		 */
 		public function menuGen($what, $recursive = true)
 		{
 			$n =& $this->project->config['showNumbers'];
@@ -332,7 +460,13 @@ EOF;
 			}
 			return '';
 		} // end menuGen();
-		
+
+		/**
+		 * Converts the page identifier to the URL.
+		 *
+		 * @param String $page The page identifier.
+		 * @return String
+		 */
 		public function toAddress($page)
 		{
 			$page = str_replace('.', '_', $page);

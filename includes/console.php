@@ -85,7 +85,7 @@
 		public function read($length = 80)
 		{
 			return fread($this->stream, $length);
-		} // end read();		
+		} // end read();	
 	} // end tfStream;
 
 	class tfConsole
@@ -207,6 +207,7 @@
 		
 		private function __construct()
 		{
+			date_default_timezone_set('Europe/London');
 			$this->console = new tfConsole;
 			
 			// This is the master filesystem

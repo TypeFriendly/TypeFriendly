@@ -55,6 +55,9 @@ navigation
 showNumbers
 :   whether to display chapter numbers (values are *true* or *false*).
 
+versionControlInfo
+:	whether to display version control information from document tags (*false* by default).
+
 ***
 
 Below, we can see a sample file. It is used to generate TypeFriendly manual:

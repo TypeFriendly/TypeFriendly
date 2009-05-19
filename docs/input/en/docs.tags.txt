@@ -60,6 +60,9 @@ Object-oriented Programming
 
 Those fields are used to mark the class dependencies in the objective code. You can set the base and derived classes, interfaces etc. TypeFriendly expects a chapter identifier that describes the required class/interface.
 
+Visibility
+:	the element visibility (for example *public*, *protected* etc.)
+
 Extends
 :   base class.
 
@@ -68,6 +71,9 @@ Implements
 
 ExtendedBy
 :   derived classes.
+
+Throws
+:	the exceptions thrown.
 
 Sample use:
 
@@ -79,9 +85,11 @@ Implements:
  - reference.bar-interface
 ExtendedBy:
  - reference.joe
+Throws:
+ - reference.foo-exception
 ~~~
 
-In addition, there are alternative versions of those tags that allow to specify the class/interface names manually. The tag name begins with an uppercase letter **e**: **EExtents**, **EImplements**, etc. Sample use:
+In addition, there are alternative versions of those tags (except `Visibility`) that allow to specify the class/interface names manually. The tag name begins with an uppercase letter **e**: **EExtents**, **EImplements**, etc. Sample use:
 
 ~~~
 Title: Class "foo"
@@ -90,6 +98,23 @@ EImplements:
  - Countable
  - IteratorAggregate
 ~~~
+
+Version control tags
+--------------------
+
+These tags are displayed in the generated output, if the configuration option `versionControlInfo` is enabled.
+
+VCSKeywords
+:	specified a place where the version control system keywords can be expanded.
+
+Sample use:
+
+~~~~
+Title: A sample page
+VCSKeywords: $Id$
+~~~~
+
+Now the version control systems, like Subversion, can expand their special keywords in the header, and moreover, if we enable one option, such information will be included in the generated output.
 
 Tag proposals
 -------------

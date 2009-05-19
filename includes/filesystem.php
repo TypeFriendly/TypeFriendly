@@ -34,7 +34,7 @@
 		
 		public function setMasterDirectory($dir, $flags)
 		{
-			if($dir{strlen($dir)-1} != '/')
+			if($dir[strlen($dir)-1] != '/')
 			{
 				$dir .= '/';
 			}
@@ -104,6 +104,21 @@
 		{	
 			return file_put_contents($this->master.str_replace('../', '', $name), $content);
 		} // end write();
+
+		public function containsItems($directory)
+		{
+			$dir = opendir($this->master.$directory);
+			while($f = readdir($dir))
+			{
+				if($f != '.' && $f != '..')
+				{
+					closedir($dir);
+					return true;
+				}
+			}
+			closedir($dir);
+			return false;
+		} // end containsItems();
 
 		public function checkDirectories($list)
 		{

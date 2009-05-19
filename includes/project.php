@@ -61,6 +61,9 @@
 
 	class SystemException extends Exception{}
 
+	/**
+	 * The class represents an item in the navigation tree.
+	 */
 	class tfItem
 	{
 		private $name;
@@ -90,6 +93,9 @@
 		} // end getLevel();
 	} // end tfItem;
 
+	/**
+	 * Represents a documentation project.
+	 */
 	class tfProject
 	{
 		public $fs;
@@ -111,7 +117,12 @@
 		private $parsed = false;
 		
 		static private $object;
-		
+
+		/**
+		 * Loads the project from the specified directory.
+		 *
+		 * @param String $directory The project directory
+		 */
 		public function __construct($directory)
 		{
 			$p = tfParsers::get();
@@ -139,7 +150,8 @@
 				'copyrightLink' => '',
 				'licenseLink' => '',
 				'navigation' => 'tree',
-				'showNumbers' => true
+				'showNumbers' => true,
+				'versionControlInfo' => false
 			);
 			
 			foreach($baseConfig as $name => $value)

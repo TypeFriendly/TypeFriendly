@@ -55,6 +55,9 @@ navigation
 showNumbers
 :   czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
 
+versionControlInfo
+:	czy wyświetlać wartości tagów dotyczących systemu kontroli wersji? (domyślnie *false*)
+
 ***
 
 Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:

@@ -58,6 +58,9 @@ Programowanie obiektowe
 -----------------------
 Pola te służą do łatwiejszego tworzenia dokumentacji do obiektowego kodu. Umożliwiają określenie np. klas pochodnych, bazowych itd. Wszędzie TypeFriendly zakłada, że otrzyma identyfikator rozdziału, który opisuje daną rzecz:
 
+Visibility
+:	widoczność danego elementu dla innych (np. publiczny, prywatny...)
+
 Extends
 :   klasa bazowa.
 
@@ -66,6 +69,9 @@ Implements
 
 ExtendedBy
 :   lista klas rozszerzających aktualną.
+
+Throws
+:	lista rzucanych wyjątków
 
 Przykładowe użycie:
 
@@ -77,9 +83,11 @@ Implements:
  - reference.bar-interface
 ExtendedBy:
  - reference.joe
+Throws:
+ - reference.foo-exception
 ~~~
  
-Dodatkowo istnieją wersje tych dyrektyw, które umożliwiają podanie nazwy klasy bezpośrednio. Wszystkie one mają nazwy rozpoczynające się od dużej litery "E", np. **EExtends**, **EImplements**. Przykładowe użycie:
+Dodatkowo istnieją wersje tych dyrektyw (za wyjątkiem `Visibility`), które umożliwiają podanie nazwy klasy bezpośrednio. Wszystkie one mają nazwy rozpoczynające się od dużej litery "E", np. **EExtends**, **EImplements**. Przykładowe użycie:
 
 ~~~
 Title: Klasa "foo"
@@ -88,6 +96,23 @@ EImplements:
  - Countable
  - IteratorAggregate
 ~~~
+
+Wsparcie systemu kontroli wersji
+--------------------------------
+
+Te tagi są wyświetlane w wynikowym dokumencie, jeśli włączymy opcję konfiguracyjną `versionControlInfo`.
+
+VCSKeywords
+:	miejsce, gdzie mogą być rozwinięte słowa kluczowe systemu kontroli wersji.
+
+Przykładowe użycie:
+
+~~~~
+Title: Przykładowa strona
+VCSKeywords: $Id$
+~~~~
+
+Teraz systemy kontroli wersji takie, jak Subversion, mogą rozwinąć słowo kluczowe "Id" w nagłówku dokumentu, a dodatkowo mamy możliwość jego uwzględnienia w wynikowym dokumencie po włączeniu odpowiedniej opcji.
 
 Pola planowane
 --------------
