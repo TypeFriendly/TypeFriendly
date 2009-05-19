@@ -81,6 +81,18 @@ class TypeFriendly_Project
 
 	} // end getPages();
 
+	/**
+	 * Returns the page with the specified identifier or
+	 * NULL if the page does not exist.
+	 *
+	 * @param String $identifier The page identifier.
+	 * @return TypeFriendly_Page|Null
+	 */
+	public function getPage($identifier)
+	{
+		return NULL;
+	} // end getPage();
+
 	public function processDocuments(Typefriendly_Options $options)
 	{
 

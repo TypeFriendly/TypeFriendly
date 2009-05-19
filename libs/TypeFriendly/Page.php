@@ -28,5 +28,47 @@
  */
 class TypeFriendly_Page
 {
+	/**
+	 * The project that the page belongs to.
+	 * @var TypeFriendly_Project
+	 */
+	private $_project = null;
 
+	/**
+	 * The page identifier.
+	 * @var String
+	 */
+	private $_identifier = null;
+
+	/**
+	 * Constructs a new page object. The constructor should be called
+	 * by the project manager only.
+	 *
+	 * @internal
+	 * @param TypeFriendly_Project $project The project manager.
+	 * @param String $identifier The page identifier.
+	 */
+	public function __construct(TypeFriendly_Project $project, $identifier)
+	{
+		$this->_project = $project;
+		$this->_identifier = $identifier;
+	} // end __construct();
+
+	/**
+	 * Returns the page identifier.
+	 * @return String
+	 */
+	public function getIdentifier()
+	{
+		return $this->_identifier;
+	} // end getIdentifier();
+
+	/**
+	 * Returns the page project manager.
+	 * @return TypeFriendly_Project
+	 */
+	public function getProject()
+	{
+		return $this->_project;
+	} // end getProject();
 } // end TypeFriendly_Page;

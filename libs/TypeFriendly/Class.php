@@ -39,14 +39,32 @@ class TypeFriendly_Class
 	 */
 	static public function autoload($class)
 	{
-
+		if(strpos($class, 'TypeFriendly') === 0)
+		{
+			require(str_replace('_', DIRECTORY_SEPARATOR, $class).'.php');
+			return true;
+		}
+		return false;
 	} // end autoload();
 
 	/**
-	 * Registers the autoloader.
+	 * Registers the autoloader. The method can load both the default autoloader
+	 * and configure the Open Power Libs autoloader to load TypeFriendly classes.
+	 *
+	 * @param Integer $type The autoloader type.
 	 */
 	static public function registerAutoloader($type = TypeFriendly_Class::AUTOLOADER_STANDARD)
 	{
-
+		if($type == TypeFriendly_Class::AUTOLOADER_STANDARD)
+		{
+			spl_autoload_register(array('TypeFriendly_Class', 'autoload'));
+		}
+		else
+		{
+			Opl_Loader::addLibrary('TypeFriendly', array(
+				'directory' => dirname(__FILE__),
+				'handler' => null					// We don't want any extra handler for this.
+			));
+		}
 	} // end registerAutoloader();
 } // end TypeFriendly_Class;

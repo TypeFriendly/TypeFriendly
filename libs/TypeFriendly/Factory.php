@@ -21,7 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id: filesystem.php 20 2009-02-22 16:25:15Z extremo $
+// $Id$
 
 /**
  * A factory class, allowing to create different items.

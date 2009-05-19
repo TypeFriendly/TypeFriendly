@@ -48,6 +48,12 @@ class TypeFriendly_Language
 	private $_base;
 
 	/**
+	 * The language messages
+	 * @var Array
+	 */
+	private $_data;
+
+	/**
 	 * Sets the language filesystem.
 	 */
 	static public function setDirectory(TypeFriendly_Filesystem $fs)
@@ -70,9 +76,9 @@ class TypeFriendly_Language
 	 *
 	 * @param TypeFriendly_Language|Null $base The base language.
 	 */
-	public function setBaseLanguage(TypeFriendly_Language $base)
+	public function setBaseLanguage(TypeFriendly_Language $base = null)
 	{
-
+		$this->_base = $base;
 	} // end setBaseLanguage();
 
 	/**
@@ -82,6 +88,60 @@ class TypeFriendly_Language
 	 */
 	public function _($group, $id)
 	{
-
+		if(!isset($this->_data[$group]))
+		{
+			if(!$this->_loadGroup($group) && $this->_base !== null)
+			{
+				$this->_data[$group] = array();
+				$this->_base->_loadGroup($group);
+			}
+			else
+			{
+				throw new TypeFriendly_Language_Exception('The group '.$group.' cannot be loaded.');
+			}
+		}
+		if(!isset($this->_data[$group][$id]))
+		{
+			if($this->_base !== null)
+			{
+				$text = $this->_base->_($group, $id);
+			}
+			else
+			{
+				throw new TypeFriendly_Language_Exception('Message '.$group.'@'.$id.' is not defined.');
+			}
+		}
+		else
+		{
+			$text = $this->_data[$group][$id];
+		}
+		if(func_num_args() > 2)
+		{
+			$args = func_get_args();
+			unset($args[0]);
+			unset($args[1]);
+			return vsprintf($text, $args);
+		}
+		return $text;
 	} // end _();
+
+	/**
+	 * Loads the message group. If the group file cannot be found, it
+	 * throws an exception.
+	 *
+	 * @internal
+	 * @param String $group The group name.
+	 */
+	private function _loadGroup($group)
+	{
+		try
+		{
+			$this->_data[$group] = parse_ini_file($this->_filesystem->readFile($this->_id.'/'.$group.'.txt'));
+			return true;
+		}
+		catch(TypeFriendly_Filesystem_Exception $exception)
+		{
+			return false;
+		}
+	} // end _loadGroup();
 } // end TypeFriendly_Language;
