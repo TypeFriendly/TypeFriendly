@@ -2,7 +2,7 @@ Title: Składnia pliku
 SeeAlso:
  - docs.tags
 
-----
+---
 
 Przykładowy plik rozdziału wygląda następująco:
 

@@ -1,6 +1,6 @@
 Title: Przypisy
 
-----
+---
 
 Przypisy działają w podobny sposób do referencji odnośników. Na przypis składają się dwie rzeczy: odnośnik w tekście, którzy otrzyma indeks górny oraz objaśnienie przypisu, które wyląduje na końcu dokumentu. 
 

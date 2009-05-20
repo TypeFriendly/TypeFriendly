@@ -1,12 +1,12 @@
 Title: License and authors
 Appendix: Yes
 
-----
+---
 
 The TypeFriendly script is developed by the [Invenzzia group](http://www.invenzzia.org/). The code was written by:
 
-+ Tomasz "Zyx" Jędrzejewski - design, core programming, documentation.
-+ Jacek "eXtreme" Jędrzejewski - outputs, Markdown issues, various fixes, default documentation layout, documentation.
+* Tomasz "Zyx" Jędrzejewski - design, core programming, documentation.
+* Jacek "eXtreme" Jędrzejewski - outputs, Markdown issues, various fixes, default documentation layout, documentation.
 
 The project uses the PHP Markdown Extra parser written by Michel Fortin and based on the John Gruber code. It is available under the modified BSD license included in its source code.
 

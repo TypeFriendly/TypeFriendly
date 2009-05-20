@@ -1,6 +1,7 @@
 Title: Output interface
 
-----
+---
+
 TypeFriendly allows to create your own output interfaces that can be used to generate the documentation. Some knowledge about PHP language is required in order to write them.
 
 Parsing rules

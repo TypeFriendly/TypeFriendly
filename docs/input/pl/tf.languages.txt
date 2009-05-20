@@ -1,6 +1,7 @@
 Title: Dokumentacja wielojęzyczna
 
-----
+---
+
 W tym rozdziale opiszemy wszystkie aspekty tworzenia dokumentacji wielojęzycznych.
 
 Model wielojęzyczny TypeFriendly zakłada, że w dokumentacji wyróżnimy jeden z języków (tzw. język bazowy), w którym tworzymy oryginalną treść, z której robione są później tłumaczenia do języków pochodnych. Język bazowy wybieramy w konfiguracji projektu, ustawiając opcję *baseLanguage*. Każdy z języków identyfikowany jest za pomocą dwuliterowego kodu, np. *en*, *de*, *pl*.
@@ -9,14 +10,14 @@ Aby utworzyć dokumentację w nowym języku, wystarczy że założymy nowy katal
 
 TypeFriendly tłumaczy interfejs dokumentacji na podstawie komunikatów zdefiniowanych w folderze `languages/`, który zawiera podkatalogi z poszczególnymi wersjami językowymi. Każdy tekst jest przydzielony do określonej grupy i ma pewien identyfikator, po którym skrypt może go odnaleźć. Każda grupa zapisana jest w oddzielonym pliku, który wygląda następująco:
 
-~~~~
+~~~
 ; komentarz
 
 identyfikator1 = "Tekst 1"
 identyfikator2 = "Tekst 2"
 identyfikator3 = "Tekst 3"
 ; i tak dalej
-~~~~
+~~~
 
 Aby wykonać tłumaczenie, najlepiej wziąć pliki interfejsu jednego z istniejących języków, skopiować je do katalogu nowego języka i przetłumaczyć przyporządkowane do identyfikatorów teksty. Gdyby w naszym języku brakowało jakiegoś identyfikatora, który jest używany przez wyjście, TypeFriendly spróbuje go znaleźć w tekstach języka bazowego. Gdy i tam go nie ma, generowany jest błąd.
 

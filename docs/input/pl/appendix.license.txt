@@ -1,11 +1,12 @@
 Title: Licencja i autorzy
-Appendix: B
+Appendix: Yes
 
-----
+---
+
 Skrypt TypeFriendly został stworzony przez [grupę Invenzzia](http://www.invenzzia.org/). Odpowiedzialne za niego osoby to:
 
-+ Tomasz "Zyx" Jędrzejewski - projekt, kod silnika, dokumentacja.
-+ Jacek "eXtreme" Jędrzejewski - systemy wyjścia, dostosowanie Markdowna, szereg poprawek, dokumentacja.
+* Tomasz "Zyx" Jędrzejewski - projekt, kod silnika, dokumentacja.
+* Jacek "eXtreme" Jędrzejewski - systemy wyjścia, dostosowanie Markdowna, szereg poprawek, dokumentacja.
 
 W projekcie został użyty parser PHP Markdown Extra napisany przez Michela Fortina i bazujący na kodzie Johna Grubera. Dostępny jest on na zmodyfikowanej licencji BSD.
 

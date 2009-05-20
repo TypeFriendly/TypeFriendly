@@ -170,7 +170,7 @@ Markdown allows to make more paragraphs in the list element. They must be surrou
 > The issue is still discussed and currently the recommended solution is to use a HTML comment `<!-- # -->` between the lists to split them.
 
 Nested lists
-------------
+============
 
 The nesting levels must be followed with spaces or tabulations.
 
@@ -199,3 +199,51 @@ The nesting levels must be followed with spaces or tabulations.
 >    * Element 2.1
 >    * Element 2.2
 > 3. Element 3
+
+Lists with other elements of Markdown syntax
+============================================
+
+To use other elements of Markdown syntax in a list, they must be followed by four spaces or a tabulation, like paragraphs. Remember that a codeblock must be indented like other list elements, apart from its own intendation.
+
+~~~
+1.  Lorem ipsum dolor sit amet sapien pede dictum sapien massa sit amet
+    sapien varius egestas, dapibus aliquam id, neque. Donec facilisis diam
+    
+        sample codeblock
+
+    elit, gravida turpis. Nullam at ligula. Aenean urna a purus fermentum
+    
+    *   Element 1
+    
+            sample codeblock
+    
+    *   Element 2
+
+    libero quis ipsum. Fusce ullamcorper ut, semper turpis egestas. Cum
+    sociis natoque penatibus et ultrices bibendum, sem in lacus tellus
+    
+2.  Something more.
+~~~
+
+> 1.  Lorem ipsum dolor sit amet sapien pede dictum sapien massa sit amet
+>     sapien varius egestas, dapibus aliquam id, neque. Donec facilisis diam
+>     
+>         sample codeblock
+> 
+>     elit, gravida turpis. Nullam at ligula. Aenean urna a purus fermentum
+>     
+>     *   Element 1
+>     
+>             sample codeblock
+>     
+>     *   Element 2
+> 
+>     libero quis ipsum. Fusce ullamcorper ut, semper turpis egestas. Cum
+>     sociis natoque penatibus et ultrices bibendum, sem in lacus tellus
+>     
+> 2.  Something more.
+
+<!-- # -->
+
+> [warning]
+> Pay attention to the number of spaces in the beginning of each line.

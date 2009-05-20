@@ -1,27 +1,27 @@
 Title: Command line interface
 
-----
+---
 
 TypeFriendly is used only from the operating system command line. It supports both Windows systems and various Unix clones, including Linux. You can call the script in this way:
 
-~~~~
+~~~
 [console]
 # Under Windows and Unix systems
-php ./typefriendly.php
+php typefriendly.php
 
 # Under Unix systems (since TF 0.1.2)
 ./typefriendly
-~~~~
+~~~
 
 TypeFriendly 0.1.0 and 0.1.1
-----------------------------
+============================
 
 The required parameter is always a path to the documentation directory (it means, to the directory that contains the `settings.ini` and other files). For example:
 
-~~~~
+~~~
 [console]
 ./typefriendly "./docs/"
-~~~~
+~~~
 
 Allowed options that must be provided in the alphabetical order are:
 
@@ -36,15 +36,15 @@ Allowed options that must be provided in the alphabetical order are:
 
 Example:
 
-~~~~
+~~~
 [console]
 php typefriendly.php build "./docs/" -l en -o xhtml
-~~~~
+~~~
 
 To display the information about TypeFriendly, call the script without any parameters.
 
 TypeFriendly 0.1.2
-------------------
+==================
 
 In TypeFriendly 0.1.2, the command-line interface has been improved and the usage of the script has changed. The first argument is always a command specifying what we want to do. In the second place, we should specify a path to the directory with the documentation we want to process and at last, we specify the options.
 

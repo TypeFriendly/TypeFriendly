@@ -2,7 +2,7 @@ Title: File syntax
 SeeAlso:
  - docs.tags
 
-----
+---
 
 A sample chapter file looks like this:
 

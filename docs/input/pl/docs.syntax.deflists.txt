@@ -60,7 +60,7 @@ Pomarańcza
 > 
 > :   Owoc cytrusowy, zwykle o pomarańczowej skórce i włóknistym miąższu.
 
-Tak jak zwykłe listy porządkowe, listy definicji również mogą zawierać inne elementy blokowe: akapity, listy porządkowe, bloki kodu...
+Tak jak zwykłe listy porządkowe, listy definicji również mogą zawierać inne elementy blokowe: akapity, listy porządkowe, bloki kodu. Muszą być one poprzedzone czterema spacjami bądź tabulacją.
 
 ~~~
 Termin 1

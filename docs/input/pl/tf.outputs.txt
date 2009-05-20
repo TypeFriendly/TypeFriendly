@@ -1,6 +1,7 @@
 Title: Interfejs wyjścia
 
-----
+---
+
 TypeFriendly pozwala łatwo tworzyć własne systemy wyjścia, które będą mogły być później użyte do generowania dokumentacji. Do ich tworzenia wymagana jest pewna znajomość języka PHP.
 
 Zasada parsowania

@@ -2,7 +2,8 @@ Title: Chapters
 SeeAlso:
  - docs.directories
 
-----
+---
+
 The chapters are created as simple text files in the `/input/language/` directory. Each of them consists of two parts:
 
 1. Header

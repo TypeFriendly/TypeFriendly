@@ -1,6 +1,7 @@
 Title: Directory structure
 
-----
+---
+
 The TypeFriendly documentation must have a proper directory structure. Create a new directory somewhere in your project (for example, `/docs`) and make there the following folders and files:
 
     /input

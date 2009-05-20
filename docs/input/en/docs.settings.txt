@@ -1,6 +1,6 @@
 Title: settings.ini file
 
-----
+---
 
 This is the main configuration file with an option list. The syntax looks like below:
 

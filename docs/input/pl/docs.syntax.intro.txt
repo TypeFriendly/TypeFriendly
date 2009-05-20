@@ -9,7 +9,7 @@ TypeFriendly korzysta z bardziej rozbudowanej składni **Markdown Extra**, któr
 > [information]
 > TypeFriendly jako podstawę swojego parsera źródeł rozdziałów korzysta z oryginalnego parsera Michela Fortina o nazwie **PHP Markdown Extra**. Do kolejnych wydań TypeFriendly zamieszczać będziemy najaktualniejsze jego wersje.
 
-<!-- -->
+<!-- # -->
 
 > [warning]
 > Dokładna specyfikacja języka Markdown jest cały czas w trakcie opracowywania i do języka mogą dojść nowe elementy i rozwiązania. Autorzy planują zachować kompatybilność wsteczną.

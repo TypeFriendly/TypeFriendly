@@ -2,7 +2,8 @@ Title: Rozdziały
 SeeAlso:
  - docs.directories
 
-----
+---
+
 W TypeFriendly poszczególne rozdziały dokumentacji tworzysz jako pliki tekstowe w katalogu `/input/jezyk/`. Każdy taki plik składa się z dwóch części:
 
 1. Nagłówek

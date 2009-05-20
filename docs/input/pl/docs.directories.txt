@@ -1,6 +1,7 @@
 Title: Struktura katalogowa
 
-----
+---
+
 Dokumentacja TypeFriendly musi mieć odpowiednią strukturę katalogową. Utwórz gdzieś w swoim projekcie katalog na jej przechowywanie (np. `/docs`) i utwórz w nim następujące foldery:
 
     /input

@@ -1,7 +1,7 @@
 Title: Development and support
 Appendix: Yes
 
-----
+---
 
 If you look for a support, visit our [discussion board](http://forums.invenzzia.org/) available in English language. We encourage to send new ideas and feature requests. If you found a bug, visit our [bugtracker](http://bugs.invenzzia.org/) - **remember that the bugs must be described IN ENGLISH ONLY!!!**
 

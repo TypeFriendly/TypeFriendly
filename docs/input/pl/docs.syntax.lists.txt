@@ -177,7 +177,7 @@ Możesz w elementach listy zawrzeć kolejne akapity. Muszą być one otoczone pu
 > Sprawa ta nadal dyskutowana jest podczas opracowywania specyfikacji języka Markdown. Jedynym zalecanym rozwiązaniem jest skorzystanie z HTML-owego komentarza `<!-- # -->` i wstawienie go między listami, co spowoduje ich rozdzielenie.
 
 Zagnieżdżone listy
-------------------
+==================
 
 Kolejne poziomy zagnieżdżonych list należy poprzedzać spacjami bądź tabulacjami.
 
@@ -206,3 +206,53 @@ Kolejne poziomy zagnieżdżonych list należy poprzedzać spacjami bądź tabula
 >    * Element 2.1
 >    * Element 2.2
 > 3. Element 3
+
+Listy z innymi elementami składni Markdown
+==========================================
+
+W listach można umieścić inne elementy składni Markdown. Tak jak akapity, muszą one być poprzedzone czterema spacjami bądź tabulacją. W przypadku bloku kodu należy pamiętać o tym, że prócz konieczności jego poprzedzenia przez cztery spację lub tabulację, trzeba jeszcze dodać wcięcie listy.
+
+~~~
+1.  Litwo! Ojczyzno moja! ty jesteś jak zdrowie.
+    Ile cię trzeba cenić, ten tylko się dowie,
+    
+        przykładowy blok kodu
+
+    Kto cię stracił. Dziś piękność twą w całej ozdobie
+    Widzę i opisuję, bo tęsknię po tobie.
+    
+    *   Element 1
+    
+            przykładowy blok kodu
+    
+    *   Element 2
+
+    Panno Święta, co jasnej bronisz Częstochowy
+    I w Ostrej świecisz Bramie! Ty, co gród zamkowy...
+
+2.  Cośtam dalej.
+~~~
+
+> 1.  Litwo! Ojczyzno moja! ty jesteś jak zdrowie.
+>     Ile cię trzeba cenić, ten tylko się dowie,
+>     
+>         przykładowy blok kodu
+> 
+>     Kto cię stracił. Dziś piękność twą w całej ozdobie
+>     Widzę i opisuję, bo tęsknię po tobie.
+>     
+>     *   Element 1
+>     
+>             przykładowy blok kodu
+>     
+>     *   Element 2
+> 
+>     Panno Święta, co jasnej bronisz Częstochowy
+>     I w Ostrej świecisz Bramie! Ty, co gród zamkowy...
+> 
+> 2.  Cośtam dalej.
+
+<!-- # -->
+
+> [warning]
+> Należy uważać na ilość spacji przed każdym elementem. 

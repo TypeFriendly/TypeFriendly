@@ -58,7 +58,7 @@ Orange
 > 
 > :   Citrus fruit, a type of berry.
 
-Like the ordinary lists, the definition lists may contain other block elements, such as paragraphs or code blocks.
+Like the ordinary lists, the definition lists may contain other block elements, such as paragraphs or code blocks. They must be followed by four spaces or a tabulation.
 
 ~~~
 Term 1

@@ -1,6 +1,6 @@
 Title: Footnotes
 
-----
+---
 
 Footnotes work like the link references. They consist of two elements: the superscripted link in the text and the footnote definition at the end of the document.
 

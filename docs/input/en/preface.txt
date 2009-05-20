@@ -1,6 +1,7 @@
 Title: Preface
 
-----
+---
+
 TypeFriendly is a documentation generation script written in PHP5. It was designed to be easy in use and it allows to achieve the first results immediately, a couple of minutes after you start the work. The script contains everything you need to write clear, multilingual documentation for your project, so that you do not have to code everything on your own.
 
 The most important features of TypeFriendly:

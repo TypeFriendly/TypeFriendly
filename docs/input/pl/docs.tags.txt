@@ -1,6 +1,7 @@
 Title: Tagi plików
 
-----
+---
+
 W rozdziale tym opisane są wszystkie dostępne tagi, jakich można używać w plikach rozdziałów. Większość z nich przyjmuje wartość tekstową, lecz niektóre mogą także obsługiwać zespół wartości (tablicę), którą podajemy w następujący sposób:
 
 ~~~
@@ -11,7 +12,7 @@ NazwaTagu:
 ~~~
 
 Pola podstawowe
----------------
+===============
 
 Title
 :   pełny tytuł danego rozdziału
@@ -41,7 +42,7 @@ SeeAlso:
 ~~~
 
 Status dokumentu
-----------------
+================
 
 Status
 :	wyświetla pole `Status` w dokumencie wynikowym wraz z towarzyszącą treścią, które można wykorzystać do różnych celów.
@@ -51,7 +52,7 @@ FeatureInformation
 
 Poniżej pokazujemy przykładowe użycie tagu `FeatureInformation`. Na początku odwiedzamy plik `settings.ini` i dodajemy do niego sekcję `[featureInformation]`:
 
-~~~~
+~~~
 [ini]
 title = "Foo"
 ; etc...
@@ -59,21 +60,21 @@ title = "Foo"
 [featureInformation]
 experimental = "> [warning]\n> Ta strona opisuje eksperymentalną opcję.\n"
 deprecated = "> [warning]\n> Ta strona opisuje przestarzałą opcję.\n"
-~~~~
+~~~
 
 W wiadomościach można używać formatowania Markdown, a do tworzenia nowych linii można zastosować symbol `\n`, który zostanie zamieniony na właściwy dla danego systemu operacyjnego znak końca wiersza. Następnie możemy dodać nasze wiadomości do rozdziałów:
 
-~~~~~~
+~~~
 Title: Jakaś opcja
 FeatureInformation: experimental
 
-~~~~
+---
 
 Jakiś tekst
-~~~~~~
+~~~
 
 Opis interfejsu programistycznego
----------------------------------
+=================================
 
 Poniższe tagi są użyteczne w tworzeniu opisów interfejsów programowania aplikacji (ang. `API`) zawierających klasy, funkcje, interfejsy itd.
 
@@ -175,7 +176,7 @@ Dostępne konstrukcje programistyczne rozpoznawane przez tag `Construct`:
 + `macro` - makrodefinicja
 
 Tagi kontroli wersji
---------------------
+====================
 
 Informacje o wersjach oraz z systemów kontroli wersji.
 
@@ -190,17 +191,17 @@ VersionTo
 
 Przykładowe użycie:
 
-~~~~
+~~~
 Title: Przykładowa strona
 VCSKeywords: $Id$
 VersionSince: 1.0.2
 VersionTo: 1.4.6
-~~~~
+~~~
 
 Teraz systemy kontroli wersji takie, jak Subversion, mogą rozwijać swoje słowa kluczowe w nagłówku, a ponadto mamy możliwość ich uwzględnienia przy generowaniu dokumentów wynikowych.
 
 Typy rozdziałów
----------------
+===============
 
 Poniższe tagi pomagają TypeFriendly identyfikować rodzaje poszczególnych rozdziałów.
 

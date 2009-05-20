@@ -1,6 +1,6 @@
 Title: File tags
 
-----
+---
 
 In this chapter we have described all the tags that are available in the chapter files. Most of them takes a string as a value, but some of them also support a group of values (an array). We specify them in the following way:
 
@@ -12,7 +12,7 @@ TagName:
 ~~~
 
 Basic tags
-----------
+==========
 
 Title
 :   a full title of the chapter (required tag)
@@ -41,7 +41,7 @@ SeeAlsoExternal:
 ~~~
 
 Document status
----------------
+===============
 
 Status
 :	displays a `Status` field in the output with the specified text. It may be used for various purposes.
@@ -51,7 +51,7 @@ FeatureInformation
 
 A sample use of `FeatureInformation` tag. First, we go to the `settings.ini` file and add an extra section `[featureInformation]`
 
-~~~~
+~~~
 [ini]
 title = "Foo"
 ; etc...
@@ -59,21 +59,21 @@ title = "Foo"
 [featureInformation]
 experimental = "> [warning]\n> This page describes an experimental feature.\n"
 deprecated = "> [warning]\n> This page describes a deprecated feature.\n"
-~~~~
+~~~
 
 The messages may use the Markdown syntax, and to create new lines, we may use `\n` symbol which is replaced with the new line symbol according to your operating system settings. Then, we may display such messages at the beginning of the chapter:
 
-~~~~~~
+~~~
 Title: Some feature
 FeatureInformation: experimental
 
-~~~~
+---
 
 Some text
-~~~~~~
+~~~
 
 API References
---------------
+==============
 
 These tags are very helpful for making various Application Programming Interface references: function, class definitions, interfaces etc.
 
@@ -175,7 +175,7 @@ The available predefined programming constructs for `Construct` tag:
 + `macro` - a macro
 
 Version control tags
---------------------
+====================
 
 Information about the versions and version control.
 
@@ -190,17 +190,17 @@ VersionTo
 
 Sample use of the tags:
 
-~~~~
+~~~
 Title: A sample page
 VCSKeywords: $Id$
 VersionSince: 1.0.2
 VersionTo: 1.4.6
-~~~~
+~~~
 
 Now the version control systems, like Subversion, can expand their special keywords in the header, and moreover, if we enable one option, such information will be included in the generated output.
 
 Document type tags
-------------------
+==================
 
 These are functional tags that help TypeFriendly to determine the chapter type.
 

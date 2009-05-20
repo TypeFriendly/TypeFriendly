@@ -1,6 +1,6 @@
 Title: Plik settings.ini
 
-----
+---
 
 Jest to główny plik konfiguracyjny z listą opcji. Jak sama nazwa pliku wskazuje, jest to typowa składnia plików INI:
 
