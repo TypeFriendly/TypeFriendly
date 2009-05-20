@@ -26,3 +26,5 @@ tf.cli
 tf.outputs
 tf.languages
 appendix
+appendix.development
+appendix.license

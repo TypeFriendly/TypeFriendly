@@ -2,3 +2,6 @@ table_of_contents = "Spis treści"
 documentation = "Dokumentacja"
 generated_in = "Wygenerowano %s"
 doc_license = "Licencja dokumentacji"
+
+period_since = "od"
+period_to = "do"

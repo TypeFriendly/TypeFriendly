@@ -26,6 +26,9 @@
 	class xhtml extends standardOutput
 	{
 		private $date = '';
+		private $translate = null;
+
+		private $_tagVersion = array();
 
 		/**
 		 * Initializes the generation, creating the index.html file with the
@@ -35,7 +38,7 @@
 		 */
 		public function init($project, $path)
 		{		
-			$translate = tfTranslate::get();
+			$this->translate = $translate = tfTranslate::get();
 			$this->date = date('d.m.Y');
 			
 			$this->project = $project;
@@ -84,28 +87,49 @@
 			
 			$code = $this->createHeader($page['Title'], $nav);
 			$code .= $this->createTopNavigator($page);
+			$subtitle = '';
+			if(isset($page['Appendix']) && $page['Appendix'])
+			{
+				$subtitle = $this->translate->_('tags', 'appendix').' ';
+			}
 			if($this->project->config['showNumbers'])
 			{
-				$code .= '<h1>'.$page['FullNumber'].'. '.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Title'].'</h1>';
 			}
 			else
 			{
-				$code .= '<h1>'.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.': '.$page['Title'].'</h1>';
 			}
 			$code .= $this->menuGen($page['Id'], false, true);
-			$code .= $this->createReference($page);
 
-			if($this->project->config['versionControlInfo'])
+			$this->_tagVersion = array();
+
+			$reference =
+				tfTags::orderProcessTag($page, 'General', 'Author', $this).
+				tfTags::orderProcessTag($page, 'Status', 'Status', $this).
+				tfTags::orderProcessTags($page, 'Programming', $this).
+				tfTags::orderProcessTags($page, 'VersionControl', $this);
+			if(sizeof($this->_tagVersion) > 0)
 			{
-				$code .= $this->createVersionControlInfo($page);
+				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
+				if(isset($this->_tagVersion['since']))
+				{
+					$reference .= $this->translate->_('general', 'period_since').' <em>'.$this->_tagVersion['since'].'</em>';
+				}
+				if(isset($this->_tagVersion['to']))
+				{
+					$reference .= ' '.$this->translate->_('general', 'period_to').' <em>'.$this->_tagVersion['to'].'</em>';
+				}
+				$reference .= '</p>';
+			}
+
+			if($reference != '')
+			{
+				$code .= $reference.'<hr/>';
 			}
 			
-			$code .= $page['Content'];
-			
-			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
-			{
-				$code .= $this->createSeeAlso($page);
-			}
+			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this).$page['Content'];
+			$code .= tfTags::orderProcessTag($page, 'Navigation', 'SeeAlso', $this);
 			
 			$code .= $this->createBottomNavigator($page);
 			$code .= $this->createFooter();
@@ -284,214 +308,6 @@ EOF;
 		} // end createBottomNavigator();
 
 		/**
-		 * Creates "See also" links below the page content.
-		 *
-		 * @param Array &$page The page meta-info.
-		 * @return String
-		 */
-		public function createSeeAlso(&$page)
-		{
-			$n =& $this->project->config['showNumbers'];
-			
-			$translate = tfTranslate::get();
-			$prog = tfProgram::get();
-			$i = 0;
-			$code = '<h4>'.$translate->_('navigation','see_also').':</h4><ul>';
-			if(isset($page['SeeAlso']))
-			{
-				foreach($page['SeeAlso'] as $value)
-				{
-					$meta = $this->project->getMetaInfo($value, false);
-					if(is_null($meta))
-					{
-						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$page['Id'].'" does not exist.');
-					}
-					else
-					{
-						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
-						$i++;
-					}			
-				}
-			}
-			if(isset($page['SeeAlsoExternal']))
-			{
-				foreach($page['SeeAlsoExternal'] as $value)
-				{
-					if(($sep = strpos($value, ' ')) !== false)
-					{
-						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
-						$i++;
-					}
-					else
-					{
-						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
-						$i++;
-					}
-				}
-			}
-			$code .= '</ul>';
-			
-			if($i == 0)
-			{
-				return '';
-			}
-			
-			return $code;
-		} // end createSeeAlso();
-
-		/**
-		 * Creates the programming references about the described structure.
-		 * This includes the support for various programming-related tags
-		 * in the page header.
-		 *
-		 * @param Array &$page The page meta-info.
-		 * @return String
-		 */
-		public function createReference(&$page)
-		{
-			$translate = tfTranslate::get();
-			$code = '';
-			// Function reference tag
-			if(isset($page['Reference']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','reference').': </strong><code>'.$page['Reference'].'</code></p>';
-			}
-			// Status tag
-			if(isset($page['Status']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';
-			}
-			// Visibility tag
-			if(isset($page['Visibility']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','visibility').': </strong>'.$page['Visibility'].'</p>';
-			}
-			// What class is extended.
-			if(isset($page['Extends']))
-			{
-				$pp = $this->project->getMetaInfo($page['Extends'], false);
-				if(!is_null($pp))
-				{
-					$code .= '<p><strong>'.$translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
-				}
-			}
-			elseif(isset($page['EExtends']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_extends').':</strong> <code>'.$page['EExtends'].'</code></p>';
-			}
-			// What interfaces are implemented
-			if(isset($page['Implements']) || isset($page['EImplements']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_implements').':</strong></p><ul>';
-				if(isset($page['Implements']))
-				{
-					foreach($page['Implements'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EImplements']))
-				{
-					foreach($page['EImplements'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			// What classes extend the current class.
-			if(isset($page['ExtendedBy']) || isset($page['EExtendedBy']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_extended').':</strong></p><ul>';
-				if(isset($page['ExtendedBy']))
-				{
-					foreach($page['ExtendedBy'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EExtendedBy']))
-				{
-					foreach($page['EExtendedBy'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			// What exceptions are thrown.
-			if(isset($page['Throws']) || isset($page['EThrows']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_throws').':</strong></p><ul>';
-				if(isset($page['Throws']))
-				{
-					foreach($page['Throws'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EThrows']))
-				{
-					foreach($page['EThrows'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			// Version-Since tag
-			if(isset($page['VersionSince']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','version_since').': </strong>'.$page['VersionSince'].'</p>';
-			}
-			// Version-To tag
-			if(isset($page['VersionTo']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','version_to').': </strong>'.$page['VersionTo'].'</p>';
-			}
-			// Author tag
-			if(isset($page['Author']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','author').': </strong>'.$page['Author'].'</p>';
-			}
-			if($code != '')
-			{
-				$code .= '<hr/>';
-			}
-			return $code;
-		} // end createReference();
-
-		/**
-		 * Creates version control information for the page.
-		 *
-		 * @param Array &$page The page meta-info.
-		 * @return String
-		 */
-		public function createVersionControlInfo($page)
-		{
-			$translate = tfTranslate::get();
-			$code = '';
-			if(isset($page['VCSKeywords']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','versionControlInfo').': </strong><code>'.$page['VCSKeywords'].'</code></p>';
-			}
-
-			return $code;
-		} // end createVersionControlInfo();
-
-		/**
 		 * Generates a menu.
 		 *
 		 * @param String $what The root page.
@@ -509,6 +325,7 @@ EOF;
 			{
 				$code .= '<h4>'.$translate->_('general','table_of_contents').'</h4>';
 			}
+			$appendixEnum = 'A';
 			if(isset($this->project->tree[$what]) && count($this->project->tree[$what]) > 0)
 			{
 				$code .= '<ul class="toc">';
@@ -539,4 +356,333 @@ EOF;
 		{
 			return $page.'.html';
 		} // end toAddress();
+
+		/**
+		 * Creates "See also" links below the page content.
+		 *
+		 * @param Array $standard The links within the documentation
+		 * @param Array $external The external SeeAlso links
+		 * @return String
+		 */
+		public function _tagSeeAlso($standard, $external)
+		{
+			$n =& $this->project->config['showNumbers'];
+
+			$translate = tfTranslate::get();
+			$prog = tfProgram::get();
+			$i = 0;
+			$code = '<h4>'.$this->translate->_('navigation','see_also').':</h4><ul>';
+			if(!is_null($standard))
+			{
+				foreach($standard as $value)
+				{
+					$meta = $this->project->getMetaInfo($value, false);
+					if(is_null($meta))
+					{
+						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$page['Id'].'" does not exist.');
+					}
+					else
+					{
+						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
+						$i++;
+					}
+				}
+			}
+			if(!is_null($external))
+			{
+				foreach($external as $value)
+				{
+					if(($sep = strpos($value, ' ')) !== false)
+					{
+						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
+						$i++;
+					}
+					else
+					{
+						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
+						$i++;
+					}
+				}
+			}
+			$code .= '</ul>';
+
+			if($i == 0)
+			{
+				return '';
+			}
+
+			return $code;
+		} // end _tagSeeAlso();
+
+		/**
+		 * Handles "Author" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagAuthor($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','author').': </strong>'.$value.'</p>';
+		} // end _tagAuthor();
+
+		/**
+		 * Handles "Status" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagStatus($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','status').': </strong>'.$value.'</p>';
+		} // end _tagStatus();
+
+		/**
+		 * Handles "VCSKeywords" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagVCSKeywords($val)
+		{
+			if($this->project->config['versionControlInfo'])
+			{
+				return '<p><strong>'.$this->translate->_('tags','version_control_info').': </strong><code>'.$val.'</code></p>';
+			}
+			return '';
+		} // end _tagVCSKeywords();
+
+		/**
+		 * Handles "VersionSince" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagVersionSince($val)
+		{
+			$this->_tagVersion['since'] = $val;
+			return '';
+		} // end _tagVersionSince();
+
+		/**
+		 * Handles "VersionTo" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagVersionTo($val)
+		{
+			$this->_tagVersion['to'] = $val;
+			return '';
+		} // end _tagVersionTo();
+
+		/**
+		 * Handles "FeatureInformation" tag.
+		 *
+		 * @param String $val The parsed value to be displayed.
+		 * @return String
+		 */
+		public function _tagFeatureInformation($val)
+		{
+			return $val;
+		} // end _tagImplements();
+
+		/**
+		 * Handles "Construct" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagConstruct($val)
+		{
+			return '<p><strong>'.$this->translate->_('tags','construct').': </strong>'.$val.'</p>';
+		} // end _tagConstruct();
+
+		/**
+		 * Handles "Visibility" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagVisibility($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','visibility').': </strong>'.$value.'</p>';
+		} // end _tagVisibility();
+
+		/**
+		 * Handles "Returns" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagReturns($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','returns').':</strong> '.$value.'</p>';
+		} // end _tagVisibility();
+
+		/**
+		 * Handles "Type" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagType($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','type').':</strong> '.$value.'</p>';
+		} // end _tagType();
+
+		/**
+		 * Handles "Reference" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagReference($value)
+		{
+			return '<p><strong>'.$this->translate->_('tags','reference').': </strong> <code>'.$value.'</code></p>';
+		} // end _tagReference();
+
+		/**
+		 * Handles "Extends" and "EExtends" tags.
+		 *
+		 * @param String $extends The "Extends" list of values
+		 * @param String $eextends The "EExtends" list of values
+		 * @return String
+		 */
+		public function _tagExtends($extends, $eextends)
+		{
+			$extends = (is_null($extends) ? $eextends : $extends);
+			$pp = $this->project->getMetaInfo($extends, false);
+			if(!is_null($pp))
+			{
+				return '<p><strong>'.$this->translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
+			}
+		} // end _tagExtends();
+
+		/**
+		 * Handles "ExtendedBy" and "EExtendedBy" tags.
+		 *
+		 * @param Array $val1 The "ExtendedBy" list of values
+		 * @param Array $val2 The "EExtendedBy" list of values
+		 * @return String
+		 */
+		public function _tagExtendedBy($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_extended');
+		} // end _tagExtendedBy();
+
+		/**
+		 * Handles "Implements" and "EImplements" tags.
+		 *
+		 * @param Array $val1 The "Implements" list of values
+		 * @param Array $val2 The "EImplements" list of values
+		 * @return String
+		 */
+		public function _tagImplements($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_implements');
+		} // end _tagImplements();
+
+		/**
+		 * Handles "Throws" and "EThrows" tags.
+		 *
+		 * @param Array $val1 The "Implements" list of values
+		 * @param Array $val2 The "EImplements" list of values
+		 * @return String
+		 */
+		public function _tagThrows($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_throws');
+		} // end _tagImplements();
+
+		/**
+		 * Handles "MultiExtends" and "EMultiExtends" tags.
+		 *
+		 * @param Array $val1 The "Implements" list of values
+		 * @param Array $val2 The "EImplements" list of values
+		 * @return String
+		 */
+		public function _tagMultiExtends($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_extends');
+		} // end _tagMultiExtends();
+
+		/**
+		 * Handles "Arguments" tag.
+		 *
+		 * @param Array $list The argument list
+		 * @return String
+		 */
+		public function _tagArguments($list)
+		{
+			$typeOk = true;
+			foreach($list as $item)
+			{
+				if(!isset($item['Type']) && !isset($item['EType']))
+				{
+					$typeOk = false;
+				}
+			}
+			$code = '<table><caption>'.$this->translate->_('tags', 'arg_list').'</caption><thead><tr><th>'.$this->translate->_('tags', 'arg_name').'</th>';
+			if($typeOk)
+			{
+				$code .= '<th>'.$this->translate->_('tags', 'arg_type').'</th>';
+			}
+			$code .= '<th>'.$this->translate->_('tags', 'arg_desc').'</th></tr></thead><tbody>';
+			foreach($list as $item)
+			{
+				$code .= '<tr><td><code>'.$item['Name'].'</code></td>';
+				if($typeOk)
+				{
+					$code .= '<td>';
+					if(isset($item['Type']))
+					{
+
+						$pp = $this->project->getMetaInfo($item['Type'], false);
+						if(!is_null($pp))
+						{
+							$code .= '<a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a>';
+						}
+					}
+					elseif(isset($item['EType']))
+					{
+						$code .= '<code>'.$item['EType'].'</code>';
+					}
+					$code .= '</td>';
+				}
+				$code .= '<td>'.$item['Desc'].'</td></tr>';
+			}
+			return $code.'</tbody></table>';
+		} // end _tagParameters();
+
+		/**
+		 * A helper method for tags like "Implements".
+		 *
+		 * @param Array $val1
+		 * @param Array $val2
+		 * @param String $message
+		 */
+		private function _showLinks($val1, $val2, $message)
+		{
+			$code = '<p><strong>'.$this->translate->_('tags',$message).':</strong> ';
+			$items = array();
+			if($val1 !== null)
+			{
+				foreach($val1 as $item)
+				{
+					$pp = $this->project->getMetaInfo($item, false);
+					if(!is_null($pp))
+					{
+						$items[] = '<a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a>';
+					}
+				}
+			}
+			if($val2 !== null)
+			{
+				foreach($val2 as $item)
+				{
+					$items[] = '<code>'.$item.'</code>';
+				}
+			}
+			return $code.implode(', ', $items).'</p>';
+		} // end _showLinks();
 	} // end xhtml;

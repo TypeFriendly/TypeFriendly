@@ -25,113 +25,184 @@ SeeAlso
 SeeAlsoExternal
 :   jak wyżej, lecz umożliwia podanie zewnętrznych odnośników. Po spacji można wpisać tekst odnośnika
 
-Status
-:   wyświetla pod tytułem pole o tytule "Status", które można zaadaptować do dowolnych celów.
-
-Reference
-:   umożliwia podanie sposobu wywołania funkcji (liczba, typ parametrów, zwracana wartość itd.).
-
 Author
 :   autor dokumentu
 
-VersionSince
-:   od jakiej wersji dany element jest dostępny
-
-VersionTo
-:   do jakiej wersji dany element był dostępny
 
 Przykład:
 
 ~~~
 Title: Funkcja foo()
 ShortTitle: foo()
-Reference: void foo(int $a, int $b)
-VersionSince: 1.0.0
-VersionTo: 1.2.0
 SeeAlso:
  - reference.functions.bar
  SeeAlsoExternal:
  - http://www.example.com/ Przykładowa strona
 ~~~
 
-Programowanie obiektowe
------------------------
-Pola te służą do łatwiejszego tworzenia dokumentacji do obiektowego kodu. Umożliwiają określenie np. klas pochodnych, bazowych itd. Wszędzie TypeFriendly zakłada, że otrzyma identyfikator rozdziału, który opisuje daną rzecz:
+Status dokumentu
+----------------
+
+Status
+:	wyświetla pole `Status` w dokumencie wynikowym wraz z towarzyszącą treścią, które można wykorzystać do różnych celów.
+
+FeatureInformation
+:	wstawia na początek treści dokumentu dodatkowy nagłówek o podanym identyfikatorze zdefiniowany w pliku konfiguracyjnym projektu.
+
+Poniżej pokazujemy przykładowe użycie tagu `FeatureInformation`. Na początku odwiedzamy plik `settings.ini` i dodajemy do niego sekcję `[featureInformation]`:
+
+~~~~
+[ini]
+title = "Foo"
+; etc...
+
+[featureInformation]
+experimental = "> [warning]\n> Ta strona opisuje eksperymentalną opcję.\n"
+deprecated = "> [warning]\n> Ta strona opisuje przestarzałą opcję.\n"
+~~~~
+
+W wiadomościach można używać formatowania Markdown, a do tworzenia nowych linii można zastosować symbol `\n`, który zostanie zamieniony na właściwy dla danego systemu operacyjnego znak końca wiersza. Następnie możemy dodać nasze wiadomości do rozdziałów:
+
+~~~~~~
+Title: Jakaś opcja
+FeatureInformation: experimental
+
+~~~~
+
+Jakiś tekst
+~~~~~~
+
+Opis interfejsu programistycznego
+---------------------------------
+
+Poniższe tagi są użyteczne w tworzeniu opisów interfejsów programowania aplikacji (ang. `API`) zawierających klasy, funkcje, interfejsy itd.
+
+Construct
+:	konstrukcja programistyczna opisywana przez rozdział. Możesz wpisać tutaj zarówno swoją własną nazwę, jak i jedną z predefiniowanych przez TypeFriendly (wykaz znajduje się niżej). W tym drugim przypadku, TF automatycznie przetłumaczy ich nazwy na wybrany język dokumentacji i sprawdzi możliwość stosowania pozostałych tagów.
+:	Użycie tego tagu nie jest obowiązkowe. Jeśli nie dodasz go do rozdziału, TypeFriendly nie będzie wykonywać żadnych dodatkowych czynności związanych z użytymi tagami.
+
+Type
+:	typ elementu (może być użyty w różnych celach)
 
 Visibility
-:	widoczność danego elementu dla innych (np. publiczny, prywatny...)
+:	widoczność/dostęp do elementu (np. *public*, *private*)
 
 Extends
-:   klasa bazowa.
+:	bazowa klasa.
+:	tag nie może być używany jednocześnie z `MultiExtends` w tym samym rozdziale.
+:	wymaga podania identyfikatora rozdziału, który opisuje klasę bazową.
+:	`EExtends` wymaga podania nazwy klasy bazowej w sytuacji, gdy nasza dokumentacja jej nie opisuje.
+
+MultiExtends
+:	bazowe klasy dla języków wspierających wielokrotne dziedziczenie.
+:	tag nie może być używany jednocześnie z `Extends` w tym samym rozdziale.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy bazowe.
+:	`EMultiExtends` wymaga podania listy z nazwami klas bazowych, gdy nie obejmuje ich nasza dokumentacja.
 
 Implements
-:   implementowane interfejsy.
+:   zaimplementowane interfejsy dla języków, które obsługują tę opcję.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne interfejsy.
+:	`EImplements` wymaga podania listy z nazwami interfejsów, gdy nie obejmuje ich nasza dokumentacja.
 
 ExtendedBy
-:   lista klas rozszerzających aktualną.
+:   klasy/interfejsy rozszerzające aktualną.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
+:	`EExtendedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
 
 Throws
-:	lista rzucanych wyjątków
+:	rzucane wyjątki.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy wyjątków.
+:	`EThrows` wymaga podania listy z nazwami klas wyjątków, gdy nie obejmuje ich nasza dokumentacja.
+
+Reference
+:	prototyp funkcji, np. `void foo(int a, int b [, int c])`
+
+Arguments
+:	lista argumentów funkcji/metody
+:	spodziewany format pojedynczego argumentu: `Name: nazwa_arg | Type: rozdzial.typu.argumentu | EType: nazwa_typu_argumentu | Desc: opis`
+:	tagi `Type` oraz `EType` są opcjonalne, jeśli jednak decydujesz się na ich użycie, muszą być zastosowane we wszystkich wymienionych argumentach.
+
+Returns
+:	opis tego, co funkcja zwraca.
 
 Przykładowe użycie:
 
 ~~~
-Title: Klasa "foo"
+Title: Class "foo"
+Construct: class
 Extends: reference.bar
 Implements:
  - reference.foo-interface
  - reference.bar-interface
 ExtendedBy:
  - reference.joe
-Throws:
- - reference.foo-exception
 ~~~
- 
-Dodatkowo istnieją wersje tych dyrektyw (za wyjątkiem `Visibility`), które umożliwiają podanie nazwy klasy bezpośrednio. Wszystkie one mają nazwy rozpoczynające się od dużej litery "E", np. **EExtends**, **EImplements**. Przykładowe użycie:
+
+Jak widać, tagi wymagają domyślnie podania identyfikatorów rozdziałów opisujących wybraną opcję. Jeśli jednak pochodzi ona z jakiejś zewnętrznej biblioteki i nie jest ujęta w naszej dokumentacji, możemy utworzyć dodatkowe tagi z nazwą poprzedzoną dużą literą `E` do ich wymienienia:
 
 ~~~
 Title: Klasa "foo"
 EExtends: PDO
+Implements:
+ - reference.my-interface
 EImplements:
  - Countable
  - IteratorAggregate
 ~~~
 
-Wsparcie systemu kontroli wersji
---------------------------------
+Obie wersje tagów mogą być użyte jednocześnie w obrębie tego samego rozdziału.
 
-Te tagi są wyświetlane w wynikowym dokumencie, jeśli włączymy opcję konfiguracyjną `versionControlInfo`.
+Dostępne konstrukcje programistyczne rozpoznawane przez tag `Construct`:
+
++ `class` - klasa
++ `interface` - interfejs
++ `abstract class` - klasa abstrakcyjna
++ `function` - funkcja
++ `method` - metoda
++ `static method` - metoda statyczna
++ `abstract method` - metoda abstrakcyjna
++ `accessor method` - metoda dostępowa (np. `setSomething()`, `getSomething()`).
++ `constructor` - konstruktor klasy
++ `destructor` - destruktor klasy
++ `magic method` - magiczna metoda (np. `__call()` w PHP)
++ `variable` - zmienna
++ `static variable` - zmienna statyczna
++ `module` - moduł
++ `package` - pakiet
++ `namespace` - przestrzeń nazw
++ `datatype` - typ danych
++ `structure` - struktura (w stylu C lub C++)
++ `macro` - makrodefinicja
+
+Tagi kontroli wersji
+--------------------
+
+Informacje o wersjach oraz z systemów kontroli wersji.
 
 VCSKeywords
-:	miejsce, gdzie mogą być rozwinięte słowa kluczowe systemu kontroli wersji.
+:	miejsce, gdzie system kontroli wersji może rozwijać swoje słowa kluczowe. Są one uwzględniane w dokumencie wynikowym, gdy włączymy opcję `versionControlInfo` w konfiguracji projektu.
+
+VersionSince
+:	pierwsza wersja, która zawiera opisywaną opcję.
+
+VersionTo
+:	ostatnia wersja, która zawiera opisywaną opcję.
 
 Przykładowe użycie:
 
 ~~~~
 Title: Przykładowa strona
 VCSKeywords: $Id$
+VersionSince: 1.0.2
+VersionTo: 1.4.6
 ~~~~
 
-Teraz systemy kontroli wersji takie, jak Subversion, mogą rozwinąć słowo kluczowe "Id" w nagłówku dokumentu, a dodatkowo mamy możliwość jego uwzględnienia w wynikowym dokumencie po włączeniu odpowiedniej opcji.
+Teraz systemy kontroli wersji takie, jak Subversion, mogą rozwijać swoje słowa kluczowe w nagłówku, a ponadto mamy możliwość ich uwzględnienia przy generowaniu dokumentów wynikowych.
 
-Pola planowane
---------------
-Poniższe pola są propozycjami, które prawdopodobnie zostaną wdrożone w nadchodzących wersjach.
+Typy rozdziałów
+---------------
 
-MultiExtends
-:   do obsługi wielokrotnego dziedziczenia
-
-SeeAlsoExternal
-:   sekcja "Zobacz także", lecz z odnośnikami zewnętrznymi
-
-Quote
-:   umożliwi wklejenie cytatu na początek rozdziału
-
-QuoteAuthor
-:   autorstwo cytatu
-
-AllowUserComments
-:   do generatora wersji on-line: informacja, czy zezwolić na komentowanie danego rozdziału.
+Poniższe tagi pomagają TypeFriendly identyfikować rodzaje poszczególnych rozdziałów.
 
 Appendix
-:   doklei do nazwy podstrony słowa "Dodatek X.", gdzie X to litera podana za wartość.
+:	akceptuje wartość logiczną (*true*, *false*, *yes*, *no*). Oznacza dany rozdział jako "Dodatek", co powoduje, że otrzymuje on zamiast tradycyjnej numeracji kolejną literę alfabetu zgodnie z ustawieniami kolejności TypeFriendly. Ponadto tytuł rozdziału zostaje poprzedzony słowem "Dodatek".

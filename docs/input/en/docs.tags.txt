@@ -26,112 +26,183 @@ SeeAlso
 SeeAlsoExternal
 :   like above, but allows to put external URLs. The address can be separated with a space from the URL text.
 
-Status
-:   shows a field named "Status" under the chapter title that can be used for various purposes.
-
-Reference
-:   allows to create a function reference (number of arguments, their type, returned value etc.). The reference itself is created manually.
-
 Author
 :   document author
-
-VersionSince
-:   which version this element is available since.
-
-VersionTo
-:   which version this element is available to.
 
 Example:
 
 ~~~
 Title: Function foo()
 ShortTitle: foo()
-Reference: void foo(int $a, int $b)
-VersionSince: 1.0.0
-VersionTo: 1.2.0
 SeeAlso:
  - reference.functions.bar
- SeeAlsoExternal:
+SeeAlsoExternal:
  - http://www.example.com/ A sample website
 ~~~
 
-Object-oriented Programming
----------------------------
+Document status
+---------------
 
-Those fields are used to mark the class dependencies in the objective code. You can set the base and derived classes, interfaces etc. TypeFriendly expects a chapter identifier that describes the required class/interface.
+Status
+:	displays a `Status` field in the output with the specified text. It may be used for various purposes.
+
+FeatureInformation
+:	prepends the content saved under the specified identifier in the project configuration to the beginning of the chapter content.
+
+A sample use of `FeatureInformation` tag. First, we go to the `settings.ini` file and add an extra section `[featureInformation]`
+
+~~~~
+[ini]
+title = "Foo"
+; etc...
+
+[featureInformation]
+experimental = "> [warning]\n> This page describes an experimental feature.\n"
+deprecated = "> [warning]\n> This page describes a deprecated feature.\n"
+~~~~
+
+The messages may use the Markdown syntax, and to create new lines, we may use `\n` symbol which is replaced with the new line symbol according to your operating system settings. Then, we may display such messages at the beginning of the chapter:
+
+~~~~~~
+Title: Some feature
+FeatureInformation: experimental
+
+~~~~
+
+Some text
+~~~~~~
+
+API References
+--------------
+
+These tags are very helpful for making various Application Programming Interface references: function, class definitions, interfaces etc.
+
+Construct
+:	the programming construct the chapter describes. You may either enter your own construct name or use the predefined one. In the second case, TypeFriendly automatically translates the construct name to the other languages and checks what others tags can be used.
+:	Note that this tag is not obligatory. If you do not use it, TypeFriendly does not perform any extra checks and validations.
+
+Type
+:	shows the element type (may be used for various purposes)
 
 Visibility
-:	the element visibility (for example *public*, *protected* etc.)
+:	the element visibility (*public*, *private* etc.)
 
 Extends
-:   base class.
+:	base class.
+:	the tag cannot be used together with `MultiExtends` in the same chapter
+:	expects the identifier of a chapter that describes the base class
+:	`EExtends` expects the plain class name that does not have its own chapter in the documentation.
+
+MultiExtends
+:	base classes (for languages that support multiple inheritance).
+:	the tag cannot be used together with `Extends` in the same chapter
+:	expects the list of chapter identifiers that describe the base classes.
+:	`EMultiExtends` expects the list of plain class names that do not have their own chapters in the documentation.
 
 Implements
-:   implemented interfaces.
+:   implemented interfaces (for languages that support interfaces)
+:	expects the list of chapter identifiers that describe the interfaces.
+:	`EImplements` expects the list of plain interface names that do not have their own chapters in the documentation.
 
 ExtendedBy
 :   derived classes.
+:	expects the list of chapter identifiers that describe the classes that extend the current one.
+:	`EExtendedBy` expects the list of plain class names that do not have their own chapters in the documentation.
 
 Throws
 :	the exceptions thrown.
+:	expects the list of chapter identifiers that describe the thrown exception classes.
+:	`EThrows` expects the list of plain exception class names that do not have their own chapters in the documentation.
+
+Reference
+:	the function reference, i.e. `void foo(int a, int b [, int c])`
+
+Arguments
+:	the list of function/method arguments
+:	the expected argument format: `Name: arg_name | Type: arg.type.chapter | EType: arg_type_name | Desc: argument description`
+:	the `Type` and `EType` tags are optional, however - if you decide to use them, they must be specified in all the arguments.
+
+Returns
+:	the description what the function or method returns.
 
 Sample use:
 
 ~~~
 Title: Class "foo"
+Construct: class
 Extends: reference.bar
 Implements:
  - reference.foo-interface
  - reference.bar-interface
 ExtendedBy:
  - reference.joe
-Throws:
- - reference.foo-exception
 ~~~
 
-In addition, there are alternative versions of those tags (except `Visibility`) that allow to specify the class/interface names manually. The tag name begins with an uppercase letter **e**: **EExtents**, **EImplements**, etc. Sample use:
+As you can see, the tags require the chapter identifiers by default. To specify the classes, interfaces etc. that are defined by some external libraries and your book does not cover them, you may use the extra tags prepended with the `E` letter:
 
 ~~~
 Title: Class "foo"
 EExtends: PDO
+Implements:
+ - reference.my-interface
 EImplements:
  - Countable
  - IteratorAggregate
 ~~~
 
+As you can see, both of the versions can be used simultaneously in the same chapter.
+
+The available predefined programming constructs for `Construct` tag:
+
++ `class` - a class
++ `interface` - an interface
++ `abstract class` - an abstract class
++ `function` - a function
++ `method` - a method
++ `static method` - a static method
++ `abstract method` - an abstract method
++ `accessor method` - an accessor method (i.e. `setSomething()`, `getSomething()`).
++ `constructor` - a class constructor
++ `destructor` - a class destructor
++ `magic method` - a magic method (i.e. `__call()` in PHP)
++ `variable` - a variable
++ `static variable` - a static variable
++ `module` - a module
++ `package` - a package
++ `namespace` - a namespace
++ `datatype` - a datatype
++ `structure` - a structure (like in C or C++)
++ `macro` - a macro
+
 Version control tags
 --------------------
 
-These tags are displayed in the generated output, if the configuration option `versionControlInfo` is enabled.
+Information about the versions and version control.
 
 VCSKeywords
-:	specified a place where the version control system keywords can be expanded.
+:	specified a place where the version control system keywords can be expanded. The content of this tag is displayed in the output, if the `versionControlInfo` option is enabled in the project configuration.
 
-Sample use:
+VersionSince
+:	the first version that contains the described item
+
+VersionTo
+:	the last version that contains the described item
+
+Sample use of the tags:
 
 ~~~~
 Title: A sample page
 VCSKeywords: $Id$
+VersionSince: 1.0.2
+VersionTo: 1.4.6
 ~~~~
 
 Now the version control systems, like Subversion, can expand their special keywords in the header, and moreover, if we enable one option, such information will be included in the generated output.
 
-Tag proposals
--------------
+Document type tags
+------------------
 
-The following fields are proposals that probably will be supported in the future releases of TypeFriendly.
-
-MultiExtends
-:   supports the multiple inheritance
-
-Quote
-:   adds a quote at the begin of the chapter
-
-QuoteAuthor
-:   quote author
-
-AllowUserComments
-:   for the on-line documentation generator. It is used to mark, whether this chapter allows user comments or not.
+These are functional tags that help TypeFriendly to determine the chapter type.
 
 Appendix
-:   appendix support.
+:	accepts a boolean value (*true*, *false*, *yes*, *no*). The tag helps creating appendices, providing the alphabetical enumberation for them according to the ordinary chapter order settings, and prepends the "Appendix" word to the title. 

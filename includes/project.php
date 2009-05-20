@@ -183,7 +183,7 @@
 			
 			// Retrieve the language versions
 			$this->langs = $this->fs->listDirectory('input/', false, true);
-			// Produce the outputs		
+			tfTags::setConfiguration($this->config);
 		} // end __construct();
 		
 		static public function set(tfProject $project)
@@ -288,6 +288,10 @@
 				$parentId = implode('.', $extract);
 				if(!isset($list[$parentId]))
 				{
+					if($parentId != '')
+					{
+						throw new Exception('The parent of '.$item.' does not exist.');
+					}
 					$list[$parentId] = array(0 => array('id' => $item, 'order' => 0));
 				}
 				else
@@ -403,18 +407,16 @@
 					{
 						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->baseLanguage.'/'.$item['id'].'.txt'));
 					}
-
-					// Validate the user-defined meta.
-					if(!isset($metaData['ShortTitle']))
+					if(!tfTags::validateTags($metaData))
 					{
-						$metaData['ShortTitle'] = $metaData['Title'];
+						throw new Exception('Tag validation error in "'.$item['id'].'": '.PHP_EOL.tfTags::getError());
 					}
 					
 					// Create the additional meta.
 					$metaData['Id'] = $item['id'];
 					$metaData['Number'] = $item['order'] + 1;
 					
-					// Create the navigation according to the chapter layout					
+					// Create the navigation according to the chapter layout
 					$metaData['_Parent'] = $id;
 					$metaData['_Previous'] = null;
 					$metaData['_Next'] = null; 
@@ -467,16 +469,25 @@
 			{
 				$queue->enqueue($item['Id']);
 			}
+			// Add the numbering.
+			$appendixEnum = 'A';
 			while($queue->count() > 0)
 			{
 				$id = $queue->dequeue();
-				if($this->pages[$id]['_Parent'] == '')
+				if(isset($this->pages[$id]['Appendix']) && $this->pages[$id]['Appendix'])
 				{
-					$this->pages[$id]['FullNumber'] = $this->pages[$id]['Number'];
+					$this->pages[$id]['FullNumber'] = ($appendixEnum++);
 				}
 				else
 				{
-					$this->pages[$id]['FullNumber'] = $this->pages[$this->pages[$id]['_Parent']]['FullNumber'].'.'.$this->pages[$id]['Number'];
+					if($this->pages[$id]['_Parent'] == '')
+					{
+						$this->pages[$id]['FullNumber'] = $this->pages[$id]['Number'];
+					}
+					else
+					{
+						$this->pages[$id]['FullNumber'] = $this->pages[$this->pages[$id]['_Parent']]['FullNumber'].'.'.$this->pages[$id]['Number'];
+					}
 				}
 				foreach($list[$id] as &$item)
 				{
@@ -526,8 +537,6 @@
 			$this->copyMedia();
 			
 			$this->outputObj = $out = $this->prog->fs->loadObject('outputs/'.$this->output.'.php', $this->output);
-			$out->init($this, 'output/'.$this->output.'/');
-			
 			if($reparse)
 			{
 				$parsers = tfParsers::get();
@@ -543,7 +552,7 @@
 				$parsers->getParser()->predef_urls = $refs;
 				$parsers->getParser()->predef_titles = $refTitles;
 			}
-			
+			$out->init($this, 'output/'.$this->output.'/');
 			foreach($this->pages as &$page)
 			{
 				if(!$this->parsed)

@@ -1,5 +1,5 @@
 Title: License and authors
-Appendix: B
+Appendix: Yes
 
 ----
 

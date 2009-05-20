@@ -176,7 +176,8 @@ versionControlInfo = false
 			$prg->loadLibrary('output');
 			$prg->loadLibrary('project');
 			$prg->loadLibrary('i18n');
-			
+			$prg->loadLibrary('tags');
+
 			$project = new tfProject($this->args['#path']);
 			tfProject::set($project);
 
@@ -210,6 +211,7 @@ versionControlInfo = false
 					$project->setOutput($out);
 					$project->generate();	
 				}
+				$prg->console->stdout->writeln('Generation completed.');
 			}
 		} // end build();
 
