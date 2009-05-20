@@ -23,27 +23,28 @@
 */
 // $Id$
 
+	require('xhtml.php');
 
-	class xhtml_single extends standardOutput
+	class xhtml_single extends xhtml
 	{
-		private $code;
-		private $pageOrder = array();
-		private $pageContent = array();
-
+		protected $pageOrder = array();
+		protected $pageContent = array();
+		
 		/**
-		 * Initializes the generation, creating the index.html file with the
-		 * table of contents.
+		 * Initializes the generation.
+		 * 		 
 		 * @param tfProject $project The project
 		 * @param String $path Output path
 		 */
 		public function init($project, $path)
 		{
+			$this->translate = tfTranslate::get();
 			$this->date = date('d.m.Y');
 			
 			$this->project = $project;
 			$this->path = $path;	
 		} // end init();
-
+		
 		/**
 		 * Generates a single page and saves it on the disk.
 		 *
@@ -51,38 +52,81 @@
 		 */
 		public function generate($page)
 		{	
-			$code = '';	
+			$nav = array();
 			
-			$n =& $this->project->config['showNumbers'];
+			$nav[$page['Id']] = $page['ShortTitle'];
 			
-			$code .= $this->createTopNavigator($page);
-			
-			$id = str_replace('.', '_', $page['Id']);
-			$code .= '<h1>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'</h1>';
-			
-			$code .= $this->createReference($page);
-			
-			if($this->project->config['versionControlInfo'])
+			$parent = $page['_Parent']; 			
+			do
 			{
-				$code .= $this->createVersionControlInfo($page);
+				$parent = $this->project->getMetaInfo($parent, false);
+				if(!is_null($parent))
+				{
+					$nav[$parent['Id']] = $parent['ShortTitle'];
+					$parent = $parent['_Parent']; 
+				}
+			}
+			while(!is_null($parent));
+			
+			$nav = array_reverse($nav, true);
+			
+			$code = $this->createTopNavigator($page);
+			$subtitle = '';
+			if(isset($page['Appendix']) && $page['Appendix'])
+			{
+				$subtitle = $this->translate->_('tags', 'appendix').' ';
+				if(!$this->project->config['showNumbers'])
+				{
+					$subtitle = trim($subtitle).': ';
+				}
+			}
+			if($this->project->config['showNumbers'])
+			{
+				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Title'].'</h1>';
+			}
+			else
+			{
+				$code .= '<h1>'.$subtitle.$page['Title'].'</h1>';
+			}
+
+			$this->_tagVersion = array();
+
+			$reference =
+				tfTags::orderProcessTag($page, 'General', 'Author', $this).
+				tfTags::orderProcessTag($page, 'Status', 'Status', $this).
+				tfTags::orderProcessTags($page, 'Programming', $this).
+				tfTags::orderProcessTags($page, 'VersionControl', $this);
+			if(sizeof($this->_tagVersion) > 0)
+			{
+				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
+				if(isset($this->_tagVersion['since']))
+				{
+					$reference .= $this->translate->_('general', 'period_since').' <em>'.$this->_tagVersion['since'].'</em>';
+				}
+				if(isset($this->_tagVersion['to']))
+				{
+					$reference .= ' '.$this->translate->_('general', 'period_to').' <em>'.$this->_tagVersion['to'].'</em>';
+				}
+				$reference .= '</p>';
+			}
+
+			if($reference != '')
+			{
+				$code .= $reference.'<hr/>';
 			}
 			
+			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this);
 			$code .= $page['Content'];
-			
-			if(isset($page['SeeAlso']) || isset($page['SeeAlsoExternal']))
-			{
-				$code .= $this->createSeeAlso($page);
-			}
+			$code .= tfTags::orderProcessTag($page, 'Navigation', 'SeeAlso', $this);
 			
 			$this->pageContent[$page['Id']] = $code;
 		} // end generate();
-
+		
 		/**
 		 * Finalizes the generation and saves the results to the hard disk.
 		 */
 		public function close()
 		{
-			$translate = tfTranslate::get();
 			
 			$code = $this->createHeader();
 			
@@ -90,11 +134,12 @@
 			
 			$code .= '<p><strong>Copyright &copy; '.$this->project->config['copyright'].'</strong></p>';
 			
-			$code .= '<p>'.$translate->_('general','doc_license').': '.$this->project->config['license'].'</p>';
+			$code .= '<p>'.$this->translate->_('general','doc_license').': '.$this->project->config['license'].'</p>';
 			
-			$code .= '<p>'.$translate->_('general','generated_in',$this->date).'</p>';
+			$code .= '<p>'.$this->translate->_('general','generated_in',$this->date).'</p>';
 			
-			$code .= '<h4 id="toc">'.$translate->_('general','table_of_contents').'</h4>';
+			$code .= '<h4 id="toc">'.$this->translate->_('general','table_of_contents').'</h4>';
+			
 			$code .= $this->menuGen('', true);
 			foreach($this->pageOrder as $id)
 			{
@@ -105,7 +150,7 @@
 		
 			$this->project->fs->write($this->path.'index.html', $code);
 		} // end close();
-
+		
 		/**
 		 * Internal method that generates a common header for all the pages
 		 * and returns the source code.
@@ -114,14 +159,13 @@
 		 * @param Array $nav The navigation list.
 		 * @return String
 		 */
-		private function createHeader()
+		public function createHeader()
 		{
-			$translate = tfTranslate::get();
 			
 			$docTitle = $this->project->config['title'];
 			$docVersion = $this->project->config['version'];
 			
-			$textDocumentation = $translate->_('general','documentation');
+			$textDocumentation = $this->translate->_('general','documentation');
 $code = <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -156,9 +200,8 @@ EOF;
 		 * @return String
 		 */
 		public function createFooter()
-		{
-			$translate = tfTranslate::get();		
-			$textLicense = $translate->_('general','doc_license');
+		{		
+			$textLicense = $this->translate->_('general','doc_license');
 
 			if(strlen($this->project->config['copyrightLink']) > 0)
 			{
@@ -191,7 +234,7 @@ $code = <<<EOF
 EOF;
 			return $code;
 		} // end createFooter();
-
+		
 		/**
 		 * Creates the navigation above the page contents.
 		 *
@@ -204,7 +247,6 @@ EOF;
             
             $id = str_replace('.', '_', $page['Id']);
 			
-			$translate = tfTranslate::get();
 			$parent = $this->project->getMetaInfo($page['_Parent'], false);
 			$prev = $this->project->getMetaInfo($page['_Previous'], false);
 			$next = $this->project->getMetaInfo($page['_Next'], false);
@@ -215,224 +257,32 @@ EOF;
 			}
 			else
 			{
-				$code .= '<dt><a href="#toc">'.$translate->_('general','table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="#toc">'.$this->translate->_('general', 'table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Title'].'<br/><a href="'.$this->toAddress($prev['Id']).'">&laquo; '.$translate->_('navigation','prev').'</a></dd>';
+				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Title'].'<br/><a href="'.$this->toAddress($prev['Id']).'">&laquo; '.$this->translate->_('navigation','prev').'</a></dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Title'].'<br/><a href="'.$this->toAddress($next['Id']).'">'.$translate->_('navigation','next').' &raquo;</a></dd>';
+				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Title'].'<br/><a href="'.$this->toAddress($next['Id']).'">'.$this->translate->_('navigation','next').' &raquo;</a></dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
 		} // end createTopNavigator();
-
+		
 		/**
-		 * Creates "See also" links below the page content.
+		 * Converts the page identifier to the URL.
 		 *
-		 * @param Array &$page The page meta-info.
+		 * @param String $page The page identifier.
 		 * @return String
 		 */
-		public function createSeeAlso(&$page)
+		public function toAddress($page)
 		{
-			$n =& $this->project->config['showNumbers'];
-			
-			$translate = tfTranslate::get();
-			
-			$i = 0;
-			
-			$prog = tfProgram::get();
-			$code = '<h3>'.$translate->_('navigation','see_also').':</h3><ul>';
-			if(isset($page['SeeAlso']))
-			{
-				foreach($page['SeeAlso'] as $value)
-				{
-					$meta = $this->project->getMetaInfo($value, false);
-					if(is_null($meta))
-					{
-						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$page['Id'].'" does not exist.');
-					}
-					else
-					{
-						$code .= '<li><a href="'.$this->toAddress($meta['Id']).'">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
-						$i++;
-					}			
-				}
-			}
-			if(isset($page['SeeAlsoExternal']))
-			{
-				foreach($page['SeeAlsoExternal'] as $value)
-				{
-					if(($sep = strpos($value, ' ')) !== false)
-					{
-						$code .= '<li><a href="'.substr($value, 0, $sep).'">'.substr($value, $sep).'</a></li>';
-						$i++;
-					}
-					else
-					{
-						$code .= '<li><a href="'.$value.'">'.$value.'</a></li>';
-						$i++;
-					}
-				}
-			}
-			$code .= '</ul>';
-			
-			if($i == 0)
-			{
-				return '';
-			}
-			
-			return $code;
-		} // end createSeeAlso();  
-
-
-		/**
-		 * Creates the programming references about the described structure.
-		 * This includes the support for various programming-related tags
-		 * in the page header.
-		 *
-		 * @param Array &$page The page meta-info.
-		 * @return String
-		 */
-		public function createReference(&$page)
-		{
-			$translate = tfTranslate::get();
-			$code = '';
-			// Reference 
-			if(isset($page['Reference']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','reference').': </strong><code>'.$page['Reference'].'</code></p>';
-			}
-			// The status tag
-			if(isset($page['Status']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','status').': </strong>'.$page['Status'].'</p>';
-			}
-			// Visibility tag
-			if(isset($page['Visibility']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','visibility').': </strong>'.$page['Visibility'].'</p>';
-			}
-			if(isset($page['Extends']))
-			{
-				$pp = $this->project->getMetaInfo($page['Extends'], false);
-				if(!is_null($pp))
-				{
-					$code .= '<p><strong>'.$translate->_('tags','obj_extends').': </strong><a href="'.$this->toAddress($pp['Id']).'">'.$pp['ShortTitle'].'</a></p>';
-				}
-			}
-			elseif(isset($page['EExtends']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_extends').':</strong> <code>'.$page['EExtends'].'</code></p>';
-			}
-			if(isset($page['Implements']) || isset($page['EImplements']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_implements').':</strong></p><ul>';
-				if(isset($page['Implements']))
-				{
-					foreach($page['Implements'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$this->toAddress($pp['Id']).'">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EImplements']))
-				{
-					foreach($page['EImplements'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			if(isset($page['ExtendedBy']) || isset($page['EExtendedBy']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_extended').':</strong></p><ul>';
-				if(isset($page['ExtendedBy']))
-				{
-					foreach($page['ExtendedBy'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$this->toAddress($pp['Id']).'">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EExtendedBy']))
-				{
-					foreach($page['EExtendedBy'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			if(isset($page['Throws']) || isset($page['EThrows']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','obj_throws').':</strong></p><ul>';
-				if(isset($page['Throws']))
-				{
-					foreach($page['Throws'] as $item)
-					{
-						$pp = $this->project->getMetaInfo($item, false);
-						if(!is_null($pp))
-						{
-							$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></li>';
-						}
-					}
-				}
-				if(isset($page['EThrows']))
-				{
-					foreach($page['EThrows'] as $item)
-					{
-						$code .= '<li><code>'.$item.'</code></li>';
-					}
-				}
-				$code .= '</ul>';
-			}
-			if(isset($page['VersionSince']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','version_since').': </strong>'.$page['VersionSince'].'</p>';
-			}
-			if(isset($page['VersionTo']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','version_to').': </strong>'.$page['VersionTo'].'</p>';
-			}
-			if(isset($page['Author']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','author').': </strong>'.$page['Author'].'</p>';
-			}
-			if($code != '')
-			{
-				$code .= '<hr/>';
-			}
-			return $code;
-		} // end createReference();
-
-		/**
-		 * Creates version control information for the page.
-		 *
-		 * @param Array &$page The page meta-info.
-		 * @return String
-		 */
-		public function createVersionControlInfo($page)
-		{
-			$translate = tfTranslate::get();
-			$code = '';
-			if(isset($page['VCSKeywords']))
-			{
-				$code .= '<p><strong>'.$translate->_('tags','versionControlInfo').': </strong><code>'.$page['VCSKeywords'].'</code></p>';
-			}
-
-			return $code;
-		} // end createVersionControlInfo();
-
+			$page = str_replace('.', '_', $page);
+			return '#'.$page;
+		} // end toAddress();
+		
 		/**
 		 * Generates a menu.
 		 *
@@ -465,16 +315,4 @@ EOF;
 			}
 			return '';
 		} // end menuGen();
-
-		/**
-		 * Converts the page identifier to the URL.
-		 *
-		 * @param String $page The page identifier.
-		 * @return String
-		 */
-		public function toAddress($page)
-		{
-			$page = str_replace('.', '_', $page);
-			return '#'.$page;
-		} // end toAddress();
-	} // end xhtml_single;
+	}

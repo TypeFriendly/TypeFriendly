@@ -577,6 +577,10 @@
 			{
 				throw new SystemException('The used language '.$secondLanguage.' is not supported in this project.');
 			}
+			if($secondLanguage == $this->config['baseLanguage'])
+			{
+				throw new SystemException('Given language is the same as the base language. There is nothing to compare.');
+			}
 			
 			$statBase = $this->fs->getModificationTime('input/'.$this->config['baseLanguage'].'/');
 			$statSec = $this->fs->getModificationTime('input/'.$secondLanguage.'/');

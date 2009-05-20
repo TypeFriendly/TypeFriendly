@@ -32,6 +32,7 @@
 	define('TF_TPL', TF_DIR.'templates/');
 	require_once(TF_INCLUDES.'console.php');
 	require_once(TF_INCLUDES.'resources.php');
+	require_once(TF_INCLUDES.'tags.php');
 	require_once(TF_INCLUDES.'filesystem.php');
 	require_once(TF_MARKDOWN.'markdown.php');
 	

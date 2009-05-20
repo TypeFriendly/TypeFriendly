@@ -21,7 +21,7 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id: project.php 33 2009-05-19 11:49:29Z zyxist $
+// $Id$
 
 /**
  * The class is a tag-manager. It checks whether the page is using

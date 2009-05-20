@@ -1,4 +1,4 @@
-table_of_contents = "Table of contents"
+table_of_contents = "Table of Contents"
 documentation = "User manual"
 generated_in = "Generated: %s"
 doc_license = "Documentation license"

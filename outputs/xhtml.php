@@ -25,10 +25,10 @@
 
 	class xhtml extends standardOutput
 	{
-		private $date = '';
-		private $translate = null;
+		protected $date = '';
+		protected $translate = null;
 
-		private $_tagVersion = array();
+		protected $_tagVersion = array();
 
 		/**
 		 * Initializes the generation, creating the index.html file with the
@@ -91,6 +91,10 @@
 			if(isset($page['Appendix']) && $page['Appendix'])
 			{
 				$subtitle = $this->translate->_('tags', 'appendix').' ';
+				if(!$this->project->config['showNumbers'])
+				{
+					$subtitle = trim($subtitle).': ';
+				}
 			}
 			if($this->project->config['showNumbers'])
 			{
@@ -98,7 +102,7 @@
 			}
 			else
 			{
-				$code .= '<h1>'.$subtitle.': '.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['Title'].'</h1>';
 			}
 			$code .= $this->menuGen($page['Id'], false, true);
 
@@ -128,7 +132,8 @@
 				$code .= $reference.'<hr/>';
 			}
 			
-			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this).$page['Content'];
+			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this);
+			$code .= $page['Content'];
 			$code .= tfTags::orderProcessTag($page, 'Navigation', 'SeeAlso', $this);
 			
 			$code .= $this->createBottomNavigator($page);
@@ -152,7 +157,7 @@
 		 * @param Array $nav The navigation list.
 		 * @return String
 		 */
-		private function createHeader($title, Array $nav)
+		public function createHeader($title, Array $nav)
 		{
 			$translate = tfTranslate::get();
 			$docTitle = $this->project->config['title'];
@@ -325,7 +330,6 @@ EOF;
 			{
 				$code .= '<h4>'.$translate->_('general','table_of_contents').'</h4>';
 			}
-			$appendixEnum = 'A';
 			if(isset($this->project->tree[$what]) && count($this->project->tree[$what]) > 0)
 			{
 				$code .= '<ul class="toc">';
@@ -371,6 +375,7 @@ EOF;
 			$translate = tfTranslate::get();
 			$prog = tfProgram::get();
 			$i = 0;
+			
 			$code = '<h4>'.$this->translate->_('navigation','see_also').':</h4><ul>';
 			if(!is_null($standard))
 			{
@@ -661,7 +666,7 @@ EOF;
 		 * @param Array $val2
 		 * @param String $message
 		 */
-		private function _showLinks($val1, $val2, $message)
+		protected function _showLinks($val1, $val2, $message)
 		{
 			$code = '<p><strong>'.$this->translate->_('tags',$message).':</strong> ';
 			$items = array();
