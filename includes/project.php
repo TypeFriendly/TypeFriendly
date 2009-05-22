@@ -115,6 +115,8 @@
 		private $media = array();
 		private $pages = array();
 		private $parsed = false;
+
+		private $templates = array();
 		
 		static private $object;
 
@@ -183,7 +185,6 @@
 			
 			// Retrieve the language versions
 			$this->langs = $this->fs->listDirectory('input/', false, true);
-			tfTags::setConfiguration($this->config);
 		} // end __construct();
 		
 		static public function set(tfProject $project)
@@ -212,6 +213,25 @@
 			$translate->setLanguage($language);
 
 			$this->language = $language;
+
+			// Try to load the feature information in the specified language.
+			$parser = tfParsers::get();
+			try
+			{
+				$featureInformation = $parser->config($this->fs->get('input/'.$this->language.'/templates/featureInformation.ini'));
+			}
+			catch(SystemException $e)
+			{
+				try
+				{
+					$featureInformation = $parser->config($this->fs->get('input/'.$this->baseLanguage.'/templates/featureInformation.ini'));
+				}
+				catch(SystemException $e)
+				{
+					$featureInformation = array();
+				}
+			}
+			tfTags::setConfiguration(array_merge($this->config, array('featureInformation' => $featureInformation)));
 		} // end setLanguage();
 		
 		public function setOutput($output)
@@ -399,6 +419,7 @@
 				{
 					// Try to load the content: first check the current language
 					// if does not exist, load the base language file.
+					$metaData = array();
 					try
 					{
 						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
@@ -406,10 +427,6 @@
 					catch(SystemException $e)
 					{
 						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->baseLanguage.'/'.$item['id'].'.txt'));
-					}
-					if(!tfTags::validateTags($metaData))
-					{
-						throw new Exception('Tag validation error in "'.$item['id'].'": '.PHP_EOL.tfTags::getError());
 					}
 					
 					// Create the additional meta.
@@ -474,7 +491,7 @@
 			while($queue->count() > 0)
 			{
 				$id = $queue->dequeue();
-				if(isset($this->pages[$id]['Appendix']) && $this->pages[$id]['Appendix'])
+				if(isset($this->pages[$id]['Tags']['Appendix']) && $this->pages[$id]['Tags']['Appendix'])
 				{
 					$this->pages[$id]['FullNumber'] = ($appendixEnum++);
 				}
@@ -546,12 +563,21 @@
 				foreach($this->pages as &$page)
 				{
 					$refs[$page['Id']] = $this->outputObj->toAddress($page['Id']);
-					$refTitles[$page['Id']] = $page['Title'];
+					$refTitles[$page['Id']] = $page['Tags']['Title'];
 				}
 				
 				$parsers->getParser()->predef_urls = $refs;
 				$parsers->getParser()->predef_titles = $refTitles;
 			}
+
+			foreach($this->pages as &$page)
+			{
+				if(!tfTags::validateTags($page['Tags']))
+				{
+					throw new Exception('Tag validation error in "'.$page['Id'].'": '.PHP_EOL.tfTags::getError());
+				}
+			}
+
 			$out->init($this, 'output/'.$this->output.'/');
 			foreach($this->pages as &$page)
 			{
@@ -559,7 +585,7 @@
 				{	
 					$page['Markdown'] = $page['Content'];
 				}
-				$parsers->getParser()->fn_id_prefix = str_replace('.', '_', $page['Id']).':'; 
+				$parsers->getParser()->fn_id_prefix = str_replace('.', '_', $page['Id']).':';
 				$page['Content'] = $parsers->parse($page['Markdown']);
 				$out->generate($page);
 			}

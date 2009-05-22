@@ -57,7 +57,7 @@
 
 			$f = fopen($filename, 'r');
 			
-			$data = array();
+			$data = array('Tags' => array());
 			
 			// Part 1 - parsing titles
 			$ok = true;
@@ -70,11 +70,11 @@
 				if(preg_match('/^([a-zA-Z\-]+)\:\\s*$/', $line, $found))
 				{
 					$hash = $found[1];
-					$data[$hash] = array();
+					$data['Tags'][$hash] = array();
 					$line = trim(fgets($f));
 					while(preg_match('/^[ ]?\- (.+)$/', $line, $found))
 					{
-						$data[$hash][] = $found[1];
+						$data['Tags'][$hash][] = $found[1];
 						$line = trim(fgets($f));
 					}
 					$ok = false;
@@ -82,7 +82,7 @@
 				}
 				elseif(preg_match('/^([a-zA-Z\-]+)\:( )?(.+)$/', $line, $found))
 				{
-					$data[$found[1]] = trim($found[3]);
+					$data['Tags'][$found[1]] = trim($found[3]);
 					$ok = true;
 				}
 				else

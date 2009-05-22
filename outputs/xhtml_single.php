@@ -23,7 +23,7 @@
 */
 // $Id$
 
-	require('xhtml.php');
+	require_once('xhtml.php');
 
 	class xhtml_single extends xhtml
 	{
@@ -51,10 +51,13 @@
 		 * @param Array $page The page meta-info.
 		 */
 		public function generate($page)
-		{	
+		{
+			tfTags::setTagList($page['Tags']);
 			$nav = array();
+
+			$this->_currentPage = $page;
 			
-			$nav[$page['Id']] = $page['ShortTitle'];
+			$nav[$page['Id']] = $page['Tags']['ShortTitle'];
 			
 			$parent = $page['_Parent']; 			
 			do
@@ -62,7 +65,7 @@
 				$parent = $this->project->getMetaInfo($parent, false);
 				if(!is_null($parent))
 				{
-					$nav[$parent['Id']] = $parent['ShortTitle'];
+					$nav[$parent['Id']] = $parent['Tags']['ShortTitle'];
 					$parent = $parent['_Parent']; 
 				}
 			}
@@ -72,7 +75,7 @@
 			
 			$code = $this->createTopNavigator($page);
 			$subtitle = '';
-			if(isset($page['Appendix']) && $page['Appendix'])
+			if(isset($page['Tags']['Appendix']) && $page['Tags']['Appendix'])
 			{
 				$subtitle = $this->translate->_('tags', 'appendix').' ';
 				if(!$this->project->config['showNumbers'])
@@ -82,20 +85,20 @@
 			}
 			if($this->project->config['showNumbers'])
 			{
-				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Tags']['Title'].'</h1>';
 			}
 			else
 			{
-				$code .= '<h1>'.$subtitle.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['Tags']['Title'].'</h1>';
 			}
 
 			$this->_tagVersion = array();
 
 			$reference =
-				tfTags::orderProcessTag($page, 'General', 'Author', $this).
-				tfTags::orderProcessTag($page, 'Status', 'Status', $this).
-				tfTags::orderProcessTags($page, 'Programming', $this).
-				tfTags::orderProcessTags($page, 'VersionControl', $this);
+				tfTags::orderProcessTag('General', 'Author', $this).
+				tfTags::orderProcessTag('Status', 'Status', $this).
+				tfTags::orderProcessTags('Programming', $this).
+				tfTags::orderProcessTags('VersionControl', $this);
 			if(sizeof($this->_tagVersion) > 0)
 			{
 				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
@@ -115,9 +118,9 @@
 				$code .= $reference.'<hr/>';
 			}
 			
-			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this);
+			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);
 			$code .= $page['Content'];
-			$code .= tfTags::orderProcessTag($page, 'Navigation', 'SeeAlso', $this);
+			$code .= tfTags::orderProcessTag('Navigation', 'SeeAlso', $this);
 			
 			$this->pageContent[$page['Id']] = $code;
 		} // end generate();
@@ -128,7 +131,7 @@
 		public function close()
 		{
 			
-			$code = $this->createHeader();
+			$code = $this->createHeader('', array());
 			
 			$code .= '<h1>'.$this->project->config['title'].' '.$this->project->config['version'].'</h1>';
 			
@@ -159,7 +162,7 @@
 		 * @param Array $nav The navigation list.
 		 * @return String
 		 */
-		public function createHeader()
+		public function createHeader($title, Array $nav)
 		{
 			
 			$docTitle = $this->project->config['title'];
@@ -253,19 +256,19 @@ EOF;
 			$code = '<dl id="'.$id.'" class="location location-middle">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><a href="'.$this->toAddress($parent['Id']).'">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="'.$this->toAddress($parent['Id']).'">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
 			}
 			else
 			{
-				$code .= '<dt><a href="#toc">'.$this->translate->_('general', 'table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="#toc">'.$this->translate->_('general', 'table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Title'].'<br/><a href="'.$this->toAddress($prev['Id']).'">&laquo; '.$this->translate->_('navigation','prev').'</a></dd>';
+				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Tags']['Title'].'<br/><a href="'.$this->toAddress($prev['Id']).'">&laquo; '.$this->translate->_('navigation','prev').'</a></dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Title'].'<br/><a href="'.$this->toAddress($next['Id']).'">'.$this->translate->_('navigation','next').' &raquo;</a></dd>';
+				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Tags']['Title'].'<br/><a href="'.$this->toAddress($next['Id']).'">'.$this->translate->_('navigation','next').' &raquo;</a></dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
@@ -291,7 +294,7 @@ EOF;
 		 * @param Boolean $start Do we include the "Table of contents" text?
 		 * @return String
 		 */
-		public function menuGen($what, $recursive = true)
+		public function menuGen($what, $recursive = true, $start = false)
 		{
 			$n =& $this->project->config['showNumbers'];
 			
@@ -303,11 +306,11 @@ EOF;
 					$this->pageOrder[] = $item['Id'];
 					if($recursive)
 					{
-						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
+						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
 					}
 					else
 					{
-						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Title'].'</a></li>';
+						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a></li>';
 					}
 				}
 				$code .= '</ul>';

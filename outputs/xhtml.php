@@ -29,6 +29,7 @@
 		protected $translate = null;
 
 		protected $_tagVersion = array();
+		protected $_currentPage = null;
 
 		/**
 		 * Initializes the generation, creating the index.html file with the
@@ -66,10 +67,12 @@
 		 * @param Array $page The page meta-info.
 		 */
 		public function generate($page)
-		{		
+		{
+			tfTags::setTagList($page['Tags']);
 			$nav = array();
+			$this->_currentPage = $page;
 			
-			$nav[$page['Id']] = $page['ShortTitle'];
+			$nav[$page['Id']] = $page['Tags']['ShortTitle'];
 			
 			$parent = $page['_Parent']; 			
 			do
@@ -77,7 +80,7 @@
 				$parent = $this->project->getMetaInfo($parent, false);
 				if(!is_null($parent))
 				{
-					$nav[$parent['Id']] = $parent['ShortTitle'];
+					$nav[$parent['Id']] = $parent['Tags']['ShortTitle'];
 					$parent = $parent['_Parent']; 
 				}
 			}
@@ -85,10 +88,10 @@
 			
 			$nav = array_reverse($nav, true);
 			
-			$code = $this->createHeader($page['Title'], $nav);
+			$code = $this->createHeader($page['Tags']['Title'], $nav);
 			$code .= $this->createTopNavigator($page);
 			$subtitle = '';
-			if(isset($page['Appendix']) && $page['Appendix'])
+			if(isset($page['Tags']['Appendix']) && $page['Tags']['Appendix'])
 			{
 				$subtitle = $this->translate->_('tags', 'appendix').' ';
 				if(!$this->project->config['showNumbers'])
@@ -98,21 +101,21 @@
 			}
 			if($this->project->config['showNumbers'])
 			{
-				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Tags']['Title'].'</h1>';
 			}
 			else
 			{
-				$code .= '<h1>'.$subtitle.$page['Title'].'</h1>';
+				$code .= '<h1>'.$subtitle.$page['Tags']['Title'].'</h1>';
 			}
 			$code .= $this->menuGen($page['Id'], false, true);
 
 			$this->_tagVersion = array();
 
 			$reference =
-				tfTags::orderProcessTag($page, 'General', 'Author', $this).
-				tfTags::orderProcessTag($page, 'Status', 'Status', $this).
-				tfTags::orderProcessTags($page, 'Programming', $this).
-				tfTags::orderProcessTags($page, 'VersionControl', $this);
+				tfTags::orderProcessTag('General', 'Author', $this).
+				tfTags::orderProcessTag('Status', 'Status', $this).
+				tfTags::orderProcessTags('Programming', $this).
+				tfTags::orderProcessTags('VersionControl', $this);
 			if(sizeof($this->_tagVersion) > 0)
 			{
 				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
@@ -132,9 +135,9 @@
 				$code .= $reference.'<hr/>';
 			}
 			
-			$code .= tfTags::orderProcessTag($page, 'General', 'FeatureInformation', $this);
+			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);
 			$code .= $page['Content'];
-			$code .= tfTags::orderProcessTag($page, 'Navigation', 'SeeAlso', $this);
+			$code .= tfTags::orderProcessTag('Navigation', 'SeeAlso', $this);
 			
 			$code .= $this->createBottomNavigator($page);
 			$code .= $this->createFooter();
@@ -259,19 +262,19 @@ EOF;
 			$code = '<dl class="location">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
 			}
 			else
 			{
-				$code .= '<dt><a href="index.html">'.$translate->_('general','table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="index.html">'.$translate->_('general','table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Title'].'<br/><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a></dd>';
+				$code .= '<dd class="prev">'.($n ? $prev['FullNumber'].'. ' : '').$prev['Tags']['Title'].'<br/><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a></dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Title'].'<br/><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a></dd>';
+				$code .= '<dd class="next">'.($n ? $next['FullNumber'].'. ' : '').$next['Tags']['Title'].'<br/><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a></dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
@@ -294,19 +297,19 @@ EOF;
 			$code = '<dl class="location location-bottom">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<br/><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Title'].'</a></dt>';
+				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a></dt>';
 			}
 			else
 			{
-				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Title'].'<br/><a href="index.html">'.$translate->_('general','table_of_contents').'</a></dt>';
+				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="index.html">'.$translate->_('general','table_of_contents').'</a></dt>';
 			}
 			if(!is_null($prev))
 			{
-				$code .= '<dd class="prev"><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a><br/>'.($n ? $prev['FullNumber'].'. ' : '').$prev['Title'].'</dd>';
+				$code .= '<dd class="prev"><a href="'.$prev['Id'].'.html">&laquo; '.$translate->_('navigation','prev').'</a><br/>'.($n ? $prev['FullNumber'].'. ' : '').$prev['Tags']['Title'].'</dd>';
 			}
 			if(!is_null($next))
 			{
-				$code .= '<dd class="next"><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a><br/>'.($n ? $next['FullNumber'].'. ' : '').$next['Title'].'</dd>';
+				$code .= '<dd class="next"><a href="'.$next['Id'].'.html">'.$translate->_('navigation','next').' &raquo;</a><br/>'.($n ? $next['FullNumber'].'. ' : '').$next['Tags']['Title'].'</dd>';
 			}
 			$code .= '</dl>	';
 			return $code;
@@ -337,11 +340,11 @@ EOF;
 				{
 					if($recursive)
 					{
-						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
+						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
 					}
 					else
 					{
-						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Title'].'</a></li>';
+						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a></li>';
 					}
 				}
 				$code .= '</ul>';
@@ -384,11 +387,11 @@ EOF;
 					$meta = $this->project->getMetaInfo($value, false);
 					if(is_null($meta))
 					{
-						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$page['Id'].'" does not exist.');
+						$prog->console->stderr->writeln('The page "'.$value.'" linked in See Also of "'.$this->_currentPage['Id'].'" does not exist.');
 					}
 					else
 					{
-						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Title'].'</a></li>';
+						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Tags']['Title'].'</a></li>';
 						$i++;
 					}
 				}
@@ -559,7 +562,7 @@ EOF;
 			$pp = $this->project->getMetaInfo($extends, false);
 			if(!is_null($pp))
 			{
-				return '<p><strong>'.$this->translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a></p>';
+				return '<p><strong>'.$this->translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></p>';
 			}
 		} // end _tagExtends();
 
@@ -573,6 +576,18 @@ EOF;
 		public function _tagExtendedBy($val1, $val2)
 		{
 			return $this->_showLinks($val1, $val2, 'obj_extended');
+		} // end _tagExtendedBy();
+
+		/**
+		 * Handles "ImplementedBy" and "EImplementedBy" tags.
+		 *
+		 * @param Array $val1 The "ImplementedBy" list of values
+		 * @param Array $val2 The "EImplementedBy" list of values
+		 * @return String
+		 */
+		public function _tagImplementedBy($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_implemented');
 		} // end _tagExtendedBy();
 
 		/**
@@ -645,7 +660,7 @@ EOF;
 						$pp = $this->project->getMetaInfo($item['Type'], false);
 						if(!is_null($pp))
 						{
-							$code .= '<a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a>';
+							$code .= '<a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a>';
 						}
 					}
 					elseif(isset($item['EType']))
@@ -677,7 +692,7 @@ EOF;
 					$pp = $this->project->getMetaInfo($item, false);
 					if(!is_null($pp))
 					{
-						$items[] = '<a href="'.$pp['Id'].'.html">'.$pp['ShortTitle'].'</a>';
+						$items[] = '<a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a>';
 					}
 				}
 			}

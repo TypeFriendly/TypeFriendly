@@ -50,14 +50,10 @@ Status
 FeatureInformation
 :	wstawia na początek treści dokumentu dodatkowy nagłówek o podanym identyfikatorze zdefiniowany w pliku konfiguracyjnym projektu.
 
-Poniżej pokazujemy przykładowe użycie tagu `FeatureInformation`. Na początku odwiedzamy plik `settings.ini` i dodajemy do niego sekcję `[featureInformation]`:
+Poniżej pokazujemy przykładowe użycie tagu `FeatureInformation`. Na początku tworzymy plik `/input/jezyk/templates/featureInformation.ini` i dodajemy do niego potrzebne wpisy:
 
 ~~~
 [ini]
-title = "Foo"
-; etc...
-
-[featureInformation]
 experimental = "> [warning]\n> Ta strona opisuje eksperymentalną opcję.\n"
 deprecated = "> [warning]\n> Ta strona opisuje przestarzałą opcję.\n"
 ~~~
@@ -109,6 +105,11 @@ ExtendedBy
 :   klasy/interfejsy rozszerzające aktualną.
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
 :	`EExtendedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
+
+ImplementedBy
+:   klasy implementujące podany interfejs.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
+:	`EImplementedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
 
 Throws
 :	rzucane wyjątki.

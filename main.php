@@ -191,27 +191,34 @@ versionControlInfo = false
 				$project->setLanguage($project->config['baseLanguage']);
 			}
 
-			if(isset($this->args['-o']))
+			try
 			{
-				$prg->console->stdout->writeln('Processing the files.');
-				$project->loadItems();
-				$prg->console->stdout->writeln('Starting '.$this->args['-o'].'.');
-				$project->setOutput($this->args['-o']);
-				$project->generate();	
-				$prg->console->stdout->writeln('Generation completed.');
-			}
-			else
-			{
-				$prg->console->stdout->writeln('Processing the files.');
-				$project->loadItems();
-
-				foreach($project->config['outputs'] as $out)
+				if(isset($this->args['-o']))
 				{
-					$prg->console->stdout->writeln('Starting '.$out.'.');
-					$project->setOutput($out);
-					$project->generate();	
+					$prg->console->stdout->writeln('Processing the files.');
+					$project->loadItems();
+					$prg->console->stdout->writeln('Starting '.$this->args['-o'].'.');
+					$project->setOutput($this->args['-o']);
+					$project->generate();
+					$prg->console->stdout->writeln('Generation completed.');
 				}
-				$prg->console->stdout->writeln('Generation completed.');
+				else
+				{
+					$prg->console->stdout->writeln('Processing the files.');
+					$project->loadItems();
+
+					foreach($project->config['outputs'] as $out)
+					{
+						$prg->console->stdout->writeln('Starting '.$out.'.');
+						$project->setOutput($out);
+						$project->generate();
+					}
+					$prg->console->stdout->writeln('Generation completed.');
+				}
+			}
+			catch(Exception $e)
+			{
+				$prg->console->stderr->writeln($e->getMessage());
 			}
 		} // end build();
 
@@ -225,6 +232,7 @@ versionControlInfo = false
 			$prg->loadLibrary('project');
 			$prg->loadLibrary('parsers');
 			$prg->loadLibrary('i18n');
+			$prg->loadLibrary('tags');
 
 			$project = new tfProject($this->args['#path']);
 			tfProject::set($project);
