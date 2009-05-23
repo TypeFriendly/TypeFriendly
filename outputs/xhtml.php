@@ -56,6 +56,7 @@
 			$code .= '<p>'.$translate->_('general','generated_in',$this->date).'</p>';
 			
 			$code .= $this->menuGen('', true, true);
+			
 			$code .= $this->createFooter();
 			
 			$this->project->fs->write($this->path.'index.html', $code);			
@@ -74,7 +75,8 @@
 			
 			$nav[$page['Id']] = $page['Tags']['ShortTitle'];
 			
-			$parent = $page['_Parent']; 			
+			$parent = $page['_Parent']; 
+						
 			do
 			{
 				$parent = $this->project->getMetaInfo($parent, false);
@@ -88,8 +90,17 @@
 			
 			$nav = array_reverse($nav, true);
 			
-			$code = $this->createHeader($page['Tags']['Title'], $nav);
+			/*if($this->project->config['showNumbers'])
+			{			
+				$code = $this->createHeader($page['FullNumber'].'. '.$page['Tags']['Title'], $nav);
+			}
+			else*/
+			{
+				$code = $this->createHeader($page['Tags']['Title'], $nav);
+			}
+			
 			$code .= $this->createTopNavigator($page);
+			
 			$subtitle = '';
 			if(isset($page['Tags']['Appendix']) && $page['Tags']['Appendix'])
 			{
@@ -99,6 +110,7 @@
 					$subtitle = trim($subtitle).': ';
 				}
 			}
+			
 			if($this->project->config['showNumbers'])
 			{
 				$code .= '<h1>'.$subtitle.$page['FullNumber'].'. '.$page['Tags']['Title'].'</h1>';
@@ -107,6 +119,7 @@
 			{
 				$code .= '<h1>'.$subtitle.$page['Tags']['Title'].'</h1>';
 			}
+			
 			$code .= $this->menuGen($page['Id'], false, true);
 
 			$this->_tagVersion = array();
@@ -116,17 +129,21 @@
 				tfTags::orderProcessTag('Status', 'Status', $this).
 				tfTags::orderProcessTags('Programming', $this).
 				tfTags::orderProcessTags('VersionControl', $this);
+			
 			if(sizeof($this->_tagVersion) > 0)
 			{
 				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
+				
 				if(isset($this->_tagVersion['since']))
 				{
 					$reference .= $this->translate->_('general', 'period_since').' <em>'.$this->_tagVersion['since'].'</em>';
 				}
+				
 				if(isset($this->_tagVersion['to']))
 				{
 					$reference .= ' '.$this->translate->_('general', 'period_to').' <em>'.$this->_tagVersion['to'].'</em>';
 				}
+				
 				$reference .= '</p>';
 			}
 
@@ -164,7 +181,7 @@
 		{
 			$translate = tfTranslate::get();
 			$docTitle = $this->project->config['title'];
-			$docVersion = $this->project->config['version'];
+			$docVersion = $this->project->config['version']; 
 			
 			$textDocumentation = $translate->_('general','documentation');
 $code = <<<EOF
@@ -177,8 +194,8 @@ $code = <<<EOF
 
 	<title>{$title} - {$docTitle}</title>
 	
-
-	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
 	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
 </head>
 <body>

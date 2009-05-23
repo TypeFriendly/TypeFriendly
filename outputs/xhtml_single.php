@@ -179,8 +179,8 @@ $code = <<<EOF
 
 	<title>{$docTitle}</title>
 	
-
-	<link rel="stylesheet" type="text/css" href="design/generic.css"  />
+	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
+	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
 	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
 </head>
 <body>
