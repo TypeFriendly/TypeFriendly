@@ -21,6 +21,7 @@ docs.syntax.blockquotes
 docs.syntax.html
 docs.syntax.advanced
 docs.tags
+docs.templates
 tf
 tf.cli
 tf.outputs

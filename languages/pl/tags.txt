@@ -1,3 +1,7 @@
+; The tag message translations.
+; Translation authors:
+; - Tomasz Jędrzejewski <http://www.zyxist.com>
+
 appendix = "Dodatek"
 status = "Status"
 reference = "Wywołanie"

@@ -16,16 +16,20 @@ Znak średnika rozpoczyna komentarz, który ciągnie się aż do końca linii.
 #### Podstawowe opcje, jakie należy ustawić, to:
 
 title
-:   nazwa projektu, do którego tworzysz dokumentację.
+:   tytuł publikacji
 
 version
-:   wersja projektu
+:   wersja publikacji
 
 copyright
-:   prawa autorskie do dokumentacji
+:   prawa autorskie do publikacji
 
 license
-:   licencja, na jakiej udostępniana jest dokumentacja
+:   licencja, na jakiej udostępniana jest publikacja
+
+projectType
+:	rodzaj publikacji
+:	dostępne wartości: `manual` (domyślna), `documentation`, `article`, `book`
 
 #### Dodatkowe opcje:
 
@@ -41,7 +45,7 @@ outputs
 :   lista formatów, w jakich chcesz generować dokumentację, odseparowanych przecinkami.
 
 baseLanguage
-:   dla każdego projektu musi być wybrany podstawowy język dokumentacji, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja dokumentacji w tym języku.
+:   dla każdej publikacji musi zostać wybrany podstawowy język, w którym powstaje oryginalna treść. Tutaj możesz go ustawić. Ważne, aby nazwa pokrywała się z nazwą katalogu, w którym znajduje się wersja publikacji w tym języku.
 
 navigation
 :   określa sposób łączenia stron w pasku nawigacyjnym "Poprzedni/Następny". **Dozwolone wartości to:**
@@ -50,7 +54,7 @@ navigation
     :   linki "Poprzedni" i "Następny" zawsze wskazują na sąsiada danego rozdziału. Jeżeli sąsiad nie istnieje, link nie jest wyświetlany. Jest to domyślna wartość.
 
     book
-    :   rozdziały są tak łączone, aby klikając "Poprzedni" lub "Następny" można było przejść całą dokumentację (jak w książce).
+    :   rozdziały są tak łączone, aby klikając "Poprzedni" lub "Następny" można było przejść całą publikację (jak w książce).
     
 showNumbers
 :   czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
@@ -60,7 +64,7 @@ versionControlInfo
 
 ***
 
-Przykładowy plik konfiguracyjny, który służy do wygenerowania tej dokumentacji, wygląda następująco:
+Przykładowy plik konfiguracyjny, który służy do wygenerowania tego podręcznika, wygląda następująco:
 
 ~~~
 ; Opcje podstawowe
@@ -71,6 +75,7 @@ copyright = "Invenzzia Group 2008-2009"
 copyrightLink = "http://www.invenzzia.org/"
 license = "GNU Free Documentation License 2.1"
 licenseLink = "http://www.gnu.org/licenses/fdl.html"
+projectType = "manual"
 
 ; Ustawienia wyświetlania itd...
 

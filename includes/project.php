@@ -148,6 +148,7 @@
 				'version' => NULL,
 				'copyright' => NULL,
 				'license' => NULL,
+				'projectType' => 'manual',
 			
 				'copyrightLink' => '',
 				'licenseLink' => '',
@@ -166,6 +167,12 @@
 					}
 					$this->config[$name] = $value;
 				}
+			}
+
+			if($this->config['projectType'] != 'manual' && $this->config['projectType'] != 'documentation' &&
+				$this->config['projectType'] != 'article' && $this->config['projectType'] != 'book')
+			{
+				throw new Exception('Invalid value of the "projectType" option: '.$this->config['value']);
 			}
 			
 			// Base language settings for the documentation interface translator
@@ -213,26 +220,30 @@
 			$translate->setLanguage($language);
 
 			$this->language = $language;
+		} // end setLanguage();
 
-			// Try to load the feature information in the specified language.
-			$parser = tfParsers::get();
-			try
-			{
-				$featureInformation = $parser->config($this->fs->get('input/'.$this->language.'/templates/featureInformation.ini'));
-			}
-			catch(SystemException $e)
+		public function getTemplate($template)
+		{
+			if(!isset($this->templates[$template]))
 			{
 				try
 				{
-					$featureInformation = $parser->config($this->fs->get('input/'.$this->baseLanguage.'/templates/featureInformation.ini'));
+					$this->templates[$template] = $this->fs->read('input/'.$this->language.'/templates/'.$template.'.txt');
 				}
 				catch(SystemException $e)
 				{
-					$featureInformation = array();
+					try
+					{
+						$this->templates[$template] = $this->fs->read('input/'.$this->baseLanguage.'/templates/'.$template.'.txt');
+					}
+					catch(SystemException $e)
+					{
+						throw $e;
+					}
 				}
 			}
-			tfTags::setConfiguration(array_merge($this->config, array('featureInformation' => $featureInformation)));
-		} // end setLanguage();
+			return $this->templates[$template];
+		} // end getTemplate();
 		
 		public function setOutput($output)
 		{
@@ -310,6 +321,7 @@
 				{
 					if($parentId != '')
 					{
+						echo 'fool';
 						throw new Exception('The parent of '.$item.' does not exist.');
 					}
 					$list[$parentId] = array(0 => array('id' => $item, 'order' => 0));
@@ -389,10 +401,12 @@
 							}
 							elseif(strlen($id) == 0)
 							{
+								echo 'ff';
 								throw new Exception('Not all base chapters are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
 							}
 							else
 							{
+								echo 'rr';
 								throw new Exception('Not all children of "'.$id.'" are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
 							}
 						}
@@ -411,8 +425,8 @@
 
 			
 			$this->pages = array();
-			$parser = tfParsers::get(); 
-			
+			$parser = tfParsers::get();
+
 			foreach($list as $id => &$sublist)
 			{		
 				foreach($sublist as $subId => &$item)
@@ -422,11 +436,18 @@
 					$metaData = array();
 					try
 					{
-						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt'));
+						/* If you remove the temporary variable below, you will be killed.
+						 * Read the links below and think:
+						 *  - http://bugs.php.net/bug.php?id=48408
+						 *  - http://bugs.php.net/bug.php?id=48409
+						 */
+						$tempVariable = $this->fs->get('input/'.$this->language.'/'.$item['id'].'.txt');
+						$metaData = $parser->tfdoc($tempVariable);
 					}
 					catch(SystemException $e)
 					{
-						$metaData = $parser->tfdoc($this->fs->get('input/'.$this->baseLanguage.'/'.$item['id'].'.txt'));
+						$tempVariable = $this->fs->get('input/'.$this->baseLanguage.'/'.$item['id'].'.txt');
+						$metaData = $parser->tfdoc($tempVariable);
 					}
 					
 					// Create the additional meta.

@@ -168,7 +168,7 @@
 			$docTitle = $this->project->config['title'];
 			$docVersion = $this->project->config['version'];
 			
-			$textDocumentation = $this->translate->_('general','documentation');
+			$textDocumentation = $this->translate->_('general',$this->project->config['projectType']);
 $code = <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

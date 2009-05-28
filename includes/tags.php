@@ -136,11 +136,11 @@ class tfTags
 	static private $_allowUnknown = false;
 
 	/**
-	 * The configuration of the project.
+	 * The project.
 	 * @static
-	 * @var Array
+	 * @var tfProject
 	 */
-	static private $_config = NULL;
+	static private $_project = NULL;
 
 	/**
 	 * The error message buffer.
@@ -171,9 +171,9 @@ class tfTags
 	 * @static
 	 * @param Array $config The configuration
 	 */
-	static public function setConfiguration(Array $configuration)
+	static public function setProject(tfProject $project)
 	{
-		self::$_config = $configuration;
+		self::$_project = $project;
 	} // end setConfiguration();
 
 	/**
@@ -194,6 +194,10 @@ class tfTags
 	 */
 	static public function validateTags(Array &$tags)
 	{
+		if(isset($tags['%%Validated']))
+		{
+			return true;
+		}
 		self::_buildTagList();
 
 		if(!isset($tags['Title']))
@@ -236,13 +240,16 @@ class tfTags
 		// Process the "FeatureInformation" tag.
 		if(isset($tags['FeatureInformation']))
 		{
-			if(!isset(self::$_config['featureInformation']) || !isset(self::$_config['featureInformation'][$tags['FeatureInformation']]))
+			$parser = tfParsers::get();
+			try
 			{
-				self::$_error = 'The feature information identifier: "'.$tags['FeatureInformation'].'" is not defined in the configuration file.';
+				$tags['FeatureInformation'] = $parser->parse(self::$_project->getTemplate($tags['FeatureInformation']));
+			}
+			catch(SystemException $exception)
+			{
+				self::$_error = 'The feature information identifier: "'.$tags['FeatureInformation'].'" is not defined.';
 				return false;
 			}
-			$parser = tfParsers::get();
-			$tags['FeatureInformation'] = $parser->parse(str_replace('\n', PHP_EOL, self::$_config['featureInformation'][$tags['FeatureInformation']]));
 		}
 		// Process the "Construct" tag
 		if(isset($tags['Construct']))
@@ -290,15 +297,18 @@ class tfTags
 
 			if(!$reference && isset($tags['Reference']))
 			{
-				throw new Exception('Tag "Reference" is not allowed with the specified construct.');
+				self::$_error = 'Tag "Reference" is not allowed with the specified construct.';
+				return false;
 			}
 			if(!$throws && (isset($tags['Throws']) || isset($tags['EThrows'])))
 			{
-				throw new Exception('Tags "Throws" and "EThrows" are not allowed with the specified construct.');
+				self::$_error = 'Tags "Throws" and "EThrows" are not allowed with the specified construct.';
+				return false;
 			}
 			if(!$implementedBy && (isset($tags['ImplementedBy']) || isset($tags['EImplementedBy'])))
 			{
-				throw new Exception('Tags "ImplementedBy" and "EImplementedBy" are not allowed with the specified construct.');
+				self::$_error = 'Tags "ImplementedBy" and "EImplementedBy" are not allowed with the specified construct.';
+				return false;
 			}
 			if(!$extends && (
 				isset($tags['Extends']) || isset($tags['EExtends']) ||
@@ -306,9 +316,11 @@ class tfTags
 				isset($tags['ExtendedBy']) || isset($tags['EExtendedBy']) ||
 				isset($tags['MultiExtends']) || isset($tags['EMultiExtends'])))
 			{
-				throw new Exception('The tags that describe the OOP inheritance are not allowed with the specified construct.');
+				self::$_error = 'The tags that describe the OOP inheritance are not allowed with the specified construct.';
+				return false;
 			}
 		}
+		$tags['%%Validated'] = true;
 		return true;
 	} // end validateTags();
 

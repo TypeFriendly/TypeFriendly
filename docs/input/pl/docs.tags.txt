@@ -48,26 +48,7 @@ Status
 :	wyświetla pole `Status` w dokumencie wynikowym wraz z towarzyszącą treścią, które można wykorzystać do różnych celów.
 
 FeatureInformation
-:	wstawia na początek treści dokumentu dodatkowy nagłówek o podanym identyfikatorze zdefiniowany w pliku konfiguracyjnym projektu.
-
-Poniżej pokazujemy przykładowe użycie tagu `FeatureInformation`. Na początku tworzymy plik `/input/jezyk/templates/featureInformation.ini` i dodajemy do niego potrzebne wpisy:
-
-~~~
-[ini]
-experimental = "> [warning]\n> Ta strona opisuje eksperymentalną opcję.\n"
-deprecated = "> [warning]\n> Ta strona opisuje przestarzałą opcję.\n"
-~~~
-
-W wiadomościach można używać formatowania Markdown, a do tworzenia nowych linii można zastosować symbol `\n`, który zostanie zamieniony na właściwy dla danego systemu operacyjnego znak końca wiersza. Następnie możemy dodać nasze wiadomości do rozdziałów:
-
-~~~
-Title: Jakaś opcja
-FeatureInformation: experimental
-
----
-
-Jakiś tekst
-~~~
+:	dokleja na początek rozdziału szablon treści. Więcej o szablonach treści możesz dowiedzieć się z [tego rozdziału][docs.templates]. Znajdziesz tam także przykład użycia tego tagu.
 
 Opis interfejsu programistycznego
 =================================

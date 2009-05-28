@@ -2,7 +2,7 @@ Title: File tags
 
 ---
 
-In this chapter we have described all the tags that are available in the chapter files. Most of them takes a string as a value, but some of them also support a group of values (an array). We specify them in the following way:
+Below, you can find a description of all the tags available in the chapter files. Most of them takes a string as a value, but some of them also support a group of values (an array). We specify them in the following way:
 
 ~~~
 TagName:
@@ -47,26 +47,7 @@ Status
 :	displays a `Status` field in the output with the specified text. It may be used for various purposes.
 
 FeatureInformation
-:	prepends the content saved under the specified identifier in the project configuration to the beginning of the chapter content.
-
-A sample use of `FeatureInformation` tag. First, we go to the `/input/language/templates/featureInformation.ini` file and add there the necessary messages:
-
-~~~
-[ini]
-experimental = "> [warning]\n> This page describes an experimental feature.\n"
-deprecated = "> [warning]\n> This page describes a deprecated feature.\n"
-~~~
-
-The messages may use the Markdown syntax, and to create new lines, we may use `\n` symbol which is replaced with the new line symbol according to your operating system settings. Then, we may display such messages at the beginning of the chapter:
-
-~~~
-Title: Some feature
-FeatureInformation: experimental
-
----
-
-Some text
-~~~
+:	prepends the specified content template to the beginning of a chapter. You can find out more about content templates [here][docs.templates] together with the example.
 
 API References
 ==============

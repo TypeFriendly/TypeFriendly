@@ -9,9 +9,11 @@ The chapters are created as simple text files in the `/input/language/` director
 1. Header
 2. Content
 
-In the header, there are several options (called "tags") that allow you to set the chapter title or connections to the other chapters. Under the header, there is a content written in the Markdown format. The exact syntax description can be found later. Here we would like to show, how to manage the chapter order.
+In the header, there are several options (called "tags") that allow you to set the chapter title or connections to the other chapters. Under the header, we write the exact chapter content in the Markdown format. You can learn Markdown from [this chapter][docs.syntax], meanwhile we are going to show, how to manipulate the chapter order.
 
-TypeFriendly uses the file name to set the basic order and the parent/child dependency. Each name must consist of the **.txt** extension and a group of identifiers separated with dots. The identifiers define all the upper-level chapters which our file belongs to. Here is a sample file list:
+In every user manual or book, the chapters are organized in a specified order and they may contain subchapters. Sometimes we might want to leave the alphabetical order, for example if each chapter describes different functions and we need an index of them. In other cases, the chapters should be read one after another, as the latter ones may require the information from the earlier ones. Wih TypeFriendly, you can achieve all of these effects.
+
+The chapter files use the `*.txt` file extension and the rest of the name is used to determine the dependencies. Each chapter has its own identifier constructed with letters, numbers, pauses and underscores. To specify that chapter A is the parent of B and C, we prepend the chapter A identifier to B and C identifiers and separate them with a dot. Below, you can find a sample list of chapter files:
 
 1. `preface.txt`
 2. `installation.txt`
@@ -25,10 +27,9 @@ TypeFriendly uses the file name to set the basic order and the parent/child depe
 10. `api.interface.function1.txt`
 11. `api.interface.function2.txt`
 
-Let's take a look at the installation chapter. We have a text file for it: `installation.txt`, where we can add some introductory text. But there are also two subchapters: `installation.simple` and `installation.advanced`. TypeFriendly sees that the first identifier is `installation`, so it links them to that chapter and generates a navigation for them. The API description is a bit more complex, because there are three levels. The `api.txt` contains an introduction, and inside it, we have a manual for the first class (`api.class.txt`). The class contains some functions, so we describe them in separate sub-chapters. Remember that if you have a path `foo.bar.joe.txt`, your documentation must have also the following files: `foo.txt` and `foo.bar.txt`, otherwise TypeFriendly will throw an error.
+Let's take a look at the installation chapter. We have a text file for it: `installation.txt`, where we can add some introductory text. But there are also two subchapters: `installation.simple` and `installation.advanced`. TypeFriendly sees that the first identifier is `installation`, so it links them to that chapter and generates a proper navigation structure. The API description is a bit more complex, because there are three levels. The `api.txt` contains an introduction, and inside it, we have the first class documented (`api.class.txt`). The class contains some functions, so we describe them in separate sub-chapters. Remember that if you have a file `foo.bar.joe.txt`, your project must have also the following files: `foo.txt` and `foo.bar.txt`, otherwise TypeFriendly will throw an error.
 
-By default, TypeFriendly sorts everything alphabetically. However, most of the chapters must have some other order. You can change it by creating in the main documentation directory a file called `sort_hints.txt` with additional sorting hints. Without them, TF will apply the following default order to the file list you have seen above:
-
+The default order for any chapter level is alphabetical:
 
 1. `api.txt`
 2. `api.interface.txt`
@@ -42,7 +43,7 @@ By default, TypeFriendly sorts everything alphabetically. However, most of the c
 10. `installation.advanced.txt`
 11. `preface.txt`
 
-Of course, this order does not make any sense. Yes, it is nice that the functions are sorted by default, but the reader may feel a bit confused, if he sees the preface at the end. Let's give some sorting hints to TF in the `sort_hints.txt` file:
+Of course, in most cases this order makes no sense, as TypeFriendly put the preface and installation at the end of the user manual. To change the order, we use the `sort_hints.txt` file in the main project directory:
 
     preface
     installation
@@ -52,10 +53,13 @@ Of course, this order does not make any sense. Yes, it is nice that the function
     api.class
     api.interface
 
-As you see, in this file we declare a required order by placing every chapter name in the separate line. If we enjoy an alphabetical order in a chapter, we simply do not mention its subchapters in the hints (in the example, we have not added any functions from `api.class` and `api.interface`. However, TypeFriendly does not allow to write only a part of the subchapter names and do a mix. It will cause an error then.
+The `sort_hints.txt` file contains a list of the chapters in the new order. Note that you do not have to specify all the files here. If the alphabetical order suits you in some cases (for example, in the function list), you simply do not include this navigation level in the file.
+
+> [warning]
+> You must either specify all the children of a chapter or none. TypeFriendly will throw you an error, if one of the subchapters is missing.
 
 Tips:
 
-1. All the language versions use the same hint file. Remember that your chapter must have the same file name in all the language versions.
+1. The chapter identifiers do not change across the various language versions of your project, moreover - the translations use the same `sort_hints.txt` file, as the original text.
 2. The file name is also used to create the links manually in the text. Choose short and intuitive names that can be memorized easily.
 3. TypeFriendly ignores the files with the different extension or with a tilde (~) character at the end of the name. This means you do not have to disable the backup options in your favourite editor.

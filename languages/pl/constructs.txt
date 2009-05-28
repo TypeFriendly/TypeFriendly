@@ -1,4 +1,6 @@
 ; The translations of available programming constructs
+; Translation authors:
+; - Tomasz Jędrzejewski <http://www.zyxist.com>
 
 class = "Klasa"
 interface = "Interfejs"
