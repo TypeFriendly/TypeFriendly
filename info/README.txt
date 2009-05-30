@@ -33,6 +33,7 @@ Authors and contributors:
  
 You should obtain the copies of the licenses in the `/info` directory. They are also available
 on-line:
+
 - <http://www.invenzzia.org/license/gpl>, <http://www.gnu.org/licenses/>
 - <http://www.invenzzia.org/license/markdown> 
 - <http://www.invenzzia.org/license/cc-share-alike-2.5> 

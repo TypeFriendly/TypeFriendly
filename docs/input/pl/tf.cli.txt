@@ -66,3 +66,6 @@ Dostępne komendy:
         ./typefriendly compare "/path/to/directory" -l en
 
 4. **version** - wyświetla wersję TypeFriendly.
+     
+        [console]
+        ./typefriendly version

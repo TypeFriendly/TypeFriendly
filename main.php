@@ -2,7 +2,7 @@
 /*
   --------------------------------------------------------------------
                            TypeFriendly
-                 Copyright (c) 2008 Invenzzia Team
+              Copyright (c) 2008-2009 Invenzzia Team
                     http://www.invenzzia.org/
                 See README for more author details
   --------------------------------------------------------------------
@@ -25,7 +25,7 @@
 
 	class tfMain extends tfApplication
 	{
-		const VERSION = '0.1.2-dev';
+		const VERSION = '0.1.2';
 		private $args;
 
 		public function parseArgs(tfProgram $prg)

@@ -1,13 +1,13 @@
 <?php
 /*
   --------------------------------------------------------------------
-						   TypeFriendly
-				 Copyright (c) 2008 Invenzzia Team
-					http://www.invenzzia.org/
-				See README for more author details
+                           TypeFriendly
+              Copyright (c) 2008-2009 Invenzzia Team
+                    http://www.invenzzia.org/
+                See README for more author details
   --------------------------------------------------------------------
   This file is part of TypeFriendly.
-																   
+
   TypeFriendly is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or

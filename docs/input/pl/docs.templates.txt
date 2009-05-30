@@ -22,7 +22,6 @@ FeatureInformation: experimental
 ---
 
 Jakiś tekst
-
 ~~~
 
 TypeFriendly wyprodukuje wtedy następujący rezultat:

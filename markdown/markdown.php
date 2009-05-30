@@ -2,7 +2,7 @@
 /*
   --------------------------------------------------------------------
                            TypeFriendly
-                 Copyright (c) 2008 Invenzzia Team
+              Copyright (c) 2008-2009 Invenzzia Team
                     http://www.invenzzia.org/
                 See README for more author details
   --------------------------------------------------------------------

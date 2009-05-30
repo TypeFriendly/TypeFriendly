@@ -22,7 +22,6 @@ FeatureInformation: experimental
 ---
 
 Some text
-
 ~~~
 
 Which will produce the following result:

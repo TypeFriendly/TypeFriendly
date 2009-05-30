@@ -51,6 +51,7 @@ php --version
 Jeśli zobaczysz wynik podobny do poniższego, oznacza to, że wszystko zostało prawidłowo zainstalowane.
 
 ~~~
+[console]
 PHP 5.2.10RC2-dev (cli) (built: May 27 2009 18:48:36)
 Copyright (c) 1997-2009 The PHP Group
 Zend Engine v2.2.0, Copyright (c) 1998-2009 Zend Technologies

@@ -66,3 +66,6 @@ The available commands:
         ./typefriendly compare "/path/to/directory" -l pl
 
 4. **version** - prints TypeFriendly version.
+     
+        [console]
+        ./typefriendly version
