@@ -140,7 +140,7 @@
 			$license = $prg->console->stdin->read(100);
 			$out->space();
 			$projectType = -1;
-			while($projectType < 1 && $projectType > 4)
+			while($projectType < 1 || $projectType > 4)
 			{
 				$out->writeln('Select the project type:');
 				$out->writeln(' (1) Documentation');
