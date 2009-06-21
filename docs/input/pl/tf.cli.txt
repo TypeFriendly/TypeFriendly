@@ -20,7 +20,7 @@ Niezbędnym parametrem jest zawsze ścieżka do katalogu, w którym znajduje si�
 
 ~~~
 [console]
-php typefriendly.php build "./docs/"
+php typefriendly.php "./docs/"
 ~~~
 
 Dostępne są następujące opcje, które podajemy w kolejności alfabetycznej przed ścieżką:
@@ -38,13 +38,13 @@ Przykład:
 
 ~~~
 [console]
-php typefriendly.php build "./docs/" -l en -o xhtml
+php typefriendly.php "./docs/" -l en -o xhtml
 ~~~
 
 Aby wyświetlić informacje o TypeFriendly, należy wywołać skrypt bez żadnych parametrów.
 
-TypeFriendly 0.1.2
-==================
+TypeFriendly 0.1.2 i nowsze
+===========================
 
 W TypeFriendly 0.1.2 interfejs linii komend został ulepszony, a jego użycie zmienione. Jako pierwszy argument podajemy zawsze akcję, którą chcemy wykonać. Następnie podajemy ścieżkę do dokumentacji i na końcu ewentualne opcje.
 

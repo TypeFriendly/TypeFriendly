@@ -248,7 +248,7 @@ EOF;
 		{
 			$n =& $this->project->config['showNumbers'];
             
-            $id = str_replace('.', '_', $page['Id']);
+            $id = 'toc:'.str_replace('.', '_', $page['Id']);
 			
 			$parent = $this->project->getMetaInfo($page['_Parent'], false);
 			$prev = $this->project->getMetaInfo($page['_Previous'], false);
@@ -283,7 +283,7 @@ EOF;
 		public function toAddress($page)
 		{
 			$page = str_replace('.', '_', $page);
-			return '#'.$page;
+			return '#toc:'.$page;
 		} // end toAddress();
 		
 		/**

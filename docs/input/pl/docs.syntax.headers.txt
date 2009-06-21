@@ -46,8 +46,6 @@ Dopuszczalne jest też zamknięcie nagłówka tymi samymi znakami. Służy to je
 >
 > W stosunku do oryginalnego parsera Markdowna, w TypeFriendly poczynione zostały zmiany, które obniżają w generowanym wyjściu XHTML poziom nagłówka o jeden. Ma to związek z tym, że tytuł artykułu jest zawsze najważniejszy, i to on zyskuje znacznik `<h1>`. Wpisany w kod nagłówek pierwszego rzędu zostanie zamieniony na nagłowek drugiego rzędu, drugiego na trzeciego itd. Oznacza to, że choć Markdown (i HTML) udostępnia 6 poziomów nagłówków, to w TypeFriendly dostępnych jest ich 5.
 
-* * *
-
 Przykładowe nagłówki:
 
 > # Nagłówek 1
@@ -59,3 +57,23 @@ Przykładowe nagłówki:
 > #### Nagłówek 4
 > 
 > ##### Nagłówek 5 
+
+Kotwice w nagłówkach {#headers_anchors}
+====================
+
+Nagłówki umożliwają stworzenie kotwic, dzięki który będzie można [odnieść się][docs.syntax.links#links_anchors] z innych części dokumentacji do wybranego fragmentu rozdziału.
+
+Znacznik wygląda następująco: `{#kotwica}`. Umieszcza się go po tekście nagłówka w notacji setext lub na końcu linijki w notacji atx.
+
+~~~
+Nagłówek {#kotwica}
+========
+
+### Nagłówek ### {#kotwica}
+
+##### Nagłówek {#kotwica}
+~~~
+
+> [important]
+>
+> Aby identyfikatory nagłówków były unikalne w obrębie dokumentacji, TypeFriendly dodaje do nich prefiks: `h:id_rodziału:`, dlatego odwołanie się bezpośrednio do kotwicy w linku: `[odnośnik](#kotwica)` nie zadziała.

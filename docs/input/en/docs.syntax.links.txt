@@ -131,3 +131,16 @@ Links to the other chapters
 TypeFriendly registers in Markdown default references that point to all the chapters of your manual with their identifiers as labels. For example, to refer to the `someClass` description in `api.classes.some-class`, we write:
 
     See also [this chapter][api.classes.some-class]
+
+Links to anchors {#links_anchors}
+----------------
+
+Since TypeFriendly 0.1.3 it is allowed to make a link to [anchors][docs.syntax.headers#headers_anchors] in the other chapters.
+
+The syntax is the same as to a chaper and an anchor `#anchor` is located after the chapter id.
+
+    Check [this part of a chapter][api.classes.some-class#anchor]
+    
+> [important]
+>
+> To make a link to an anchor in the same chapter it is still required to use the above syntax and **not to use** `[link](#anchor)`. It is because TypeFriendly adds a prefix: `h:chapter_id:` to each header anchor to make them unique in the whole documentation.

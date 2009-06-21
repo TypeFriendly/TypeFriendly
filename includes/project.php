@@ -607,6 +607,7 @@
 					$page['Markdown'] = $page['Content'];
 				}
 				$parsers->getParser()->fn_id_prefix = str_replace('.', '_', $page['Id']).':';
+				$parsers->getParser()->page_id = $page['Id'];
 				$page['Content'] = $parsers->parse($page['Markdown']);
 				$out->generate($page);
 			}

@@ -37,4 +37,4 @@ Odnoszenie się do obrazków znajdujących się w internecie w przypadku dokumen
 > ![Wykres](media/graph.png)  
 > **Przykład wstawienia obrazka**
 
-W naszej dokumentacji powyższy plik `graph.png` znajduje się w katalogu `docs/pl/media/`.
+W naszej dokumentacji powyższy plik `graph.png` znajduje się w katalogu `/input/en/media/`.

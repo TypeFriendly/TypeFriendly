@@ -46,8 +46,6 @@ The text may be optionally ended with the same characters to make the header loo
 >
 > TypeFriendly makes a small change to the original parser. The header level in the XHTML output is always decreased by 1, because the first level (`<h1>`) is reserved for the chapter title. So, the header written as the first level will be the second level and so on. As a result, TypeFriendly supports up to 5 levels, not 6.
 
-* * *
-
 Sample headers:
 
 > # Header 1
@@ -59,3 +57,23 @@ Sample headers:
 > #### Header 4
 > 
 > ##### Header 5 
+
+Anchors in headers {#headers_anchors}
+==================
+
+Headers allow to create anchors, which can be used to [make a link][docs.syntax.links#links_anchors] from other parts of documentation to a particular fragment of a chapter.
+
+The tag looks like this: `{#anchor}`. It is places after header's text in setext notation or on the end of a line in atx notation.
+
+~~~
+Header {#anchor}
+========
+
+### Header ### {#anchor}
+
+##### Header {#anchor}
+~~~
+
+> [important]
+>
+> To make header anchors unique in whole documentation, TypeFriendly addes a prefix: `h:chapter_id:` to each of them. So making a direct link to an anchor in this way: `[link](#anchor)` will not work.

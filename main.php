@@ -25,7 +25,7 @@
 
 	class tfMain extends tfApplication
 	{
-		const VERSION = '0.1.2';
+		const VERSION = '0.1.3-dev';
 		private $args;
 
 		public function parseArgs(tfProgram $prg)

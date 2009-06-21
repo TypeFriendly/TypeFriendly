@@ -38,13 +38,13 @@ Example:
 
 ~~~
 [console]
-php typefriendly.php build "./docs/" -l en -o xhtml
+php typefriendly.php "./docs/" -l en -o xhtml
 ~~~
 
 To display the information about TypeFriendly, call the script without any parameters.
 
-TypeFriendly 0.1.2
-==================
+TypeFriendly 0.1.2 and newer
+============================
 
 In TypeFriendly 0.1.2, the command-line interface has been improved and the usage of the script has changed. The first argument is always a command specifying what we want to do. In the second place, we should specify a path to the directory with the documentation we want to process and at last, we specify the options.
 

@@ -36,6 +36,8 @@
 	
 	class MarkdownDocs_Parser extends MarkdownExtra_Parser
 	{
+		var $page_id = '';
+		
 		function _doCodeBlocks_callback($matches)
 		{
 			$codeblock = $matches[1];
@@ -89,7 +91,10 @@
 				$codeblock = substr($codeblock, 1);
 				return $codeblock;
 			}
-			else*/if(preg_match('/^((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*\n)/', $codeblock, $matches))
+			else*/
+			$split = preg_split('/[\r\n]/', $codeblock, 2, PREG_SPLIT_NO_EMPTY); 
+			
+			if(count($split) == 2 && preg_match('/^\s*((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*)/', $split[0], $matches))
 			{
 				
 				if($matches[2] == '\\')
@@ -98,12 +103,17 @@
 					return $codeblock;
 				}
 				
-				$strlen = strlen($matches[1]);
+				$strlen = strlen($matches[0]);
 				$parser = strtolower($matches[3]);
 				
+				
+				
+				$codeblock = $split[1];
+				
+				//var_dump($codeblock);
 				if($strlen > 0)
 				{
-					$codeblock = substr($codeblock, $strlen);
+					//$codeblock = substr($codeblock, $strlen);
 					if($parser == 'console')
 					{
 						$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
@@ -114,8 +124,10 @@
 					{
 						$codeblock = preg_replace('/\n+$/', '', $codeblock);
 						$geshi = new GeSHi($codeblock, $parser);
+						$geshi->set_overall_style('');
 					
 						$codeblock = $geshi->parse_code();
+						//var_dump($codeblock);
 					}
 					
 					$clear = false;
@@ -155,22 +167,16 @@
 			$bq = preg_replace('/^/m', "  ", $bq);
 			# These leading spaces cause problem with <pre> content, 
 			# so we need to fix that:
-			$bq = preg_replace_callback('{(\s*<pre>.+?</pre>)}sx', array($this, '_DoBlockQuotes_callback2'), $bq);
+			$bq = preg_replace_callback('{(\s*<pre[^>]*>.+?</pre>)}sx', 
+				array(&$this, '_DoBlockQuotes_callback2'), $bq);
 			
 			return "\n".$this->hashBlock("<blockquote$addClass>\n$bq\n</blockquote>")."\n\n";
 		} // end _doBlockQuotes_callback();
 		
-		function _doBlockQuotes_callback2($matches)
-		{
-			$pre = $matches[1];
-			$pre = preg_replace('/^  /m', '', $pre);
-			return $pre;
-		} // end _doBlockQuotes_callback2();
-		
 		function _doHeaders_attr($attr)
 		{
 			if(empty($attr)) return "";
-			return " id=\"$attr\"";
+			return ' id="h:'.str_replace('.', '_', $this->page_id).':'.$attr.'"';
 		} // end _doHeaders_attr();
 		
 		function _doHeaders_callback_setext($matches)
@@ -196,4 +202,36 @@
 			$block = "<h$level$attr>".$this->runSpanGamut($matches[2])."</h$level>";
 			return "\n".$this->hashBlock($block)."\n\n";
 		} // end _doHeaders_callback_atx();
+		
+		function _doAnchors_reference_callback($matches)
+		{
+			$whole_match =  $matches[1];
+			$res = parent::_doAnchors_reference_callback($matches);
+			if($res != $whole_match || strpos($matches[3], '#') === false)
+			{
+			    return $res;
+			}	
+			list($matches[3], $anchor) = explode('#', $matches[3], 2);
+			
+			$link_id = strtolower($matches[3]);
+			
+			$temp = false;
+			if(isset($this->urls[$link_id]))
+			{
+				$temp = $this->urls[$link_id];
+				$explode = explode('#', $this->urls[$link_id], 2);
+				if(count($explode) == 2)
+				{
+					$this->urls[$link_id] = $explode[0];
+				}
+				$this->urls[$link_id] .= '#h:'.str_replace('.', '_', $link_id).':'.$anchor;
+			}
+			$res = parent::_doAnchors_reference_callback($matches);
+			if($temp !== false)
+			{
+				$this->urls[$link_id] = $temp;
+			}
+			
+			return $res;
+		} // end _doAnchors_reference_callback();
 	} // end MarkdownDocs_Parser;
