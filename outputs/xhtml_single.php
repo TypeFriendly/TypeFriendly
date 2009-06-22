@@ -151,7 +151,7 @@
 			
 			$code .= $this->createFooter();
 		
-			$this->project->fs->write($this->path.'index.html', $code);
+			$this->project->fs->write($this->path.'index.html', $code);      
 		} // end close();
 		
 		/**

@@ -127,7 +127,7 @@
 			{
 				if($name[0] == '#')
 				{
-					if(isset($this->args[$i]) && $this->testValue($this->args[$i], $item[1]))
+					if(isset($this->args[$i]))
 					{
 						$item = $this->args[$i];
 						$i++;

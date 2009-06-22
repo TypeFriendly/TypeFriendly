@@ -157,7 +157,7 @@
 			$code .= tfTags::orderProcessTag('Navigation', 'SeeAlso', $this);
 			
 			$code .= $this->createBottomNavigator($page);
-			$code .= $this->createFooter();
+			$code .= $this->createFooter();          
 			$this->project->fs->write($this->path.$page['Id'].'.html', $code);
 		} // end generate();
 
@@ -408,7 +408,7 @@ EOF;
 					}
 					else
 					{
-						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Tags']['Title'].'</a></li>';
+						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Tags']['ShortTitle'].'</a></li>';
 						$i++;
 					}
 				}

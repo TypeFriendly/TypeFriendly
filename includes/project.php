@@ -559,6 +559,8 @@
 		{
 			static $lastOutput = NULL;
 			
+			$prog = tfProgram::get();
+			
 			$reparse = false;
 			
 			if($lastOutput != $this->output)
@@ -610,7 +612,9 @@
 				$parsers->getParser()->page_id = $page['Id'];
 				$page['Content'] = $parsers->parse($page['Markdown']);
 				$out->generate($page);
+				$prog->console->stderr->write('.');				
 			}
+			$prog->console->stderr->write(PHP_EOL);	
 			$this->parsed = true;
 			$out->close();
 		} // end generate();

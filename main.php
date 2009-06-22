@@ -87,7 +87,7 @@
 			$out->writeln('Actions:');
 			$out->writeln('  create      - creates a new documentation from a template under the specified path.');
 			$out->writeln('  build       - builds an existing documentation.');
-			$out->writeln('  compare     - compares the translations in existing documentation. Use with -c option.');
+			$out->writeln('  compare     - compares the translations in existing documentation. Use with -l option.');
 			$out->writeln('  version     - version information.');
 			$out->space();
 			$out->writeln('Options:');
@@ -181,7 +181,7 @@ versionControlInfo = false
 	} // end create();
 
 		public function build(tfProgram $prg)
-		{
+		{          
 			if(!isset($this->args['#path']))
 			{
 				return $this->main($prg);
@@ -214,7 +214,7 @@ versionControlInfo = false
 					$project->loadItems();
 					$prg->console->stdout->writeln('Starting '.$this->args['-o'].'.');
 					$project->setOutput($this->args['-o']);
-					$project->generate();
+					$project->generate();       
 					$prg->console->stdout->writeln('Generation completed.');
 				}
 				else
