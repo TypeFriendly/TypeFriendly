@@ -22,7 +22,7 @@ ShortTitle
 
     * W tytule dokumentu i "okruchach chleba" (breadcrumbs),
     * W tagach: **SeeAlso**, **Extends**, **Implements**, **ExtendedBy**, **ImplementedBy**, **Throws**, **MultiExtends** i **Arguments**,
-    * Jako atrybut "title" w odnośnikach do innych rozdziałów.
+    * Jako HTML-owy atrybut "title" w odnośnikach do innych rozdziałów.
     
     Jeżeli **ShortTitle** nie jest ustawiony, brana jest wartość z **Title**.
 
