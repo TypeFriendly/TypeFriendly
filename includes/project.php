@@ -577,6 +577,15 @@
 			$this->copyMedia();
 			
 			$this->outputObj = $out = $this->prog->fs->loadObject('outputs/'.$this->output.'.php', $this->output);
+			
+			foreach($this->pages as &$page)
+			{
+				if(!tfTags::validateTags($page['Tags']))
+				{
+					throw new Exception('Tag validation error in "'.$page['Id'].'": '.PHP_EOL.tfTags::getError());
+				}
+			}
+			
 			if($reparse)
 			{
 				$parsers = tfParsers::get();
@@ -586,21 +595,13 @@
 				foreach($this->pages as &$page)
 				{
 					$refs[$page['Id']] = $this->outputObj->toAddress($page['Id']);
-					$refTitles[$page['Id']] = $page['Tags']['Title'];
+					$refTitles[$page['Id']] = ($this->config['showNumbers'] ? $page['FullNumber'].'. ' : '').$page['Tags']['ShortTitle'];
 				}
 				
 				$parsers->getParser()->predef_urls = $refs;
 				$parsers->getParser()->predef_titles = $refTitles;
 			}
-
-			foreach($this->pages as &$page)
-			{
-				if(!tfTags::validateTags($page['Tags']))
-				{
-					throw new Exception('Tag validation error in "'.$page['Id'].'": '.PHP_EOL.tfTags::getError());
-				}
-			}
-
+			
 			$out->init($this, 'output/'.$this->output.'/');
 			foreach($this->pages as &$page)
 			{

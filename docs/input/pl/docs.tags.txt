@@ -18,7 +18,13 @@ Title
 :   pełny tytuł danego rozdziału
 
 ShortTitle
-:   skrócony tytuł rozdziału (np. na potrzeby odnośników). Jeżeli nie jest ustawiony, brana jest wartość z **Title**.
+:   Alternatywna wersja tytułu, wbrew nazwie wcale nie musi być krótsza. Tag ten przez TypeFriendly używany jest w następujących sytuacjach:
+
+    * W tytule dokumentu i "okruchach chleba" (breadcrumbs),
+    * W tagach: **SeeAlso**, **Extends**, **Implements**, **ExtendedBy**, **ImplementedBy**, **Throws**, **MultiExtends** i **Arguments**,
+    * Jako atrybut "title" w odnośnikach do innych rozdziałów.
+    
+    Jeżeli **ShortTitle** nie jest ustawiony, brana jest wartość z **Title**.
 
 SeeAlso
 :   tablica identyfikatorów rozdziałów na potrzeby rubryki "Zobacz także".

@@ -18,7 +18,13 @@ Title
 :   a full title of the chapter (required tag)
 
 ShortTitle
-:   a shortened title of the chapter (for example, for use in URLs). If not set, the value is taken from **Title**.
+:   Alternative version of the title, contrary to the name it does not need to be shorter. This tag is used by TypeFriendly in following situations:
+
+    * As a document title and in breadcrumbs,
+    * In tags: **SeeAlso**, **Extends**, **Implements**, **ExtendedBy**, **ImplementedBy**, **Throws**, **MultiExtends** and **Arguments**,
+    * As HTML "title" attribute in links to other chapters.
+
+    If not set, the value is taken from **Title**.
 
 SeeAlso
 :   an array of identifiers to generate the "See also" section.
