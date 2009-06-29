@@ -1,4 +1,4 @@
-TypeFriendly 0.1.2
+TypeFriendly 0.1.3
 ==================
 
 TypeFriendly is a documentation generator written in PHP5 and developed to be easy in use.

@@ -401,12 +401,10 @@
 							}
 							elseif(strlen($id) == 0)
 							{
-								echo 'ff';
 								throw new Exception('Not all base chapters are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
 							}
 							else
 							{
-								echo 'rr';
 								throw new Exception('Not all children of "'.$id.'" are defined in the sorting hint list. Missing: "'.$val['id'].'". I don\'t know, what to do.');
 							}
 						}
