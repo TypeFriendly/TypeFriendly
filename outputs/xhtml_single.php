@@ -99,23 +99,24 @@
 				tfTags::orderProcessTag('Status', 'Status', $this).
 				tfTags::orderProcessTags('Programming', $this).
 				tfTags::orderProcessTags('VersionControl', $this);
+			
 			if(sizeof($this->_tagVersion) > 0)
 			{
-				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
+				$reference .= '<tr><th>'.$this->translate->_('tags','versions').'</th><td>';
 				if(isset($this->_tagVersion['since']))
 				{
-					$reference .= $this->translate->_('general', 'period_since').' <em>'.$this->_tagVersion['since'].'</em>';
+					$reference .= $this->translate->_('general', 'period_since').' <code>'.$this->_tagVersion['since'].'</code>';
 				}
 				if(isset($this->_tagVersion['to']))
 				{
-					$reference .= ' '.$this->translate->_('general', 'period_to').' <em>'.$this->_tagVersion['to'].'</em>';
+					$reference .= ' '.$this->translate->_('general', 'period_to').' <code>'.$this->_tagVersion['to'].'</code>';
 				}
-				$reference .= '</p>';
+				$reference .= '</td></tr>'.PHP_EOL;
 			}
 
 			if($reference != '')
 			{
-				$code .= $reference.'<hr/>';
+				$code .= '<div class="tf_reference"><table>'.$reference.'</table><hr/></div>';
 			}
 			
 			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);

@@ -132,24 +132,21 @@
 			
 			if(sizeof($this->_tagVersion) > 0)
 			{
-				$reference .= '<p><strong>'.$this->translate->_('tags','versions').':</strong> ';
-				
+				$reference .= '<tr><th>'.$this->translate->_('tags','versions').'</th><td>';
 				if(isset($this->_tagVersion['since']))
 				{
-					$reference .= $this->translate->_('general', 'period_since').' <em>'.$this->_tagVersion['since'].'</em>';
+					$reference .= $this->translate->_('general', 'period_since').' <code>'.$this->_tagVersion['since'].'</code>';
 				}
-				
 				if(isset($this->_tagVersion['to']))
 				{
-					$reference .= ' '.$this->translate->_('general', 'period_to').' <em>'.$this->_tagVersion['to'].'</em>';
+					$reference .= ' '.$this->translate->_('general', 'period_to').' <code>'.$this->_tagVersion['to'].'</code>';
 				}
-				
-				$reference .= '</p>';
+				$reference .= '</td></tr>'.PHP_EOL;
 			}
 
 			if($reference != '')
 			{
-				$code .= $reference.'<hr/>';
+				$code .= '<div class="tf_reference"><table>'.$reference.'</table><hr/></div>';
 			}
 			
 			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);
@@ -447,7 +444,7 @@ EOF;
 		 */
 		public function _tagAuthor($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','author').': </strong>'.$value.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','author').'</th><td>'.$value.'</td></tr>';
 		} // end _tagAuthor();
 
 		/**
@@ -458,7 +455,7 @@ EOF;
 		 */
 		public function _tagStatus($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','status').': </strong>'.$value.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','status').'</th><td>'.$value.'</td></tr>';
 		} // end _tagStatus();
 
 		/**
@@ -471,7 +468,7 @@ EOF;
 		{
 			if($this->project->config['versionControlInfo'])
 			{
-				return '<p><strong>'.$this->translate->_('tags','version_control_info').': </strong><code>'.$val.'</code></p>';
+				return '<tr><th>'.$this->translate->_('tags','version_control_info').'</th><td><code>'.$val.'</code></td></tr>';
 			}
 			return '';
 		} // end _tagVCSKeywords();
@@ -519,7 +516,7 @@ EOF;
 		 */
 		public function _tagConstruct($val)
 		{
-			return '<p><strong>'.$this->translate->_('tags','construct').': </strong>'.$val.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','construct').'</th><td>'.$val.'</td></tr>';
 		} // end _tagConstruct();
 
 		/**
@@ -530,7 +527,7 @@ EOF;
 		 */
 		public function _tagVisibility($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','visibility').': </strong>'.$value.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','visibility').'</th><td>'.$value.'</td></tr>';
 		} // end _tagVisibility();
 
 		/**
@@ -541,7 +538,7 @@ EOF;
 		 */
 		public function _tagReturns($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','returns').':</strong> '.$value.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','returns').'</th><td>'.$value.'</td></tr>';
 		} // end _tagVisibility();
 
 		/**
@@ -552,7 +549,7 @@ EOF;
 		 */
 		public function _tagType($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','type').':</strong> '.$value.'</p>';
+			return '<tr><th>'.$this->translate->_('tags','type').'</th><td>'.$value.'</td></tr>';
 		} // end _tagType();
 
 		/**
@@ -563,7 +560,7 @@ EOF;
 		 */
 		public function _tagReference($value)
 		{
-			return '<p><strong>'.$this->translate->_('tags','reference').': </strong> <code>'.$value.'</code></p>';
+			return '<tr><th>'.$this->translate->_('tags','reference').'</th><td><code>'.$value.'</code></td></tr>';
 		} // end _tagReference();
 
 		/**
@@ -579,7 +576,7 @@ EOF;
 			$pp = $this->project->getMetaInfo($extends, false);
 			if(!is_null($pp))
 			{
-				return '<p><strong>'.$this->translate->_('tags','obj_extends').': </strong><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></p>';
+				return '<tr><th>'.$this->translate->_('tags','obj_extends').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
 			}
 		} // end _tagExtends();
 
@@ -659,18 +656,19 @@ EOF;
 					$typeOk = false;
 				}
 			}
-			$code = '<table><caption>'.$this->translate->_('tags', 'arg_list').'</caption><thead><tr><th>'.$this->translate->_('tags', 'arg_name').'</th>';
-			if($typeOk)
+			$code = '<tr><th>'.$this->translate->_('tags', 'arg_list').'</th><td>';//.$this->translate->_('tags', 'arg_name').'</th>';
+			/*if($typeOk)
 			{
 				$code .= '<th>'.$this->translate->_('tags', 'arg_type').'</th>';
 			}
-			$code .= '<th>'.$this->translate->_('tags', 'arg_desc').'</th></tr></thead><tbody>';
+			$code .= '<th>'.$this->translate->_('tags', 'arg_desc').'</th></tr></thead><tbody>';*/
+			$code .= '<dl>';
 			foreach($list as $item)
 			{
-				$code .= '<tr><td><code>'.$item['Name'].'</code></td>';
+				$code .= '<dt><code>'.$item['Name'].'</code>';
 				if($typeOk)
 				{
-					$code .= '<td>';
+					$code .= ' <small>- ';
 					if(isset($item['Type']))
 					{
 
@@ -682,13 +680,13 @@ EOF;
 					}
 					elseif(isset($item['EType']))
 					{
-						$code .= '<code>'.$item['EType'].'</code>';
-					}
-					$code .= '</td>';
+						$code .= ''.$item['EType'].'';
+					}          
+					$code .= '</small>';
 				}
-				$code .= '<td>'.$item['Desc'].'</td></tr>';
+				$code .= '</dt><dd>'.$item['Desc'].'</dd>';
 			}
-			return $code.'</tbody></table>';
+			return $code.'</dl></td></tr>';
 		} // end _tagParameters();
 
 		/**
@@ -700,7 +698,7 @@ EOF;
 		 */
 		protected function _showLinks($val1, $val2, $message)
 		{
-			$code = '<p><strong>'.$this->translate->_('tags',$message).':</strong> ';
+			$code = '<tr><th>'.$this->translate->_('tags',$message).'</th><td>';
 			$items = array();
 			if($val1 !== null)
 			{
@@ -709,7 +707,7 @@ EOF;
 					$pp = $this->project->getMetaInfo($item, false);
 					if(!is_null($pp))
 					{
-						$items[] = '<a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a>';
+						$items[] = '<code><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></code>';
 					}
 				}
 			}
@@ -720,6 +718,6 @@ EOF;
 					$items[] = '<code>'.$item.'</code>';
 				}
 			}
-			return $code.implode(', ', $items).'</p>';
+			return $code.implode(', ', $items).'</td></tr>';
 		} // end _showLinks();
 	} // end xhtml;

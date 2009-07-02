@@ -82,7 +82,7 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 .rel {color:#ff0000;}
 
 /* MARKDOWN */
-#content {margin: 10px; line-height: 20px;}
+#content {margin: 10px; line-height: 145%;}
 
 #content h1 {font-size: 24px; line-height: 26px; font-weight: bold; letter-spacing: -1px; font-family: Arial, Helvetica, sans-serif; margin: 10px 0 10px 0; color: #2e5727; border-bottom: 1px solid #c4f58a; padding-bottom: 4px;}
 #content h2 {font-size: 20px; line-height: 22px; font-weight: bold; letter-spacing: -1px; font-family: Arial, Helvetica, sans-serif; margin: 20px 0 10px 0; color: #333333; border-bottom: 1px solid #dddddd; padding-bottom: 2px;}
@@ -122,10 +122,11 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content div.footnotes li hr {color: #444444; background-color: #444444;}
 
 #content table {margin: 10px 0; width: 100%;}
+#content table caption {margin: 0; text-align: center; font-weight: bold; font-size: 120%; line-height: 180%;}
 #content table thead {}
 #content table tbody {}
 #content table tr {text-align: center;}    
-#content table td, #content table th {padding: 4px 7px; border: 1px solid #999999;}
+#content table td, #content table th {padding: 4px 7px; border: 1px solid #999999; font-size: 14px;}
 #content table td {background: #ffffff;}
 #content table th {background: #e4f7bd; text-align: center; font-weight: bold; color: #657926;}
 
@@ -154,9 +155,16 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content blockquote.stop {background-image: url(icon-stop.gif);}
 #content blockquote.warning {background-image: url(icon-warning.gif);}
 
-#content div.method-synopsis {padding-left: 100px; text-indent: -100px; font-family: 'Courier New', Courier; font-size: 13px;}
-#content div.method-synopsis kbd {color: #ff0000; font-size: 16px; font-weight: bold;}
-#content div.method-synopsis kbd.b {color: #0000ff; font-size: 14px;}
-#content div.method-synopsis strong {font-size: 15px;}
-#content div.method-synopsis em {font-style: normal; color: #777777; font-size: 12px;}
-#content div.method-synopsis code {background: none; color: #000000; font-size: 13px;}
+#content div.tf_reference {font-size: 13px;/* background: #fafafa;*/ margin: 10px 0 20px 0; /*padding: 10px;*/}
+#content div.tf_reference p {margin: 0;}
+#content div.tf_reference hr {display: none;}
+#content div.tf_reference table {}
+#content div.tf_reference table td {text-align: left; width: 100%}
+#content div.tf_reference table th {text-align: left; background: transparent; color: #000000; white-space: nowrap;}
+#content div.tf_reference table td, #content div.tf_reference table th {border-width: 0 0 2px 0; border-color: #eeeeee; padding-top: 2px; padding-bottom: 2px; vertical-align: top; font-size: 13px;}
+#content div.tf_reference dl {margin: 0;}
+#content div.tf_reference dl dt a {position: static; display: inline; top:auto; right: auto; font-weight: bold;}
+#content div.tf_reference dl dt {color: #888888;}
+#content div.tf_reference dl dt code {color: #444444;}
+#content div.tf_reference dl dt small {}
+#content div.tf_reference dl dt {margin: 0}
