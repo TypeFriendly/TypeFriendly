@@ -1,3 +1,4 @@
+; $Id$
 ; The navigation messages
 ; The translations of available programming constructs
 ; Translation authors:

@@ -1,3 +1,4 @@
+; $Id$
 ; Translations of the main messages used across the book.
 ; Translation authors:
 ; - Tomasz Jędrzejewski <http://www.zyxist.com>
@@ -8,7 +9,7 @@ manual = "User manual"
 book = "Book"
 article = "Article"
 generated_in = "Generated: %s"
-doc_license = "Available under the terms of license"
+doc_license = "Available under the terms of license: %s"
 
 period_since = "since"
 period_to = "to"
