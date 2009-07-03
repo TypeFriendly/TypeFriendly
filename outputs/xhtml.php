@@ -194,6 +194,7 @@ $code = <<<EOF
 	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
 	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
 	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->
 </head>
 <body>
 
@@ -279,11 +280,11 @@ EOF;
 			$code = '<dl class="location">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'</dt>';
 			}
 			else
 			{
-				$code .= '<dt><a href="index.html">'.$translate->_('general','table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="index.html">'.$translate->_('general','table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'</dt>';
 			}
 			if(!is_null($prev))
 			{
@@ -314,11 +315,11 @@ EOF;
 			$code = '<dl class="location location-bottom">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a></dt>';
+				$code .= '<dt>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="'.$parent['Id'].'.html">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a></dt>';
 			}
 			else
 			{
-				$code .= '<dt><hr/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="index.html">'.$translate->_('general','table_of_contents').'</a></dt>';
+				$code .= '<dt>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<br/><a href="index.html">'.$translate->_('general','table_of_contents').'</a></dt>';
 			}
 			if(!is_null($prev))
 			{

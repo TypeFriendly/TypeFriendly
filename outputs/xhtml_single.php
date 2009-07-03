@@ -182,7 +182,8 @@ $code = <<<EOF
 	
 	<link rel="stylesheet" type="text/css" href="design/generic.css" media="all"  />
 	<link rel="stylesheet" type="text/css" href="design/print.css" media="print" />
-	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->	
+	<!--[if lte IE 6]><link rel="stylesheet" href="design/ie.css" type="text/css" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" href="design/ie7.css" type="text/css" /><![endif]-->	
 </head>
 <body>
 
@@ -259,11 +260,11 @@ EOF;
 			$code = '<dl id="'.$id.'" class="location location-middle">';
 			if(!is_null($parent))
 			{
-				$code .= '<dt><a href="'.$this->toAddress($parent['Id']).'">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="'.$this->toAddress($parent['Id']).'">'.($n ? $parent['FullNumber'].'. ' : '').$parent['Tags']['Title'].'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'</dt>';
 			}
 			else
 			{
-				$code .= '<dt><a href="#toc">'.$this->translate->_('general', 'table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'<hr/></dt>';
+				$code .= '<dt><a href="#toc">'.$this->translate->_('general', 'table_of_contents').'</a><br/>'.($n ? $page['FullNumber'].'. ' : '').$page['Tags']['Title'].'</dt>';
 			}
 			if(!is_null($prev))
 			{

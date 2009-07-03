@@ -82,7 +82,7 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 .rel {color:#ff0000;}
 
 /* MARKDOWN */
-#content {margin: 10px; line-height: 145%;}
+#content {margin: 10px; font-size: 14px; line-height: 145%;}
 
 #content h1 {font-size: 24px; line-height: 26px; font-weight: bold; letter-spacing: -1px; font-family: Arial, Helvetica, sans-serif; margin: 10px 0 10px 0; color: #2e5727; border-bottom: 1px solid #c4f58a; padding-bottom: 4px;}
 #content h2 {font-size: 20px; line-height: 22px; font-weight: bold; letter-spacing: -1px; font-family: Arial, Helvetica, sans-serif; margin: 20px 0 10px 0; color: #333333; border-bottom: 1px solid #dddddd; padding-bottom: 2px;}
@@ -99,7 +99,7 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content a:hover {/*color: #8d1414;*/ border-bottom: 1px solid #6faf00;}
 #content hr {color: #444444; background-color: #444444; height: 1px; border: none;}
 #content dl {margin: 10px 0;}
-#content dl dt {font-weight: bold; font-size: 13px; margin: 5px 0 0 0; position: relative;}
+#content dl dt {font-weight: bold; font-size: 95%; margin: 5px 0 0 0; position: relative;}
 #content dl dt + dt {margin: -2px 0 0 0;}
 #content dl dt a {border: none; position: absolute; display: block; top:-2px; right: 5px; font-weight: bold;}
 #content dl dd {margin-left: 0; padding-left: 25px; background: url(jump.gif) no-repeat 5px 3px;}
@@ -114,12 +114,17 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content pre code {background: none !important; padding: 0;}
 #content pre.console {background: #333333; color: #ffffff;}
 #content pre,
-#content code {font-family: Consolas, 'Lucida Console', 'Courier New', courier, monospaced;}
+#content code {font-size: 100%; font-family: Consolas, 'Lucida Console', 'Courier New', courier, monospaced;}
+        
+#content dl dt code {font-weight: bold;}
+#content h2 code, #content h3 code, #content h4 code, #content h5 code, #content h6 code {font-weight: bold;}
 
-#content a[rel="footnote"] {font-size: 12px;}
-#content div.footnotes {font-size: 12px;}
+#content a[rel="footnote"] {font-size: 12px; line-height: 100%; padding: 0 1px;}
+#content div.footnotes {font-size: 13px;}
 #content div.footnotes hr {color: #69A540; background-color: #69A540;}
 #content div.footnotes li hr {color: #444444; background-color: #444444;}
+#content div.footnotes dl dd {background-position: 5px 2px;}
+#content div.footnotes table td, #content div.footnotes table th {font-size: 13px;}
 
 #content table {margin: 10px 0; width: 100%;}
 #content table caption {margin: 0; text-align: center; font-weight: bold; font-size: 120%; line-height: 180%;}
@@ -168,3 +173,4 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content div.tf_reference dl dt code {color: #444444;}
 #content div.tf_reference dl dt small {}
 #content div.tf_reference dl dt {margin: 0}
+
