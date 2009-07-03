@@ -22,7 +22,7 @@
 */
 /* $Id$ */
 
-#header h1 {right: 30px;}
+#wrap {width: expression(document.body.clientWidth > 1030 ? "1000px" : "auto"); zoom: 1;}
 
 #content pre {word-wrap: break-word;}
 #content blockquote {zoom:1;}
