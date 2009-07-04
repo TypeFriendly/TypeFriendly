@@ -77,21 +77,6 @@
 		
 		function _codeBlockHighlighter($codeblock, &$clear)
 		{
-			/*if($codeblock{0} == '>')
-			{
-				$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
-				$codeblock = preg_replace_callback('/^\n+/', array($this, '_doFencedCodeBlocks_newlines'), $codeblock);
-				$codeblock = "<pre class=\"console\"><code>$codeblock</code></pre>";
-				
-				$clear = false;			
-				return $codeblock;	
-			}
-			elseif($codeblock{0}.$codeblock{1} == '\>')
-			{
-				$codeblock = substr($codeblock, 1);
-				return $codeblock;
-			}
-			else*/
 			$split = preg_split('/[\r\n]/', $codeblock, 2, PREG_SPLIT_NO_EMPTY); 
 			
 			if(count($split) == 2 && preg_match('/^\s*((\\\){0,2}\[([a-zA-Z0-9\-_]+)\]\s*)/', $split[0], $matches))
@@ -105,15 +90,11 @@
 				
 				$strlen = strlen($matches[0]);
 				$parser = strtolower($matches[3]);
-				
-				
-				
+
 				$codeblock = $split[1];
 				
-				//var_dump($codeblock);
 				if($strlen > 0)
 				{
-					//$codeblock = substr($codeblock, $strlen);
 					if($parser == 'console')
 					{
 						$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
@@ -127,7 +108,6 @@
 						$geshi->set_overall_style('');
 					
 						$codeblock = $geshi->parse_code();
-						//var_dump($codeblock);
 					}
 					
 					$clear = false;
