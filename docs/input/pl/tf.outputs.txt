@@ -16,8 +16,9 @@ Wyjście samo musi dbać o zapisanie wyniku do odpowiednich plików - TypeFriend
 API
 ===
 
-standardOutput
---------------
+`standardOutput`
+----------------
+
 Jest to klasa abstrakcyjna, którą musi rozszerzać i implementować klasa wyjścia. Zawiera metody:
 
 + `init($project, $path)` - wywoływana przed rozpoczęciem przetwarzania podstron. Jako parametry dostaje obiekt projektu oraz ścieżkę, do której należy zapisać pliki wynikowe.
@@ -32,23 +33,26 @@ Dodatkowe tagi w meta-danych rozdziału
 * `Prev` - identyfikator poprzedniej strony dokumentacji lub NULL
 * `Parent` - identyfikator rozdziału nadrzędnego lub NULL
 
-tfTranslate
------------
+`tfTranslate`
+-------------
+
 Obiekt tej klasy służy do tłumaczenia interfejsu dokumentacji na różne języki.
 
 + `tfTranslate::get()` - zwraca obiekt interfejsu tłumaczeń.
 + `_($group, $id, ...)` - pobiera tekst w danym języku o identyfikatorze `$id` w grupie `$group`. Opcjonalnie można podać więcej argumentów, które zostaną umieszczone w komunikacie, o ile zawiera on odpowiednie do tego celu pola.
 
-tfProject
----------
+`tfProject`
+-----------
+
 Obiekt projektu.
 
 + `$fs` - obiekt klasy `tfFilesystem` obrazujący katalog projektu.
 + `$tree` - publiczna struktura opisująca drzewo. Jako indeks podajemy identyfikator żądanego rozdziału i otrzymujemy tablicę z pełnymi danymi wszystkich zawartych w nim podstron.
 + `getMetaInfo($name[, $exception = true])` - zwraca wszystkie meta-informacje dotyczące rozdziału o nazwie `$name`. Domyślnie w przypadku nieznalezienia generowany jest wyjątek. Jeżeli ostatni argument ustawiony jest na **false**, wtedy w przypadku braku zwracana jest wartość **NULL**.
 
-tfFilesystem
-------------
+`tfFilesystem`
+--------------
+
 Klasa reprezentująca system plików w obrębie podanego katalogu. Umożliwia szybką i prostą manipulację plikami oraz katalogami. W opisie przez ''system plików'' będziemy rozumieć folder, na który został ustawiony obiekt tej klasy i w obrębie którego możemy dokonywać manipulacji.
 
 + `get($name)` - zwraca rzeczywistą ścieżkę do podanego pliku w systemie plików. W razie nieznalezienia generowany jest wyjątek `SystemException`.

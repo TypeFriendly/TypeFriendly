@@ -16,8 +16,9 @@ The output system must take care of saving the result to the files. TypeFriendly
 API
 ===
 
-standardOutput
---------------
+`standardOutput`
+----------------
+
 An abstract class that must be extended by the output class. The methods:
 
 + `init($project, $path)` - called before the pages are processed. It takes the project object and the output directory path, where the result files should be saved.
@@ -32,23 +33,26 @@ Additional tags in the meta-data defined by TypeFriendly:
 * `Prev` - an identifier of the previous page or NULL
 * `Parent` - an identifier of the parent page or NULL
 
-tfTranslate
------------
+`tfTranslate`
+-------------
+
 It is used to translate the documentation messages to other languages.
 
 + `tfTranslate::get()` - returns the `tfTranslate` object.
 + `_($group, $id, ...)` - returns a text `$id` in the group `$group`. Optionally, more parameters can be provided - their values will be placed in the message, if it contains necessary tags.
 
-tfProject
----------
+`tfProject`
+-----------
+
 The project object.
 
 + `$fs` - the `tfFilesystem` object that describes the project directory.
 + `$tree` - a public structure with the chapter tree. As an index, we provide the chapter identifier and we get an array with the meta-data of all the sub-chapters.
 + `getMetaInfo($name[, $exception = true])` - returns the meta-data of the specified chapter. `$name` is the chapter identifier. If the last parameter is set to **false**, the method throws an exception, if the requested page has not been found. Otherwise, it returns **NULL**.
 
-tfFilesystem
-------------
+`tfFilesystem`
+--------------
+
 This class represents the file system inside a directory. It allows fast and easy file/directory manipulation. We assume that *filesystem* means the directory mapped by an object of this class, where we can do the manipulations.
 
 + `get($name)` - returns the real path to the specified file in the file system. If the file does not exist, `SystemException` is thrown.

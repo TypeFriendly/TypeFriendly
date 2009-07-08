@@ -97,6 +97,7 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content p {margin: 10px 0; text-align: justify;}
 #content a {color: #669900; /*padding-right: 18px; background: url(jump.gif) no-repeat 100% 50%;*/}
 #content a:hover {/*color: #8d1414;*/ border-bottom: 1px solid #6faf00;}
+#content a:hover code {background: none;}
 #content hr {color: #444444; background-color: #444444; height: 1px; border: none;}
 #content dl {margin: 10px 0;}
 #content dl dt {font-weight: bold; font-size: 95%; margin: 5px 0 0 0; position: relative;}
