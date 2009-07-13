@@ -51,7 +51,8 @@ class tfTags
 		),
 		'Status' => array(
 			'Status' => self::STRING,
-			'FeatureInformation' => self::IDENTIFIER
+			'FeatureInformation' => self::IDENTIFIER,
+			'FeatureInformationFrame' => self::STRING
 		),
 		'Programming' => array(
 			'Construct' => self::STRING,
@@ -194,6 +195,21 @@ class tfTags
 	 */
 	static public function validateTags(Array &$tags)
 	{
+		// Process the "FeatureInformation" tag.
+		// This tag has to be reparsed every time the method is invoked (because of parsing markdown)
+		if(isset($tags['FeatureInformation']))
+		{
+			$parser = tfParsers::get();
+			try
+			{
+				$tags['FeatureInformationFrame'] = $parser->parse(self::$_project->getTemplate($tags['FeatureInformation']));
+			}
+			catch(SystemException $exception)
+			{
+				self::$_error = 'The feature information identifier: "'.$tags['FeatureInformation'].'" is not defined.';
+				return false;
+			}
+		}
 		if(isset($tags['%%Validated']))
 		{
 			return true;
@@ -236,20 +252,6 @@ class tfTags
 		{
 			self::$_error = 'Tags "Extends" and "MultiExtends" cannot be used together.';
 			return false;
-		}
-		// Process the "FeatureInformation" tag.
-		if(isset($tags['FeatureInformation']))
-		{
-			$parser = tfParsers::get();
-			try
-			{
-				$tags['FeatureInformation'] = $parser->parse(self::$_project->getTemplate($tags['FeatureInformation']));
-			}
-			catch(SystemException $exception)
-			{
-				self::$_error = 'The feature information identifier: "'.$tags['FeatureInformation'].'" is not defined.';
-				return false;
-			}
 		}
 		// Process the "Construct" tag
 		if(isset($tags['Construct']))

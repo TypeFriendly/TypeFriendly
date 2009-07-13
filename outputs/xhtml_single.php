@@ -119,7 +119,7 @@
 				$code .= '<div class="tf_reference"><table>'.$reference.'</table><hr/></div>';
 			}
 			
-			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);
+			$code .= tfTags::orderProcessTag('General', 'FeatureInformationFrame', $this);
 			$code .= $page['Content'];
 			$code .= tfTags::orderProcessTag('Navigation', 'SeeAlso', $this);
 			

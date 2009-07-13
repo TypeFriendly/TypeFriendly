@@ -149,7 +149,7 @@
 				$code .= '<div class="tf_reference"><table>'.$reference.'</table><hr/></div>';
 			}
 			
-			$code .= tfTags::orderProcessTag('General', 'FeatureInformation', $this);
+			$code .= tfTags::orderProcessTag('General', 'FeatureInformationFrame', $this);
 			$code .= $page['Content'];
 			$code .= tfTags::orderProcessTag('Navigation', 'SeeAlso', $this);
 			
@@ -507,7 +507,7 @@ EOF;
 		 * @param String $val The parsed value to be displayed.
 		 * @return String
 		 */
-		public function _tagFeatureInformation($val)
+		public function _tagFeatureInformationFrame($val)
 		{
 			return $val;
 		} // end _tagImplements();
