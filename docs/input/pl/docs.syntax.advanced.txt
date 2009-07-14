@@ -4,7 +4,7 @@ Title: Zaawansowane użycie
 
 W Markdownie bezwzględnie należy przestrzegać ilości spacji, których używamy do formatowania rozbudowanych, zagnieżdżonych elementów blokowych, jak powyższa listy wypunktowania z blokami kodu, czy ramki.
 
-Jeśli nadal masz problemy z prawidłowym sformatowaniem jakiegoś fragmentu tekstu, upewnij się, czy wstawiłeś odpowiednią liczbę spacji, czy dałeś przejścia do nowej lini. 
+Jeśli nadal masz problemy z prawidłowym sformatowaniem jakiegoś fragmentu tekstu, upewnij się, czy wstawiłeś odpowiednią liczbę spacji, czy dałeś przejścia do nowej linii. 
 
 Dobrą wprawką jest również kod źródłowy tej dokumentacji.
 

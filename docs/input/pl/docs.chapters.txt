@@ -61,5 +61,7 @@ Plik zawiera listę rozdziałów w żądanym przez nas porządku. Zauważ, że n
 Wskazówki:
 
 1. Plik ze wskazówkami jest jeden dla wszystkich języków, dlatego bardzo ważne jest, aby w każdej wersji językowej odpowiadające sobie rozdziały miały tę samą nazwę pliku.
+
 2. Nazwa pliku jest też wykorzystywana do identyfikowania rozdziałów przy tworzeniu ręcznym odnośników w tekście. Dlatego wybieraj nazwy krótkie i intuicyjne, trzymając się jakichś reguł. Ułatwi to późniejsze odnalezienie się w tym wszystkim.
+
 3. TypeFriendly pomija pliki z innym rozszerzeniem lub kończące się np. tyldą, tak więc nie trzeba wyłączać opcji tworzenia kopii zapasowej w edytorze, aby tworzyć publikację.

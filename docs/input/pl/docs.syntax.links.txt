@@ -129,9 +129,9 @@ W podobny sposób można postąpić a adresami e-mail. W tym przypadku jednak pa
 Odnośniki do pozostałych rozdziałów dokumentacji
 ================================================
 
-TypeFriendly definiuje listę domyślnych referencji do wszystkich rodziałów generowanej dokumentacji przy użyciu ich identyfikatorów. Jeżeli chcemy odnieść się do rozdziału `api.klasy.jakas-klasa` wystarczy napisać:
+TypeFriendly definiuje listę domyślnych referencji do wszystkich rozdziałów generowanej dokumentacji przy użyciu ich identyfikatorów. Jeżeli chcemy odnieść się do rozdziału `api.klasy.jakas-klasa` wystarczy napisać:
 
-    Zajrzyj do [tego rodziału][api.klasy.jakas-klasa]
+    Zajrzyj do [tego rozdziału][api.klasy.jakas-klasa]
     
 Spowoduje to automatyczne utworzenie linku do żądanego rodziału.
 
@@ -142,7 +142,7 @@ Od wersji 0.1.3 TypeFriendly można odnosić się do [kotwic][docs.syntax.header
 
 Składnia jest taka sama jak normalnie do rozdziału, dodaje się tylko po identyfikatorze odnośnik kotwicy: `#kotwica`:
 
-    Zajrzyj do [tego fragmentu rodziału][api.klasy.jakas-klasa#kotwica]
+    Zajrzyj do [tego fragmentu rozdziału][api.klasy.jakas-klasa#kotwica]
     
 > [important]
 >

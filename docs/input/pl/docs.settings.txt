@@ -60,7 +60,7 @@ showNumbers
 :   czy włączyć numerowanie rozdziałów (wartości *true* lub *false*).
 
 versionControlInfo
-:	czy wyświetlać wartości tagów dotyczących systemu kontroli wersji? (domyślnie *false*)
+:   czy wyświetlać wartości tagów dotyczących systemu kontroli wersji? (domyślnie *false*)
 
 ***
 

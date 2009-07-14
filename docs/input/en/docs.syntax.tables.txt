@@ -49,4 +49,4 @@ In tables it is possible to specify content alignment for each column. It is don
 <!-- # -->
 
 > [information]
-> Default CSS of the output (**xhtml** and **xhtml_single**) automaticly makes cells centered.
+> Default CSS of the output (**xhtml** and **xhtml_single**) automatically makes cells centered.

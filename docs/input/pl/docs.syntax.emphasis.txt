@@ -20,7 +20,7 @@ __podwójne podkreślenia__
 
 Możesz użyć którego znaku chcesz, jednym wymogiem jest użycie tego samego znaku do otworzenia i zamknięcia wyróżnienia.
 
-Jeśli chcesz, aby fragment był i pogrubiony, i pochylony, użyj trech znaków.
+Jeśli chcesz, aby fragment był i pogrubiony, i pochylony, użyj trzech znaków.
 
     ***potrójne gwiazdki***
     

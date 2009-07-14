@@ -9,7 +9,7 @@ Model wielojęzyczny TypeFriendly zakłada, że w dokumentacji wyróżnimy jeden
 Tłumaczenie rozdziałów
 ======================
 
-Aby utworzyć tłumaczenie naszej publikacji, tworzymy nowy folder wewnątrz `/input` dla nowego języka. Jako jego nazwę wybieramy dwuliterowy symbol języka. Następnie po prostu zapisujemy tam przetłumaczone wersje oryginalnych rozdziałów. Tłumaczenie musi posiadać identyczą strukturę, jak oryginał i nie jest dozwolone dodawanie do niego dodatkowych rozdziałów (zostaną wtedy zignorowane). Poniżej znajdziesz poprawną strukturę tłumaczenia:
+Aby utworzyć tłumaczenie naszej publikacji, tworzymy nowy folder wewnątrz `/input` dla nowego języka. Jako jego nazwę wybieramy dwuliterowy symbol języka. Następnie po prostu zapisujemy tam przetłumaczone wersje oryginalnych rozdziałów. Tłumaczenie musi posiadać identyczną strukturę, jak oryginał i nie jest dozwolone dodawanie do niego dodatkowych rozdziałów (zostaną wtedy zignorowane). Poniżej znajdziesz poprawną strukturę tłumaczenia:
 
 ~~~
 /input/pl/  (główny język publikacji)
@@ -53,9 +53,7 @@ Każda wersja językowa posiada swój własny katalog `/media` z własnymi grafi
 Tłumaczenie szablonów treści
 ============================
 
-Każda wersja językowa posiada swój własny katalog `/templates` z szablonami treści.
-
-Each language version of the book contains its own `/templates` directory with the graphics etc.Podobnie jak w przypadku rozdziałów, TypeFriendly uzupełnia brakujące szablony w tłumaczeniach plikami z podstawowej wersji językowej.
+Każda wersja językowa posiada swój własny katalog `/templates` z szablonami treści. Podobnie jak w przypadku rozdziałów, TypeFriendly uzupełnia brakujące szablony w tłumaczeniach plikami z podstawowej wersji językowej.
 
 Tłumaczenie interfejsu publikacji
 =================================

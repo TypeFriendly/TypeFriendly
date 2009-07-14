@@ -84,17 +84,17 @@ MultiExtends
 :	`EMultiExtends` wymaga podania listy z nazwami klas bazowych, gdy nie obejmuje ich nasza dokumentacja.
 
 Implements
-:   zaimplementowane interfejsy dla języków, które obsługują tę opcję.
+:	zaimplementowane interfejsy dla języków, które obsługują tę opcję.
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne interfejsy.
 :	`EImplements` wymaga podania listy z nazwami interfejsów, gdy nie obejmuje ich nasza dokumentacja.
 
 ExtendedBy
-:   klasy/interfejsy rozszerzające aktualną.
+:	klasy/interfejsy rozszerzające aktualną.
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
 :	`EExtendedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
 
 ImplementedBy
-:   klasy implementujące podany interfejs.
+:	klasy implementujące podany interfejs.
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
 :	`EImplementedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
 

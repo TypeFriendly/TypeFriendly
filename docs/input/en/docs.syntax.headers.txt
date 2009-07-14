@@ -76,4 +76,4 @@ Header {#anchor}
 
 > [important]
 >
-> To make header anchors unique in whole documentation, TypeFriendly addes a prefix: `h:chapter_id:` to each of them. So making a direct link to an anchor in this way: `[link](#anchor)` will not work.
+> To make header anchors unique in whole documentation, TypeFriendly adds a prefix: `h:chapter_id:` to each of them. So making a direct link to an anchor in this way: `[link](#anchor)` will not work.

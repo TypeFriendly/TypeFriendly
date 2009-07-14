@@ -27,7 +27,7 @@ More information can be found in the [link chapter][docs.syntax.links].
 Images in TypeFriendly
 ======================
 
-Refering to the external images has absolutely no sense in the user manual which can be read and used off-line. In TF, the image files are located in the `/input/LANGUAGE/media` directory. Note that each language version has its own directory, so that you can translate also the texts on the pictures. During the processing, TypeFriendly moves this directory to `/output`.
+Referring to the external images has absolutely no sense in the user manual which can be read and used off-line. In TF, the image files are located in the `/input/LANGUAGE/media` directory. Note that each language version has its own directory, so that you can translate also the texts on the pictures. During the processing, TypeFriendly moves this directory to `/output`.
 
 ~~~
 ![Chart](media/graph.png)  

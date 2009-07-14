@@ -29,7 +29,7 @@ W znacznikach liniowych - w przeciwieństwie do blokowych - składnia Markdown *
 Formatowanie Markdown w elementach blokowych
 ============================================
 
-Originalna składnia Markdown wyklucza parsowanie składni w HTML-owych znacznikach blokowych. Została jednak rozszerzona o możliwość opcjonalnego włączenia tego parsowania poprzez dopisanie do znacznika atrybutu `markdown` o wartości `1`, co daje `markdown="1"`:
+Oryginalna składnia Markdown wyklucza parsowanie składni w HTML-owych znacznikach blokowych. Została jednak rozszerzona o możliwość opcjonalnego włączenia tego parsowania poprzez dopisanie do znacznika atrybutu `markdown` o wartości `1`, co daje `markdown="1"`:
 
 ~~~
 <div markdown="1">

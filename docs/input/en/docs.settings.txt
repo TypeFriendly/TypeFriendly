@@ -51,10 +51,10 @@ navigation
 :   defines the way, how to generate "Previous" and "Next" links. **Available values are**:
     
     tree
-    :   "Previous" and "Next" always point to the neighbours of the current chapter. If such a neighbour does not exist, the link is not displayed. This is the default value.
+    :   "Previous" and "Next" always point to the neighbors of the current chapter. If such a neighbor does not exist, the link is not displayed. This is the default value.
 
     book
-    :   the "Previous" and "Next" links allow to travell across the whole documentation (like a book).
+    :   the "Previous" and "Next" links allow to travel across the whole documentation (like a book).
     
 showNumbers
 :   whether to display chapter numbers (values are *true* or *false*).

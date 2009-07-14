@@ -76,7 +76,7 @@ Ty jesteś jak zdrowie.
 Poziome linie
 =============
 
-Można wstawić poziomą linię oddzielającą (`<hr />`) umieszczając co najmniej trzy gwiazdki `*`, pauzy `-` lub podkreślenia `_` obok siebie w linijce. Opcjonalnie możesz rodzielić spacją te znaki.
+Można wstawić poziomą linię oddzielającą (`<hr />`) umieszczając co najmniej trzy gwiazdki `*`, pauzy `-` lub podkreślenia `_` obok siebie w linijce. Opcjonalnie możesz rozdzielić spacją te znaki.
 
 ~~~
 * * *

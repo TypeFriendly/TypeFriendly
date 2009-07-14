@@ -58,7 +58,7 @@ Markdown allows to surround the link with angle brackets (`< >`):
 > [information]
 > The reference definitions are for Markdown internal use only. They are removed from the output document.
 
-The reference labels can use letters, numbers, spaces, punctation marks, however they are case-insensitive.
+The reference labels can use letters, numbers, spaces, punctuation marks, however they are case-insensitive.
 
 Those two lines refer to the same label:
 

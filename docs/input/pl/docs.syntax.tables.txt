@@ -32,7 +32,7 @@ Zawartość komórek tabeli może przyjmować jedynie elementy liniowe takie jak
 Wyrównywanie do lewej lub prawej krawędzi
 -----------------------------------------
 
-W tabekach można określić do której strony ma być wyrównany tekst w komórkach danej kolumny. Realizuje się to poprzez dodanie znaku dwukropka `:` po lewej, prawej bądź obu stronach lini oddzielającej nagłówek od wierszy kolumny. W poniższym przkładzie również optycznie przesunięto spacjami zawartość komórek lecz nie jest to konieczne.
+W tabelkach można określić do której strony ma być wyrównany tekst w komórkach danej kolumny. Realizuje się to poprzez dodanie znaku dwukropka `:` po lewej, prawej bądź obu stronach linii oddzielającej nagłówek od wierszy kolumny. W poniższym przykładzie również optycznie przesunięto spacjami zawartość komórek lecz nie jest to konieczne.
 
 ~~~
 | Nagłówek  | Nagłówek | Nagłówek  | Nagłówek     |

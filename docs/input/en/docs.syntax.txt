@@ -19,7 +19,7 @@ OptionList:
 Chapter content
 ~~~
 
-In the header section, we put the tags in the way showed above. The *Title* is compulsory, but TypeFriendly recognizes much more. In fact, their list depends on the used output, because unsually it's it which makes use of them. You can easily create a new output and start to use your own tags. It will be described later.
+In the header section, we put the tags in the way showed above. The *Title* is compulsory, but TypeFriendly recognizes much more. In fact, their list depends on the used output, because usually it's it which makes use of them. You can easily create a new output and start to use your own tags. It will be described later.
 
 The header must be separated from the content by at least three pause characters `---` surrounded with two single empty lines.
 

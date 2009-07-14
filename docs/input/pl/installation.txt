@@ -17,7 +17,7 @@ System Windows
 
 Binarne wersje PHP 5.2 dla systemu Windows są dostępne do ściągnięcia w formie archiwów ZIP ze strony [www.php.net](http://www.php.net/). Rozpakuj ściągnięte archiwum ZIP gdzieś na dysk twardy, np. `C:\php\`. Właściwie to już jest wszystko, jednak póki co korzystanie z interpretera będzie dość niewygodne, gdyż będziesz musiał podawać pełną ścieżkę dostępu do pliku `php.exe`. Aby usunąć tę nieprzyjemność, musisz dodać `C:\php` do zmiennej środowiskowej `PATH` w Twoim systemie.
 
-Otwórz *Panel sterowania* i uruchom aplet *System*. W zakładce *Zaawansowane* wybierz przycisk *Zmienne środowiskowe*. W nowootwartym oknie, w sekcji *Zmienne środowiskowe* znajdź zmienną `PATH`, zaznacz ją i kliknij przycisk *Edytuj*, aby zmodyfikować jej wartość. **Po znaku średnika `;`** dopisz ścieżkę do katalogu z PHP, np. 
+Otwórz *Panel sterowania* i uruchom aplet *System*. W zakładce *Zaawansowane* wybierz przycisk *Zmienne środowiskowe*. W nowo otwartym oknie, w sekcji *Zmienne środowiskowe* znajdź zmienną `PATH`, zaznacz ją i kliknij przycisk *Edytuj*, aby zmodyfikować jej wartość. **Po znaku średnika `;`** dopisz ścieżkę do katalogu z PHP, np. 
 
     ...;C:\php\
 

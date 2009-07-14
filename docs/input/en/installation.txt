@@ -26,7 +26,7 @@ Save everything and close the control panel.
 Unix systems
 ------------
 
-Obtaining PHP is much easier on Unix systems, as they are unsually equipped with various package management tools. For example, on Debian Linux, you can install PHP from the console:
+Obtaining PHP is much easier on Unix systems, as they are usually equipped with various package management tools. For example, on Debian Linux, you can install PHP from the console:
 
 ~~~
 [console]
@@ -36,7 +36,7 @@ apt-get install php5-cli
 
 In other distributions the exact commands may be different and you have to refer to the documentation.
 
-Unsually, the packages are pre-configured to locate the executable file in one of the `PATH` locations, so you do not have to modify this environment variable manually.
+Usually, the packages are pre-configured to locate the executable file in one of the `PATH` locations, so you do not have to modify this environment variable manually.
 
 Testing the installation
 ------------------------

@@ -83,17 +83,17 @@ MultiExtends
 :	`EMultiExtends` expects the list of plain class names that do not have their own chapters in the documentation.
 
 Implements
-:   implemented interfaces (for languages that support interfaces)
+:	implemented interfaces (for languages that support interfaces)
 :	expects the list of chapter identifiers that describe the interfaces.
 :	`EImplements` expects the list of plain interface names that do not have their own chapters in the documentation.
 
 ExtendedBy
-:   derived classes.
+:	derived classes.
 :	expects the list of chapter identifiers that describe the classes that extend the current one.
 :	`EExtendedBy` expects the list of plain class names that do not have their own chapters in the documentation.
 
 ImplementedBy
-:   classes implementing the specified interface.
+:	classes implementing the specified interface.
 :	expects the list of chapter identifiers that describe the classes that implement the current interface.
 :	`EImplementedBy` expects the list of plain class names that do not have their own chapters in the documentation.
 
@@ -194,4 +194,4 @@ Document type tags
 These are functional tags that help TypeFriendly to determine the chapter type.
 
 Appendix
-:	accepts a boolean value (*true*, *false*, *yes*, *no*). The tag helps creating appendices, providing the alphabetical enumberation for them according to the ordinary chapter order settings, and prepends the "Appendix" word to the title. 
+:	accepts a boolean value (*true*, *false*, *yes*, *no*). The tag helps creating appendices, providing the alphabetical enumeration for them according to the ordinary chapter order settings, and prepends the "Appendix" word to the title. 

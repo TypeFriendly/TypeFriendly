@@ -61,7 +61,7 @@ Przykładowe nagłówki:
 Kotwice w nagłówkach {#headers_anchors}
 ====================
 
-Nagłówki umożliwają stworzenie kotwic, dzięki który będzie można [odnieść się][docs.syntax.links#links_anchors] z innych części dokumentacji do wybranego fragmentu rozdziału.
+Nagłówki umożliwiają stworzenie kotwic, dzięki który będzie można [odnieść się][docs.syntax.links#links_anchors] z innych części dokumentacji do wybranego fragmentu rozdziału.
 
 Znacznik wygląda następująco: `{#kotwica}`. Umieszcza się go po tekście nagłówka w notacji setext lub na końcu linijki w notacji atx.
 

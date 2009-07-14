@@ -2,7 +2,7 @@ Title: Definition lists
 
 ---
 
-Markdown supports a special list format called a definition lists. It consists of a term and an explaination, like in a dictionary. To create a definition list, we write a term in the first line, and in the next one, we put a definition followed by `:` and some spaces.
+Markdown supports a special list format called a definition lists. It consists of a term and an explanation, like in a dictionary. To create a definition list, we write a term in the first line, and in the next one, we put a definition followed by `:` and some spaces.
 
 ~~~
 Apple
@@ -18,11 +18,11 @@ Orange
 > Orange
 > :   Citrus fruit, a type of berry.
 
-Definition lists support a group of explainations to the same term or a couple of terms to one explaination:
+Definition lists support a group of explanations to the same term or a couple of terms to one explanation:
 
 ~~~
 Word
-:   Unit of language that builts phrases.
+:   Unit of language that builds phrases.
 :   Fixed-size unit of bits that creates a natural data unit in computers.
 
 TF
@@ -31,7 +31,7 @@ TypeFriendly
 ~~~
 
 > Word
-> :   Unit of language that builts phrases.
+> :   Unit of language that builds phrases.
 > :   Fixed-size unit of bits that creates a natural data unit in computers.
 > 
 > TF
