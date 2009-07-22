@@ -5,6 +5,7 @@ Title: Plik settings.ini
 Jest to główny plik konfiguracyjny z listą opcji. Jak sama nazwa pliku wskazuje, jest to typowa składnia plików INI:
 
 ~~~
+[ini]
 opcja1 = "wartosc1"
 opcja2 = "wartosc2"
 opcja3 = "wartosc3"
@@ -67,6 +68,7 @@ versionControlInfo
 Przykładowy plik konfiguracyjny, który służy do wygenerowania tego podręcznika, wygląda następująco:
 
 ~~~
+[ini]
 ; Opcje podstawowe
 
 title = "TypeFriendly"

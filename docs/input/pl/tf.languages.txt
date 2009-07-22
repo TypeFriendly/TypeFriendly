@@ -61,6 +61,7 @@ Tłumaczenie interfejsu publikacji
 TypeFriendly tłumaczy również interfejs nawigacyjny samej publikacji, tj. komunikaty takie jak "Spis treści". Konkretne teksty przypisane do komunikatów zdefiniowane są w plikach w obrębie katalogu globalnego `/languages`. Podkatalogi reprezentują różne wersje językowe, dla których aktualnie dostępne są tłumaczenia. Każdy komunikat jest częścią jakiejś grupy i posiada swój unikalny identyfikator ułatwiający znalezienie go. Każda grupa zapisana jest w osobnym pliku o składni plików INI:
 
 ~~~
+[ini]
 ; komentarz
 
 identyfikator1 = "Tekst 1"

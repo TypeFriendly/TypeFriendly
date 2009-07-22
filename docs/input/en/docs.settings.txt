@@ -5,6 +5,7 @@ Title: settings.ini file
 This is the main configuration file that specifies the general properties of our project. It is an ordinary INI file with the syntax similar to the one listed below:
 
 ~~~
+[ini]
 option1 = "value 1"
 option2 = "value 2"
 option3 = "value 3"
@@ -67,6 +68,7 @@ versionControlInfo
 Below, we can see a sample file. It is used to generate TypeFriendly manual:
 
 ~~~
+[ini]
 ; Base options
 
 title = "TypeFriendly"

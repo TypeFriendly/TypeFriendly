@@ -61,6 +61,7 @@ Translating the book interface
 TypeFriendly also translates the book navigation messages, such as "Table of contents". The texts assigned to the messages are defined in the global `/languages` directory. The subdirectories represent each language currently available. The message is a part of a group and has its own unique ID used to find it. The groups are located in separate files that look like this:
 
 ~~~
+[ini]
 ; a comment
 
 identifier1 = "Text 1"
