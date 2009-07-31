@@ -25,8 +25,8 @@
 
 	@define('MARKDOWN_PARSER_CLASS', 'MarkdownDocs_Parser');
 	
-	require_once 'markdown.php';
-	require_once TF_GESHI.'geshi.php';
+	require_once TF_VENDOR.'markdown/markdown.php';
+	require_once TF_VENDOR.'geshi/geshi.php';
 	
 	/*
 		Original Markdown parser is written in PHP4, so I don't think it is

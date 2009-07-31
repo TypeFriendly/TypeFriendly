@@ -43,7 +43,7 @@ Kolorowanie składni
 
 TypeFriendly dodaje nam możliwość włączenia kolorowania składni wstawionego kodu. Obsługiwane jest ono przez [GeSHi](http://qbnz.com/highlighter/). Lista obsługiwanych języków dostępna jest na stronie tego parsera. 
 
-Włączenie kolorowania składni realizowane jest poprzez wstawienie w pierwszej linijce bloku kodu znacznika: `[język]`. W nawiasach kwadratowych zawarta jest nazwa języka, której odpowiada plik kolorowania GeSHi znajdujący się w katalogu `/geshi/geshi`.
+Włączenie kolorowania składni realizowane jest poprzez wstawienie w pierwszej linijce bloku kodu znacznika: `[język]`. W nawiasach kwadratowych zawarta jest nazwa języka, której odpowiada plik kolorowania GeSHi znajdujący się w katalogu `/vendor/geshi/geshi`.
 
 #### Przykładowe użycie
 

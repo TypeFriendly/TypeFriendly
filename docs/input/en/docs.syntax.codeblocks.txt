@@ -45,7 +45,7 @@ Syntax highlighting
 
 TypeFriendly extends the code blocks with a feature of syntax highlighting. It is produced by [GeSHi](http://qbnz.com/highlighter/). The list of supported languages is available at the library website.
 
-To turn on the syntax highlighting, we put the name of the language in square brackets: `[language]` in the line just before the code block. The language name must correspond to the language rule file in the `/geshi/geshi` directory.
+To turn on the syntax highlighting, we put the name of the language in square brackets: `[language]` in the line just before the code block. The language name must correspond to the language rule file in the `/vendor/geshi/geshi` directory.
 
 #### Sample use
 
