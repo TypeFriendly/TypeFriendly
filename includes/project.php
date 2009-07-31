@@ -133,7 +133,7 @@
 			$this->fs = new tfFilesystem;
 			if(!$this->fs->setMasterDirectory($directory, TF_READ | TF_EXEC))
 			{
-				throw new SystemException('The project directory: '.$directory.' is not accessible');
+				throw new SystemException('The project directory: "'.$directory.'" is not accessible');
 			}
 			
 			$this->config = $p->config($this->fs->get('settings.ini'));
@@ -213,7 +213,7 @@
 		{
 			if(!in_array($language, $this->langs))
 			{
-				throw new SystemException('The used language '.$language.' is not supported in this project.');
+				throw new SystemException('The used language "'.$language.'" is not supported in this project.');
 			}
 
 			$translate = tfTranslate::get();
@@ -250,7 +250,7 @@
 			$res = tfResources::get();
 			if(!in_array($output, $res->outputs))
 			{
-				throw new SystemException('The used output '.$output.' is not supported by TypeFriendly.');
+				throw new SystemException('The used output "'.$output.'" is not supported by TypeFriendly.');
 			}
 			
 			$this->output = $output;
@@ -322,7 +322,7 @@
 					if($parentId != '')
 					{
 						echo 'fool';
-						throw new Exception('The parent of '.$item.' does not exist.');
+						throw new Exception('The parent of "'.$item.'" does not exist.');
 					}
 					$list[$parentId] = array(0 => array('id' => $item, 'order' => 0));
 				}
@@ -623,11 +623,11 @@
 		{
 			if(!in_array($this->config['baseLanguage'], $this->langs))
 			{
-				throw new SystemException('The used language '.$this->config['baseLanguage'].' is not supported in this project.');
+				throw new SystemException('The used language "'.$this->config['baseLanguage'].'" is not supported in this project.');
 			}
 			if(!in_array($secondLanguage, $this->langs))
 			{
-				throw new SystemException('The used language '.$secondLanguage.' is not supported in this project.');
+				throw new SystemException('The used language "'.$secondLanguage.'" is not supported in this project.');
 			}
 			if($secondLanguage == $this->config['baseLanguage'])
 			{

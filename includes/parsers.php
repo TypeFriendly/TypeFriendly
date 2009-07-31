@@ -52,7 +52,7 @@
 		{
 			if(!file_exists($filename))
 			{
-				throw new SystemException('tfdoc: '.$filename.' - file not found');
+				throw new SystemException('tfdoc: "'.$filename.'" - file not found');
 			}
 
 			$f = fopen($filename, 'r');
@@ -115,7 +115,7 @@
 			
 			if(!is_array($items))
 			{
-				throw new SystemException('The specified file: '.$filename.' is not a valid configuration file.');
+				throw new SystemException('The specified file: "'.$filename.'" is not a valid configuration file.');
 			}
 			return $items;
 		} // end config();

@@ -25,7 +25,7 @@
 
 	class tfMain extends tfApplication
 	{
-		const VERSION = '0.1.3-dev';
+		const VERSION = '0.1.3';
 		private $args;
 
 		public function parseArgs(tfProgram $prg)
@@ -34,7 +34,7 @@
 				'#operation' => array(0 => OPT_REQUIRED, TYPE_STRING),
 				'#path' => array(0 => OPT_OPTIONAL, TYPE_PATH),
 				'-l' => array(0 => OPT_OPTIONAL, TYPE_STRING),
-				'-o' => array(0 => OPT_OPTIONAL, TYPE_STRING),			
+				'-o' => array(0 => OPT_OPTIONAL, TYPE_STRING),
 			);
 			try
 			{
@@ -108,7 +108,7 @@
 			if(!is_dir($this->args['#path']))
 			{
 				$err = $prg->console->stderr;
-				$err->writeln('Error: the specified directory "'.$this->args['#path'].'" does not exist.');
+				$err->writeln('Error: the specified directory does not exist.');
 				return;
 			}
 
@@ -258,6 +258,6 @@ versionControlInfo = false
 		{
 			$out = $prg->console->stdout;
 			$out->writeln('TypeFriendly '.self::VERSION);
-			$out->writeln('(c) Invenzzia Group 2008 - '.date('Y'));
+			$out->writeln('(c) Invenzzia Group 2008 - 2009');
 		} // end version();
 	} // end tfMain;

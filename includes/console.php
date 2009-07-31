@@ -25,7 +25,7 @@
 
 	define('OPT_REQUIRED', 0);
 	define('OPT_OPTIONAL', 1);
-
+	
 	define('TYPE_STRING', 0);
 	define('TYPE_INTEGER', 1);
 	define('TYPE_PATH', 2);
@@ -112,7 +112,7 @@
 			$size = sizeof($this->args) - 1;
 			if(is_null($to))
 			{
-				return $size == $from;				
+				return $size == $from;
 			}
 			else
 			{
@@ -127,7 +127,7 @@
 			{
 				if($name[0] == '#')
 				{
-					if(isset($this->args[$i]))
+					if(isset($this->args[$i]) && $this->testValue($this->args[$i], $item[1]))
 					{
 						$item = $this->args[$i];
 						$i++;
@@ -136,19 +136,20 @@
 					{
 						if($item[0] == OPT_OPTIONAL)
 						{
+							$item = '';
 							continue;
 						}
 						throw new Exception('Invalid argument #'.$i.': '.$name.'.');
 					}
 				}
-				else
+				elseif($name[0] == '-')
 				{
-					if(isset($this->args[$i]) && $this->args[$i] == $name)
+					if(($j = array_search($name, $this->args)) !== false)
 					{
-						$i++;
-						if($this->testValue($this->args[$i], $item[1]))
+						$j++;
+						if($this->testValue($this->args[$j], $item[1]))
 						{
-							$item = $this->args[$i];
+							$item = $this->args[$j];
 							$i++;
 						}
 						else
@@ -158,7 +159,7 @@
 								unset($list[$name]);
 								continue;
 							}
-							throw new Exception('Invalid argument #'.$i.': '.$name.'.');
+							throw new Exception('Invalid argument #'.$j.': '.$name.'.');
 						}
 					}
 					elseif($item[0] == OPT_OPTIONAL)
@@ -193,7 +194,7 @@
 			$explode = explode(' ', $this->os);
 			$this->os = $explode[0];
 			define('USED_OS', $this->os);
-		} // end detectOS();		
+		} // end detectOS();
 	} // end tfConsole;
 	
 	class tfProgram

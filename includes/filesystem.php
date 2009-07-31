@@ -34,7 +34,13 @@ class tfFilesystem
 
 	public function setMasterDirectory($dir, $flags)
 	{
-		if($dir[strlen($dir)-1] != '/')
+		$n = strlen($dir)-1;
+		if($n < 1)
+		{
+			return false;
+		}
+		
+		if($dir[$n] != '/')
 		{
 			$dir .= '/';
 		}
@@ -52,7 +58,7 @@ class tfFilesystem
 		$name = str_replace('../', '', $name);
 		if(!file_exists($this->master.$name))
 		{
-			throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			throw new SystemException('The file "'.$this->master.$name.'" is not accessible.');
 		}
 
 		return $this->master.$name;
@@ -63,7 +69,7 @@ class tfFilesystem
 		$name = str_replace('../', '', $name);
 		if(!file_exists($this->master.$name))
 		{
-			throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			throw new SystemException('The file "'.$this->master.$name.'" is not accessible.');
 		}
 
 		return file_get_contents($this->master.$name);
@@ -74,7 +80,7 @@ class tfFilesystem
 		$name = str_replace('../', '', $name);
 		if(!file_exists($this->master.$name))
 		{
-			throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			throw new SystemException('The file "'.$this->master.$name.'" is not accessible.');
 		}
 
 		$data = file($this->master.$name);
@@ -90,12 +96,12 @@ class tfFilesystem
 		$name = str_replace('../', '', $name);
 		if(!file_exists($this->master.$name))
 		{
-			throw new SystemException('The file '.$this->master.$name.' is not accessible.');
+			throw new SystemException('The file "'.$this->master.$name.'" is not accessible.');
 		}
 		require($this->master.$name);
 		if(!class_exists($object))
 		{
-			throw new SystemException('The file '.$this->master.$name.' does not contain the required class: '.$object.'.');
+			throw new SystemException('The file "'.$this->master.$name.'" does not contain the required class: '.$object);
 		}
 		return new $object;
 	} // end loadObject();
@@ -291,7 +297,7 @@ class tfFilesystem
 		}
 		else
 		{
-			throw new SystemException('The directory '.$this->master.$from.' does not exist.');
+			throw new SystemException('The directory "'.$this->master.$from.'" does not exist.');
 		}
 	} // end copyItem();
 
@@ -307,7 +313,7 @@ class tfFilesystem
 
 			if(!is_dir($sys->master.$from))
 			{
-				throw new SystemException('The directory '.$sys->master.$from.' does not exist.');
+				throw new SystemException('The directory "'.$sys->master.$from.'" does not exist.');
 			}
 
 			$this->recursiveCopy($sys->master.$from, $this->master.$to);
