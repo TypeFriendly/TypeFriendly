@@ -114,6 +114,13 @@ Arguments
 Returns
 :	the description what the function or method returns.
 
+File
+:	the file that contains the described item.
+
+Files
+:	the list of file names
+:	variant of `File` that allows to specify more file names.
+
 Sample use:
 
 ~~~

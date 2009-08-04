@@ -56,6 +56,8 @@ class tfTags
 		),
 		'Programming' => array(
 			'Construct' => self::STRING,
+			'File' => self::STRING,
+			'Files' => array(self::ARRAY_OF, self::STRING),
 			'Type' => self::STRING,
 			'Visibility' => self::STRING,
 			'Extends' => self::PAGE_IDENTIFIER,

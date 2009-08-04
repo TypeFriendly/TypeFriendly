@@ -535,6 +535,33 @@ EOF;
 		} // end _tagVisibility();
 
 		/**
+		 * Handles "File" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagFile($value)
+		{
+			return '<tr><th>'.$this->translate->_('tags','file').'</th><td><code>'.$value.'</code></td></tr>';
+		} // end _tagFile();
+
+		/**
+		 * Handles "Files" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagFiles($value)
+		{
+			$code = '<tr><th>'.$this->translate->_('tags','files').'</th><td>';
+			foreach($value as $file)
+			{
+				$code .= '<code>'.$file.'</code><br/>';
+			}
+			return $code.'</td></tr>';
+		} // end _tagFiles();
+
+		/**
 		 * Handles "Returns" tag.
 		 *
 		 * @param String $value The tag value

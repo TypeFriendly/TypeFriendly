@@ -193,22 +193,38 @@
 			// Retrieve the language versions
 			$this->langs = $this->fs->listDirectory('input/', false, true);
 		} // end __construct();
-		
+
+		/**
+		 * Registers the project in the global scope.
+		 * @param tfProject $project The project to register.
+		 */
 		static public function set(tfProject $project)
 		{
 			self::$object = $project;
 		} // end set();
-		
+
+		/**
+		 * Returns the project currently registered in the global scope.
+		 * @return tfProject
+		 */
 		static public function get()
 		{
 			return self::$object;
 		} // end get();
-		
+
+		/**
+		 * Returns the output object.
+		 * @return standardOutput
+		 */
 		public function getOutput()
 		{
 			return $this->outputObj;
 		} // end getOutput();
 
+		/**
+		 * Sets the new project language.
+		 * @param String $language The new language abbreviation, i.e. "pl" or "en".
+		 */
 		public function setLanguage($language)
 		{
 			if(!in_array($language, $this->langs))
@@ -222,6 +238,12 @@
 			$this->language = $language;
 		} // end setLanguage();
 
+		/**
+		 * Returns the specified content template.
+		 * @param String $template The template name
+		 * @throws SystemException
+		 * @return String
+		 */
 		public function getTemplate($template)
 		{
 			if(!isset($this->templates[$template]))
@@ -244,7 +266,11 @@
 			}
 			return $this->templates[$template];
 		} // end getTemplate();
-		
+
+		/**
+		 * Sets the output.
+		 * @param standardOutput $output The project output.
+		 */
 		public function setOutput($output)
 		{
 			$res = tfResources::get();
@@ -255,7 +281,10 @@
 			
 			$this->output = $output;
 		} // end setOutput();
-		
+
+		/**
+		 * Loads the publication into the memory and organizes it into a tree.
+		 */
 		public function loadItems()
 		{
 			/* HOW DOES IT WORK?
@@ -534,6 +563,9 @@
 			$this->tree = $list;
 		} // end loadItems();
 
+		/**
+		 * Copies the multimedia files to the output directory.
+		 */
 		public function copyMedia()
 		{
 			try
@@ -553,6 +585,11 @@
 			catch(SystemException $e){}				
 		} // end copyMedia();
 
+		/**
+		 * Generates the output document.
+		 *
+		 * @staticvar standardOutput $lastOutput The last output used.
+		 */
 		public function generate()
 		{
 			static $lastOutput = NULL;
@@ -619,6 +656,10 @@
 			$out->close();
 		} // end generate();
 
+		/**
+		 * Compares the base language to the translation.
+		 * @param String $secondLanguage The translation language abbreviation, i.e. "pl" or "en"
+		 */
 		public function versionCompare($secondLanguage)
 		{
 			if(!in_array($this->config['baseLanguage'], $this->langs))
@@ -680,11 +721,23 @@
 			}
 		} // end versionCompare();
 
+		/**
+		 * A helper function for sorting.
+		 * @param Array $a Left element
+		 * @param Array $b Right element
+		 * @return Integer
+		 */
 		public function orderSort($a, $b)
 		{
 			return $a['order'] - $b['order'];
 		} // end orderSort();
 
+		/**
+		 * Gets some meta information about the specified page.
+		 * @param String $pageId The page identifier.
+		 * @param Boolean $exception Do we throw exceptions if something goes wrong?
+		 * @return Array
+		 */
 		public function getMetaInfo($pageId, $exception = true)
 		{
 			if(isset($this->pages[$pageId]))

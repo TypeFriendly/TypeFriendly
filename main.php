@@ -28,6 +28,11 @@
 		const VERSION = '0.1.3';
 		private $args;
 
+		/**
+		 * Parses the application arguments.
+		 *
+		 * @param tfProgram $prg The program instance.
+		 */
 		public function parseArgs(tfProgram $prg)
 		{		
 			$this->args = array(
@@ -64,6 +69,10 @@
 			}
 		} // end parseArgs();
 
+		/**
+		 * The main action, executed if no parameters were provided.
+		 * @param tfProgram $prg
+		 */
 		public function main(tfProgram $prg)
 		{
 			$out = $prg->console->stdout;
@@ -96,6 +105,10 @@
 			$out->writeln('                 must be declared within the project.');
 		} // end main();
 
+		/**
+		 * New publication wizard
+		 * @param tfProgram $prg
+		 */
 		public function create(tfProgram $prg)
 		{
 			$out = $prg->console->stdout;
@@ -180,6 +193,10 @@ versionControlInfo = false
 			$out->writeln('Generation completed.');
 		} // end create();
 
+		/**
+		 * Builds an output document
+		 * @param tfProgram $prg
+		 */
 		public function build(tfProgram $prg)
 		{          
 			if(!isset($this->args['#path']))
@@ -236,6 +253,10 @@ versionControlInfo = false
 			}
 		} // end build();
 
+		/**
+		 * Compares the language versions.
+		 * @param tfProgram $prg
+		 */
 		public function compare(tfProgram $prg)
 		{
 			if(!isset($this->args['-l']))

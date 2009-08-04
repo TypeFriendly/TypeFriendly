@@ -114,6 +114,13 @@ Arguments
 Returns
 :	opis tego, co funkcja zwraca.
 
+File
+:	plik zawierający omawiany element.
+
+Files
+:	lista nazw plików
+:	odmiana tagu `File` pozwalająca wymienić kilka plików.
+
 Przykładowe użycie:
 
 ~~~

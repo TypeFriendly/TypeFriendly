@@ -175,7 +175,7 @@
 			}
 		} // end testArgs();
 		
-		private function testValue($value, $type)
+		private function testValue(&$value, $type)
 		{
 			switch($type)
 			{
@@ -184,7 +184,13 @@
 				case TYPE_INTEGER:
 					return ctype_digit($value);	
 				case TYPE_PATH:
-					return is_dir($value);
+					$path = realpath($value);
+					if($path === false)
+					{
+						return false;
+					}
+					$value = $path;
+					return true;
 			}
 		} // end testValue();
 		
