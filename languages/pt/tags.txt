@@ -1,0 +1,29 @@
+; $Id$
+; The tag message translations.
+; Translation authors:
+; - Camilo Carromeu <http://www.carromeu.com>
+
+appendix = "Apêndice"
+status = "Situação"
+reference = "Referência"
+obj_extends = "Extende"
+obj_implements = "Implementa"
+obj_extended = "Extendido por"
+obj_implemented = "Implementado por"
+obj_throws = "Lança exceção"
+version_since = "Desde a versão"
+version_to = "Para a versão"
+versions = "Versões"
+author = "Autor"
+reference = "Referência"
+visibility = "Visibilidade"
+version_control_info = "Controle de versão"
+type = "Tipo"
+construct = "Construtor"
+returns = "Valor de retorno"
+arg_list = "Lista de argumentos"
+arg_name = "Nome"
+arg_type = "Tipo"
+arg_desc = "Descrição"
+file = "Arquivo"
+files = "Arquivos"

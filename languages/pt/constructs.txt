@@ -1,0 +1,24 @@
+; $Id$
+; The translations of available programming constructs
+; Translation authors:
+; - Camilo Carromeu <http://www.carromeu.com>
+
+class = "Classe"
+interface = "Interface"
+abstract_class = "Classe abstrata"
+function = "Função"
+method = "Método"
+static_method = "Método estático"
+abstract_method = "Método abstrato"
+accessor_method = "Método de acesso"
+constructor = "Construtor da classe"
+destructor = "Destrutor da classe"
+magic_method = "Método mágico"
+variable = "Variável"
+static_variable = "Variável estática"
+module = "Módulo"
+package = "Pacote"
+namespace = "Espaço de nome"
+datatype = "Tipo de dado"
+structure = "Estrutura"
+macro = "Macro"
