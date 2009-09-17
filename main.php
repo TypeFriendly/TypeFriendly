@@ -198,7 +198,8 @@ versionControlInfo = false
 		 * @param tfProgram $prg
 		 */
 		public function build(tfProgram $prg)
-		{          
+		{
+
 			if(!isset($this->args['#path']))
 			{
 				return $this->main($prg);

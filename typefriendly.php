@@ -23,7 +23,7 @@
 */
 // $Id$
 
-	define('TF_DIR', './');
+	define('TF_DIR', dirname(__FILE__).'/');
 	define('TF_INCLUDES', TF_DIR.'includes/');
 	define('TF_VENDOR', TF_DIR.'vendor/');
 	define('TF_OUTPUTS', TF_DIR.'outputs/');
