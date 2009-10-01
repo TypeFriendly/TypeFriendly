@@ -535,6 +535,33 @@ EOF;
 		} // end _tagVisibility();
 
 		/**
+		 * Handles "Namespace" and "ENamespace" tags.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagNamespace($namespace, $enamespace)
+		{
+			if($namespace === null)
+			{
+				return '<tr><th>'.$this->translate->_('tags','namespace').'</th><td><code>'.$enamespace.'</code></td></tr>';
+			}
+			else
+			{
+				$pp = $this->project->getMetaInfo($namespace, false);
+
+				if($pp !== null)
+				{
+					return '<tr><th>'.$this->translate->_('tags','namespace').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
+				}
+				else
+				{
+					return 'dupa';
+				}
+			}
+		} // end _tagNamespace();
+
+		/**
 		 * Handles "File" tag.
 		 *
 		 * @param String $value The tag value

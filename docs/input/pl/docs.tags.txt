@@ -71,6 +71,11 @@ Type
 Visibility
 :	widoczność/dostęp do elementu (np. *public*, *private*)
 
+Namespace
+:	pozwala określić przestrzeń nazw elementu.
+:	wymaga podania identyfikatora rozdziału opisującego podaną przestrzeń nazw.
+:	`ENamespace` wymaga podania nazwy przestrzeni nazw w sytuacji, gdy nasza dokumentacja jej nie opisuje.
+
 Extends
 :	bazowa klasa.
 :	tag nie może być używany jednocześnie z `MultiExtends` w tym samym rozdziale.

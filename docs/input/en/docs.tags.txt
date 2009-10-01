@@ -70,6 +70,11 @@ Type
 Visibility
 :	the element visibility (*public*, *private* etc.)
 
+Namespace
+:	allows to specify the element namespace.
+:	expects the identifier of a chapter that describes the namespace.
+:	`ENamespace` expects the plain name of the namespace that does not have its own chapter in the documentation.
+
 Extends
 :	base class.
 :	the tag cannot be used together with `MultiExtends` in the same chapter

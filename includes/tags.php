@@ -58,6 +58,8 @@ class tfTags
 			'Construct' => self::STRING,
 			'File' => self::STRING,
 			'Files' => array(self::ARRAY_OF, self::STRING),
+			'Namespace' => self::PAGE_IDENTIFIER,
+			'ENamespace' => self::STRING,
 			'Type' => self::STRING,
 			'Visibility' => self::STRING,
 			'Extends' => self::PAGE_IDENTIFIER,
@@ -105,6 +107,7 @@ class tfTags
 	static private $_connectedTags = array(
 		'Extends' => 'EExtends',
 		'Implements' => 'EImplements',
+		'Namespace' => 'ENamespace',
 		'ExtendedBy' => 'EExtendedBy',
 		'ImplementedBy' => 'EImplementedBy',
 		'Throws' => 'EThrows',
