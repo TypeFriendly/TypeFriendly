@@ -303,6 +303,8 @@ class tfTags
 			$reference = false;
 			$throws = false;
 			$implementedBy = false;
+			$mixins = false;
+			$traits = false;
 			switch($tags['ConstructType'])
 			{
 				case 'function':
