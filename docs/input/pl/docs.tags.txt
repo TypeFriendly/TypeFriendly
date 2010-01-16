@@ -103,10 +103,25 @@ ImplementedBy
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy.
 :	`EImplementedBy` wymaga podania listy z nazwami klas, gdy nie obejmuje ich nasza dokumentacja.
 
+Mixins
+:	lista domieszek (ang. **mixin**) używanych w klasie.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne domieszki.
+:	`EMixins` wymaga podania listy z nazwami domieszek, gdy nie obejmuje ich nasza dokumentacja.
+
+Traits
+:	lista cech (ang. **trait**) używanych w klasie.
+:	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne cechy.
+:	`ETraits` wymaga podania listy z nazwami cech, gdy nie obejmuje ich nasza dokumentacja.
+
 Throws
 :	rzucane wyjątki.
 :	wymaga podania listy identyfikatorów rozdziałów opisujących poszczególne klasy wyjątków.
 :	`EThrows` wymaga podania listy z nazwami klas wyjątków, gdy nie obejmuje ich nasza dokumentacja.
+
+PartOf
+:	używany z konstrukcją `internal class` do określenia klasy zawierającej podaną klasę wewnętrzną.
+:	wymaga podania identyfikatora rozdziału opisującego daną klasę.
+:	`EPartOf` wymaga podania nazwy klasy, gdy nie obejmuje jej nasza dokumentacja.
 
 Reference
 :	prototyp funkcji, np. `void foo(int a, int b [, int c])`
@@ -125,6 +140,17 @@ File
 Files
 :	lista nazw plików
 :	odmiana tagu `File` pozwalająca wymienić kilka plików.
+
+Package
+:	pakiet zawierający klasę
+:	wymaga podania identyfikatora rozdziału opisującego dany pakiet.
+:	`EPackage` wymaga podania nazwy pakietu.
+
+TimeComplexity
+:	pozwala podać złożoność czasową algorytmu lub funkcji.
+
+MemoryComplexity
+:	pozwala podać złożoność pamięciową algorytmu lub funkcji.
 
 Przykładowe użycie:
 
@@ -158,14 +184,22 @@ Dostępne konstrukcje programistyczne rozpoznawane przez tag `Construct`:
 + `class` - klasa
 + `interface` - interfejs
 + `abstract class` - klasa abstrakcyjna
++ `final class` - klasa finalna
++ `exception class` - klasa wyjątku
++ `internal class` - zagnieżdżona klasa wewnętrzna
 + `function` - funkcja
 + `method` - metoda
 + `static method` - metoda statyczna
 + `abstract method` - metoda abstrakcyjna
 + `accessor method` - metoda dostępowa (np. `setSomething()`, `getSomething()`).
++ `final method` - metoda finalna
++ `final static method` - finalna metoda statyczna
++ `final accessor method` - finalna metoda dostępowa
++ `optional method` - pusta metoda, która może być opcjonalnie rozszerzona przez programistę
 + `constructor` - konstruktor klasy
 + `destructor` - destruktor klasy
 + `magic method` - magiczna metoda (np. `__call()` w PHP)
++ `operator` - przeciążony operator
 + `variable` - zmienna
 + `static variable` - zmienna statyczna
 + `module` - moduł
@@ -174,6 +208,48 @@ Dostępne konstrukcje programistyczne rozpoznawane przez tag `Construct`:
 + `datatype` - typ danych
 + `structure` - struktura (w stylu C lub C++)
 + `macro` - makrodefinicja
++ `mixin` - domieszka
++ `trait` - cecha
++ `executable` - plik wykonywalny
++ `script` - skrypt
+
+Tagi opisujące zachowanie
+=========================
+
+Pozwalają na udokumentowanie spodziewanego zachowania elementu poprzez zdefiniowanie efektów ubocznych, warunków początkowych, końcowych, ograniczeń itd.
+
+StartConditions
+:	lista warunków początkowych opisanych słownie.
+
+EndConditions
+:	lista warunków końcowych opisanych słownie.
+
+SideEffects
+:	lista efektów ubocznych opisanych słownie.
+
+Limitations
+:	lista ograniczeń opisanych słownie.
+
+DataSources
+:	lista źródeł danych wykorzystywanych przez element.
+:	wymagana lista identyfikatorów rozdziałów opisujących wybrane źródła danych.
+:	`EDataSources` wymaga listy źródeł danych opisanych słownie w sytuacji, gdy nie opisuje ich nasza dokumentacja.
+
+Przykładowe użycie:
+
+~~~~
+Title: Pobranie listy elementów
+StartConditions:
+ - istnieje co najmniej jeden element
+SideEffects:
+ - zwiększenie ilości wyświetleń elementów o 1
+EDataSources:
+ - tabela "Elementy"
+
+----
+
+Opis...
+~~~~
 
 Tagi kontroli wersji
 ====================

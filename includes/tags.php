@@ -72,16 +72,34 @@ class tfTags
 			'EExtendedBy' => array(self::ARRAY_OF, self::STRING),
 			'ImplementedBy' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
 			'EImplementedBy' => array(self::ARRAY_OF, self::STRING),
+			'Mixins' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
+			'EMixins' => array(self::ARRAY_OF, self::STRING),
+			'Traits' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
+			'ETraits' => array(self::ARRAY_OF, self::STRING),
+			'PartOf' => self::PAGE_IDENTIFIER,
+			'EPartOf' => self::STRING,
 			'Reference' => self::STRING,
 			'Arguments' => array(self::ARRAY_OF, array('Name' => self::WORD, 'Type' => self::PAGE_IDENTIFIER, 'EType' => self::STRING, 'Desc' => self::STRING)),
 			'Returns' => self::STRING,
 			'Throws' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
 			'EThrows' => array(self::ARRAY_OF, self::STRING),
+			'Package' => self::PAGE_IDENTIFIER,
+			'EPackage' => self::STRING,
+			'TimeComplexity' => self::STRING,
+			'MemoryComplexity' => self::STRING,
+		),
+		'Behaviour' => array(
+			'StartConditions' => array(self::ARRAY_OF, self::STRING),
+			'EndConditions' => array(self::ARRAY_OF, self::STRING),
+			'SideEffects' => array(self::ARRAY_OF, self::STRING),
+			'DataSources' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
+			'EDataSources' => array(self::ARRAY_OF, self::STRING),
+			'Limitations' => array(self::ARRAY_OF, self::STRING),
 		),
 		'VersionControl' => array(
 			'VCSKeywords' => self::STRING,
 			'VersionSince' => self::STRING,
-			'VersionTo' => self::STRING
+			'VersionTo' => self::STRING,
 		),
 		'Navigation' => array(
 			'SeeAlso' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
@@ -110,6 +128,11 @@ class tfTags
 		'Namespace' => 'ENamespace',
 		'ExtendedBy' => 'EExtendedBy',
 		'ImplementedBy' => 'EImplementedBy',
+		'Mixins' => 'EMixins',
+		'Traits' => 'ETraits',
+		'PartOf' => 'EPartOf',
+		'Package' => 'EPackage',
+		'DataSources' => 'EDataSources',
 		'Throws' => 'EThrows',
 		'MultiExtends' => 'EMultiExtends',
 		'SeeAlso' => 'SeeAlsoExternal'
@@ -124,7 +147,10 @@ class tfTags
 		'class', 'interface', 'abstract class', 'function', 'method', 'static method',
 		'abstract method', 'variable', 'static variable', 'module', 'package',
 		'constructor', 'destructor', 'magic method', 'namespace', 'accessor method',
-		'datatype', 'structure', 'macro'
+		'datatype', 'structure', 'macro', 'final method', 'optional method',
+		'final static method', 'final accessor method', 'component', 'file', 'mixin',
+		'trait', 'exception class', 'internal class', 'executable', 'script', 'final class',
+		'operator'
 	);
 
 	/**
@@ -284,17 +310,33 @@ class tfTags
 				case 'static_method':
 				case 'abstract_method':
 				case 'accessor_method':
+				case 'final_method':
+				case 'final_static method':
+				case 'final_accessor_method':
+				case 'optional_method':
 				case 'magic_method':
 				case 'constructor':
 				case 'destructor':
 				case 'macro':
+				case 'operator':
 					$reference = true;
 					$throws = true;
 					break;
+
+				case 'mixin':
+				case 'trait':
+					$implementedBy = true;
+					break;
+
 				case 'class':
 				case 'abstract_class':
+				case 'exception_class':
+				case 'internal_class':
 				case 'structure':
 					$extends = true;
+				case 'final_class':
+					$mixins = true;
+					$traits = true;
 					break;
 				case 'interface':
 					$extends = true;
@@ -315,6 +357,21 @@ class tfTags
 			if(!$implementedBy && (isset($tags['ImplementedBy']) || isset($tags['EImplementedBy'])))
 			{
 				self::$_error = 'Tags "ImplementedBy" and "EImplementedBy" are not allowed with the specified construct.';
+				return false;
+			}
+			if(!$mixins && (isset($tags['Mixins']) || isset($tags['EMixins'])))
+			{
+				self::$_error = 'Tags "Mixins" and "EMixins" are not allowed with the specified construct.';
+				return false;
+			}
+			if(!$traits && (isset($tags['Traits']) || isset($tags['ETraits'])))
+			{
+				self::$_error = 'Tags "Traits" and "ETraits" are not allowed with the specified construct.';
+				return false;
+			}
+			if($tags['ConstructType'] != 'internal_class' && (isset($tags['PartOf']) || isset($tags['EPartOf'])))
+			{
+				self::$_error = 'Tags "PartOf" and "EPartOf" are not allowed with the specified construct.';
 				return false;
 			}
 			if(!$extends && (
@@ -387,7 +444,6 @@ class tfTags
 		{
 			$another = self::$_connectedTags[$tag];
 		}
-
 		$name = '_tag'.$tag;
 		if(method_exists($object, $name))
 		{

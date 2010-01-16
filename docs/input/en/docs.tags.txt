@@ -102,11 +102,25 @@ ImplementedBy
 :	expects the list of chapter identifiers that describe the classes that implement the current interface.
 :	`EImplementedBy` expects the list of plain class names that do not have their own chapters in the documentation.
 
+Mixins
+:	list of mixins used by the class.
+:	expects the list of chapter identifiers that describe the mixins.
+:	`EMixins` expects the list of plain mixin names that do not have their own chapters in the documentation.
+
+Traits
+:	list of traits used by the class.
+:	expects the list of chapter identifiers that describe the traits.
+:	`ETraits` expects the list of plain trait names that do not have their own chapters in the documentation.
 
 Throws
 :	the exceptions thrown.
 :	expects the list of chapter identifiers that describe the thrown exception classes.
 :	`EThrows` expects the list of plain exception class names that do not have their own chapters in the documentation.
+
+PartOf
+:	used with the `internal class` construct to specify the top-level class that contains the current class.
+:	expects an identifier of a chapter that describes the master class.
+:	`EPartOf` expects the plain class name that does not have its own chapter in the documentation.
 
 Reference
 :	the function reference, i.e. `void foo(int a, int b [, int c])`
@@ -125,6 +139,17 @@ File
 Files
 :	the list of file names
 :	variant of `File` that allows to specify more file names.
+
+Package
+:	a package that contains the element.
+:	expects an identifier of a chapter that describes the package.
+:	`EPackage` expects the plain package name that does not have its own chapter in the documentation.
+
+TimeComplexity
+:	specifies the time complexity of an function or algorithm.
+
+MemoryComplexity
+:	specifies the memory complexity of an function or algorithm.
 
 Sample use:
 
@@ -158,14 +183,22 @@ The available predefined programming constructs for `Construct` tag:
 + `class` - a class
 + `interface` - an interface
 + `abstract class` - an abstract class
++ `final class` -a final class
++ `exception class` - an exception class
++ `internal class` - a nested internal class
 + `function` - a function
 + `method` - a method
 + `static method` - a static method
 + `abstract method` - an abstract method
 + `accessor method` - an accessor method (i.e. `setSomething()`, `getSomething()`).
++ `final method` - a final method
++ `final static method` - a final static method
++ `final accessor method` - a final accessor method
++ `optional method` - an empty method that can be optionally implemented by the programmer
 + `constructor` - a class constructor
 + `destructor` - a class destructor
 + `magic method` - a magic method (i.e. `__call()` in PHP)
++ `operator` - an overloaded operator
 + `variable` - a variable
 + `static variable` - a static variable
 + `module` - a module
@@ -174,6 +207,48 @@ The available predefined programming constructs for `Construct` tag:
 + `datatype` - a datatype
 + `structure` - a structure (like in C or C++)
 + `macro` - a macro
++ `mixin` - a mixin
++ `trait` - a trait
++ `executable` - an executable file
++ `script` - a script
+
+Behaviour description tags
+==========================
+
+They allow to document the expected element behaviour by defining side effects, start conditions, limitations, etc.
+
+StartConditions
+:	a list of descriptions of the start conditions.
+
+EndConditions
+:	a list of descriptions of the end conditions.
+
+SideEffects
+:	a list of descriptions of the side effects.
+
+Limitations
+:	a list of descriptions of the limitations.
+
+DataSources
+:	a list of data sources used by the element.
+:	expects the list of chapter identifiers that describe the data sources.
+:	`EDataSources` expects the list of plain data source names or descriptions that do not have their own chapters in the documentation.
+
+Sample use:
+
+~~~~
+Title: Returning a list of elements
+StartConditions:
+ - at least one element exists
+SideEffects:
+ - increasing the view counter by 1
+EDataSources:
+ - "Elements" table
+
+----
+
+Description...
+~~~~
 
 Version control tags
 ====================

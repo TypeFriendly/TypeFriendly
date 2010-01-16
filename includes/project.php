@@ -129,7 +129,7 @@
 		{
 			$p = tfParsers::get();
 			$this->prog = tfProgram::get();
-			
+
 			$this->fs = new tfFilesystem;
 			if(!$this->fs->setMasterDirectory($directory, TF_READ | TF_EXEC))
 			{

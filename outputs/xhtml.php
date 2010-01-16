@@ -128,6 +128,7 @@
 				tfTags::orderProcessTag('General', 'Author', $this).
 				tfTags::orderProcessTag('Status', 'Status', $this).
 				tfTags::orderProcessTags('Programming', $this).
+				tfTags::orderProcessTags('Behaviour', $this).
 				tfTags::orderProcessTags('VersionControl', $this);
 			
 			if(sizeof($this->_tagVersion) > 0)
@@ -573,6 +574,17 @@ EOF;
 		} // end _tagFile();
 
 		/**
+		 * Handles "Reference" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagReference($value)
+		{
+			return '<tr><th>'.$this->translate->_('tags','reference').'</th><td><code>'.$value.'</code></td></tr>';
+		} // end _tagFile();
+
+		/**
 		 * Handles "Files" tag.
 		 *
 		 * @param String $value The tag value
@@ -611,17 +623,6 @@ EOF;
 		} // end _tagType();
 
 		/**
-		 * Handles "Reference" tag.
-		 *
-		 * @param String $value The tag value
-		 * @return String
-		 */
-		public function _tagReference($value)
-		{
-			return '<tr><th>'.$this->translate->_('tags','reference').'</th><td><code>'.$value.'</code></td></tr>';
-		} // end _tagReference();
-
-		/**
 		 * Handles "Extends" and "EExtends" tags.
 		 *
 		 * @param String $extends The "Extends" list of values
@@ -637,6 +638,23 @@ EOF;
 				return '<tr><th>'.$this->translate->_('tags','obj_extends').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
 			}
 		} // end _tagExtends();
+
+		/**
+		 * Handles "PartOf" and "EPartOf" tags.
+		 *
+		 * @param String $partOf The "PartOf" list of values
+		 * @param String $ePartOf The "EPartOf" list of values
+		 * @return String
+		 */
+		public function _tagPartOf($partOf, $ePartOf)
+		{
+			$partOf = (is_null($partOf) ? $ePartOf : $partOf);
+			$pp = $this->project->getMetaInfo($partOf, false);
+			if(!is_null($pp))
+			{
+				return '<tr><th>'.$this->translate->_('tags','part_of').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
+			}
+		} // end _tagPartOf();
 
 		/**
 		 * Handles "ExtendedBy" and "EExtendedBy" tags.
@@ -699,6 +717,30 @@ EOF;
 		} // end _tagMultiExtends();
 
 		/**
+		 * Handles "Mixins" and "EMixins" tags.
+		 *
+		 * @param Array $val1 The "Mixins" list of values
+		 * @param Array $val2 The "EMixins" list of values
+		 * @return String
+		 */
+		public function _tagMixins($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_mixins');
+		} // end _tagMixins();
+
+		/**
+		 * Handles "Traits" and "ETraits" tags.
+		 *
+		 * @param Array $val1 The "Traits" list of values
+		 * @param Array $val2 The "ETraits" list of values
+		 * @return String
+		 */
+		public function _tagTraits($val1, $val2)
+		{
+			return $this->_showLinks($val1, $val2, 'obj_traits');
+		} // end _tagTraits();
+
+		/**
 		 * Handles "Arguments" tag.
 		 *
 		 * @param Array $list The argument list
@@ -746,6 +788,151 @@ EOF;
 			}
 			return $code.'</dl></td></tr>';
 		} // end _tagParameters();
+
+		/**
+		 * Handles "Package" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagPackage($package, $epackage)
+		{
+			if($package === null)
+			{
+				return '<tr><th>'.$this->translate->_('tags','package').'</th><td><code>'.$epackage.'</code></td></tr>';
+			}
+			else
+			{
+				$pp = $this->project->getMetaInfo($extends, false);
+				if($pp !== null)
+				{
+					return '<tr><th>'.$this->translate->_('tags','package').'</th><td><code><a href="'.$pageDef['Id'].'.html">'.$pageDef['ShortTitle'].'</a></code></td></tr>';
+				}
+			}
+		} // end _tagPackage();
+
+		/**
+		 * Handles "TimeComplexity" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagTimeComplexity($val)
+		{
+			return '<tr><th>'.$this->translate->_('tags','time_complexity').'</th><td><code>'.$val.'</code></td></tr>';
+		} // end _tagTimeComplexity();
+
+		/**
+		 * Handles "MemoryComplexity" tag.
+		 *
+		 * @param String $val The value to be displayed.
+		 * @return String
+		 */
+		public function _tagMemoryComplexity($val)
+		{
+			return '<tr><th>'.$this->translate->_('tags','memory_complexity').'</th><td><code>'.$val.'</code></td></tr>';
+		} // end _tagMemoryComplexity();
+
+		/**
+		 * Handles "StartConditions" tag.
+		 *
+		 * @param Array $conditions The values to be displayed.
+		 * @return String
+		 */
+		public function _tagStartConditions($conditions)
+		{
+						return $this->_showList($conditions, 'start_conditions');
+		} // end _tagStartConditions();
+
+		/**
+		 * Handles "EndConditions" tag.
+		 *
+		 * @param Array $conditions The values to be displayed.
+		 * @return String
+		 */
+		public function _tagEndConditions($conditions)
+		{
+			return $this->_showList($conditions, 'end_conditions');
+		} // end _tagEndConditions();
+
+		/**
+		 * Handles "SideEffects" tag.
+		 *
+		 * @param Array $conditions The values to be displayed.
+		 * @return String
+		 */
+		public function _tagSideEffects($conditions)
+		{
+			return $this->_showList($conditions, 'side_effects');
+		} // end _tagSideEffects();
+
+		/**
+		 * Handles "Limitations" tag.
+		 *
+		 * @param Array $conditions The values to be displayed.
+		 * @return String
+		 */
+		public function _tagLimitations($conditions)
+		{
+			return $this->_showList($conditions, 'limitations');
+		} // end _tagLimitations();
+
+		/**
+		 * Handles "DataSources" tag.
+		 *
+		 * @param Array $conditions The values to be displayed.
+		 * @return String
+		 */
+		public function _tagDataSources($val1, $val2)
+		{
+			$code = '<tr><th>'.$this->translate->_('tags', 'datasources').'</th><td><ol>';
+			if($val1 !== null)
+			{
+				foreach($val1 as $item)
+				{
+					$pp = $this->project->getMetaInfo($item, false);
+					if(!is_null($pp))
+					{
+						$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></li>';
+					}
+				}
+			}
+			if($val2 !== null)
+			{
+				foreach($val2 as $item)
+				{
+					$code .= '<li>'.$item.'</li>';
+				}
+			}
+			return $code.'</ol></td></tr>';
+		} // end _tagDataSources();
+
+		/**
+		 * A helper method for tags like "SideEffects".
+		 *
+		 * @param Array $val1
+		 * @param Array $val2
+		 * @param String $message
+		 */
+		protected function _showList(array $val1, $message)
+		{
+			$code = '<tr><th>'.$this->translate->_('tags',$message).'</th><td>';
+			$items = array();
+			if(sizeof($val1) == 1)
+			{
+				$code .= $val1[0];
+			}
+			else
+			{
+				$code .= '<ol>';
+				foreach($val1 as $item)
+				{
+					$code .= '<li>'.$item.'</li>';
+				}
+				$code .= '</ol>';
+			}
+			return $code.'</td></tr>';
+		} // end _showList();
 
 		/**
 		 * A helper method for tags like "Implements".

@@ -185,11 +185,10 @@
 					return ctype_digit($value);	
 				case TYPE_PATH:
 					$path = realpath($value);
-					if($path === false)
+					if($path !== false)
 					{
-						return false;
-					}
-					$value = $path;
+						$value = $path;
+					}					
 					return true;
 			}
 		} // end testValue();

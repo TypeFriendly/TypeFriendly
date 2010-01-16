@@ -98,6 +98,7 @@
 				tfTags::orderProcessTag('General', 'Author', $this).
 				tfTags::orderProcessTag('Status', 'Status', $this).
 				tfTags::orderProcessTags('Programming', $this).
+				tfTags::orderProcessTags('Behaviour', $this).
 				tfTags::orderProcessTags('VersionControl', $this);
 			
 			if(sizeof($this->_tagVersion) > 0)
