@@ -2,7 +2,7 @@
 /*
   --------------------------------------------------------------------
                            TypeFriendly
-              Copyright (c) 2008-2009 Invenzzia Team
+              Copyright (c) 2008-2010 Invenzzia Team
                     http://www.invenzzia.org/
                 See README for more author details
   --------------------------------------------------------------------
@@ -582,7 +582,7 @@ EOF;
 		public function _tagReference($value)
 		{
 			return '<tr><th>'.$this->translate->_('tags','reference').'</th><td><code>'.$value.'</code></td></tr>';
-		} // end _tagFile();
+		} // end _tagReference();
 
 		/**
 		 * Handles "Files" tag.

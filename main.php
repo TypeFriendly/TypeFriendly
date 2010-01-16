@@ -2,7 +2,7 @@
 /*
   --------------------------------------------------------------------
                            TypeFriendly
-              Copyright (c) 2008-2009 Invenzzia Team
+              Copyright (c) 2008-2010 Invenzzia Team
                     http://www.invenzzia.org/
                 See README for more author details
   --------------------------------------------------------------------
@@ -81,7 +81,7 @@
 			$out->space();
 			$out->center('TypeFriendly', 80);
 			$out->center('Documentation building tool', 80);
-			$out->center('(c) Invenzzia Group 2008-'.date('Y'), 80);
+			$out->center('(c) Invenzzia Group 2008-2010', 80);
 			$out->center('www.invenzzia.org', 80);
 			$out->space();
 			$out->center('This program is free software. You can use, redistribute and/or modify it', 80);
@@ -280,6 +280,6 @@ versionControlInfo = false
 		{
 			$out = $prg->console->stdout;
 			$out->writeln('TypeFriendly '.self::VERSION);
-			$out->writeln('(c) Invenzzia Group 2008 - 2009');
+			$out->writeln('(c) Invenzzia Group 2008 - 2010');
 		} // end version();
 	} // end tfMain;

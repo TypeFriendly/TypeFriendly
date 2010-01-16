@@ -1,4 +1,4 @@
-TypeFriendly 0.1.3
+TypeFriendly 0.1.4
 ==================
 
 TypeFriendly is a documentation generator written in PHP5 and developed to be easy in use.
@@ -22,7 +22,7 @@ The project is distributed under the terms of GNU General Public License 3.
 
 Authors and contributors:
 
-- The TypeFriendly code and engine: Copyright (c) 2008-2009 Invenzzia Group <http://www.invenzzia.org/>
+- The TypeFriendly code and engine: Copyright (c) 2008-2010 Invenzzia Group <http://www.invenzzia.org/>
   GNU General Public License 3
 - The PHP-Markdown Extra parser: Copyright (c) 2004-2009 Michel Fortin <http://www.michelf.com/>
   New BSD license
