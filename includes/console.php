@@ -204,6 +204,10 @@
 	
 	class tfProgram
 	{
+		/**
+		 * The system console.
+		 * @var tfConsole
+		 */
 		public $console;
 		public $outputs;
 		public $fs;

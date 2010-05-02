@@ -748,6 +748,7 @@ EOF;
 		 */
 		public function _tagArguments($list)
 		{
+			$output = tfProgram::get()->console->stderr;
 			$typeOk = true;
 			foreach($list as $item)
 			{
@@ -755,13 +756,19 @@ EOF;
 				{
 					$typeOk = false;
 				}
+				// Do some validation here.
+				if(!isset($item['Desc']))
+				{
+					$output->writeln('Missing Arguments:Desc tag in '.$this->_currentPage['Id']);
+					return;
+				}
+				if(!isset($item['Name']))
+				{
+					$output->writeln('Missing Arguments:Name tag in '.$this->_currentPage['Id']);
+					return;
+				}
 			}
 			$code = '<tr><th>'.$this->translate->_('tags', 'arg_list').'</th><td>';//.$this->translate->_('tags', 'arg_name').'</th>';
-			/*if($typeOk)
-			{
-				$code .= '<th>'.$this->translate->_('tags', 'arg_type').'</th>';
-			}
-			$code .= '<th>'.$this->translate->_('tags', 'arg_desc').'</th></tr></thead><tbody>';*/
 			$code .= '<dl>';
 			foreach($list as $item)
 			{
