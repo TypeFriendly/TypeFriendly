@@ -1,4 +1,3 @@
-; $Id$
 ; The tag message translations.
 ; Translation authors:
 ; - Tomasz Jędrzejewski <http://www.zyxist.com>

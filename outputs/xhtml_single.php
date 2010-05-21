@@ -21,7 +21,6 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id$
 
 	require_once('xhtml.php');
 
@@ -32,7 +31,7 @@
 		
 		/**
 		 * Initializes the generation.
-		 * 		 
+		 * 
 		 * @param tfProject $project The project
 		 * @param String $path Output path
 		 */

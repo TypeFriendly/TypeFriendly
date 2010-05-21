@@ -21,7 +21,6 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id$
 
 	define('OPT_REQUIRED', 0);
 	define('OPT_OPTIONAL', 1);
@@ -55,7 +54,7 @@
 		} // end write();
 		
 		public function writeln($text)
-		{			
+		{
 			fwrite($this->stream, $text.PHP_EOL);
 		} // end writeln();
 		
@@ -85,7 +84,7 @@
 		public function read($length = 80)
 		{
 			return fread($this->stream, $length);
-		} // end read();	
+		} // end read();
 	} // end tfStream;
 
 	class tfConsole
@@ -188,7 +187,7 @@
 					if($path !== false)
 					{
 						$value = $path;
-					}					
+					}
 					return true;
 			}
 		} // end testValue();
@@ -276,7 +275,7 @@
 			catch(Exception $e)
 			{
 				fwrite(STDERR, "\nAn exception occured during the execution: \n".$e->getMessage()."\n");
-				die();			
+				die();
 			}
 		} // end run();
 	} // end tfProgram;

@@ -1,4 +1,3 @@
-; $Id$
 ; The translations of available programming constructs
 ; Translation authors:
 ; - Camilo Carromeu <http://www.carromeu.com>

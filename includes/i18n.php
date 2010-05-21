@@ -21,7 +21,6 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id$
 
 	class tfTranslate
 	{
@@ -40,7 +39,7 @@
 		{
 			$program = tfProgram::get();
 			$this->parsers = tfParsers::get();
-			$this->fs = $program->fs;			
+			$this->fs = $program->fs;
 		} // end __construct();
 
 		static public function get()

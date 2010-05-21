@@ -1,4 +1,3 @@
-; $Id$
 ; The tag message translations.
 ; Translation authors:
 ; - Camilo Carromeu <http://www.carromeu.com>

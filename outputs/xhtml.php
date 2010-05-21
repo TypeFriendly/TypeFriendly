@@ -21,7 +21,6 @@
   You should have received a copy of the GNU General Public License
   along with TypeFriendly. If not, see <http://www.gnu.org/licenses/>.
 */
-// $Id$
 
 	class xhtml extends standardOutput
 	{
@@ -38,7 +37,7 @@
 		 * @param String $path Output path
 		 */
 		public function init($project, $path)
-		{		
+		{
 			$this->translate = $translate = tfTranslate::get();
 			$this->date = date('d.m.Y');
 			
@@ -76,7 +75,7 @@
 			$nav[$page['Id']] = $page['Tags']['ShortTitle'];
 			
 			$parent = $page['_Parent']; 
-						
+			
 			do
 			{
 				$parent = $this->project->getMetaInfo($parent, false);
@@ -90,14 +89,7 @@
 			
 			$nav = array_reverse($nav, true);
 			
-			/*if($this->project->config['showNumbers'])
-			{			
-				$code = $this->createHeader($page['FullNumber'].'. '.$page['Tags']['Title'], $nav);
-			}
-			else*/
-			{
-				$code = $this->createHeader($page['Tags']['Title'], $nav);
-			}
+			$code = $this->createHeader($page['Tags']['Title'], $nav);
 			
 			$code .= $this->createTopNavigator($page);
 			

@@ -1,4 +1,3 @@
-; $Id$
 ; Translations of the main messages used across the book.
 ; Translation authors:
 ; - Tomasz Jędrzejewski <http://www.zyxist.com>
