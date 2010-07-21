@@ -359,11 +359,11 @@ EOF;
 				{
 					if($recursive)
 					{
-						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
+						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a>'.$this->menuGen($item['Id'], true).'</li>';
 					}
 					else
 					{
-						$code .= '<li><a href="'.$item['Id'].'.html">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a></li>';
+						$code .= '<li><a href="'.$this->toAddress($item['Id']).'">'.($n ? $item['FullNumber'].'. ' : '').$item['Tags']['Title'].'</a></li>';
 					}
 				}
 				$code .= '</ul>';
@@ -410,7 +410,7 @@ EOF;
 					}
 					else
 					{
-						$code .= '<li><a href="'.$meta['Id'].'.html">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Tags']['ShortTitle'].'</a></li>';
+						$code .= '<li><a href="'.$this->toAddress($meta['Id']).'">'.($n ? $meta['FullNumber'].'. ' : '').$meta['Tags']['ShortTitle'].'</a></li>';
 						$i++;
 					}
 				}
@@ -553,7 +553,7 @@ EOF;
 
 				if($pp !== null)
 				{
-					return '<tr><th>'.$this->translate->_('tags','namespace').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
+					return '<tr><th>'.$this->translate->_('tags','namespace').'</th><td><a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
 				}
 				else
 				{
@@ -635,7 +635,7 @@ EOF;
 			$pp = $this->project->getMetaInfo($extends, false);
 			if(!is_null($pp))
 			{
-				return '<tr><th>'.$this->translate->_('tags','obj_extends').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
+				return '<tr><th>'.$this->translate->_('tags','obj_extends').'</th><td><a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
 			}
 		} // end _tagExtends();
 
@@ -652,7 +652,7 @@ EOF;
 			$pp = $this->project->getMetaInfo($partOf, false);
 			if(!is_null($pp))
 			{
-				return '<tr><th>'.$this->translate->_('tags','part_of').'</th><td><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
+				return '<tr><th>'.$this->translate->_('tags','part_of').'</th><td><a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a></td></tr>';
 			}
 		} // end _tagPartOf();
 
@@ -782,7 +782,7 @@ EOF;
 						$pp = $this->project->getMetaInfo($item['Type'], false);
 						if(!is_null($pp))
 						{
-							$code .= '<a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a>';
+							$code .= '<a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a>';
 						}
 					}
 					elseif(isset($item['EType']))
@@ -813,7 +813,7 @@ EOF;
 				$pp = $this->project->getMetaInfo($extends, false);
 				if($pp !== null)
 				{
-					return '<tr><th>'.$this->translate->_('tags','package').'</th><td><code><a href="'.$pageDef['Id'].'.html">'.$pageDef['ShortTitle'].'</a></code></td></tr>';
+					return '<tr><th>'.$this->translate->_('tags','package').'</th><td><code><a href="'.$this->toAddress($pageDef['Id']).'">'.$pageDef['ShortTitle'].'</a></code></td></tr>';
 				}
 			}
 		} // end _tagPackage();
@@ -900,7 +900,7 @@ EOF;
 					$pp = $this->project->getMetaInfo($item, false);
 					if(!is_null($pp))
 					{
-						$code .= '<li><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></li>';
+						$code .= '<li><a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a></li>';
 					}
 				}
 			}
@@ -959,7 +959,7 @@ EOF;
 					$pp = $this->project->getMetaInfo($item, false);
 					if(!is_null($pp))
 					{
-						$items[] = '<code><a href="'.$pp['Id'].'.html">'.$pp['Tags']['ShortTitle'].'</a></code>';
+						$items[] = '<code><a href="'.$this->toAddress($pp['Id']).'">'.$pp['Tags']['ShortTitle'].'</a></code>';
 					}
 				}
 			}
