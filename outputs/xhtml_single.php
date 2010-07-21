@@ -58,7 +58,7 @@
 			
 			$nav[$page['Id']] = $page['Tags']['ShortTitle'];
 			
-			$parent = $page['_Parent']; 			
+			$parent = $page['_Parent'];
 			do
 			{
 				$parent = $this->project->getMetaInfo($parent, false);
