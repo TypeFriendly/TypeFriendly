@@ -93,7 +93,7 @@
 				}
 				$ok = true;
 			}
-			while(!$this->separator($line));
+			while(!$this->separator($line) && !feof($f));
 			$data['Content'] = '';
 			while(!feof($f))
 			{
