@@ -173,3 +173,9 @@ body {font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; padding: 10px
 #content div.tf_reference dl dt code {color: #444444;}
 #content div.tf_reference dl dt small {}
 #content div.tf_reference dl dt {margin: 0}
+
+span.stability { background: #eeeeee; text-transform:uppercase; font-weight: bold; padding-left: 5px; padding-right: 5px; }
+span.dev, span.experimental { color: #ff0000; }
+span.alpha { color: #d44100; }
+span.beta { color: #8ba000; }
+span.stable { color: #00ab1c; }

@@ -432,6 +432,27 @@ EOF;
 
 			return $code;
 		} // end _tagSeeAlso();
+		
+		/**
+		 * Handles "Stability" tag.
+		 *
+		 * @param String $value The tag value
+		 * @return String
+		 */
+		public function _tagStability($value)
+		{
+			$stability = strtolower($value);
+			
+			if($stability == 'devel')
+			{
+				$stability = 'dev';
+			}
+			if($stability != 'dev' && $stability != 'alpha' && $stability != 'beta' && $stability != 'stable' && $stability != 'experimental')
+			{
+				$stability = 'unknown';
+			}
+			return '<tr><th>'.$this->translate->_('tags','stability').'</th><td><span class="stability '.$stability.'">'.$this->translate->_('tags','stability_'.$stability).'</td></tr>';
+		} // end _tagStability();
 
 		/**
 		 * Handles "Author" tag.

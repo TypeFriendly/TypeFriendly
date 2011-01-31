@@ -99,6 +99,7 @@ class tfTags
 			'VCSKeywords' => self::STRING,
 			'VersionSince' => self::STRING,
 			'VersionTo' => self::STRING,
+			'Stability' => self::STRING,
 		),
 		'Navigation' => array(
 			'SeeAlso' => array(self::ARRAY_OF, self::PAGE_IDENTIFIER),
