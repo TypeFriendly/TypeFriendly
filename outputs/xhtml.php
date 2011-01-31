@@ -549,7 +549,8 @@ EOF;
 				}
 				else
 				{
-					return 'dupa';
+					$prog = tfProgram::get();
+					$prog->console->stderr->writeln('No such namespace: "'.$namespace.'" - maybe you wanted to use \'ENamespace\'?');
 				}
 			}
 		} // end _tagNamespace();
